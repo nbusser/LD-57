@@ -3,6 +3,7 @@ extends Node3D
 @onready var hand: Hand = $Hand
 @onready var fixed_arm: Node3D = $FixedArm
 @onready var cardScene: PackedScene = preload("res://src/Card.tscn")
+@onready var fingerTip = get_node("2DHand/HandBody/Sprite2D/FingerTip")
 
 @onready var stencil_viewport : SubViewport = $StencilViewport
 @onready var stencil_camera : Camera3D = $StencilViewport/Camera3D
@@ -36,10 +37,11 @@ func _process(_delta):
 		stencil_camera.fov = current_camera.fov
 		stencil_camera.global_transform = current_camera.global_transform
 
-
 	var card: StaticBody3D = null
 	if hand.enabled:
 		card = hand.get_closest_card()
+	else: # Use FrontView hand
+		card = fingerTip.get_closest_card()
 	if card:
 		(card.get_node("MeshInstance3D") as MeshInstance3D).set_layer_mask_value(6, true)
 		if selected and card != selected:

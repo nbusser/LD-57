@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dve1ylvmh0i6o"]
+[gd_scene load_steps=5 format=3 uid="uid://dve1ylvmh0i6o"]
 
 [ext_resource type="Script" uid="uid://b2cvc362p8kcb" path="res://src/2d_hand.gd" id="1_6e8t3"]
 [ext_resource type="Texture2D" uid="uid://cpdylmn711eol" path="res://assets/sprites/hand.png" id="2_7k6lh"]
+[ext_resource type="Script" uid="uid://dr3eiw3kce6oq" path="res://src/Map/finger_tip.gd" id="3_vbcl1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jlw6s"]
 radius = 60.0
@@ -29,6 +30,10 @@ position = Vector2(228, 5)
 rotation = -0.0576413
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_7k6lh")
+
+[node name="FingerTip" type="Node2D" parent="HandBody/Sprite2D"]
+position = Vector2(4.94583, -0.604165)
+script = ExtResource("3_vbcl1")
 
 [node name="Anchor" type="Node2D" parent="."]
 position = Vector2(-1001, 0)
