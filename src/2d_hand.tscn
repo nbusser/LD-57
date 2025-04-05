@@ -1,25 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://dve1ylvmh0i6o"]
+[gd_scene load_steps=7 format=3 uid="uid://dve1ylvmh0i6o"]
 
 [ext_resource type="Script" uid="uid://b2cvc362p8kcb" path="res://src/2d_hand.gd" id="1_6e8t3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jlw6s"]
+radius = 60.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6e8t3"]
-size = Vector2(200, 200)
+size = Vector2(100, 100)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6e8t3"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6e8t3"]
+size = Vector2(500, 2)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7k6lh"]
+friction = 0.0
 
 [node name="2DHand" type="Node2D"]
 script = ExtResource("1_6e8t3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="HandBody" type="RigidBody2D" parent="."]
+[node name="HandBody" type="CharacterBody2D" parent="."]
 z_index = 2
-gravity_scale = 0.0
+position = Vector2(72, -16)
+motion_mode = 1
+wall_min_slide_angle = 3.14159
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HandBody"]
 shape = SubResource("CircleShape2D_jlw6s")
 
 [node name="Sprite2D" type="Sprite2D" parent="HandBody"]
+visible = false
 texture = SubResource("PlaceholderTexture2D_6e8t3")
 
 [node name="Anchor" type="Node2D" parent="."]
@@ -34,3 +47,25 @@ width = 90.0
 default_color = Color(0.786382, 0.623015, 0.61453, 1)
 joint_mode = 2
 antialiased = true
+
+[node name="Sleeve" type="Node2D" parent="."]
+position = Vector2(24, 0)
+
+[node name="Top" type="RigidBody2D" parent="Sleeve"]
+position = Vector2(0, 72)
+physics_material_override = SubResource("PhysicsMaterial_6e8t3")
+can_sleep = false
+freeze = true
+
+[node name="TopArea" type="CollisionShape2D" parent="Sleeve/Top"]
+position = Vector2(145.5, 0)
+shape = SubResource("RectangleShape2D_6e8t3")
+
+[node name="Bottom" type="RigidBody2D" parent="Sleeve"]
+position = Vector2(0, 272)
+physics_material_override = SubResource("PhysicsMaterial_7k6lh")
+freeze = true
+
+[node name="BottomArea" type="CollisionShape2D" parent="Sleeve/Bottom"]
+position = Vector2(145.5, 40)
+shape = SubResource("RectangleShape2D_6e8t3")
