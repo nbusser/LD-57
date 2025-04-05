@@ -38,7 +38,6 @@ func _physics_process(delta: float) -> void:
 			Vector3(deg_to_rad(center_hand.x - amplitude_hand_vt), deg_to_rad(center_hand.y - amplitude_hand_hz), 0),
 			Vector3(deg_to_rad(center_hand.x + amplitude_hand_vt), deg_to_rad(center_hand.y + amplitude_hand_hz), 0)
 		)
-		print(rotation.x)
 		if rotation.x > deg_to_rad(center_hand.x + amplitude_hand_vt - 1):
 			switch_mode(ViewMode.TABLE_MODE)
 	elif current_mode == ViewMode.TABLE_MODE: # Full 2D panning
