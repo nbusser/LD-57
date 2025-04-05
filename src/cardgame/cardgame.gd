@@ -58,56 +58,56 @@ class RoundManager:
 
 	#Résolution du combat
 	func battle()-> bool:
-        var wasFirst = firstPlayer
+		var wasFirst = firstPlayer
 		var player_score = battleField[0]["card"] if battleField[0]["player"] == "player" else 0
 		var alien_score = battleField[0]["card"] if battleField[0]["player"] == "alien" else 0
 
-        #CAS SPECIAL ETOILE ET -2
-        if alien_score == 0 or player_score == 0:
-            #2 étoiles
-            if alien_score == 0 and player_score == 0:
-                if wasFirst:
-                    playerlife -= 5
-                else:
-                    alienLife -= 5
-                #Les roles s'inversent
-                firstPlayer = not wasFirst
-            elif alien_score == 0:
-                #L'alien a joué une étoile
-                firstPlayer = true
-                if player_score == -2:
-                    alienLife -= 2
-            elif player_score == 0:
-                #Le joueur a joué une étoile
-                firstPlayer = false
-                if alien_score == -2:
-                    playerLife -= 2
+		#CAS SPECIAL ETOILE ET -2
+		if alien_score == 0 or player_score == 0:
+			#2 étoiles
+			if alien_score == 0 and player_score == 0:
+				if wasFirst:
+					playerLife -= 5
+				else:
+					alienLife -= 5
+				#Les roles s'inversent
+				firstPlayer = not wasFirst
+			elif alien_score == 0:
+				#L'alien a joué une étoile
+				firstPlayer = true
+				if player_score == -2:
+					alienLife -= 2
+			elif player_score == 0:
+				#Le joueur a joué une étoile
+				firstPlayer = false
+				if alien_score == -2:
+					playerLife -= 2
 
-        #CAS SPECIAL -2 ET 5
-        elif (alien_score == -2 and player_score == 5) or (player_score == -2 and alien_score == 5):
-            if alien_score == -2:
-                playerLife -= 5  # Alien perd 7 points de vie
-                firstPlayer = false
-            else:
-                alienLife -= 5  # Joueur perd 7 points de vie
-                firstPlayer = true
-                
-        #CAS NORMAL
-        else:
-            #On retire les points de vie
-            firstPlayer = false if player_score > alien_score else true
-            if player_score > alien_score:
-                #Le joueur perd
-                playerLife -= player_score - alien_score
-            elif alien_score > player_score:
-                #L'alien perd
-                alienLife -= alien_score - player_score
-            else:
-                #Egalité
-                #Ouai dark sasukesouke
-                pass
-            
-        return firstPlayer
+		#CAS SPECIAL -2 ET 5
+		elif (alien_score == -2 and player_score == 5) or (player_score == -2 and alien_score == 5):
+			if alien_score == -2:
+				playerLife -= 5  # Alien perd 7 points de vie
+				firstPlayer = false
+			else:
+				alienLife -= 5  # Joueur perd 7 points de vie
+				firstPlayer = true
+				
+		#CAS NORMAL
+		else:
+			#On retire les points de vie
+			firstPlayer = false if player_score > alien_score else true
+			if player_score > alien_score:
+				#Le joueur perd
+				playerLife -= player_score - alien_score
+			elif alien_score > player_score:
+				#L'alien perd
+				alienLife -= alien_score - player_score
+			else:
+				#Egalité
+				#Ouai dark sasukesouke
+				pass
+			
+		return firstPlayer
 
 	#Trouver un moyen de detecter la fin de partie.
 	#Toutes les données sont accessible depuis la classe la
