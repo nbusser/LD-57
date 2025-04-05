@@ -29,7 +29,7 @@ position = Vector2(-632, 0)
 z_index = 1
 
 [node name="Arm" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 width = 90.0
 default_color = Color(0.786382, 0.623015, 0.61453, 1)
 joint_mode = 2
