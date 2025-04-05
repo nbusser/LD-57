@@ -38,6 +38,9 @@ func _physics_process(delta: float) -> void:
 			Vector3(deg_to_rad(center_hand.x - amplitude_hand_vt), deg_to_rad(center_hand.y - amplitude_hand_hz), 0),
 			Vector3(deg_to_rad(center_hand.x + amplitude_hand_vt), deg_to_rad(center_hand.y + amplitude_hand_hz), 0)
 		)
+		print(rotation.x)
+		if rotation.x > deg_to_rad(center_hand.x + amplitude_hand_vt - 1):
+			switch_mode(ViewMode.TABLE_MODE)
 	elif current_mode == ViewMode.TABLE_MODE: # Full 2D panning
 		if x_ratio < margin_table:
 			rotation += Vector3(0, speed_table*delta, 0)
@@ -51,22 +54,24 @@ func _physics_process(delta: float) -> void:
 			Vector3(deg_to_rad(center_table.x - amplitude_table), deg_to_rad(center_table.y - amplitude_table), 0),
 			Vector3(deg_to_rad(center_table.x + amplitude_table), deg_to_rad(center_table.y + amplitude_table), 0)
 		)
+		if rotation.x < deg_to_rad(center_table.x - amplitude_table + .2):
+			switch_mode(ViewMode.HAND_MODE)
 
 var tween: Tween = null
-func _on_weeeee_toggled(toggled_on: bool) -> void:
+func switch_mode(mode: ViewMode) -> void:
 	current_mode = ViewMode.IN_TRANSITION
 	if tween:
 		tween.stop()
 	tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
-	if toggled_on:
+	if mode == ViewMode.TABLE_MODE:
 		tween.parallel().tween_property(rail, "progress_ratio", 0.99, 1)
 		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_table.x), deg_to_rad(center_table.y), 0), 1)
 		tween.tween_callback(func (): current_mode = ViewMode.TABLE_MODE)
 	else:
 		tween.parallel().tween_property(rail, "progress_ratio", 0.01, 1)
-		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_hand.x + amplitude_hand_vt), deg_to_rad(center_hand.y), 0), 1)
+		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_hand.x), deg_to_rad(center_hand.y), 0), 1)
 		tween.tween_callback(func (): current_mode = ViewMode.HAND_MODE)
 
 func _exit_tree() -> void:

@@ -75,30 +75,15 @@ loop = false
 tilt_enabled = false
 
 [node name="Camera" type="Camera3D" parent="CameraRail/FollowRail"]
-transform = Transform3D(1, 0, 0, 0, 0.866026, 0.500002, 0, -0.5, 0.866028, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573578, 0, -0.573577, 0.819155, 0, 0, 0)
 rotation_order = 1
 script = ExtResource("1_wqubw")
 
 [node name="Table" parent="." instance=ExtResource("3_13lp4")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
-
-[node name="Weeeee" type="Button" parent="CanvasLayer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -39.5
-offset_top = 82.0
-offset_right = 39.5
-offset_bottom = 113.0
-grow_horizontal = 2
-size_flags_vertical = 4
-toggle_mode = true
-text = "Weeeeee"
-
 [node name="Hand" parent="." instance=ExtResource("2_hlp16")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83809, 0)
+visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.258819, 0.965926, 0, -0.965926, -0.258819, 1, 4, -1)
@@ -170,5 +155,3 @@ shape = SubResource("RectangleShape2D_jljl6")
 
 [node name="2DHand" parent="." instance=ExtResource("8_fgn2p")]
 position = Vector2(-8, 416)
-
-[connection signal="toggled" from="CanvasLayer/Weeeee" to="CameraRail/FollowRail/Camera" method="_on_weeeee_toggled"]
