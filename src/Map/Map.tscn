@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=18 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table.tscn" id="3_13lp4"]
 [ext_resource type="PackedScene" uid="uid://b1swxld0lwpiv" path="res://src/Card.tscn" id="5_jde0p"]
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
+[ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lrvju"]
 
@@ -33,6 +34,18 @@ albedo_color = Color(0.262745, 0.521569, 0.0823529, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_fyitu"]
 material = SubResource("StandardMaterial3D_lrvju")
 size = Vector3(400, 0.1, 400)
+
+[sub_resource type="Environment" id="Environment_lrvju"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fyitu"]
+viewport_path = NodePath("StencilViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fgn2p"]
+resource_local_to_scene = true
+shader = ExtResource("7_fyitu")
+shader_parameter/lineWeight = 3.0
+shader_parameter/outlineColor = Color(3, 0.8, 0, 0.8)
+shader_parameter/stencilMask = SubResource("ViewportTexture_fyitu")
 
 [node name="Map" type="Node3D"]
 script = ExtResource("1_e037b")
@@ -105,5 +118,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.48195
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0667799, 0)
 mesh = SubResource("BoxMesh_fyitu")
+
+[node name="StencilViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+
+[node name="Camera3D" type="Camera3D" parent="StencilViewport"]
+cull_mask = 1047584
+environment = SubResource("Environment_lrvju")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fgn2p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [connection signal="toggled" from="CanvasLayer/Weeeee" to="CameraRail/FollowRail/Camera" method="_on_weeeee_toggled"]

@@ -4,6 +4,9 @@ extends Node3D
 @onready var fixed_arm: Node3D = $FixedArm
 @onready var cardScene: PackedScene = preload("res://src/Card.tscn")
 
+@onready var stencil_viewport : SubViewport = $StencilViewport
+@onready var stencil_camera : Camera3D = $StencilViewport/Camera3D
+
 const plane_collision_layer = 6
 
 func _process(_delta):
@@ -20,6 +23,17 @@ func _process(_delta):
 
 	if result:
 		hand.global_position = result.position
+
+	var viewport := get_viewport()
+	var current_camera := viewport.get_camera_3d()
+
+	if stencil_viewport.size != viewport.size:
+		stencil_viewport.size = viewport.size
+
+	if current_camera:
+		stencil_camera.fov = current_camera.fov
+		stencil_camera.global_transform = current_camera.global_transform
+
 
 func _ready():
 	spawn_cards(5)
