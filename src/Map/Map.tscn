@@ -12,7 +12,7 @@
 [sub_resource type="Curve3D" id="Curve3D_wqubw"]
 bake_interval = 0.01
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.2, -0.6),
+"points": PackedVector3Array(0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.4, -1),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -31,13 +31,15 @@ transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 1, 1)
 curve = SubResource("Curve3D_wqubw")
 
 [node name="FollowRail" type="PathFollow3D" parent="CameraRail"]
-transform = Transform3D(-4.37113e-08, 0, 0.999997, 0, 1, 0, -0.999997, 0, -4.37113e-08, 0, 0, 0)
+transform = Transform3D(0.999997, 0, -1.38381e-07, 0, 1, 0, 1.38381e-07, 0, 0.999997, 0, 0.0105412, -0.00303022)
+progress = 0.0110764
 rotation_mode = 1
 loop = false
 tilt_enabled = false
 
 [node name="Camera" type="Camera3D" parent="CameraRail/FollowRail"]
-transform = Transform3D(-0.0594215, 0.341416, -0.938036, 6.31463e-08, 0.939693, 0.342019, 0.998236, 0.0203233, -0.055838, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.866026, 0.500002, 0, -0.5, 0.866028, 0, 0, 0)
+rotation_order = 1
 script = ExtResource("1_wqubw")
 
 [node name="Table" parent="." instance=ExtResource("3_13lp4")]
