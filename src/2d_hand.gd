@@ -6,7 +6,7 @@ extends Node2D
 @onready var Arm = get_node("Arm")
 
 @export var distance_constraint = 60.0
-@export var reactivity = 10
+@export var reactivity = 4
 
 func _ready() -> void:
 	var points = Arm.points
@@ -14,17 +14,31 @@ func _ready() -> void:
 		points[i] = Anchor.position + i*(Hand.position - Anchor.position)/points.size()
 	Arm.set_points(points)
 
-func _process(delta: float) -> void:
-	Hand.position = get_global_mouse_position()
-	fABRIK_pass()
+func _physics_process(delta: float) -> void:
+	# Move hand
+	Hand.velocity = (get_global_mouse_position() - Hand.global_position)*500*delta
+	if Hand.move_and_slide():
+		var target_dist = (Hand.global_position - get_global_mouse_position()).length()
+		var collision_info = Hand.get_last_slide_collision()
+		var norm = collision_info.get_normal()
+		var slide_dir = norm.rotated(PI/2)
+		var target = Geometry2D.line_intersects_line(Hand.global_position, slide_dir, get_global_mouse_position(), norm)
+		Hand.velocity = (target - Hand.global_position)*500*delta
+		Hand.move_and_slide()
+	
 	# Adjust arm length
 	var required_length = (Anchor.position - Hand.position).length()
-	if required_length/Arm.points.size() > distance_constraint:
-		distance_constraint = required_length/(Arm.points.size() - 1)
-	elif required_length/Arm.points.size() < distance_constraint:
+	if required_length/Arm.points.size() > distance_constraint: # Too short, emergency fix
+		distance_constraint = required_length/Arm.points.size()
+	elif required_length/(Arm.points.size() - 2) < distance_constraint: # Too long, spool back slowly
 		distance_constraint -= delta*reactivity
+	if distance_constraint < required_length/(Arm.points.size() - 1): # Long enough but may be longer, grow slowly
+		distance_constraint += delta*reactivity
+	
+	# Run FABRIK
+	FABRIK_pass()
 
-func fABRIK_pass():
+func FABRIK_pass():
 	var points = Arm.points
 	
 	# Forward
