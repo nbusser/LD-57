@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=22 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b1swxld0lwpiv" path="res://src/Card.tscn" id="5_jde0p"]
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
 [ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
+[ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/2d_hand.tscn" id="8_fgn2p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lrvju"]
 
@@ -46,6 +47,15 @@ shader = ExtResource("7_fyitu")
 shader_parameter/lineWeight = 3.0
 shader_parameter/outlineColor = Color(3, 0.8, 0, 0.8)
 shader_parameter/stencilMask = SubResource("ViewportTexture_fyitu")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fgn2p"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jljl6"]
+size = Vector2(500, 2)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hxqom"]
+friction = 0.0
 
 [node name="Map" type="Node3D"]
 script = ExtResource("1_e037b")
@@ -135,5 +145,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Sleeve" type="Node2D" parent="."]
+position = Vector2(760, 330)
+
+[node name="Top" type="RigidBody2D" parent="Sleeve"]
+position = Vector2(0, 72)
+physics_material_override = SubResource("PhysicsMaterial_fgn2p")
+can_sleep = false
+freeze = true
+
+[node name="TopArea" type="CollisionShape2D" parent="Sleeve/Top"]
+position = Vector2(145.5, 0)
+shape = SubResource("RectangleShape2D_jljl6")
+
+[node name="Bottom" type="RigidBody2D" parent="Sleeve"]
+position = Vector2(0, 272)
+physics_material_override = SubResource("PhysicsMaterial_hxqom")
+freeze = true
+
+[node name="BottomArea" type="CollisionShape2D" parent="Sleeve/Bottom"]
+position = Vector2(145.5, 40)
+shape = SubResource("RectangleShape2D_jljl6")
+
+[node name="2DHand" parent="." instance=ExtResource("8_fgn2p")]
+position = Vector2(-8, 416)
 
 [connection signal="toggled" from="CanvasLayer/Weeeee" to="CameraRail/FollowRail/Camera" method="_on_weeeee_toggled"]

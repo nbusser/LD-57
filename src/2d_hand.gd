@@ -6,7 +6,7 @@ extends Node2D
 @onready var Arm = get_node("Arm")
 
 @export var distance_constraint = 60.0
-@export var reactivity = 4
+@export var reactivity = 5
 
 func _ready() -> void:
 	var points = Arm.points
