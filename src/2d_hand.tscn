@@ -10,13 +10,13 @@ radius = 60.0
 script = ExtResource("1_6e8t3")
 
 [node name="Arm" type="Line2D" parent="."]
+z_index = 1
 points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-width = 90.0
+width = 100.0
 default_color = Color(0.0744944, 0.169169, 0.139158, 1)
 joint_mode = 2
 
 [node name="HandBody" type="CharacterBody2D" parent="."]
-z_index = 2
 position = Vector2(72, -11)
 motion_mode = 1
 wall_min_slide_angle = 3.14159
@@ -25,8 +25,8 @@ wall_min_slide_angle = 3.14159
 shape = SubResource("CircleShape2D_jlw6s")
 
 [node name="Sprite2D" type="Sprite2D" parent="HandBody"]
-z_index = 1
-position = Vector2(226, 24)
+position = Vector2(228, 5)
+rotation = -0.0576413
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_7k6lh")
 
