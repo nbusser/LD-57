@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb2c6exrmfj47"]
+
+[ext_resource type="Texture2D" uid="uid://bprdj2krbpywu" path="res://assets/sprites/player.png" id="1_do4pe"]
+
+[node name="Enemy" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+texture = ExtResource("1_do4pe")

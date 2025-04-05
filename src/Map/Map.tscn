@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=10 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
 [ext_resource type="PackedScene" uid="uid://dqom45hiv58ib" path="res://src/Hand.tscn" id="2_hlp16"]
 [ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table.tscn" id="3_13lp4"]
 [ext_resource type="PackedScene" uid="uid://b1swxld0lwpiv" path="res://src/Card.tscn" id="5_jde0p"]
+[ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
 
 [sub_resource type="Environment" id="Environment_57a3y"]
 
@@ -73,5 +74,8 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 0.983423, -0.181326, 0, 0.181326, 0.983423, 0, 0.744975, 0)
 shape = SubResource("BoxShape3D_jde0p")
+
+[node name="Enemy" parent="." instance=ExtResource("6_lrvju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823981, -1.29922)
 
 [connection signal="toggled" from="CanvasLayer/Weeeee" to="CameraRail/FollowRail/Camera" method="_on_weeeee_toggled"]
