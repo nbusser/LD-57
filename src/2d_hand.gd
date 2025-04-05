@@ -8,13 +8,19 @@ extends Node2D
 @export var distance_constraint = 60.0
 @export var reactivity = 5
 
+var enabled = true
+
 func _ready() -> void:
 	var points = Arm.points
 	for i in range(points.size()):
 		points[i] = Anchor.position + i*(HandBody.position - Anchor.position)/points.size()
 	Arm.set_points(points)
+	HandBody.position = Vector2(0, 0)
 
 func _physics_process(delta: float) -> void:
+	if !enabled:
+		return
+	
 	# Move hand
 	HandBody.velocity = (get_global_mouse_position() - HandBody.global_position)*500*delta
 	if HandBody.move_and_slide():
@@ -53,3 +59,12 @@ func FABRIK_pass():
 		points[i] = points[i - 1] + new_direction*distance_constraint
 	
 	Arm.set_points(points)
+
+func disable():
+	self.visible = false
+	enabled = false
+
+func enable():
+	_ready()
+	self.visible = true
+	enabled = true

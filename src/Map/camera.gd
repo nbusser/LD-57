@@ -67,7 +67,7 @@ func switch_mode(mode: ViewMode) -> void:
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	if mode == ViewMode.TABLE_MODE:
-		HandFrontView.visible = false
+		HandFrontView.disable()
 		tween.parallel().tween_property(Rail, "progress_ratio", 0.99, 1)
 		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_table.x), deg_to_rad(center_table.y), 0), 1)
 		tween.tween_callback(func ():
@@ -80,7 +80,7 @@ func switch_mode(mode: ViewMode) -> void:
 		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_hand.x), deg_to_rad(center_hand.y), 0), 1)
 		tween.tween_callback(func ():
 			current_mode = ViewMode.HAND_MODE
-			HandFrontView.visible = true
+			HandFrontView.enable()
 		)
 
 func _exit_tree() -> void:
