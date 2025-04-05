@@ -2,9 +2,10 @@ extends Camera3D
 
 @onready var rail = get_node("..")
 
-@export var margin_hand = .1
+@export var margin_hand = .2
 @export var speed_hand = 1
-@export var amplitude_hand = 10 # degrees
+@export var amplitude_hand_vt = 10 # degrees
+@export var amplitude_hand_hz = 3 # degrees
 @export var center_hand = Vector2(-30, 0)
  
 @export var margin_table = .4
@@ -20,13 +21,22 @@ func _physics_process(delta: float) -> void:
 	var y_ratio = get_viewport().get_mouse_position().y/get_viewport().get_size().y
 	
 	if current_mode == ViewMode.HAND_MODE: # horizontal panning only
+		var x_coeff = 0.0
+		var y_coeff = 0.0
+		if x_ratio < margin_hand:
+			x_coeff = pow(1.0 - x_ratio/margin_hand, 4.0)
+		elif x_ratio > (1.0 - margin_hand):
+			x_coeff = -pow(1.0 - (1.0 - x_ratio)/margin_hand, 4.0)
 		if y_ratio < margin_hand:
-			rotation += Vector3(speed_hand*delta, 0, 0)
+			y_coeff = pow(1.0 - y_ratio/margin_hand, 2.0)
 		elif y_ratio > (1.0 - margin_hand):
-			rotation -= Vector3(speed_hand*delta, 0, 0)
+			y_coeff = -pow(1.0 - (1.0 - y_ratio)/margin_hand, 2.0)
+		x_coeff = clamp(x_coeff, -1.0, 1.0)
+		y_coeff = clamp(y_coeff, -1.0, 1.0)
+		rotation += speed_hand*delta*Vector3(y_coeff, x_coeff, 0)
 		rotation = rotation.clamp(
-			Vector3(deg_to_rad(center_hand.x - amplitude_hand), deg_to_rad(center_hand.y - amplitude_hand), 0),
-			Vector3(deg_to_rad(center_hand.x + amplitude_hand), deg_to_rad(center_hand.y + amplitude_hand), 0)
+			Vector3(deg_to_rad(center_hand.x - amplitude_hand_vt), deg_to_rad(center_hand.y - amplitude_hand_hz), 0),
+			Vector3(deg_to_rad(center_hand.x + amplitude_hand_vt), deg_to_rad(center_hand.y + amplitude_hand_hz), 0)
 		)
 	elif current_mode == ViewMode.TABLE_MODE: # Full 2D panning
 		if x_ratio < margin_table:
@@ -48,11 +58,17 @@ func _on_weeeee_toggled(toggled_on: bool) -> void:
 	if tween:
 		tween.stop()
 	tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
 	if toggled_on:
 		tween.parallel().tween_property(rail, "progress_ratio", 0.99, 1)
 		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_table.x), deg_to_rad(center_table.y), 0), 1)
 		tween.tween_callback(func (): current_mode = ViewMode.TABLE_MODE)
 	else:
 		tween.parallel().tween_property(rail, "progress_ratio", 0.01, 1)
-		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_hand.x + amplitude_hand), deg_to_rad(center_hand.y), 0), 1)
+		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_hand.x + amplitude_hand_vt), deg_to_rad(center_hand.y), 0), 1)
 		tween.tween_callback(func (): current_mode = ViewMode.HAND_MODE)
+
+func _exit_tree() -> void:
+	if tween:
+		tween.stop()
