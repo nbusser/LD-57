@@ -56,3 +56,7 @@ func _on_weeeee_toggled(toggled_on: bool) -> void:
 		tween.parallel().tween_property(rail, "progress_ratio", 0.01, 1)
 		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_hand.x + amplitude_hand), deg_to_rad(center_hand.y), 0), 1)
 		tween.tween_callback(func (): current_mode = ViewMode.HAND_MODE)
+
+func _exit_tree() -> void:
+	if tween:
+		tween.stop()
