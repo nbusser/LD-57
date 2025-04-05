@@ -9,6 +9,8 @@ extends Node3D
 
 const plane_collision_layer = 6
 
+var selected = null
+
 func _process(_delta):
 	var mouse_pos = get_viewport().get_mouse_position()
 	var cam = get_viewport().get_camera_3d()
@@ -39,8 +41,10 @@ func _process(_delta):
 	if hand.enabled:
 		card = hand.get_closest_card()
 	if card:
-		# (card.get_node("MeshInstance3D") as MeshInstance3D).mesh.material.albedo_color = Color(1, 0, 0)
-		card.rotate(Vector3.UP, 0.1)
+		(card.get_node("MeshInstance3D") as MeshInstance3D).set_layer_mask_value(6, true)
+		if selected and card != selected:
+			(selected.get_node("MeshInstance3D") as MeshInstance3D).set_layer_mask_value(6, false)
+		selected = card
 
 func _ready():
 	spawn_cards(5)
