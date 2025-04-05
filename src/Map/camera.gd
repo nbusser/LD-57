@@ -2,7 +2,7 @@ extends Camera3D
 
 @onready var rail = get_node("..")
 
-@export var margin_hand = .1
+@export var margin_hand = .2
 @export var speed_hand = 1
 @export var amplitude_hand_vt = 10 # degrees
 @export var amplitude_hand_hz = 3 # degrees
@@ -21,14 +21,19 @@ func _physics_process(delta: float) -> void:
 	var y_ratio = get_viewport().get_mouse_position().y/get_viewport().get_size().y
 	
 	if current_mode == ViewMode.HAND_MODE: # horizontal panning only
+		var x_coeff = 0.0
+		var y_coeff = 0.0
 		if x_ratio < margin_hand:
-			rotation += Vector3(0, speed_table*delta, 0)
+			x_coeff = pow(1.0 - x_ratio/margin_hand, 4.0)
 		elif x_ratio > (1.0 - margin_hand):
-			rotation -= Vector3(0, speed_table*delta, 0)
+			x_coeff = -pow(1.0 - (1.0 - x_ratio)/margin_hand, 4.0)
 		if y_ratio < margin_hand:
-			rotation += Vector3(speed_hand*delta, 0, 0)
+			y_coeff = pow(1.0 - y_ratio/margin_hand, 2.0)
 		elif y_ratio > (1.0 - margin_hand):
-			rotation -= Vector3(speed_hand*delta, 0, 0)
+			y_coeff = -pow(1.0 - (1.0 - y_ratio)/margin_hand, 2.0)
+		x_coeff = clamp(x_coeff, -1.0, 1.0)
+		y_coeff = clamp(y_coeff, -1.0, 1.0)
+		rotation += speed_hand*delta*Vector3(y_coeff, x_coeff, 0)
 		rotation = rotation.clamp(
 			Vector3(deg_to_rad(center_hand.x - amplitude_hand_vt), deg_to_rad(center_hand.y - amplitude_hand_hz), 0),
 			Vector3(deg_to_rad(center_hand.x + amplitude_hand_vt), deg_to_rad(center_hand.y + amplitude_hand_hz), 0)
