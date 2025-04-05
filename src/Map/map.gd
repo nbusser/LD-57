@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var hand: CharacterBody3D = $Hand/HandBody
+@onready var hand: Hand = $Hand
 @onready var fixed_arm: Node3D = $FixedArm
 @onready var cardScene: PackedScene = preload("res://src/Card.tscn")
 
@@ -34,6 +34,10 @@ func _process(_delta):
 		stencil_camera.fov = current_camera.fov
 		stencil_camera.global_transform = current_camera.global_transform
 
+	var card: StaticBody3D = hand.get_closest_card()
+	if card:
+		# (card.get_node("MeshInstance3D") as MeshInstance3D).mesh.material.albedo_color = Color(1, 0, 0)
+		card.rotate(Vector3.UP, 0.1)
 
 func _ready():
 	spawn_cards(5)
