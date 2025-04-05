@@ -48,8 +48,8 @@ class RoundManager:
 		battleField.append({"player": player, "card": card})
 
 	# Fonction pour faire piocher l'alien à partir de la fonction draw_cards et de alienHand
-	func alien_draw_cards() -> void:
-		alienHand = draw_cards(alienDeck, HAND_SIZE)
+	func alien_draw_cards(count : int) -> void:
+		alienHand = draw_cards(alienDeck, count)
 
 	# Fonction pour faire jouer l'alien
 	func alien_play_card() -> void:
