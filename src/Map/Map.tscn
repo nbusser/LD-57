@@ -102,7 +102,7 @@ transform = Transform3D(1, 0, 0, 0, 0.983423, -0.181326, 0, 0.181326, 0.983423, 
 shape = SubResource("BoxShape3D_jde0p")
 
 [node name="Enemy" parent="." instance=ExtResource("6_lrvju")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823981, -1.29922)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823981, -0.612635)
 
 [node name="Card2" parent="." instance=ExtResource("5_jde0p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.563106, 0.626397, 0.518094)
