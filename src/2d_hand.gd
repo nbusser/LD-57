@@ -6,7 +6,7 @@ extends Node2D
 @onready var Arm = get_node("Arm")
 
 @export var distance_constraint = 60.0
-@export var reactivity = 5
+@export var reactivity = 50
 
 var enabled = true
 
@@ -59,6 +59,8 @@ func FABRIK_pass():
 		points[i] = points[i - 1] + new_direction*distance_constraint
 	
 	Arm.set_points(points)
+	
+	HandBody.global_rotation = points[points.size() - 2].angle_to_point(points[points.size() - 1])
 
 func disable():
 	self.visible = false
