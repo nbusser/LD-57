@@ -34,7 +34,10 @@ func _process(_delta):
 		stencil_camera.fov = current_camera.fov
 		stencil_camera.global_transform = current_camera.global_transform
 
-	var card: StaticBody3D = hand.get_closest_card()
+
+	var card: StaticBody3D = null
+	if hand.enabled:
+		card = hand.get_closest_card()
 	if card:
 		# (card.get_node("MeshInstance3D") as MeshInstance3D).mesh.material.albedo_color = Color(1, 0, 0)
 		card.rotate(Vector3.UP, 0.1)
