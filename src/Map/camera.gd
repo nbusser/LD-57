@@ -48,6 +48,8 @@ func _on_weeeee_toggled(toggled_on: bool) -> void:
 	if tween:
 		tween.stop()
 	tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
 	if toggled_on:
 		tween.parallel().tween_property(rail, "progress_ratio", 0.99, 1)
 		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_table.x), deg_to_rad(center_table.y), 0), 1)
