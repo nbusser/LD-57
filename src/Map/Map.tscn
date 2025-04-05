@@ -80,4 +80,7 @@ shape = SubResource("BoxShape3D_jde0p")
 [node name="Enemy" parent="." instance=ExtResource("6_lrvju")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823981, -1.29922)
 
+[node name="Card2" parent="." instance=ExtResource("5_jde0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.563106, 0.626397, 0.518094)
+
 [connection signal="toggled" from="CanvasLayer/Weeeee" to="CameraRail/FollowRail/Camera" method="_on_weeeee_toggled"]

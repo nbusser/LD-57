@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var hand: CharacterBody3D = $Hand
+@onready var hand: CharacterBody3D = $Hand/HandBody
 @onready var cardScene: PackedScene = preload("res://src/Card.tscn")
 
 const plane_collision_layer = 6
