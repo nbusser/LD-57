@@ -1,8 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=6 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
 
 [sub_resource type="Environment" id="Environment_57a3y"]
+
+[sub_resource type="Curve3D" id="Curve3D_wqubw"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.2, -0.6),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_57a3y"]
 
@@ -13,8 +21,19 @@
 [node name="Environment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_57a3y")
 
-[node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1, 1)
+[node name="CameraRail" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 1, 1)
+curve = SubResource("Curve3D_wqubw")
+
+[node name="FollowRail" type="PathFollow3D" parent="CameraRail"]
+transform = Transform3D(0.999997, 0, -4.54636e-07, 0, 1, 0, 4.54636e-07, 0, 0.999997, 0, 0.00667369, -0.00109996)
+progress = 0.00675834
+rotation_mode = 1
+loop = false
+tilt_enabled = false
+
+[node name="Camera" type="Camera3D" parent="CameraRail/FollowRail"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0)
 script = ExtResource("1_wqubw")
 
 [node name="Table" type="Node" parent="."]
@@ -39,3 +58,21 @@ mesh = SubResource("BoxMesh_wqubw")
 [node name="Leg4" type="MeshInstance3D" parent="Table"]
 transform = Transform3D(0.05, 0, 0, 0, 0.5, 0, 0, 0, 0.05, -0.431, 0.337301, -0.431)
 mesh = SubResource("BoxMesh_wqubw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Weeeee" type="Button" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -39.5
+offset_top = 82.0
+offset_right = 39.5
+offset_bottom = 113.0
+grow_horizontal = 2
+size_flags_vertical = 4
+toggle_mode = true
+text = "Weeeeee"
+
+[connection signal="toggled" from="CanvasLayer/Weeeee" to="CameraRail/FollowRail/Camera" method="_on_weeeee_toggled"]
