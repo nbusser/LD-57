@@ -1,10 +1,10 @@
 extends Camera3D
 
+@export var margin_prop = .1
+@export var speed = .008
+@export var amplitude = 20 # degrees
+
 func _physics_process(delta: float) -> void:
-	const margin_prop = .1
-	const speed = .008
-	const amplitude = 20 # degrees
-	
 	var x_ratio = get_viewport().get_mouse_position().x/get_viewport().get_size().x
 	var y_ratio = get_viewport().get_mouse_position().y/get_viewport().get_size().y
 	if x_ratio < margin_prop:
