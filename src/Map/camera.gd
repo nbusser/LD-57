@@ -4,7 +4,8 @@ extends Camera3D
 
 @export var margin_hand = .1
 @export var speed_hand = 1
-@export var amplitude_hand = 10 # degrees
+@export var amplitude_hand_vt = 10 # degrees
+@export var amplitude_hand_hz = 3 # degrees
 @export var center_hand = Vector2(-30, 0)
  
 @export var margin_table = .4
@@ -20,13 +21,17 @@ func _physics_process(delta: float) -> void:
 	var y_ratio = get_viewport().get_mouse_position().y/get_viewport().get_size().y
 	
 	if current_mode == ViewMode.HAND_MODE: # horizontal panning only
+		if x_ratio < margin_hand:
+			rotation += Vector3(0, speed_table*delta, 0)
+		elif x_ratio > (1.0 - margin_hand):
+			rotation -= Vector3(0, speed_table*delta, 0)
 		if y_ratio < margin_hand:
 			rotation += Vector3(speed_hand*delta, 0, 0)
 		elif y_ratio > (1.0 - margin_hand):
 			rotation -= Vector3(speed_hand*delta, 0, 0)
 		rotation = rotation.clamp(
-			Vector3(deg_to_rad(center_hand.x - amplitude_hand), deg_to_rad(center_hand.y - amplitude_hand), 0),
-			Vector3(deg_to_rad(center_hand.x + amplitude_hand), deg_to_rad(center_hand.y + amplitude_hand), 0)
+			Vector3(deg_to_rad(center_hand.x - amplitude_hand_vt), deg_to_rad(center_hand.y - amplitude_hand_hz), 0),
+			Vector3(deg_to_rad(center_hand.x + amplitude_hand_vt), deg_to_rad(center_hand.y + amplitude_hand_hz), 0)
 		)
 	elif current_mode == ViewMode.TABLE_MODE: # Full 2D panning
 		if x_ratio < margin_table:
@@ -56,7 +61,7 @@ func _on_weeeee_toggled(toggled_on: bool) -> void:
 		tween.tween_callback(func (): current_mode = ViewMode.TABLE_MODE)
 	else:
 		tween.parallel().tween_property(rail, "progress_ratio", 0.01, 1)
-		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_hand.x + amplitude_hand), deg_to_rad(center_hand.y), 0), 1)
+		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_hand.x + amplitude_hand_vt), deg_to_rad(center_hand.y), 0), 1)
 		tween.tween_callback(func (): current_mode = ViewMode.HAND_MODE)
 
 func _exit_tree() -> void:
