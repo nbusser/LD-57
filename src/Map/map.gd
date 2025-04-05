@@ -5,7 +5,7 @@ extends Node3D
 
 const plane_collision_layer = 6
 
-func _process(delta):
+func _process(_delta):
 	var mouse_pos = get_viewport().get_mouse_position()
 	var cam = get_viewport().get_camera_3d()
 	var ray_origin = cam.project_ray_origin(mouse_pos)
@@ -28,5 +28,5 @@ func _ready():
 func spawn_card():
 	var card = cardScene.instantiate()
 	card.add_to_group("cards")
-	card.global_position = get_viewport().get_camera_3d().global_position + get_viewport().get_camera_3d().basis.z * -.5
 	add_child(card)
+	card.global_position = get_viewport().get_camera_3d().global_position + get_viewport().get_camera_3d().basis.z * -.5
