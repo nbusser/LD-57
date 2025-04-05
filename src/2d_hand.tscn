@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://dve1ylvmh0i6o"]
+
+[ext_resource type="Script" uid="uid://b2cvc362p8kcb" path="res://src/2d_hand.gd" id="1_6e8t3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jlw6s"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6e8t3"]
+size = Vector2(200, 200)
+
+[node name="2DHand" type="Node2D"]
+script = ExtResource("1_6e8t3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HandBody" type="RigidBody2D" parent="."]
+z_index = 2
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HandBody"]
+shape = SubResource("CircleShape2D_jlw6s")
+
+[node name="Sprite2D" type="Sprite2D" parent="HandBody"]
+texture = SubResource("PlaceholderTexture2D_6e8t3")
+
+[node name="Anchor" type="Node2D" parent="."]
+position = Vector2(-632, 0)
+
+[node name="IntermediatePoints" type="Node2D" parent="."]
+z_index = 1
+
+[node name="Arm" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 90.0
+default_color = Color(0.786382, 0.623015, 0.61453, 1)
+joint_mode = 2
+antialiased = true
