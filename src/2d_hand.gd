@@ -46,17 +46,17 @@ func _physics_process(delta: float) -> void:
 func FABRIK_pass():
 	var points = Arm.points
 	
-	# Forward
-	points[points.size() - 1] = HandBody.position  # Set the first node to the anchor position
-	for i in range(points.size() - 2, -1, -1):
-		var new_direction = (points[i + 1] - points[i]).normalized()
-		points[i] = points[i + 1] - new_direction*distance_constraint
-	
 	# Backward
 	points[0] = Anchor.position  # Set the last node to the target position
 	for i in range(1, points.size()):
 		var new_direction = (points[i] - points[i - 1]).normalized()
 		points[i] = points[i - 1] + new_direction*distance_constraint
+	
+	# Forward
+	points[points.size() - 1] = HandBody.position  # Set the first node to the anchor position
+	for i in range(points.size() - 2, -1, -1):
+		var new_direction = (points[i + 1] - points[i]).normalized()
+		points[i] = points[i + 1] - new_direction*distance_constraint
 	
 	Arm.set_points(points)
 	
