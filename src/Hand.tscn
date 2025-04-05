@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqom45hiv58ib"]
+
+[ext_resource type="Script" uid="uid://cu0dkej5aw0a1" path="res://src/hand.gd" id="1_fmgxm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_i50rn"]
+radius = 0.15
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_i50rn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmgxm"]
+albedo_color = Color(0.517647, 1, 1, 1)
+albedo_texture = SubResource("PlaceholderTexture2D_i50rn")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fmgxm"]
+material = SubResource("StandardMaterial3D_fmgxm")
+radius = 0.09
+height = 0.3
+
+[node name="Hand" type="CharacterBody3D"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_i50rn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06, 0)
+mesh = SubResource("CapsuleMesh_fmgxm")
+script = ExtResource("1_fmgxm")

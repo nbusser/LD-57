@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1swxld0lwpiv"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_77rk5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t65bg"]
+albedo_color = Color(0.2, 1, 1, 1)
+albedo_texture = SubResource("PlaceholderTexture2D_77rk5")
+uv1_scale = Vector3(3, 2, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_77rk5"]
+material = SubResource("StandardMaterial3D_t65bg")
+size = Vector3(0.057, 0.0004, 0.08)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i8o5v"]
+radius = 0.04
+height = 0.12
+
+[node name="Card" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_77rk5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_i8o5v")
