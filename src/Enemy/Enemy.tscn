@@ -1,7 +1,25 @@
-[gd_scene load_steps=30 format=3 uid="uid://cb2c6exrmfj47"]
+[gd_scene load_steps=36 format=3 uid="uid://cb2c6exrmfj47"]
 
 [ext_resource type="Texture2D" uid="uid://b8rmf6ufuoiq0" path="res://assets/sprites/sproinkblink-Sheet.png" id="1_do4pe"]
+[ext_resource type="Script" uid="uid://b1whyc7omqomo" path="res://src/Enemy/enemy.gd" id="1_fjy47"]
 [ext_resource type="Texture2D" uid="uid://ralww3ycdfo8" path="res://assets/sprites/sproinksweating-Sheet.png" id="2_5fq8x"]
+[ext_resource type="Texture2D" uid="uid://bvug7hrquq6so" path="res://assets/sprites/pigsleep-Sheet.png" id="2_428xd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0ehj"]
+atlas = ExtResource("2_428xd")
+region = Rect2(0, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yldpm"]
+atlas = ExtResource("2_428xd")
+region = Rect2(402, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cioqm"]
+atlas = ExtResource("2_428xd")
+region = Rect2(0, 402, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0cnx"]
+atlas = ExtResource("2_428xd")
+region = Rect2(402, 402, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5fq8x"]
 atlas = ExtResource("1_do4pe")
@@ -110,6 +128,23 @@ region = Rect2(402, 1206, 400, 400)
 [sub_resource type="SpriteFrames" id="SpriteFrames_irkw7"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0ehj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yldpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cioqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0cnx")
+}],
+"loop": true,
+"name": &"pig_distracted",
+"speed": 2.0
+}, {
+"frames": [{
 "duration": 40.0,
 "texture": SubResource("AtlasTexture_5fq8x")
 }, {
@@ -147,7 +182,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_6ital")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"sproink_idle",
 "speed": 10.0
 }, {
 "frames": [{
@@ -194,14 +229,15 @@ animations = [{
 "texture": SubResource("AtlasTexture_1pd8t")
 }],
 "loop": true,
-"name": &"sweating",
+"name": &"sproink_weak",
 "speed": 10.0
 }]
 
 [node name="Enemy" type="Node3D"]
+script = ExtResource("1_fjy47")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0720145, 0)
 sprite_frames = SubResource("SpriteFrames_irkw7")
-animation = &"idle"
-frame_progress = 0.636522
+animation = &"sproink_idle"
+frame_progress = 0.778822
