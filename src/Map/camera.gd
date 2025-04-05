@@ -1,13 +1,15 @@
 extends Camera3D
 
-@onready var rail = get_node("..")
+@onready var Rail = get_node("..")
+@onready var HandTopView = get_node("../../../Hand")
+@onready var HandFrontView = get_node("../../../2DHand")
 
 @export var margin_hand = .2
 @export var speed_hand = 1
 @export var amplitude_hand_vt = 10 # degrees
 @export var amplitude_hand_hz = 3 # degrees
 @export var center_hand = Vector2(-30, 0)
- 
+
 @export var margin_table = .4
 @export var speed_table = .6
 @export var amplitude_table = 3 # degrees
@@ -65,13 +67,21 @@ func switch_mode(mode: ViewMode) -> void:
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	if mode == ViewMode.TABLE_MODE:
-		tween.parallel().tween_property(rail, "progress_ratio", 0.99, 1)
+		HandFrontView.visible = false
+		tween.parallel().tween_property(Rail, "progress_ratio", 0.99, 1)
 		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_table.x), deg_to_rad(center_table.y), 0), 1)
-		tween.tween_callback(func (): current_mode = ViewMode.TABLE_MODE)
+		tween.tween_callback(func ():
+			current_mode = ViewMode.TABLE_MODE
+			HandTopView.visible = true
+		)
 	else:
-		tween.parallel().tween_property(rail, "progress_ratio", 0.01, 1)
+		HandTopView.visible = false
+		tween.parallel().tween_property(Rail, "progress_ratio", 0.01, 1)
 		tween.parallel().tween_property(self, "rotation", Vector3(deg_to_rad(center_hand.x), deg_to_rad(center_hand.y), 0), 1)
-		tween.tween_callback(func (): current_mode = ViewMode.HAND_MODE)
+		tween.tween_callback(func ():
+			current_mode = ViewMode.HAND_MODE
+			HandFrontView.visible = true
+		)
 
 func _exit_tree() -> void:
 	if tween:
