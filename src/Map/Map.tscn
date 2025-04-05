@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=14 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -7,7 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://b1swxld0lwpiv" path="res://src/Card.tscn" id="5_jde0p"]
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lrvju"]
+
+[sub_resource type="Sky" id="Sky_fyitu"]
+sky_material = SubResource("ProceduralSkyMaterial_lrvju")
+
 [sub_resource type="Environment" id="Environment_57a3y"]
+background_mode = 2
+sky = SubResource("Sky_fyitu")
 
 [sub_resource type="Curve3D" id="Curve3D_wqubw"]
 bake_interval = 0.01
@@ -19,6 +26,13 @@ point_count = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jde0p"]
 size = Vector3(4, 0.01, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrvju"]
+albedo_color = Color(0.262745, 0.521569, 0.0823529, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fyitu"]
+material = SubResource("StandardMaterial3D_lrvju")
+size = Vector3(400, 0.1, 400)
 
 [node name="Map" type="Node3D"]
 script = ExtResource("1_e037b")
@@ -65,6 +79,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83809, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.258819, 0.965926, 0, -0.965926, -0.258819, 1, 4, -1)
+light_energy = 4.232
+shadow_enabled = true
 
 [node name="Card" parent="." instance=ExtResource("5_jde0p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62017, 0)
@@ -82,5 +98,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823981, -1.29922)
 
 [node name="Card2" parent="." instance=ExtResource("5_jde0p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.563106, 0.626397, 0.518094)
+
+[node name="FixedArm" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0667799, 0)
+mesh = SubResource("BoxMesh_fyitu")
 
 [connection signal="toggled" from="CanvasLayer/Weeeee" to="CameraRail/FollowRail/Camera" method="_on_weeeee_toggled"]
