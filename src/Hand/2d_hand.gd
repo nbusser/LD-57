@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	if !enabled:
 		return
 
-	# Move hand
+	# Move
 	hand_body.velocity = (get_global_mouse_position() - mouse_pointer.global_position) * 500 * delta
 	if hand_body.move_and_slide():
 		var collision_info = hand_body.get_last_slide_collision()

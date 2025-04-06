@@ -5,7 +5,9 @@ const PLANE_COLLISION_LAYER = 6
 const CARD_THICKNESS = 0.0003  # .3mm
 const VERTICAL_OFFSET = Vector3.DOWN * 0.06
 
-var selected: Card = null
+var hovered: Card = null
+
+var dragged_card: Card = null
 
 @onready var hand: Hand = $Hand
 @onready var fixed_arm: Node3D = $FixedArm
@@ -49,11 +51,23 @@ func _process(_delta):
 	else:  # Use FrontView hand
 		card = finger_tip.get_closest_card()
 
+	# Hovering the card
 	if card:
 		(card.get_node("CardMesh") as MeshInstance3D).set_layer_mask_value(6, true)
-		if selected and card != selected:
-			(selected.get_node("CardMesh") as MeshInstance3D).set_layer_mask_value(6, false)
-		selected = card
+		if hovered and card != hovered:
+			(hovered.get_node("CardMesh") as MeshInstance3D).set_layer_mask_value(6, false)
+		hovered = card
+
+
+func _input(event):
+	# Dragging/dropping a card
+	if event is InputEventMouseButton and event.button_index == 1:
+		if event.is_pressed():
+			if hovered != null:
+				dragged_card = hovered
+		else:
+			if dragged_card != null:
+				dragged_card = null
 
 
 func _ready():
