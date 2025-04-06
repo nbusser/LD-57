@@ -7,16 +7,17 @@ var _dragged_card: Card = null
 
 @onready var card_scene: PackedScene = preload("res://src/Card/Card.tscn")
 @onready var cards_in_hand: Node3D = $CardsInHand
-@onready var finger_tip: Node2D = $"../Billboard/2DHand/HandBody/Sprite2D/FingerTip"
+@onready var finger_tip: Node3D = $"../Billboard/2DHand/HandBody/Sprite2D/FingerTip"
 @onready var camera: Camera3D = $"../CameraRail/FollowRail/Camera"
 
 
 func _physics_process(_delta: float) -> void:
+	# TODO just use finger_tip.pointed_location instead
 	# Move the dragged card along the finger tip
 	if _dragged_card != null:
 		_dragged_card.rotation = Vector3(PI / 2, 0, 0)
-		var ray_origin = camera.project_ray_origin(finger_tip.global_position)
-		var ray_end = ray_origin + camera.project_ray_normal(finger_tip.global_position) * 1
+		var ray_origin = camera.global_position
+		var ray_end = finger_tip.global_position
 
 		var space_state = get_world_3d().direct_space_state
 		var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end, 1 << 7)

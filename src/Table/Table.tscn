@@ -11,7 +11,7 @@ size = Vector3(1, 0.719, 1)
 
 [node name="Table" type="StaticBody3D"]
 
-[node name="Table" type="Node" parent="."]
+[node name="Table" type="Node3D" parent="."]
 
 [node name="Top" type="MeshInstance3D" parent="Table"]
 transform = Transform3D(1, 0, 0, 0, 0.0314607, 0, 0, 0, 1, 0, 0.594257, 0)

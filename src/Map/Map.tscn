@@ -137,6 +137,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="2DHand" parent="." instance=ExtResource("8_fgn2p")]
+
 [node name="CardsManager" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)
 script = ExtResource("9_22krd")
@@ -145,11 +147,8 @@ script = ExtResource("9_22krd")
 
 [node name="Billboard" type="Node2D" parent="."]
 
-[node name="2DHand" parent="Billboard" instance=ExtResource("8_fgn2p")]
-z_index = -10
-position = Vector2(-8, 416)
-
 [node name="Sleeve" type="Node2D" parent="Billboard"]
+visible = false
 position = Vector2(760, 330)
 
 [node name="Top" type="RigidBody2D" parent="Billboard/Sleeve"]

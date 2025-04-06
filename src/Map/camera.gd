@@ -8,8 +8,8 @@ extends Camera3D
 @export var center = Vector2(-30, 0)
 
 @onready var rail = $".."
-@onready var hand = $"../../../Billboard/2DHand"
-@onready var finger_tip = $"../../../Billboard/2DHand/HandBody/Sprite2D/FingerTip"
+@onready var hand = $"../../../2DHand"
+@onready var finger_tip = $"../../../2DHand/HandBody/Sprite2D/FingerTip"
 @onready var billboard = $"../../../Billboard"
 
 

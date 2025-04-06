@@ -1,12 +1,11 @@
-extends Node3D
+extends CharacterBody3D
 
-var coords_2D = Vector2()
 @onready var camera = get_node("../../CameraRail/FollowRail/Camera")
 
+var coords_2D = Vector2()
 
 func _ready() -> void:
 	coords_2D = camera.unproject_position(global_position)
-
 
 func _process(delta: float) -> void:
 	# Retroprojection

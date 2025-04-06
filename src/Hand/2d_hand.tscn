@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://b2cvc362p8kcb" path="res://src/Hand/2d_hand.gd" id="1_6e8t3"]
 [ext_resource type="Texture2D" uid="uid://cmhev7oj7816j" path="res://assets/sprites/hand.png" id="2_7k6lh"]
+[ext_resource type="Script" uid="uid://m1ofa6e7drlr" path="res://src/Hand/hand_body.gd" id="2_bb4y2"]
 [ext_resource type="Script" uid="uid://dr3eiw3kce6oq" path="res://src/Map/finger_tip.gd" id="3_vbcl1"]
 [ext_resource type="Script" uid="uid://du808ocmqjkbo" path="res://src/Hand/anchor.gd" id="4_yki2y"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jlw6s"]
-radius = 60.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_yki2y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pm0q2"]
 atlas = ExtResource("2_7k6lh")
@@ -16,7 +16,7 @@ region = Rect2(0, 0, 512, 512)
 atlas = ExtResource("2_7k6lh")
 region = Rect2(512, 0, 512, 512)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_bb4y2"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_yki2y"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -30,47 +30,38 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Curve2D" id="Curve2D_pm0q2"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 1000, -1126, -518, -100, -50, 50, 0, -947, -349, -200, -200, 0, 0, -809, 251)
-}
-point_count = 3
-
-[node name="2DHand" type="Node2D"]
+[node name="2DHand" type="Node3D"]
 script = ExtResource("1_6e8t3")
 
 [node name="Arm" type="Line2D" parent="."]
 z_index = 1
 points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-width = 100.0
-default_color = Color(0.0744944, 0.169169, 0.139158, 1)
+width = 5.0
+default_color = Color(1, 0.09, 0.484333, 1)
 joint_mode = 2
 
-[node name="HandBody" type="CharacterBody2D" parent="."]
-position = Vector2(0, 9)
+[node name="HandBody" type="CharacterBody3D" parent="."]
+collision_layer = 0
+collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 3.14159
+script = ExtResource("2_bb4y2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HandBody"]
-shape = SubResource("CircleShape2D_jlw6s")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandBody"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_yki2y")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="HandBody"]
-position = Vector2(204, 18)
-scale = Vector2(0.8, 0.8)
-sprite_frames = SubResource("SpriteFrames_bb4y2")
+[node name="Sprite2D" type="AnimatedSprite3D" parent="HandBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
+pixel_size = 0.001
+sprite_frames = SubResource("SpriteFrames_yki2y")
 
-[node name="FingerTip" type="Node2D" parent="HandBody/Sprite2D"]
-position = Vector2(117.044, 5.8246)
+[node name="FingerTip" type="Node3D" parent="HandBody/Sprite2D"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0, 297.635, 22.6597, 0)
 script = ExtResource("3_vbcl1")
 
-[node name="AnchorRail" type="Path2D" parent="."]
-position = Vector2(525, 0)
-curve = SubResource("Curve2D_pm0q2")
-
-[node name="AnchorFollowRail" type="PathFollow2D" parent="AnchorRail"]
-position = Vector2(-1125.98, -487.863)
-rotation = 1.56912
-progress = 30.1353
-
-[node name="Anchor" type="Node2D" parent="AnchorRail/AnchorFollowRail"]
+[node name="Anchor" type="Node3D" parent="."]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, -2, 0.9, 0)
 script = ExtResource("4_yki2y")
+
+[node name="Joints" type="Node3D" parent="."]
