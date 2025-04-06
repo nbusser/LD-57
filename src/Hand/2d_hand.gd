@@ -11,7 +11,7 @@ var state: Enums.HandState = Enums.HandState.POINT:
 		state = value
 		_on_update_state()
 
-@onready var anchor = $"AnchorRail/AnchorFollowRail/Anchor"
+@onready var anchor = $"Anchor"
 @onready var hand_body = $"HandBody"
 @onready var arm = $"Arm"
 @onready var finger_tip = $"HandBody/Sprite2D/FingerTip"
@@ -67,8 +67,8 @@ func _physics_process(delta: float) -> void:
 	FABRIK_pass(delta)
 
 	#Adjust display size
-	sprite_2d.scale.x = .1 + 1.0 - finger_tip.distance / 3.0
-	sprite_2d.scale.y = .1 + 1.0 - finger_tip.distance / 3.0
+	hand_body.scale.x = .1 + 1.0 - finger_tip.distance / 3.0
+	hand_body.scale.y = .1 + 1.0 - finger_tip.distance / 3.0
 	arm.width_curve.set_point_value(1, .3 + 1.0 - finger_tip.distance / 3.0)
 
 
