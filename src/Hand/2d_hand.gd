@@ -3,12 +3,12 @@ extends Node2D
 @export var distance_constraint = 60.0
 @export var reactivity = 50
 
+var enabled = true
+
 @onready var anchor = $"AnchorRail/AnchorFollowRail/Anchor"
 @onready var hand_body = $"HandBody"
 @onready var arm = $"Arm"
 @onready var finger_tip = $"HandBody/Sprite2D/FingerTip"
-
-var enabled = true
 
 
 func _ready() -> void:

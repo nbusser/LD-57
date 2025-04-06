@@ -1,9 +1,8 @@
 extends Node2D
 
-@onready var follow_rail = get_node("..")
 @export var rail_ratio_speed = .1
-
 var forward = true
+@onready var follow_rail = get_node("..")
 
 
 func _process(delta: float) -> void:
