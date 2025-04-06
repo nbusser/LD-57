@@ -21,7 +21,7 @@ func _physics_process(_delta: float) -> void:
 		var space_state = get_world_3d().direct_space_state
 		var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end, 1 << 7)
 		query.collide_with_areas = true
-		var result = space_state.intersect_ray(query).get('position')
+		var result = space_state.intersect_ray(query).get("position")
 		if result:
 			_dragged_card.global_position = result
 		# _dragged_card.transform = _dragged_card.transform.translated(Vector3(0.0, -0.06, 0.0))
