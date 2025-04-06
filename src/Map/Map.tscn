@@ -1,9 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=30 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
 [ext_resource type="Texture2D" uid="uid://xkej5orjj4jo" path="res://assets/HDR_blue_local_star.jpg" id="2_xtfh0"]
 [ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table/Table.tscn" id="3_13lp4"]
+[ext_resource type="Material" uid="uid://dwpeqms8cq4u6" path="res://src/Map/floor.tres" id="6_1blim"]
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
 [ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
 [ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="8_fgn2p"]
