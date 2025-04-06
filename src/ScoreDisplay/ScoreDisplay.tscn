@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://qb3kiu4nd5oj"]
+
+[ext_resource type="Script" uid="uid://dob40naa1m61c" path="res://src/ScoreDisplay/score_display.gd" id="1_kcakm"]
+
+[node name="ScoreDisplay" type="Node3D"]
+script = ExtResource("1_kcakm")
+
+[node name="Label3D" type="Label3D" parent="."]
+text = "20"
