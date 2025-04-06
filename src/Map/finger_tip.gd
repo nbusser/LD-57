@@ -6,6 +6,7 @@ var distance = 2.0
 
 @onready var camera = $"../../../../../CameraRail/FollowRail/Camera"
 
+
 func _physics_process(_delta: float) -> void:
 	var ray_query = PhysicsRayQueryParameters3D.new()
 	ray_query.from = camera.project_ray_origin(global_position)

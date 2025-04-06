@@ -7,6 +7,7 @@ var glowing = false
 @onready var glowing_texture: Texture2D = load("res://assets/sprites/battlefield_glow.png")
 @onready var base_texture: Texture2D = load("res://assets/sprites/battlefield.png")
 
+
 func _ready() -> void:
 	$Sprite3D.texture = base_texture
 
