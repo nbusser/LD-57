@@ -44,9 +44,11 @@ func _alien_draw_card(card_instance: Node3D) -> void:
 	#TODO PLACEHOLDER DE L ALIEN QUI FAIT GENRE QU IL PREND UNE CARTE
 	#PEUT ETRE QU IL FAUDRA FAIRE BOUGER SON BRAS OU QU IL FASSE LA GUEULE
 	var card_value = card_instance.get("card_value")
-	animated_sprite_3d.play("pig_distracted")
+	var initial_state = state
+	state = Enums.EnemyState.THINKING
 	await get_tree().create_timer(3.0).timeout
-	_update_sprite()
+	if initial_state != Enums.EnemyState.THINKING:
+		state = initial_state
 	card_instance.queue_free()
 
 
