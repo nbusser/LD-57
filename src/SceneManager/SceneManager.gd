@@ -40,6 +40,12 @@ func _ready() -> void:
 	randomize()
 	Globals.scene_ended.connect(self._on_end_scene)
 	_run_main_menu()
+	for mp in music_players:
+		mp.play()
+		mp.volume_linear = 0
+	while true:
+		await get_tree().create_timer(3.0).timeout
+		self.change_music_track(music_players[randi_range(0, music_players.size() - 1)])
 
 
 func _process(_delta: float) -> void:
@@ -128,9 +134,13 @@ func _run_credits(can_go_back: bool) -> void:
 
 func change_music_track(new_audio_player: AudioStreamPlayer) -> void:
 	if current_audio_player != new_audio_player:
+		var tween = create_tween()
+		tween.tween_property(new_audio_player, "volume_linear", 1, .4)
+		await get_tree().create_timer(.3).timeout
 		for mp in music_players:
-			mp.stop()
-		new_audio_player.play()
+			if mp != new_audio_player:
+				tween = create_tween()
+				tween.tween_property(mp, "volume_linear", 0, .2)
 		current_audio_player = new_audio_player
 
 
