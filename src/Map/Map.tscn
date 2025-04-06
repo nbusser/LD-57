@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=25 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -9,6 +9,8 @@
 [ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
 [ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="8_fgn2p"]
 [ext_resource type="Texture2D" uid="uid://dkxf7u58n18ne" path="res://assets/sprites/sleeve_placeholder.png" id="8_jljl6"]
+[ext_resource type="Script" uid="uid://cko8icjpkjvo" path="res://src/Map/card_hand.gd" id="9_22krd"]
+[ext_resource type="Texture2D" uid="uid://cpdylmn711eol" path="res://assets/sprites/hand.png" id="10_fk5ph"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lrvju"]
 
@@ -110,9 +112,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823981, -0.612635)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.563106, 0.626397, 0.518094)
 card_value = 0
 
-[node name="FixedArm" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0667799, 0)
 mesh = SubResource("BoxMesh_fyitu")
@@ -137,6 +136,18 @@ mouse_filter = 2
 [node name="2DHand" parent="." instance=ExtResource("8_fgn2p")]
 z_index = -10
 position = Vector2(-8, 416)
+
+[node name="CardHand" type="Node2D" parent="."]
+script = ExtResource("9_22krd")
+
+[node name="Sprite2D" type="Sprite2D" parent="CardHand"]
+position = Vector2(399, 461)
+texture = ExtResource("10_fk5ph")
+flip_h = true
+hframes = 2
+
+[node name="Cards" type="Node3D" parent="CardHand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)
 
 [node name="Sleeve" type="Node2D" parent="."]
 position = Vector2(760, 330)
