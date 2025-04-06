@@ -108,7 +108,7 @@ light_energy = 4.232
 shadow_enabled = true
 
 [node name="Area3D" type="Area3D" parent="."]
-collision_layer = 32
+collision_layer = 128
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]

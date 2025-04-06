@@ -15,11 +15,16 @@ func _physics_process(_delta: float) -> void:
 	# Move the dragged card along the finger tip
 	if _dragged_card != null:
 		_dragged_card.rotation = Vector3(PI / 2, 0, 0)
-		_dragged_card.global_position = (
-			camera.project_ray_origin(finger_tip.global_position)
-			+ camera.project_ray_normal(finger_tip.global_position) * 0.3
-		)
-		_dragged_card.transform = _dragged_card.transform.translated(Vector3(0.0, -0.06, 0.0))
+		var ray_origin = camera.project_ray_origin(finger_tip.global_position)
+		var ray_end = ray_origin + camera.project_ray_normal(finger_tip.global_position) * 1000
+
+		var space_state = get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end, 1 << 7)
+		query.collide_with_areas = true
+		var result = space_state.intersect_ray(query).get('position')
+		if result:
+			_dragged_card.global_position = result
+		# _dragged_card.transform = _dragged_card.transform.translated(Vector3(0.0, -0.06, 0.0))
 
 
 func grab_card_in_hand(card: Card):
