@@ -36,18 +36,25 @@ func _physics_process(delta: float) -> void:
 		)
 		if rotation.x > deg_to_rad(center.x + amplitude_vt - 1):
 			rail.progress_ratio == .011
+			rotation.x = deg_to_rad(center.x + amplitude_vt - 1)
 	else:
 		rotation += pan_speed * delta * Vector3(0, x_coeff, 0)
 		rotation = rotation.clamp(
 			Vector3(rotation.x, deg_to_rad(center.y - amplitude_hz), 0),
 			Vector3(rotation.x, deg_to_rad(center.y + amplitude_hz), 0)
 		)
-		if rail.progress_ratio < .99:
+		if rail.progress_ratio < .6:
 			y_coeff = clamp(y_coeff, -1.0, 1.0)
 		else:
 			y_coeff = clamp(y_coeff, -1.0, 0)
 		rail.progress_ratio += rail_speed * delta * y_coeff
+		rotation.x = lerp(
+			deg_to_rad(center.x + amplitude_vt - 1),
+			deg_to_rad(center.x - 2*amplitude_vt),
+			rail.progress_ratio
+		)
 		if rail.progress_ratio < 0.011:
 			rail.progress_ratio = 0.01
-		if rail.progress_ratio > .99:
-			rail.progress_ratio = .99
+			rotation.x = deg_to_rad(center.x + amplitude_vt - 1)
+		if rail.progress_ratio > .6:
+			rail.progress_ratio = .6

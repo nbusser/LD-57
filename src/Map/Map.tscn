@@ -23,7 +23,7 @@ sky = SubResource("Sky_fyitu")
 [sub_resource type="Curve3D" id="Curve3D_wqubw"]
 bake_interval = 0.01
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.4, -0.5),
+"points": PackedVector3Array(0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.4, -0.4),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -66,11 +66,11 @@ script = ExtResource("1_e037b")
 environment = SubResource("Environment_57a3y")
 
 [node name="CameraRail" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 1, 1)
+transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 1, 0.8)
 curve = SubResource("Curve3D_wqubw")
 
 [node name="FollowRail" type="PathFollow3D" parent="CameraRail"]
-transform = Transform3D(0.999997, 0, -4.1482e-07, 0, 1, 0, 4.1482e-07, 0, 0.999997, 0, 0.0109029, -0.00161117)
+transform = Transform3D(0.999997, 0, 2.98022e-08, 0, 1, 0, -2.98022e-08, 0, 0.999997, 0, 0.0109543, -0.00130003)
 progress = 0.0110764
 rotation_mode = 1
 loop = false
