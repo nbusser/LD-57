@@ -8,7 +8,7 @@
 [ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
 [ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="8_fgn2p"]
 [ext_resource type="Texture2D" uid="uid://dkxf7u58n18ne" path="res://assets/sprites/sleeve_placeholder.png" id="8_jljl6"]
-[ext_resource type="Script" path="res://src/Map/card_hand.gd" id="9_22krd"]
+[ext_resource type="Script" uid="uid://cko8icjpkjvo" path="res://src/Map/card_hand.gd" id="9_22krd"]
 [ext_resource type="Texture2D" uid="uid://cmhev7oj7816j" path="res://assets/sprites/hand.png" id="10_fk5ph"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lrvju"]
@@ -23,7 +23,7 @@ sky = SubResource("Sky_fyitu")
 [sub_resource type="Curve3D" id="Curve3D_wqubw"]
 bake_interval = 0.01
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.4, -1),
+"points": PackedVector3Array(0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.4, -0.5),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -70,7 +70,7 @@ transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 1, 1)
 curve = SubResource("Curve3D_wqubw")
 
 [node name="FollowRail" type="PathFollow3D" parent="CameraRail"]
-transform = Transform3D(0.999997, 0, -3.95971e-07, 0, 1, 0, 3.95971e-07, 0, 0.999997, 0, 0.0105412, -0.0030302)
+transform = Transform3D(0.999997, 0, -4.1482e-07, 0, 1, 0, 4.1482e-07, 0, 0.999997, 0, 0.0109029, -0.00161117)
 progress = 0.0110764
 rotation_mode = 1
 loop = false
