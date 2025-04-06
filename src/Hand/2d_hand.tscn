@@ -1,9 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dve1ylvmh0i6o"]
+[gd_scene load_steps=11 format=3 uid="uid://dve1ylvmh0i6o"]
 
 [ext_resource type="Script" uid="uid://b2cvc362p8kcb" path="res://src/Hand/2d_hand.gd" id="1_6e8t3"]
 [ext_resource type="Texture2D" uid="uid://cmhev7oj7816j" path="res://assets/sprites/hand.png" id="2_7k6lh"]
 [ext_resource type="Script" uid="uid://dr3eiw3kce6oq" path="res://src/Map/finger_tip.gd" id="3_vbcl1"]
 [ext_resource type="Script" uid="uid://du808ocmqjkbo" path="res://src/Hand/anchor.gd" id="4_yki2y"]
+
+[sub_resource type="Curve" id="Curve_yki2y"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jlw6s"]
 radius = 60.0
@@ -43,6 +47,7 @@ script = ExtResource("1_6e8t3")
 z_index = 1
 points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 width = 100.0
+width_curve = SubResource("Curve_yki2y")
 default_color = Color(0.0744944, 0.169169, 0.139158, 1)
 joint_mode = 2
 
@@ -55,16 +60,17 @@ wall_min_slide_angle = 3.14159
 shape = SubResource("CircleShape2D_jlw6s")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="HandBody"]
-position = Vector2(204, 18)
+position = Vector2(-0.999985, -0.999998)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_bb4y2")
+offset = Vector2(256.25, 23.75)
 
 [node name="FingerTip" type="Node2D" parent="HandBody/Sprite2D"]
-position = Vector2(117.044, 5.8246)
+position = Vector2(374.544, 29.5746)
 script = ExtResource("3_vbcl1")
 
 [node name="AnchorRail" type="Path2D" parent="."]
-position = Vector2(525, 0)
+position = Vector2(469, 0)
 curve = SubResource("Curve2D_pm0q2")
 
 [node name="AnchorFollowRail" type="PathFollow2D" parent="AnchorRail"]

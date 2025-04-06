@@ -4,6 +4,17 @@ const CARD_LAYER = 7
 
 @onready var camera = $"../../../../../CameraRail/FollowRail/Camera"
 
+var distance = 2.0
+
+func _physics_process(delta: float) -> void:
+	var ray_query = PhysicsRayQueryParameters3D.new()
+	ray_query.from = camera.project_ray_origin(global_position)
+	ray_query.to = ray_query.from + camera.project_ray_normal(global_position) * 100
+	var results = camera.get_world_3d().direct_space_state.intersect_ray(ray_query)
+	if results:
+		distance = (results.position - camera.global_position).length()
+	else:
+		distance = 2.0
 
 func get_closest_card() -> Card:
 	var ray_query = PhysicsRayQueryParameters3D.new()

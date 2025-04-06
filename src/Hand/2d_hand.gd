@@ -4,7 +4,6 @@ extends Node2D
 @export var reactivity = 50
 @export var joint_speed = 2000
 
-var enabled = true
 var joints = []
 
 var state: Enums.HandState = Enums.HandState.POINT:
@@ -34,7 +33,7 @@ func _ready() -> void:
 		node.global_position = points[i]
 		var collision_shape = CollisionShape2D.new()
 		var circle_shape = CircleShape2D.new()
-		circle_shape.radius = 10
+		circle_shape.radius = 20
 		collision_shape.shape = circle_shape
 		node.collision_layer = 2
 		node.add_child(collision_shape)
@@ -43,9 +42,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if !enabled:
-		return
-
 	# Move
 	hand_body.velocity = (get_global_mouse_position() - finger_tip.global_position) * 500 * delta
 	if hand_body.move_and_slide():
@@ -70,6 +66,10 @@ func _physics_process(delta: float) -> void:
 	# Run FABRIK
 	FABRIK_pass(delta)
 
+	#Adjust display size
+	sprite_2d.scale.x = .1 + 1.0 - finger_tip.distance/3.0
+	sprite_2d.scale.y = .1 + 1.0 - finger_tip.distance/3.0
+	arm.width_curve.set_point_value(1, .3 + 1.0 - finger_tip.distance/3.0)
 
 # gdlint:ignore = function-name
 func FABRIK_pass(delta: float):
@@ -101,17 +101,6 @@ func FABRIK_pass(delta: float):
 	arm.set_points(points)
 
 	hand_body.global_rotation = points[points.size() - 2].angle_to_point(points[points.size() - 1])
-
-
-func disable():
-	self.visible = false
-	enabled = false
-
-
-func enable():
-	_ready()
-	self.visible = true
-	enabled = true
 
 
 func _on_update_state():
