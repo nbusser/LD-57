@@ -2,7 +2,7 @@ extends Node2D
 
 const CARD_LAYER = 7
 
-@onready var camera = $"../../../../CameraRail/FollowRail/Camera"
+@onready var camera = $"../../../../../CameraRail/FollowRail/Camera"
 
 
 func get_closest_card() -> Card:

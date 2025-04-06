@@ -7,8 +7,8 @@ var _dragged_card: Card = null
 
 @onready var _cards_manager: CardsManager = $CardsManager
 @onready var _card_scene: PackedScene = preload("res://src/Card/Card.tscn")
-@onready var _finger_tip = $"2DHand/HandBody/Sprite2D/FingerTip"
-@onready var _sprite = $"2DHand/HandBody/Sprite2D"
+@onready var _finger_tip = $"Billboard/2DHand/HandBody/Sprite2D/FingerTip"
+@onready var _sprite = $"Billboard/2DHand/HandBody/Sprite2D"
 
 @onready var _stencil_viewport: SubViewport = $StencilViewport
 @onready var _stencil_camera: Camera3D = $StencilViewport/Camera3D

@@ -7,7 +7,7 @@ var _dragged_card: Card = null
 
 @onready var card_scene: PackedScene = preload("res://src/Card/Card.tscn")
 @onready var cards_in_hand: Node3D = $CardsInHand
-@onready var finger_tip: Node2D = $"../2DHand/HandBody/Sprite2D/FingerTip"
+@onready var finger_tip: Node2D = $"../Billboard/2DHand/HandBody/Sprite2D/FingerTip"
 @onready var camera: Camera3D = $"../CameraRail/FollowRail/Camera"
 
 
