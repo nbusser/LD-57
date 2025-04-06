@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=28 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://des7slrabd1qt" path="res://src/cardgame/cardgame.tscn" id="10_hxqom"]
 [ext_resource type="PackedScene" uid="uid://bswm5o0d0ybau" path="res://src/deckObject/deckObject.tscn" id="11_22krd"]
 [ext_resource type="PackedScene" uid="uid://xk15mh5tpksd" path="res://src/StaticEnvironment.tscn" id="12_fk5ph"]
+[ext_resource type="PackedScene" uid="uid://blp2otlyjliss" path="res://src/snapBattle/snapBattle.tscn" id="12_xtfh0"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22krd"]
 
@@ -186,5 +187,11 @@ transform = Transform3D(8, 0, 0, 0, -3.49691e-07, -8, 0, 8, -3.49691e-07, -0.398
 
 [node name="deckObjectPlayer" parent="deckManager" instance=ExtResource("11_22krd")]
 transform = Transform3D(8, 0, 0, 0, -3.49691e-07, -8, 0, 8, -3.49691e-07, -0.399, 0.616, 0.320375)
+
+[node name="Snapper" parent="." instance=ExtResource("12_xtfh0")]
+transform = Transform3D(0.013, 0, 0, 0, -5.68248e-10, -0.013, 0, 0.013, -5.68248e-10, -0.035, 0.615, 0.076)
+
+[node name="CardsInBattleField" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0350621, 0.626012, 0.0846656)
 
 [node name="StaticEnvironment" parent="." instance=ExtResource("12_fk5ph")]

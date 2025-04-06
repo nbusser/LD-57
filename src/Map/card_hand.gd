@@ -9,6 +9,8 @@ var _dragged_card: Card = null
 @onready var cards_in_hand: Node3D = $CardsInHand
 @onready var finger_tip: Node2D = $"../Billboard/2DHand/HandBody/Sprite2D/FingerTip"
 @onready var camera: Camera3D = $"../CameraRail/FollowRail/Camera"
+@onready var batte_field_zone: Node3D = $"../CardsInBattleField"
+@onready var card_game: Node = $"../cardgame"
 
 
 func _physics_process(_delta: float) -> void:
@@ -34,9 +36,23 @@ func grab_card_in_hand(card: Card):
 	card.start_dragging()
 
 
+func place_card_in_battlefield(card: Card):
+	card_game.round_manager.play_card("player", card.card_value)
+	batte_field_zone.add_child(card)
+	card.position = Vector3.ZERO
+	card.remove_from_group("grabbable_cards")
+
+
 func drop_card_in_hand():
 	remove_child(_dragged_card)
-	_hand_add_card(_dragged_card, 0)
+	if (
+		camera.rail.progress_ratio < .6
+		or card_game.current_state != card_game.GameState.PLAYER_TURN
+	):
+		_hand_add_card(_dragged_card, 0)
+	elif camera.rail.progress_ratio >= .6:
+		place_card_in_battlefield(_dragged_card)
+
 	_dragged_card.stop_dragging()
 	_dragged_card = null
 

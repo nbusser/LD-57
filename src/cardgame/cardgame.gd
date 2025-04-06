@@ -151,7 +151,6 @@ func _instantiate_card(card_arg: PackedScene, pos_reference_node: Node3D, value:
 
 func _ready() -> void:
 	#Pour le débug on start le round mtn
-	print(the_alien)
 	_start_game()
 	return
 
@@ -204,7 +203,6 @@ func _process(delta: float) -> void:
 		for card in round_manager.battle_field:
 			#On vérifie qu'on a bien posé la carte
 			if card["player"] == "player":
-				round_manager.play_card("player", card["card"])
 				if round_manager.first_player:
 					current_state = GameState.ALIEN_TURN
 				else:
@@ -215,7 +213,6 @@ func _process(delta: float) -> void:
 		for card in round_manager.battle_field:
 			#On vérifie qu'on a bien posé la carte
 			if card["player"] == "alien":
-				round_manager.play_card("alien", card["card"])
 				if round_manager.first_player:
 					current_state = GameState.PLAYER_TURN
 				else:

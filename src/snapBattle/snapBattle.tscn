@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://blp2otlyjliss"]
+
+[ext_resource type="Script" uid="uid://hxir4p803uud" path="res://src/snapBattle/snap_battle.gd" id="1_p2ecn"]
+[ext_resource type="Texture2D" uid="uid://bq0w4yvevqhdm" path="res://assets/sprites/battlefield.png" id="2_hoski"]
+
+[node name="Snap" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_p2ecn")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("2_hoski")
