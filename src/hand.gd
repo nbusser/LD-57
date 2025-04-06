@@ -6,15 +6,18 @@ var dirty = true
 
 var enabled = false
 
+
 func _on_grab_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("cards"):
 		close_cards.set(body.get_instance_id(), body)
 		dirty = true
 
+
 func _on_grab_area_body_exited(body: Node3D) -> void:
 	if body.is_in_group("cards"):
 		close_cards.erase(body.get_instance_id())
 		dirty = true
+
 
 func get_closest_card() -> Node3D:
 	if not dirty:
@@ -32,9 +35,11 @@ func get_closest_card() -> Node3D:
 	dirty = false
 	return closest_card
 
+
 func disable():
 	self.visible = false
 	enabled = false
+
 
 func enable():
 	self.visible = true

@@ -69,7 +69,7 @@ transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 1, 1)
 curve = SubResource("Curve3D_wqubw")
 
 [node name="FollowRail" type="PathFollow3D" parent="CameraRail"]
-transform = Transform3D(0.999997, 0, -3.95971e-07, 0, 1, 0, 3.95971e-07, 0, 0.999997, 0, 0.0105412, -0.0030302)
+transform = Transform3D(0.999997, 0, 5.96045e-08, 0, 1, 0, -5.96045e-08, 0, 0.999997, 0, 0.0105412, -0.0030302)
 progress = 0.0110764
 rotation_mode = 1
 loop = false
