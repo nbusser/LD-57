@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
-[ext_resource type="Texture2D" uid="uid://xkej5orjj4jo" path="res://assets/HDR_blue_local_star.jpg" id="2_fk5ph"]
+[ext_resource type="Texture2D" uid="uid://bjqe0bj67l0sn" path="res://assets/HDR_blue_local_star.hdr" id="2_fk5ph"]
 [ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table/Table.tscn" id="3_13lp4"]
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
 [ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
@@ -108,7 +108,7 @@ light_energy = 4.232
 shadow_enabled = true
 
 [node name="Area3D" type="Area3D" parent="."]
-collision_layer = 32
+collision_layer = 128
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
