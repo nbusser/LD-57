@@ -13,6 +13,7 @@ var dragged_card: Card = null
 @onready var fixed_arm: Node3D = $FixedArm
 @onready var card_scene: PackedScene = preload("res://src/Card/Card.tscn")
 @onready var finger_tip = $"2DHand/HandBody/Sprite2D/FingerTip"
+@onready var sprite = $"2DHand/HandBody/Sprite2D"
 
 @onready var stencil_viewport: SubViewport = $StencilViewport
 @onready var stencil_camera: Camera3D = $StencilViewport/Camera3D
@@ -65,9 +66,11 @@ func _input(event):
 		if event.is_pressed():
 			if hovered != null:
 				dragged_card = hovered
+				sprite.frame = 1
 		else:
 			if dragged_card != null:
 				dragged_card = null
+				sprite.frame = 0
 
 
 func _ready():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dve1ylvmh0i6o"]
+[gd_scene load_steps=9 format=3 uid="uid://dve1ylvmh0i6o"]
 
 [ext_resource type="Script" uid="uid://b2cvc362p8kcb" path="res://src/Hand/2d_hand.gd" id="1_6e8t3"]
 [ext_resource type="Texture2D" uid="uid://cpdylmn711eol" path="res://assets/sprites/hand.png" id="2_7k6lh"]
@@ -6,6 +6,28 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jlw6s"]
 radius = 60.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pm0q2"]
+atlas = ExtResource("2_7k6lh")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yki2y"]
+atlas = ExtResource("2_7k6lh")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bb4y2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pm0q2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yki2y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vbcl1"]
 radius = 95.33
@@ -21,33 +43,32 @@ default_color = Color(0.0744944, 0.169169, 0.139158, 1)
 joint_mode = 2
 
 [node name="HandBody" type="CharacterBody2D" parent="."]
-position = Vector2(72, -11)
 motion_mode = 1
 wall_min_slide_angle = 3.14159
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HandBody"]
 shape = SubResource("CircleShape2D_jlw6s")
 
-[node name="Sprite2D" type="Sprite2D" parent="HandBody"]
-position = Vector2(228, 5)
+[node name="Sprite2D" type="AnimatedSprite2D" parent="HandBody"]
+position = Vector2(204, 6)
 rotation = -0.0576413
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("2_7k6lh")
+sprite_frames = SubResource("SpriteFrames_bb4y2")
+
+[node name="MousePointer" type="Node2D" parent="HandBody/Sprite2D"]
+position = Vector2(60.7882, 9.76819)
 
 [node name="FingerTip" type="Node2D" parent="HandBody/Sprite2D"]
-position = Vector2(4.94583, -0.604165)
+position = Vector2(100.794, 10.8246)
 script = ExtResource("3_vbcl1")
 
 [node name="CardCatchArea" type="Area2D" parent="HandBody/Sprite2D/FingerTip"]
+position = Vector2(-73.8436, -0.50492)
 collision_layer = 65
 collision_mask = 65
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HandBody/Sprite2D/FingerTip/CardCatchArea"]
-position = Vector2(-85.029, -0.260814)
 shape = SubResource("CircleShape2D_vbcl1")
-
-[node name="MousePointer" type="Node2D" parent="HandBody/Sprite2D"]
-position = Vector2(-72.5956, -0.432909)
 
 [node name="Anchor" type="Node2D" parent="."]
 position = Vector2(-1001, 0)
