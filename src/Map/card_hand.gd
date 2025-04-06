@@ -26,7 +26,17 @@ func _physics_process(_delta: float) -> void:
 		var result = space_state.intersect_ray(query).get("position")
 		if result:
 			_dragged_card.global_position = result
+			_is_card_close_to_battlefield = (
+				_dragged_card.global_position.distance_to(batte_field_zone.global_position) < 0.1
+			)
 		# _dragged_card.transform = _dragged_card.transform.translated(Vector3(0.0, -0.06, 0.0))
+
+
+var _is_card_close_to_battlefield = false
+
+
+func is_card_close_to_battlefield() -> bool:
+	return _is_card_close_to_battlefield
 
 
 func grab_card_in_hand(card: Card):
@@ -45,15 +55,13 @@ func place_card_in_battlefield(card: Card):
 
 func drop_card_in_hand():
 	remove_child(_dragged_card)
-	if (
-		camera.rail.progress_ratio < .6
-		or card_game.current_state != card_game.GameState.PLAYER_TURN
-	):
-		print("Card dropped in hand")
-		_hand_add_card(_dragged_card, 0)
-	elif camera.rail.progress_ratio >= .6:
+	var close = is_card_close_to_battlefield()
+	if close and card_game.current_state == card_game.GameState.PLAYER_TURN:
 		print("Card dropped in battlefield")
 		place_card_in_battlefield(_dragged_card)
+	else:
+		print("Card dropped in hand")
+		_hand_add_card(_dragged_card, 0)
 
 	_dragged_card.stop_dragging()
 	_dragged_card = null

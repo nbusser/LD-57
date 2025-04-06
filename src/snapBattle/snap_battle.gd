@@ -1,14 +1,20 @@
 extends Node3D
 
 @onready var camera: Camera3D = $"../CameraRail/FollowRail/Camera"
+@onready var cards_manager: CardsManager = $"../CardsManager"
+@onready var glowing_texture: Texture2D = load("res://assets/sprites/battlefield_glow.png")
+@onready var base_texture: Texture2D = load("res://assets/sprites/battlefield.png")
 
 
 func _ready() -> void:
-	pass
+	$Sprite3D.texture = base_texture
+
+
+var glowing = false
 
 
 func _process(_delta: float) -> void:
-	if camera.rail.progress_ratio >= .6:
-		$Sprite3D.texture = load("res://assets/sprites/battlefield_glow.png")
-	else:
-		$Sprite3D.texture = load("res://assets/sprites/battlefield.png")
+	var is_close = cards_manager.is_card_close_to_battlefield()
+	if is_close != glowing:
+		glowing = is_close
+		$Sprite3D.texture = glowing_texture if is_close else base_texture
