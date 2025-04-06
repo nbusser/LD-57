@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cm3lo5y7xhsb2"]
-||||||| a5b8bee
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://520jxfamwkau"]
-=======
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b50274prydxhw"]
->>>>>>> 8bbf3d02cc7132bdc01bd9eaf474a9c187d9f529
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_o7o14"]
 frequency = 0.0102
