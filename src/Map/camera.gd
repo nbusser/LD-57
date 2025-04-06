@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 			Vector3(deg_to_rad(center.x + amplitude_vt), deg_to_rad(center.y + amplitude_hz), 0)
 		)
 		if rotation.x > deg_to_rad(center.x + amplitude_vt - 1):
-			rail.progress_ratio == .011
+			rail.progress_ratio = .011
 			rotation.x = deg_to_rad(center.x + amplitude_vt - 1)
 	else:
 		rotation += pan_speed * delta * Vector3(0, x_coeff, 0)
