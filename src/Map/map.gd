@@ -5,9 +5,8 @@ const PLANE_COLLISION_LAYER = 6
 const CARD_THICKNESS = 0.0003  # .3mm
 const VERTICAL_OFFSET = Vector3.DOWN * 0.06
 
-var hovered: Card = null
-
-var dragged_card: Card = null
+var _hovered_card: Card = null
+var _dragged_card: Card = null
 
 @onready var hand: Hand = $Hand
 @onready var fixed_arm: Node3D = $FixedArm
@@ -17,6 +16,10 @@ var dragged_card: Card = null
 
 @onready var stencil_viewport: SubViewport = $StencilViewport
 @onready var stencil_camera: Camera3D = $StencilViewport/Camera3D
+
+
+func _is_dragging():
+	return _dragged_card != null
 
 
 func _process(_delta):
@@ -46,30 +49,43 @@ func _process(_delta):
 		stencil_camera.fov = current_camera.fov
 		stencil_camera.global_transform = current_camera.global_transform
 
-	var card: StaticBody3D = null
-	if hand.enabled:
-		card = hand.get_closest_card()
-	else:  # Use FrontView hand
-		card = finger_tip.get_closest_card()
+	if _is_dragging():
+		return
 
-	# Hovering the card
-	if card:
-		(card.get_node("CardMesh") as MeshInstance3D).set_layer_mask_value(6, true)
-		if hovered and card != hovered:
-			(hovered.get_node("CardMesh") as MeshInstance3D).set_layer_mask_value(6, false)
-		hovered = card
+	var new_hover_card: Card = null
+	if hand.enabled:
+		new_hover_card = hand.get_closest_card()
+	else:  # Use FrontView hand
+		new_hover_card = finger_tip.get_closest_card()
+
+	if new_hover_card == null:
+		if _hovered_card != null:
+			_hovered_card.stop_hovering()
+			_hovered_card = null
+	else:
+		if _hovered_card == null:
+			_hovered_card = new_hover_card
+			_hovered_card.start_hovering()
+		elif new_hover_card != _hovered_card:
+			_hovered_card.stop_hovering()
+			new_hover_card.start_hovering()
+			_hovered_card = new_hover_card
 
 
 func _input(event):
 	# Dragging/dropping a card
 	if event is InputEventMouseButton and event.button_index == 1:
 		if event.is_pressed():
-			if hovered != null:
-				dragged_card = hovered
+			if _hovered_card != null:
+				_dragged_card = _hovered_card
+				_dragged_card.start_dragging()
+				_hovered_card = null
 				sprite.frame = 1
 		else:
-			if dragged_card != null:
-				dragged_card = null
+			if _dragged_card != null:
+				_dragged_card.stop_dragging()
+				_dragged_card = null
+				# TODO: drop the card
 				sprite.frame = 0
 
 
