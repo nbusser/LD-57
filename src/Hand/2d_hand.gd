@@ -17,6 +17,11 @@ var state: Enums.HandState = Enums.HandState.POINT:
 @onready var finger_tip = $"HandBody/Sprite2D/FingerTip"
 @onready var sprite_2d: AnimatedSprite2D = $"HandBody/Sprite2D"
 
+@onready var point_outline: Line2D = $HandBody/Sprite2D/PointOutline
+@onready var pinch_outline: Node2D = $HandBody/Sprite2D/PinchOutline
+@onready var point_collision: CollisionPolygon2D = $HandBody/PointCollision
+@onready var pinch_collision: CollisionPolygon2D = $HandBody/PinchCollision
+
 
 func _ready() -> void:
 	var points = arm.points
@@ -39,6 +44,8 @@ func _ready() -> void:
 		node.add_child(collision_shape)
 		arm.add_child(node)
 		joints.append(node)
+
+	_on_update_state()
 
 
 func _physics_process(delta: float) -> void:
@@ -105,8 +112,18 @@ func FABRIK_pass(delta: float):
 
 
 func _on_update_state():
+	point_outline.hide()
+	pinch_outline.hide()
+
+	point_collision.disabled = true
+	pinch_collision.disabled = true
+
 	match state:
 		Enums.HandState.POINT:
 			sprite_2d.frame = 0
+			point_outline.show()
+			point_collision.disabled = false
 		Enums.HandState.PINCH:
 			sprite_2d.frame = 1
+			pinch_outline.show()
+			pinch_collision.disabled = false
