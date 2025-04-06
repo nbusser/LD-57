@@ -1,8 +1,6 @@
 class_name CardGame
 extends Node
 
-
-
 enum GameState {
 	NOT_STARTED,
 	INIT,
@@ -23,8 +21,6 @@ var round_manager = null
 @onready var player_deck_node = get_node("../deckManager/deckObjectPlayer")
 @onready var alien_deck_node = get_node("../deckManager/deckObjectAlien")
 @onready var card_scene = preload("res://src/Card/Card.tscn")
-
-
 
 
 class RoundManager:
