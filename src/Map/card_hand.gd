@@ -16,7 +16,7 @@ func _physics_process(_delta: float) -> void:
 	if _dragged_card != null:
 		_dragged_card.global_position = (
 			camera.project_ray_origin(finger_tip.global_position)
-			+ camera.project_ray_normal(finger_tip.global_position) * 1
+			+ camera.project_ray_normal(finger_tip.global_position) * 0.3
 		)
 
 
@@ -66,6 +66,7 @@ func _hand_reorder_cards():
 		var card: Card = cards_in_hand.get_child(i)
 
 		var angle = start_angle + (angle_step * i)
+		card.position = Vector3.ZERO
 		card.transform = card.transform.rotated_local(Vector3.LEFT, PI / 2)
 		card.transform = (
 			card
