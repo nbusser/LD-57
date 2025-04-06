@@ -1,7 +1,7 @@
 extends Node3D
 
 enum EnemyType { SPROINK, PIG }
-enum EnemyState { IDLE, WEAK, DISTRACTED }
+enum EnemyState { IDLE, WEAK, DISTRACTED, THINKING, ANGRY }
 
 var type: EnemyType = EnemyType.SPROINK:
 	set(value):
@@ -25,6 +25,10 @@ func _update_sprite():
 			animated_sprite_3d.play("sproink_idle")
 		[EnemyType.SPROINK, EnemyState.WEAK]:
 			animated_sprite_3d.play("sproink_weak")
+		[EnemyType.SPROINK, EnemyState.THINKING]:
+			animated_sprite_3d.play("sproink_thinking")
+		[EnemyType.SPROINK, EnemyState.ANGRY]:
+			animated_sprite_3d.play("sproink_angry")
 		[EnemyType.SPROINK, ..]:
 			animated_sprite_3d.play("sproink_idle")
 		# pig
