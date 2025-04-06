@@ -1,20 +1,22 @@
-[gd_scene load_steps=24 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=27 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
-[ext_resource type="PackedScene" uid="uid://dqom45hiv58ib" path="res://src/Hand/Hand.tscn" id="2_hlp16"]
+[ext_resource type="Texture2D" uid="uid://xkej5orjj4jo" path="res://assets/HDR_blue_local_star.jpg" id="2_fk5ph"]
 [ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table/Table.tscn" id="3_13lp4"]
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
 [ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
 [ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="8_fgn2p"]
 [ext_resource type="Texture2D" uid="uid://dkxf7u58n18ne" path="res://assets/sprites/sleeve_placeholder.png" id="8_jljl6"]
+[ext_resource type="Script" uid="uid://cko8icjpkjvo" path="res://src/Map/card_hand.gd" id="9_22krd"]
 [ext_resource type="PackedScene" uid="uid://des7slrabd1qt" path="res://src/cardgame/cardgame.tscn" id="10_hxqom"]
 [ext_resource type="PackedScene" uid="uid://bswm5o0d0ybau" path="res://src/deckObject/deckObject.tscn" id="11_22krd"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lrvju"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22krd"]
+panorama = ExtResource("2_fk5ph")
 
 [sub_resource type="Sky" id="Sky_fyitu"]
-sky_material = SubResource("ProceduralSkyMaterial_lrvju")
+sky_material = SubResource("PanoramaSkyMaterial_22krd")
 
 [sub_resource type="Environment" id="Environment_57a3y"]
 background_mode = 2
@@ -23,7 +25,7 @@ sky = SubResource("Sky_fyitu")
 [sub_resource type="Curve3D" id="Curve3D_wqubw"]
 bake_interval = 0.01
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.4, -1),
+"points": PackedVector3Array(0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0.4, -0.4),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -31,12 +33,28 @@ point_count = 2
 [sub_resource type="BoxShape3D" id="BoxShape3D_jde0p"]
 size = Vector3(4, 0.01, 4)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xtfh0"]
+noise_type = 0
+seed = 3
+frequency = 0.03
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1blim"]
+width = 1024
+height = 1024
+as_normal_map = true
+noise = SubResource("FastNoiseLite_xtfh0")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrvju"]
-albedo_color = Color(0.262745, 0.521569, 0.0823529, 1)
+albedo_color = Color(0.260873, 0.356554, 0.389369, 1)
+metallic = 0.65
+normal_enabled = true
+normal_scale = 1.21
+normal_texture = SubResource("NoiseTexture2D_1blim")
 
 [sub_resource type="BoxMesh" id="BoxMesh_fyitu"]
 material = SubResource("StandardMaterial3D_lrvju")
-size = Vector3(400, 0.1, 400)
+size = Vector3(2, 0.1, 2)
 
 [sub_resource type="Environment" id="Environment_lrvju"]
 
@@ -66,11 +84,11 @@ script = ExtResource("1_e037b")
 environment = SubResource("Environment_57a3y")
 
 [node name="CameraRail" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 1, 1)
+transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 1, 0.8)
 curve = SubResource("Curve3D_wqubw")
 
 [node name="FollowRail" type="PathFollow3D" parent="CameraRail"]
-transform = Transform3D(0.999997, 0, -3.95971e-07, 0, 1, 0, 3.95971e-07, 0, 0.999997, 0, 0.0105412, -0.0030302)
+transform = Transform3D(0.999997, 0, 2.98022e-08, 0, 1, 0, -2.98022e-08, 0, 0.999997, 0, 0.0109543, -0.00130003)
 progress = 0.0110764
 rotation_mode = 1
 loop = false
@@ -82,10 +100,6 @@ rotation_order = 1
 script = ExtResource("1_wqubw")
 
 [node name="Table" parent="." instance=ExtResource("3_13lp4")]
-
-[node name="Hand" parent="." instance=ExtResource("2_hlp16")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83809, 0)
-visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.258819, 0.965926, 0, -0.965926, -0.258819, 1, 4, -1)
@@ -102,9 +116,6 @@ shape = SubResource("BoxShape3D_jde0p")
 
 [node name="Enemy" parent="." instance=ExtResource("6_lrvju")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823981, -0.612635)
-
-[node name="FixedArm" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0667799, 0)
@@ -130,6 +141,12 @@ mouse_filter = 2
 [node name="2DHand" parent="." instance=ExtResource("8_fgn2p")]
 z_index = -10
 position = Vector2(-8, 416)
+
+[node name="CardsManager" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)
+script = ExtResource("9_22krd")
+
+[node name="CardsInHand" type="Node3D" parent="CardsManager"]
 
 [node name="Sleeve" type="Node2D" parent="."]
 position = Vector2(760, 330)

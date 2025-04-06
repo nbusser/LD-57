@@ -1,9 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b1swxld0lwpiv"]
 
 [ext_resource type="Script" uid="uid://cpn6p14owhxg" path="res://src/Card/card.gd" id="1_xkmnc"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j0rgh"]
-size = Vector2(518, 800)
+[ext_resource type="Texture2D" uid="uid://dsieo0tadije" path="res://assets/sprites/cards/sprite_0.png" id="2_xkmnc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_77rk5"]
 size = Vector3(0.062, 0.001, 0.096)
@@ -18,8 +16,8 @@ collision_mask = 65
 script = ExtResource("1_xkmnc")
 
 [node name="FaceSprite" type="Sprite3D" parent="."]
-transform = Transform3D(0.0119998, 6.9344e-07, 7.49681e-05, -7.49713e-05, 0.000110983, 0.0119993, 3.57628e-10, -0.0119995, 0.000110985, 0, 0.001, 0)
-texture = SubResource("PlaceholderTexture2D_j0rgh")
+transform = Transform3D(0.0220996, 1.2784e-06, 0.000137935, -0.000137941, 0.0002042, 0.0220986, 3.29316e-09, -0.0220991, 0.000204204, 0, 0.0012, 0)
+texture = ExtResource("2_xkmnc")
 
 [node name="CardMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_77rk5")

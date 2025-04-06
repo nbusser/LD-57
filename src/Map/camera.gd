@@ -1,115 +1,61 @@
 extends Camera3D
 
-enum ViewMode { HAND_MODE, TABLE_MODE, IN_TRANSITION }
-
-@export var margin_hand = .2
-@export var speed_hand = 1
-@export var amplitude_hand_vt = 10  # degrees
-@export var amplitude_hand_hz = 3  # degrees
-@export var center_hand = Vector2(-30, 0)
-
-@export var margin_table = .4
-@export var speed_table = .6
-@export var amplitude_table = 3  # degrees
-@export var center_table = Vector2(-90, 0)
-
-var current_mode: ViewMode = ViewMode.HAND_MODE
-
-var tween: Tween = null
+@export var margin = .2
+@export var pan_speed = 1
+@export var rail_speed = 1
+@export var amplitude_vt = 10  # degrees
+@export var amplitude_hz = 3  # degrees
+@export var center = Vector2(-30, 0)
 
 @onready var rail = $".."
-@onready var hand_top_view = $"../../../Hand"
-@onready var hand_front_view = $"../../../2DHand"
+@onready var hand = $"../../../2DHand"
+@onready var finger_tip = $"../../../2DHand/HandBody/Sprite2D/FingerTip"
 
 
 func _physics_process(delta: float) -> void:
-	var x_ratio = get_viewport().get_mouse_position().x / get_viewport().get_size().x
-	var y_ratio = get_viewport().get_mouse_position().y / get_viewport().get_size().y
+	var x_ratio = finger_tip.global_position.x / get_viewport().get_size().x
+	var y_ratio = finger_tip.global_position.y / get_viewport().get_size().y
 
-	if current_mode == ViewMode.HAND_MODE:  # horizontal panning only
-		var x_coeff = 0.0
-		var y_coeff = 0.0
-		if x_ratio < margin_hand:
-			x_coeff = pow(1.0 - x_ratio / margin_hand, 4.0)
-		elif x_ratio > (1.0 - margin_hand):
-			x_coeff = -pow(1.0 - (1.0 - x_ratio) / margin_hand, 4.0)
-		if y_ratio < margin_hand:
-			y_coeff = pow(1.0 - y_ratio / margin_hand, 2.0)
-		elif y_ratio > (1.0 - margin_hand):
-			y_coeff = -pow(1.0 - (1.0 - y_ratio) / margin_hand, 2.0)
-		x_coeff = clamp(x_coeff, -1.0, 1.0)
-		y_coeff = clamp(y_coeff, -1.0, 1.0)
-		rotation += speed_hand * delta * Vector3(y_coeff, x_coeff, 0)
+	var x_coeff = 0.0
+	var y_coeff = 0.0
+	if x_ratio < margin:
+		x_coeff = pow(1.0 - x_ratio / margin, 4.0)
+	elif x_ratio > (1.0 - margin):
+		x_coeff = -pow(1.0 - (1.0 - x_ratio) / margin, 4.0)
+	if y_ratio < margin:
+		y_coeff = pow(1.0 - y_ratio / margin, 2.0)
+	elif y_ratio > (1.0 - margin):
+		y_coeff = -pow(1.0 - (1.0 - y_ratio) / margin, 2.0)
+	x_coeff = clamp(x_coeff, -1.0, 1.0)
+	y_coeff = clamp(y_coeff, -1.0, 1.0)
+
+	if rail.progress_ratio == .01:
+		rotation += pan_speed * delta * Vector3(y_coeff, x_coeff, 0)
 		rotation = rotation.clamp(
-			Vector3(
-				deg_to_rad(center_hand.x - amplitude_hand_vt),
-				deg_to_rad(center_hand.y - amplitude_hand_hz),
-				0
-			),
-			Vector3(
-				deg_to_rad(center_hand.x + amplitude_hand_vt),
-				deg_to_rad(center_hand.y + amplitude_hand_hz),
-				0
-			)
+			Vector3(deg_to_rad(center.x - amplitude_vt), deg_to_rad(center.y - amplitude_hz), 0),
+			Vector3(deg_to_rad(center.x + amplitude_vt), deg_to_rad(center.y + amplitude_hz), 0)
 		)
-		if rotation.x > deg_to_rad(center_hand.x + amplitude_hand_vt - 1):
-			switch_mode(ViewMode.TABLE_MODE)
-	elif current_mode == ViewMode.TABLE_MODE:  # Full 2D panning
-		if x_ratio < margin_table:
-			rotation += Vector3(0, speed_table * delta, 0)
-		elif x_ratio > (1.0 - margin_table):
-			rotation -= Vector3(0, speed_table * delta, 0)
-		if y_ratio < margin_table:
-			rotation += Vector3(speed_table * delta, 0, 0)
-		elif y_ratio > (1.0 - margin_table):
-			rotation -= Vector3(speed_table * delta, 0, 0)
-		rotation = rotation.clamp(
-			Vector3(
-				deg_to_rad(center_table.x - amplitude_table),
-				deg_to_rad(center_table.y - amplitude_table),
-				0
-			),
-			Vector3(
-				deg_to_rad(center_table.x + amplitude_table),
-				deg_to_rad(center_table.y + amplitude_table),
-				0
-			)
-		)
-		if rotation.x < deg_to_rad(center_table.x - amplitude_table + .2):
-			switch_mode(ViewMode.HAND_MODE)
-
-
-func switch_mode(mode: ViewMode) -> void:
-	current_mode = ViewMode.IN_TRANSITION
-	if tween:
-		tween.stop()
-	tween = get_tree().create_tween()
-	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	if mode == ViewMode.TABLE_MODE:
-		hand_front_view.disable()
-		tween.parallel().tween_property(rail, "progress_ratio", 0.99, 1)
-		tween.parallel().tween_property(
-			self, "rotation", Vector3(deg_to_rad(center_table.x), deg_to_rad(center_table.y), 0), 1
-		)
-		tween.tween_callback(
-			func():
-				current_mode = ViewMode.TABLE_MODE
-				hand_top_view.enable()
-		)
+		if rotation.x > deg_to_rad(center.x + amplitude_vt - 1):
+			rail.progress_ratio = .011
+			rotation.x = deg_to_rad(center.x + amplitude_vt - 1)
 	else:
-		hand_top_view.disable()
-		tween.parallel().tween_property(rail, "progress_ratio", 0.01, 1)
-		tween.parallel().tween_property(
-			self, "rotation", Vector3(deg_to_rad(center_hand.x), deg_to_rad(center_hand.y), 0), 1
+		rotation += pan_speed * delta * Vector3(0, x_coeff, 0)
+		rotation = rotation.clamp(
+			Vector3(rotation.x, deg_to_rad(center.y - amplitude_hz), 0),
+			Vector3(rotation.x, deg_to_rad(center.y + amplitude_hz), 0)
 		)
-		tween.tween_callback(
-			func():
-				current_mode = ViewMode.HAND_MODE
-				hand_front_view.enable()
+		if rail.progress_ratio < .6:
+			y_coeff = clamp(y_coeff, -1.0, 1.0)
+		else:
+			y_coeff = clamp(y_coeff, -1.0, 0)
+		rail.progress_ratio += rail_speed * delta * y_coeff
+		rotation.x = lerp(
+			deg_to_rad(center.x + amplitude_vt - 1),
+			deg_to_rad(center.x - 2 * amplitude_vt),
+			rail.progress_ratio
 		)
-
-
-func _exit_tree() -> void:
-	if tween:
-		tween.stop()
+		if rail.progress_ratio < 0.011:
+			rail.progress_ratio = 0.01
+			rotation.x = deg_to_rad(center.x + amplitude_vt - 1)
+		if rail.progress_ratio > .6:
+			rail.progress_ratio = .6

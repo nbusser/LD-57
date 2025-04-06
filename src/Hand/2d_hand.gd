@@ -5,16 +5,19 @@ extends Node2D
 
 var enabled = true
 
-@onready var anchor = $"Anchor"
+@onready var anchor = $"AnchorRail/AnchorFollowRail/Anchor"
 @onready var hand_body = $"HandBody"
 @onready var arm = $"Arm"
-@onready var mouse_pointer = $"HandBody/Sprite2D/MousePointer"
+@onready var finger_tip = $"HandBody/Sprite2D/FingerTip"
 
 
 func _ready() -> void:
 	var points = arm.points
 	for i in range(points.size()):
-		points[i] = anchor.position + i * (hand_body.position - anchor.position) / points.size()
+		points[i] = (
+			anchor.global_position
+			+ i * (hand_body.position - anchor.global_position) / points.size()
+		)
 	arm.set_points(points)
 	hand_body.position = Vector2(0, 0)
 
@@ -24,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	# Move
-	hand_body.velocity = (get_global_mouse_position() - mouse_pointer.global_position) * 500 * delta
+	hand_body.velocity = (get_global_mouse_position() - finger_tip.global_position) * 500 * delta
 	if hand_body.move_and_slide():
 		var collision_info = hand_body.get_last_slide_collision()
 		var norm = collision_info.get_normal()
@@ -36,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		hand_body.move_and_slide()
 
 	# Adjust arm length
-	var required_length = (anchor.position - hand_body.position).length()
+	var required_length = (anchor.global_position - hand_body.position).length()
 	if required_length / arm.points.size() > distance_constraint:  # Too short, emergency fix
 		distance_constraint = required_length / arm.points.size()
 	elif required_length / (arm.points.size() - 2) < distance_constraint:  # Too long, spool back slowly
@@ -53,7 +56,7 @@ func FABRIK_pass():
 	var points = arm.points
 
 	# Backward
-	points[0] = anchor.position  # Set the last node to the target position
+	points[0] = anchor.global_position  # Set the last node to the target position
 	for i in range(1, points.size()):
 		var new_direction = (points[i] - points[i - 1]).normalized()
 		points[i] = points[i - 1] + new_direction * distance_constraint

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dve1ylvmh0i6o"]
+[gd_scene load_steps=10 format=3 uid="uid://dve1ylvmh0i6o"]
 
 [ext_resource type="Script" uid="uid://b2cvc362p8kcb" path="res://src/Hand/2d_hand.gd" id="1_6e8t3"]
-[ext_resource type="Texture2D" uid="uid://cpdylmn711eol" path="res://assets/sprites/hand.png" id="2_7k6lh"]
+[ext_resource type="Texture2D" uid="uid://cmhev7oj7816j" path="res://assets/sprites/hand.png" id="2_7k6lh"]
 [ext_resource type="Script" uid="uid://dr3eiw3kce6oq" path="res://src/Map/finger_tip.gd" id="3_vbcl1"]
+[ext_resource type="Script" path="res://src/Hand/anchor.gd" id="4_yki2y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jlw6s"]
 radius = 60.0
@@ -29,8 +30,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vbcl1"]
-radius = 95.33
+[sub_resource type="Curve2D" id="Curve2D_pm0q2"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 1000, -1126, -518, -100, -50, 50, 0, -947, -349, -200, -200, 0, 0, -809, 251)
+}
+point_count = 3
 
 [node name="2DHand" type="Node2D"]
 script = ExtResource("1_6e8t3")
@@ -43,6 +47,7 @@ default_color = Color(0.0744944, 0.169169, 0.139158, 1)
 joint_mode = 2
 
 [node name="HandBody" type="CharacterBody2D" parent="."]
+position = Vector2(0, 9)
 motion_mode = 1
 wall_min_slide_angle = 3.14159
 
@@ -50,28 +55,22 @@ wall_min_slide_angle = 3.14159
 shape = SubResource("CircleShape2D_jlw6s")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="HandBody"]
-position = Vector2(204, 6)
-rotation = -0.0576413
+position = Vector2(204, 18)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_bb4y2")
 
-[node name="MousePointer" type="Node2D" parent="HandBody/Sprite2D"]
-position = Vector2(60.7882, 9.76819)
-
 [node name="FingerTip" type="Node2D" parent="HandBody/Sprite2D"]
-position = Vector2(100.794, 10.8246)
+position = Vector2(117.044, 5.8246)
 script = ExtResource("3_vbcl1")
 
-[node name="CardCatchArea" type="Area2D" parent="HandBody/Sprite2D/FingerTip"]
-position = Vector2(-73.8436, -0.50492)
-collision_layer = 65
-collision_mask = 65
+[node name="AnchorRail" type="Path2D" parent="."]
+position = Vector2(525, 0)
+curve = SubResource("Curve2D_pm0q2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HandBody/Sprite2D/FingerTip/CardCatchArea"]
-shape = SubResource("CircleShape2D_vbcl1")
+[node name="AnchorFollowRail" type="PathFollow2D" parent="AnchorRail"]
+position = Vector2(-1125.98, -487.863)
+rotation = 1.56912
+progress = 30.1353
 
-[node name="Anchor" type="Node2D" parent="."]
-position = Vector2(-1001, 0)
-
-[node name="IntermediatePoints" type="Node2D" parent="."]
-z_index = 1
+[node name="Anchor" type="Node2D" parent="AnchorRail/AnchorFollowRail"]
+script = ExtResource("4_yki2y")
