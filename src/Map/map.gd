@@ -5,6 +5,7 @@ const PLANE_COLLISION_LAYER = 6
 var _hovered_card: Card = null
 var _dragged_card: Card = null
 
+@onready var _card_game: CardGame = $cardgame
 @onready var _cards_manager: CardsManager = $CardsManager
 @onready var _card_scene: PackedScene = preload("res://src/Card/Card.tscn")
 @onready var _finger_tip = $"Billboard/2DHand/HandBody/Sprite2D/FingerTip"
@@ -12,6 +13,9 @@ var _dragged_card: Card = null
 
 @onready var _stencil_viewport: SubViewport = $StencilViewport
 @onready var _stencil_camera: Camera3D = $StencilViewport/Camera3D
+
+@onready var _score_display_enemy = $ScoreDisplayEnemy
+@onready var _score_display_player = $ScoreDisplayPlayer
 
 
 func _is_dragging():
@@ -67,3 +71,16 @@ func _input(event):
 
 func _ready():
 	_cards_manager.spawn_cards([0, -2, 3, 4, 4])
+
+	#Pour le débug on start le round mtn
+	var round_manager = _card_game.create_round_manager()
+
+	round_manager.life_changed.connect(_on_life_changed)
+
+
+func _on_life_changed(side: CardGame.Side, value: int):
+	match side:
+		CardGame.Side.ALIEN:
+			_score_display_enemy.value = value
+		CardGame.Side.PLAYER:
+			_score_display_player.value = value

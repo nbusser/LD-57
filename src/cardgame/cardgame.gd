@@ -14,6 +14,8 @@ enum GameState {
 	WIN
 }
 
+enum Side { PLAYER, ALIEN }
+
 var current_state: GameState = GameState.NOT_STARTED
 var precedent_state: GameState = current_state
 var round_manager = null
@@ -25,6 +27,8 @@ var round_manager = null
 
 
 class RoundManager:
+	signal life_changed(side: Side, value: int)
+
 	const DECK_SIZE: int = 21
 	const HAND_SIZE: int = 3
 	const DEFAULT_DECK: Array = [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 0, 0, 0, -2, -2, -2]
@@ -35,8 +39,14 @@ class RoundManager:
 	var battle_field: Array = []
 	var first_player: bool = true
 	var alien_hand: Array = []
-	var alien_life: int = 20
-	var player_life: int = 20
+	var alien_life: int = 20:
+		set(value):
+			alien_life = value
+			life_changed.emit(Side.ALIEN, value)
+	var player_life: int = 20:
+		set(value):
+			player_life = value
+			life_changed.emit(Side.PLAYER, value)
 	var alien_playing: bool = false
 
 	#On setup le deck du joueur et de l'alien
@@ -142,15 +152,10 @@ func _instantiate_card(card_arg: PackedScene, pos_reference_node: Node3D, value:
 	return card_inst
 
 
-func _ready() -> void:
-	#Pour le débug on start le round mtn
-	_start_game()
-	return
-
-
-func _start_game() -> void:
+func create_round_manager() -> RoundManager:
 	round_manager = RoundManager.new()
 	current_state = GameState.INIT
+	return round_manager
 
 
 func _process(delta: float) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=30 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bswm5o0d0ybau" path="res://src/deckObject/deckObject.tscn" id="11_22krd"]
 [ext_resource type="PackedScene" uid="uid://xk15mh5tpksd" path="res://src/StaticEnvironment.tscn" id="12_fk5ph"]
 [ext_resource type="PackedScene" uid="uid://blp2otlyjliss" path="res://src/snapBattle/snapBattle.tscn" id="12_xtfh0"]
+[ext_resource type="PackedScene" uid="uid://qb3kiu4nd5oj" path="res://src/ScoreDisplay/ScoreDisplay.tscn" id="14_1blim"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22krd"]
 panorama = ExtResource("2_xtfh0")
@@ -206,3 +207,9 @@ transform = Transform3D(0.013, 0, 0, 0, -5.68248e-10, -0.013, 0, 0.013, -5.68248
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0350621, 0.626012, 0.0846656)
 
 [node name="StaticEnvironment" parent="." instance=ExtResource("12_fk5ph")]
+
+[node name="ScoreDisplayEnemy" parent="." instance=ExtResource("14_1blim")]
+transform = Transform3D(0.999994, -0.00298314, 0.00197657, 0.00298703, 0.999994, -0.00196519, -0.00197068, 0.0019711, 0.999996, 0.348877, 0.684018, -0.367983)
+
+[node name="ScoreDisplayPlayer" parent="." instance=ExtResource("14_1blim")]
+transform = Transform3D(0.999994, -0.00298314, 0.00197657, 0.00298703, 0.999994, -0.00196519, -0.00197068, 0.0019711, 0.999996, 0.348877, 0.684018, 0.469398)
