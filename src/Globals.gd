@@ -29,13 +29,13 @@ const SAMPLE_GLOBAL_VARIABLE: int = 1
 
 # gdlint: disable=duplicated-load
 var card_skins: Dictionary = {
-	-2: load("res://assets/sprites/card_placeholder.png"),
-	0: load("res://assets/sprites/card_placeholder.png"),
-	1: load("res://assets/sprites/card_placeholder.png"),
-	2: load("res://assets/sprites/card_placeholder.png"),
-	3: load("res://assets/sprites/card_placeholder.png"),
-	4: load("res://assets/sprites/card_placeholder.png"),
-	5: load("res://assets/sprites/card_placeholder.png"),
+	-2: load("res://assets/sprites/cards/sprite_0.png"),
+	0: load("res://assets/sprites/cards/sprite_1.png"),
+	1: load("res://assets/sprites/cards/sprite_2.png"),
+	2: load("res://assets/sprites/cards/sprite_4.png"),
+	3: load("res://assets/sprites/cards/sprite_5.png"),
+	4: load("res://assets/sprites/cards/sprite_6.png"),
+	5: load("res://assets/sprites/cards/sprite_8.png"),
 }
 # gdlint: enable=duplicated-load
 
