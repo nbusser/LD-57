@@ -64,9 +64,11 @@ func _hand_reorder_cards():
 
 	for i in range(num_cards):
 		var card: Card = cards_in_hand.get_child(i)
+		card.position = Vector3.ZERO
+		card.rotation = Vector3.ZERO
 
 		var angle = start_angle + (angle_step * i)
-		card.position = Vector3.ZERO
+
 		card.transform = card.transform.rotated_local(Vector3.LEFT, PI / 2)
 		card.transform = (
 			card
