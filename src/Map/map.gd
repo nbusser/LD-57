@@ -72,7 +72,7 @@ func spawn_cards(num_cards: int):
 		fixed_arm.add_child(card)
 
 		var angle = start_angle + (angle_step * i)
-		card.transform = card.transform.rotated_local(Vector3.LEFT, PI / 2)
+		card.transform = card.transform.rotated_local(Vector3.LEFT, PI/2)
 		card.transform = (
 			card
 			. transform
@@ -80,4 +80,5 @@ func spawn_cards(num_cards: int):
 			. rotated(Vector3.FORWARD, angle)
 			. translated(VERTICAL_OFFSET)
 			. translated(Vector3.BACK * CARD_THICKNESS * i)
+			. rotated_local(Vector3.RIGHT, PI)
 		)
