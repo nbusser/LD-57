@@ -40,6 +40,7 @@ default_color = Color(0.0744944, 0.169169, 0.139158, 1)
 joint_mode = 2
 
 [node name="HandBody" type="CharacterBody2D" parent="."]
+position = Vector2(0, 9)
 motion_mode = 1
 wall_min_slide_angle = 3.14159
 
@@ -47,8 +48,7 @@ wall_min_slide_angle = 3.14159
 shape = SubResource("CircleShape2D_jlw6s")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="HandBody"]
-position = Vector2(204, 6)
-rotation = -0.0576413
+position = Vector2(204, 18)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_bb4y2")
 
