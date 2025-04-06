@@ -7,6 +7,17 @@ var _dragged_card: Card = null
 
 @onready var card_scene: PackedScene = preload("res://src/Card/Card.tscn")
 @onready var cards_in_hand: Node3D = $CardsInHand
+@onready var finger_tip: Node2D = $"../2DHand/HandBody/Sprite2D/FingerTip"
+@onready var camera: Camera3D = $"../CameraRail/FollowRail/Camera"
+
+
+func _physics_process(_delta: float) -> void:
+	# Move the dragged card along the finger tip
+	if _dragged_card != null:
+		_dragged_card.global_position = (
+			camera.project_ray_origin(finger_tip.global_position)
+			+ camera.project_ray_normal(finger_tip.global_position) * 1
+		)
 
 
 func grab_card_in_hand(card: Card):
@@ -22,6 +33,7 @@ func drop_card_in_hand(card: Card):
 	_hand_add_card(card, 0)
 	card.stop_dragging()
 
+
 func spawn_cards(num_cards: int):
 	for i in range(num_cards):
 		var card: Card = card_scene.instantiate()
@@ -34,6 +46,7 @@ func spawn_cards(num_cards: int):
 
 func _hand_add_card(card: Card, index: int):
 	cards_in_hand.add_child(card)
+	cards_in_hand.move_child(card, index)
 	_hand_reorder_cards()
 
 
