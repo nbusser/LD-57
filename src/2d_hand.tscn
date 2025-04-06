@@ -35,6 +35,9 @@ texture = ExtResource("2_7k6lh")
 position = Vector2(4.94583, -0.604165)
 script = ExtResource("3_vbcl1")
 
+[node name="MousePointer" type="Node2D" parent="HandBody/Sprite2D"]
+position = Vector2(-72.5956, -0.432909)
+
 [node name="Anchor" type="Node2D" parent="."]
 position = Vector2(-1001, 0)
 
