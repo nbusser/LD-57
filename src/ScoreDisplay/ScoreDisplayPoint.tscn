@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3lbtfni0uvt1"]
+
+[ext_resource type="Script" uid="uid://cs2u3csstuxfe" path="res://src/ScoreDisplay/score_display_point.gd" id="1_1p534"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1p534"]
+resource_local_to_scene = true
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 10.0
+
+[node name="ScoreDisplayPoint" type="Node3D"]
+script = ExtResource("1_1p534")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+radius = 0.005
+height = 0.2
+material = SubResource("StandardMaterial3D_1p534")
