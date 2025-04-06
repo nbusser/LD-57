@@ -6,6 +6,7 @@ const CARD_LAYER = 7
 
 var distance = 2.0
 
+
 func _physics_process(delta: float) -> void:
 	var ray_query = PhysicsRayQueryParameters3D.new()
 	ray_query.from = camera.project_ray_origin(global_position)
@@ -15,6 +16,7 @@ func _physics_process(delta: float) -> void:
 		distance = (results.position - camera.global_position).length()
 	else:
 		distance = 2.0
+
 
 func get_closest_card() -> Card:
 	var ray_query = PhysicsRayQueryParameters3D.new()

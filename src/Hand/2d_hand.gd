@@ -67,9 +67,10 @@ func _physics_process(delta: float) -> void:
 	FABRIK_pass(delta)
 
 	#Adjust display size
-	sprite_2d.scale.x = .1 + 1.0 - finger_tip.distance/3.0
-	sprite_2d.scale.y = .1 + 1.0 - finger_tip.distance/3.0
-	arm.width_curve.set_point_value(1, .3 + 1.0 - finger_tip.distance/3.0)
+	sprite_2d.scale.x = .1 + 1.0 - finger_tip.distance / 3.0
+	sprite_2d.scale.y = .1 + 1.0 - finger_tip.distance / 3.0
+	arm.width_curve.set_point_value(1, .3 + 1.0 - finger_tip.distance / 3.0)
+
 
 # gdlint:ignore = function-name
 func FABRIK_pass(delta: float):
