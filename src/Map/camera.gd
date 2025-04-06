@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 		rail.progress_ratio += rail_speed * delta * y_coeff
 		rotation.x = lerp(
 			deg_to_rad(center.x + amplitude_vt - 1),
-			deg_to_rad(center.x - 2*amplitude_vt),
+			deg_to_rad(center.x - 2 * amplitude_vt),
 			rail.progress_ratio
 		)
 		if rail.progress_ratio < 0.011:
