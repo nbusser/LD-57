@@ -27,6 +27,18 @@ enum EndSceneStatus {
 
 const SAMPLE_GLOBAL_VARIABLE: int = 1
 
+# gdlint: disable=duplicated-load
+var card_skins: Dictionary = {
+	-2: load("res://assets/sprites/card_placeholder.png"),
+	0: load("res://assets/sprites/card_placeholder.png"),
+	1: load("res://assets/sprites/card_placeholder.png"),
+	2: load("res://assets/sprites/card_placeholder.png"),
+	3: load("res://assets/sprites/card_placeholder.png"),
+	4: load("res://assets/sprites/card_placeholder.png"),
+	5: load("res://assets/sprites/card_placeholder.png"),
+}
+# gdlint: enable=duplicated-load
+
 
 func end_scene(status: EndSceneStatus, params: Dictionary = {}) -> void:
 	scene_ended.emit(status, params)

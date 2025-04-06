@@ -48,10 +48,11 @@ func _process(_delta):
 		card = hand.get_closest_card()
 	else:  # Use FrontView hand
 		card = finger_tip.get_closest_card()
+
 	if card:
-		(card.get_node("MeshInstance3D") as MeshInstance3D).set_layer_mask_value(6, true)
+		(card.get_node("CardMesh") as MeshInstance3D).set_layer_mask_value(6, true)
 		if selected and card != selected:
-			(selected.get_node("MeshInstance3D") as MeshInstance3D).set_layer_mask_value(6, false)
+			(selected.get_node("CardMesh") as MeshInstance3D).set_layer_mask_value(6, false)
 		selected = card
 
 
@@ -66,6 +67,7 @@ func spawn_cards(num_cards: int):
 
 	for i in range(num_cards):
 		var card: Node3D = card_scene.instantiate()
+		card.init(1)
 		card.add_to_group("cards")
 		fixed_arm.add_child(card)
 

@@ -93,6 +93,7 @@ shadow_enabled = true
 
 [node name="Card" parent="." instance=ExtResource("5_jde0p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62017, 0)
+card_value = 1
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 32
@@ -107,6 +108,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823981, -0.612635)
 
 [node name="Card2" parent="." instance=ExtResource("5_jde0p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.563106, 0.626397, 0.518094)
+card_value = 0
 
 [node name="FixedArm" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)

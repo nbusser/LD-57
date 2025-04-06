@@ -1,15 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://b1swxld0lwpiv"]
 
-[ext_resource type="Texture2D" uid="uid://di5oru3lg7nnl" path="res://assets/sprites/card_placeholder.png" id="1_i8o5v"]
+[ext_resource type="Script" uid="uid://cpn6p14owhxg" path="res://src/Card/card.gd" id="1_xkmnc"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t65bg"]
-albedo_texture = ExtResource("1_i8o5v")
-uv1_scale = Vector3(2.67, 1.86, 3)
-uv1_offset = Vector3(0.17, 0.1, 0)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j0rgh"]
+size = Vector2(518, 800)
 
 [sub_resource type="BoxMesh" id="BoxMesh_77rk5"]
-material = SubResource("StandardMaterial3D_t65bg")
-size = Vector3(0.057, 0.0003, 0.08)
+size = Vector3(0.062, 0.001, 0.096)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i8o5v"]
 radius = 0.04
@@ -18,8 +15,13 @@ height = 0.12
 [node name="Card" type="StaticBody3D" groups=["cards"]]
 collision_layer = 97
 collision_mask = 65
+script = ExtResource("1_xkmnc")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="FaceSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.0119998, 6.9344e-07, 7.49681e-05, -7.49713e-05, 0.000110983, 0.0119993, 3.57628e-10, -0.0119995, 0.000110985, 0, 0.001, 0)
+texture = SubResource("PlaceholderTexture2D_j0rgh")
+
+[node name="CardMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_77rk5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
