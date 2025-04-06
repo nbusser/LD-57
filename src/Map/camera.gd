@@ -9,6 +9,7 @@ extends Camera3D
 @onready var rail = $".."
 @onready var hand = $"../../../2DHand"
 
+
 func _physics_process(delta: float) -> void:
 	var x_ratio = get_viewport().get_mouse_position().x / get_viewport().get_size().x
 	var y_ratio = get_viewport().get_mouse_position().y / get_viewport().get_size().y
