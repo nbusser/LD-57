@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=27 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
+[ext_resource type="Texture2D" uid="uid://xkej5orjj4jo" path="res://assets/HDR_blue_local_star.jpg" id="2_fk5ph"]
 [ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table/Table.tscn" id="3_13lp4"]
 [ext_resource type="PackedScene" uid="uid://b1swxld0lwpiv" path="res://src/Card/Card.tscn" id="5_jde0p"]
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
@@ -11,10 +12,11 @@
 [ext_resource type="Script" uid="uid://cko8icjpkjvo" path="res://src/Map/card_hand.gd" id="9_22krd"]
 [ext_resource type="Texture2D" uid="uid://cmhev7oj7816j" path="res://assets/sprites/hand.png" id="10_fk5ph"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lrvju"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22krd"]
+panorama = ExtResource("2_fk5ph")
 
 [sub_resource type="Sky" id="Sky_fyitu"]
-sky_material = SubResource("ProceduralSkyMaterial_lrvju")
+sky_material = SubResource("PanoramaSkyMaterial_22krd")
 
 [sub_resource type="Environment" id="Environment_57a3y"]
 background_mode = 2
@@ -31,12 +33,28 @@ point_count = 2
 [sub_resource type="BoxShape3D" id="BoxShape3D_jde0p"]
 size = Vector3(4, 0.01, 4)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xtfh0"]
+noise_type = 0
+seed = 3
+frequency = 0.03
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1blim"]
+width = 1024
+height = 1024
+as_normal_map = true
+noise = SubResource("FastNoiseLite_xtfh0")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrvju"]
-albedo_color = Color(0.262745, 0.521569, 0.0823529, 1)
+albedo_color = Color(0.260873, 0.356554, 0.389369, 1)
+metallic = 0.65
+normal_enabled = true
+normal_scale = 1.21
+normal_texture = SubResource("NoiseTexture2D_1blim")
 
 [sub_resource type="BoxMesh" id="BoxMesh_fyitu"]
 material = SubResource("StandardMaterial3D_lrvju")
-size = Vector3(400, 0.1, 400)
+size = Vector3(2, 0.1, 2)
 
 [sub_resource type="Environment" id="Environment_lrvju"]
 
