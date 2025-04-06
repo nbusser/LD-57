@@ -9,11 +9,12 @@ extends Camera3D
 
 @onready var rail = $".."
 @onready var hand = $"../../../2DHand"
+@onready var finger_tip = $"../../../2DHand/HandBody/Sprite2D/FingerTip"
 
 
 func _physics_process(delta: float) -> void:
-	var x_ratio = get_viewport().get_mouse_position().x / get_viewport().get_size().x
-	var y_ratio = get_viewport().get_mouse_position().y / get_viewport().get_size().y
+	var x_ratio = finger_tip.global_position.x / get_viewport().get_size().x
+	var y_ratio = finger_tip.global_position.y / get_viewport().get_size().y
 
 	var x_coeff = 0.0
 	var y_coeff = 0.0

@@ -8,7 +8,7 @@ var enabled = true
 @onready var anchor = $"Anchor"
 @onready var hand_body = $"HandBody"
 @onready var arm = $"Arm"
-@onready var mouse_pointer = $"HandBody/Sprite2D/MousePointer"
+@onready var finger_tip = $"HandBody/Sprite2D/FingerTip"
 
 
 func _ready() -> void:
@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	# Move
-	hand_body.velocity = (get_global_mouse_position() - mouse_pointer.global_position) * 500 * delta
+	hand_body.velocity = (get_global_mouse_position() - finger_tip.global_position) * 500 * delta
 	if hand_body.move_and_slide():
 		var collision_info = hand_body.get_last_slide_collision()
 		var norm = collision_info.get_normal()
