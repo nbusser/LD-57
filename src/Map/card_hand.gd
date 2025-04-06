@@ -34,29 +34,57 @@ func grab_card_in_hand(card: Card):
 	card.start_dragging()
 
 
-func drop_card_in_hand(card: Card):
+func get_closest_card() -> Card:
+	var ray_query = PhysicsRayQueryParameters3D.new()
+	ray_query.from = camera.project_ray_origin(finger_tip.global_position)
+	ray_query.to = ray_query.from + camera.project_ray_normal(finger_tip.global_position) * 100
+	ray_query.collision_mask = 1 << 7 - 1
+	var results = camera.get_world_3d().direct_space_state.intersect_ray(ray_query)
+
+	if results && results.collider.is_in_group("cards"):
+		return results.collider
+	return null
+
+
+func drop_card_in_hand():
+	var closest_card = finger_tip.get_closest_card()
+	if closest_card != null:
+		pass
+
+	print(camera.project_ray_normal(finger_tip.global_position))
+	print(cards_in_hand.get_child(0).global_position)
+
+	# for i in range(len(cards_in_hand.get_children())):
+	# 	var card_in_hand: Card = cards_in_hand.get_child(i)
+	# 	var distance = get_closest_card()
+	# 	print(distance)
+	# 	if distance < min_distance:
+	# 		closest_card = card_in_hand
+	# print(closest_card.card_value)
+
+	remove_child(_dragged_card)
+	_hand_add_card(_dragged_card, 0)
+	_dragged_card.stop_dragging()
 	_dragged_card = null
-	remove_child(card)
-	_hand_add_card(card, 0)
-	card.stop_dragging()
 
 
 func spawn_cards(card_values: Array):
 	for value in card_values:
 		var card: Card = card_scene.instantiate()
 		card.init(value)
-		card.add_to_group("cards")
 		cards_in_hand.add_child(card)
 	_hand_reorder_cards()
 
 
 func _hand_add_card(card: Card, index: int):
+	card.add_to_group("cards")
 	cards_in_hand.add_child(card)
 	cards_in_hand.move_child(card, index)
 	_hand_reorder_cards()
 
 
 func _hand_remove_card(card: Card):
+	card.remove_from_group("cards")
 	cards_in_hand.remove_child(card)
 	_hand_reorder_cards()
 
