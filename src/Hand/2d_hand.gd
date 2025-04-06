@@ -33,9 +33,9 @@ func _physics_process(delta: float) -> void:
 		var norm = collision_info.get_normal()
 		var slide_dir = norm.rotated(PI / 2)
 		var target = Geometry2D.line_intersects_line(
-			hand_body.global_position, slide_dir, get_global_mouse_position(), norm
+			finger_tip.global_position, slide_dir, get_global_mouse_position(), norm
 		)
-		hand_body.velocity = (target - hand_body.global_position) * 500 * delta
+		hand_body.velocity = (target - finger_tip.global_position) * 500 * delta
 		hand_body.move_and_slide()
 
 	# Adjust arm length
