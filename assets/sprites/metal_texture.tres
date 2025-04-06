@@ -3,6 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://ckdp4k4ndieb6" path="res://assets/sprites/metal.png" id="1_1sms0"]
 
 [resource]
-albedo_texture = ExtResource("1_1sms0")
+albedo_color = Color(0.76, 0.76, 0.76, 1)
 metallic = 1.0
-metallic_texture = ExtResource("1_1sms0")
+roughness = 0.54
+roughness_texture_channel = 2
+heightmap_enabled = true
+heightmap_scale = 4.6
+heightmap_texture = ExtResource("1_1sms0")
