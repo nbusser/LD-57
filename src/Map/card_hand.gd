@@ -11,15 +11,16 @@ var _dragged_card: Card = null
 
 func grab_card_in_hand(card: Card):
 	_dragged_card = card
-	add_child(_dragged_card)
 	_hand_remove_card(card)
+	add_child(_dragged_card)
+	card.start_dragging()
 
 
 func drop_card_in_hand(card: Card):
 	_dragged_card = null
 	remove_child(card)
 	_hand_add_card(card, 0)
-
+	card.stop_dragging()
 
 func spawn_cards(num_cards: int):
 	for i in range(num_cards):
