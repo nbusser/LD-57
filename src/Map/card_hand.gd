@@ -49,4 +49,5 @@ func _reorder_cards():
 			. translated(CARD_VERTICAL_OFFSET)
 			. translated(Vector3.BACK * CARD_THICKNESS * i)
 			. rotated_local(Vector3.RIGHT, PI)
+			. translated(Vector3.BACK * .001 * i)
 		)
