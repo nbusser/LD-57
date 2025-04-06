@@ -66,4 +66,4 @@ func _input(event):
 
 
 func _ready():
-	_cards_manager.spawn_cards(5)
+	_cards_manager.spawn_cards([0, -2, 3, 4, 4])

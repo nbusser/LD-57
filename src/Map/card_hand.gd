@@ -34,11 +34,10 @@ func drop_card_in_hand(card: Card):
 	card.stop_dragging()
 
 
-func spawn_cards(num_cards: int):
-	for i in range(num_cards):
+func spawn_cards(card_values: Array):
+	for value in card_values:
 		var card: Card = card_scene.instantiate()
-		var card_value = 1
-		card.init(card_value)
+		card.init(value)
 		card.add_to_group("cards")
 		cards_in_hand.add_child(card)
 	_hand_reorder_cards()
