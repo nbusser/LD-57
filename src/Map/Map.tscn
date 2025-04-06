@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=29 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
+[ext_resource type="Texture2D" uid="uid://xkej5orjj4jo" path="res://assets/HDR_blue_local_star.jpg" id="2_xtfh0"]
 [ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table/Table.tscn" id="3_13lp4"]
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
 [ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
@@ -14,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://blp2otlyjliss" path="res://src/snapBattle/snapBattle.tscn" id="12_xtfh0"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22krd"]
+panorama = ExtResource("2_xtfh0")
+energy_multiplier = 2.5
 
 [sub_resource type="Sky" id="Sky_fyitu"]
 sky_material = SubResource("PanoramaSkyMaterial_22krd")
@@ -54,7 +57,7 @@ normal_texture = SubResource("NoiseTexture2D_1blim")
 
 [sub_resource type="BoxMesh" id="BoxMesh_fyitu"]
 material = SubResource("StandardMaterial3D_lrvju")
-size = Vector3(2, 0.1, 2)
+size = Vector3(3, 0.1, 3)
 
 [sub_resource type="Environment" id="Environment_lrvju"]
 
@@ -102,9 +105,16 @@ script = ExtResource("1_wqubw")
 [node name="Table" parent="." instance=ExtResource("3_13lp4")]
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(0.98813, -0.0397604, 0.148388, -0.153622, -0.255747, 0.95446, 0, -0.965926, -0.258819, 1, 2.54111, -1)
-light_energy = 4.232
+transform = Transform3D(0.935589, -0.0913866, 0.341059, -0.353091, -0.242148, 0.903709, 0, -0.965926, -0.258819, 1, 2.54111, -1)
+light_energy = 2.0
 shadow_enabled = true
+spot_angle = 23.5772
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(0.869566, 0.226875, -0.438615, 0.414099, 0.148883, 0.897973, 0.26903, -0.962477, 0.0355149, -1.44327, 2.54111, 0.244519)
+light_energy = 2.0
+shadow_enabled = true
+spot_angle = 19.5751
 
 [node name="place_area" type="Area3D" parent="."]
 collision_layer = 128
