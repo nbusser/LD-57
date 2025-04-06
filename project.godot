@@ -19,6 +19,7 @@ config/icon="res://assets/sprites/player.png"
 [autoload]
 
 Globals="*res://src/Globals.gd"
+Enums="*res://src/enums.gd"
 
 [editor_plugins]
 

@@ -1,13 +1,10 @@
 extends Node3D
 
-enum EnemyType { SPROINK, PIG }
-enum EnemyState { IDLE, WEAK, DISTRACTED, THINKING, ANGRY }
-
-var type: EnemyType = EnemyType.SPROINK:
+var type: Enums.EnemyType = Enums.EnemyType.SPROINK:
 	set(value):
 		type = value
 		_update_sprite()
-var state: EnemyState = EnemyState.IDLE:
+var state: Enums.EnemyState = Enums.EnemyState.IDLE:
 	set(value):
 		state = value
 		_update_sprite()
@@ -21,20 +18,20 @@ var state: EnemyState = EnemyState.IDLE:
 func _update_sprite():
 	match [type, state]:
 		# sproink
-		[EnemyType.SPROINK, EnemyState.IDLE]:
+		[Enums.EnemyType.SPROINK, Enums.EnemyState.IDLE]:
 			animated_sprite_3d.play("sproink_idle")
-		[EnemyType.SPROINK, EnemyState.WEAK]:
+		[Enums.EnemyType.SPROINK, Enums.EnemyState.WEAK]:
 			animated_sprite_3d.play("sproink_weak")
-		[EnemyType.SPROINK, EnemyState.THINKING]:
+		[Enums.EnemyType.SPROINK, Enums.EnemyState.THINKING]:
 			animated_sprite_3d.play("sproink_thinking")
-		[EnemyType.SPROINK, EnemyState.ANGRY]:
+		[Enums.EnemyType.SPROINK, Enums.EnemyState.ANGRY]:
 			animated_sprite_3d.play("sproink_angry")
-		[EnemyType.SPROINK, ..]:
+		[Enums.EnemyType.SPROINK, ..]:
 			animated_sprite_3d.play("sproink_idle")
 		# pig
-		[EnemyType.PIG, EnemyState.DISTRACTED]:
+		[Enums.EnemyType.PIG, Enums.EnemyState.DISTRACTED]:
 			animated_sprite_3d.play("pig_distracted")
-		[EnemyType.PIG, ..]:
+		[Enums.EnemyType.PIG, ..]:
 			animated_sprite_3d.play("pig_distracted")
 
 

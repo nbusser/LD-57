@@ -8,7 +8,7 @@ var _dragged_card: Card = null
 @onready var _cards_manager: CardsManager = $CardsManager
 @onready var _card_scene: PackedScene = preload("res://src/Card/Card.tscn")
 @onready var _finger_tip = $"Billboard/2DHand/HandBody/Sprite2D/FingerTip"
-@onready var _sprite = $"Billboard/2DHand/HandBody/Sprite2D"
+@onready var _2d_hand = $"Billboard/2DHand"
 
 @onready var _stencil_viewport: SubViewport = $StencilViewport
 @onready var _stencil_camera: Camera3D = $StencilViewport/Camera3D
@@ -57,12 +57,12 @@ func _input(event):
 				_dragged_card = _hovered_card
 				_cards_manager.grab_card_in_hand(_dragged_card)
 				_hovered_card = null
-				_sprite.frame = 1
+				_2d_hand.state = Enums.HandState.PINCH
 		else:
 			if _dragged_card != null:
 				_cards_manager.drop_card_in_hand()
 				_dragged_card = null
-				_sprite.frame = 0
+				_2d_hand.state = Enums.HandState.POINT
 
 
 func _ready():

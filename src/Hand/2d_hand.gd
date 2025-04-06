@@ -7,10 +7,16 @@ extends Node2D
 var enabled = true
 var joints = []
 
+var state: Enums.HandState = Enums.HandState.POINT:
+	set(value):
+		state = value
+		_on_update_state()
+
 @onready var anchor = $"AnchorRail/AnchorFollowRail/Anchor"
 @onready var hand_body = $"HandBody"
 @onready var arm = $"Arm"
 @onready var finger_tip = $"HandBody/Sprite2D/FingerTip"
+@onready var sprite_2d: AnimatedSprite2D = $"HandBody/Sprite2D"
 
 
 func _ready() -> void:
@@ -106,3 +112,11 @@ func enable():
 	_ready()
 	self.visible = true
 	enabled = true
+
+
+func _on_update_state():
+	match state:
+		Enums.HandState.POINT:
+			sprite_2d.frame = 0
+		Enums.HandState.PINCH:
+			sprite_2d.frame = 1
