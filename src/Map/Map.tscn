@@ -1,14 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=24 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
 [ext_resource type="PackedScene" uid="uid://dqom45hiv58ib" path="res://src/Hand/Hand.tscn" id="2_hlp16"]
 [ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table/Table.tscn" id="3_13lp4"]
-[ext_resource type="PackedScene" uid="uid://b1swxld0lwpiv" path="res://src/Card/Card.tscn" id="5_jde0p"]
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
 [ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
 [ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="8_fgn2p"]
 [ext_resource type="Texture2D" uid="uid://dkxf7u58n18ne" path="res://assets/sprites/sleeve_placeholder.png" id="8_jljl6"]
+[ext_resource type="PackedScene" uid="uid://des7slrabd1qt" path="res://src/cardgame/cardgame.tscn" id="10_hxqom"]
+[ext_resource type="PackedScene" uid="uid://bswm5o0d0ybau" path="res://src/deckObject/deckObject.tscn" id="11_22krd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lrvju"]
 
@@ -69,7 +70,7 @@ transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 1, 1)
 curve = SubResource("Curve3D_wqubw")
 
 [node name="FollowRail" type="PathFollow3D" parent="CameraRail"]
-transform = Transform3D(0.999997, 0, 5.96045e-08, 0, 1, 0, -5.96045e-08, 0, 0.999997, 0, 0.0105412, -0.0030302)
+transform = Transform3D(0.999997, 0, -3.95971e-07, 0, 1, 0, 3.95971e-07, 0, 0.999997, 0, 0.0105412, -0.0030302)
 progress = 0.0110764
 rotation_mode = 1
 loop = false
@@ -91,10 +92,6 @@ transform = Transform3D(1, 0, 0, 0, -0.258819, 0.965926, 0, -0.965926, -0.258819
 light_energy = 4.232
 shadow_enabled = true
 
-[node name="Card" parent="." instance=ExtResource("5_jde0p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62017, 0)
-card_value = 1
-
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 32
 collision_mask = 0
@@ -105,10 +102,6 @@ shape = SubResource("BoxShape3D_jde0p")
 
 [node name="Enemy" parent="." instance=ExtResource("6_lrvju")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823981, -0.612635)
-
-[node name="Card2" parent="." instance=ExtResource("5_jde0p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.563106, 0.626397, 0.518094)
-card_value = 0
 
 [node name="FixedArm" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)
@@ -164,3 +157,13 @@ shape = SubResource("RectangleShape2D_jljl6")
 position = Vector2(605, 145)
 scale = Vector2(0.693726, 0.609863)
 texture = ExtResource("8_jljl6")
+
+[node name="cardgame" parent="." instance=ExtResource("10_hxqom")]
+
+[node name="deckManager" type="Node3D" parent="."]
+
+[node name="deckObjectAlien" parent="deckManager" instance=ExtResource("11_22krd")]
+transform = Transform3D(8, 0, 0, 0, -3.49691e-07, -8, 0, 8, -3.49691e-07, -0.398799, 0.61604, -0.269868)
+
+[node name="deckObjectPlayer" parent="deckManager" instance=ExtResource("11_22krd")]
+transform = Transform3D(8, 0, 0, 0, -3.49691e-07, -8, 0, 8, -3.49691e-07, -0.399, 0.616, 0.320375)

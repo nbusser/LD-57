@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bswm5o0d0ybau"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ksuvm"]
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(20, 0, 0, 0, -8.74228e-07, 20, 0, -20, -8.74228e-07, 0, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("PlaceholderTexture2D_ksuvm")
