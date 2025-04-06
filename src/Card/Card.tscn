@@ -10,7 +10,7 @@ size = Vector3(0.062, 0.001, 0.096)
 radius = 0.04
 height = 0.12
 
-[node name="Card" type="StaticBody3D" groups=["cards"]]
+[node name="Card" type="StaticBody3D"]
 collision_layer = 97
 collision_mask = 65
 script = ExtResource("1_xkmnc")

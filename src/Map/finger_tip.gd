@@ -12,6 +12,6 @@ func get_closest_card() -> Card:
 	ray_query.collision_mask = 1 << CARD_LAYER - 1
 	var results = camera.get_world_3d().direct_space_state.intersect_ray(ray_query)
 
-	if results && results.collider.is_in_group("cards"):
+	if results && results.collider.is_in_group("grabbable_cards"):
 		return results.collider
 	return null

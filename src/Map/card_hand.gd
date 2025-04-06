@@ -45,19 +45,19 @@ func spawn_cards(card_values: Array):
 	for value in card_values:
 		var card: Card = card_scene.instantiate()
 		card.init(value)
-		cards_in_hand.add_child(card)
+		_hand_add_card(card, 0)
 	_hand_reorder_cards()
 
 
 func _hand_add_card(card: Card, index: int):
-	card.add_to_group("cards")
+	card.add_to_group("grabbable_cards")
 	cards_in_hand.add_child(card)
 	cards_in_hand.move_child(card, index)
 	_hand_reorder_cards()
 
 
 func _hand_remove_card(card: Card):
-	card.remove_from_group("cards")
+	card.remove_from_group("cards_in_hand")
 	cards_in_hand.remove_child(card)
 	_hand_reorder_cards()
 
