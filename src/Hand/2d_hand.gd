@@ -2,8 +2,10 @@ extends Node2D
 
 @export var distance_constraint = 60.0
 @export var reactivity = 50
+@export var joint_speed = 2000
 
 var enabled = true
+var joints = []
 
 @onready var anchor = $"AnchorRail/AnchorFollowRail/Anchor"
 @onready var hand_body = $"HandBody"
@@ -16,10 +18,22 @@ func _ready() -> void:
 	for i in range(points.size()):
 		points[i] = (
 			anchor.global_position
-			+ i * (hand_body.position - anchor.global_position) / points.size()
+			+ i * (hand_body.global_position - anchor.global_position) / points.size()
 		)
 	arm.set_points(points)
 	hand_body.position = Vector2(0, 0)
+	for i in range(points.size()):
+		var node = CharacterBody2D.new()
+		node.name = "Joint" + str(i)
+		node.global_position = points[i]
+		var collision_shape = CollisionShape2D.new()
+		var circle_shape = CircleShape2D.new()
+		circle_shape.radius = 10
+		collision_shape.shape = circle_shape
+		node.collision_layer = 2
+		node.add_child(collision_shape)
+		arm.add_child(node)
+		joints.append(node)
 
 
 func _physics_process(delta: float) -> void:
@@ -48,25 +62,36 @@ func _physics_process(delta: float) -> void:
 		distance_constraint += delta * reactivity
 
 	# Run FABRIK
-	FABRIK_pass()
+	FABRIK_pass(delta)
 
 
 # gdlint:ignore = function-name
-func FABRIK_pass():
-	var points = arm.points
-
+func FABRIK_pass(delta: float):
 	# Backward
-	points[0] = anchor.global_position  # Set the last node to the target position
-	for i in range(1, points.size()):
-		var new_direction = (points[i] - points[i - 1]).normalized()
-		points[i] = points[i - 1] + new_direction * distance_constraint
+	joints[0].global_position = anchor.global_position  # Set the last node to the target position
+	for i in range(1, joints.size()):
+		var new_direction = (joints[i].position - joints[i - 1].position).normalized()
+		joints[i].velocity = (
+			joint_speed
+			* delta
+			* ((joints[i - 1].position + new_direction * distance_constraint) - joints[i].position)
+		)
+		joints[i].move_and_slide()
 
 	# Forward
-	points[points.size() - 1] = hand_body.position  # Set the first node to the anchor position
-	for i in range(points.size() - 2, -1, -1):
-		var new_direction = (points[i + 1] - points[i]).normalized()
-		points[i] = points[i + 1] - new_direction * distance_constraint
+	joints[joints.size() - 1].global_position = hand_body.global_position  # Set the first node to the anchor position
+	for i in range(joints.size() - 2, -1, -1):
+		var new_direction = (joints[i + 1].position - joints[i].position).normalized()
+		joints[i].velocity = (
+			joint_speed
+			* delta
+			* ((joints[i + 1].position - new_direction * distance_constraint) - joints[i].position)
+		)
+		joints[i].move_and_slide()
 
+	var points = []
+	for i in range(joints.size()):
+		points.append(joints[i].position)
 	arm.set_points(points)
 
 	hand_body.global_rotation = points[points.size() - 2].angle_to_point(points[points.size() - 1])
