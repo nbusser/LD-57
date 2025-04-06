@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://xk15mh5tpksd"]
+
+[ext_resource type="Material" uid="uid://520jxfamwkau" path="res://src/glassMaterial.tres" id="1_rhba3"]
+[ext_resource type="Texture2D" uid="uid://coqtsfxbdsut" path="res://assets/sprites/alien2.png" id="2_wvxjb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2nl4g"]
+material = ExtResource("1_rhba3")
+size = Vector3(6, 6, 6)
+
+[node name="StaticEnvironment" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_2nl4g")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.860796, -0.855711, -3.22112)
+visible = false
+texture = ExtResource("2_wvxjb")
