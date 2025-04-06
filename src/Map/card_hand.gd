@@ -16,7 +16,7 @@ func _physics_process(_delta: float) -> void:
 	if _dragged_card != null:
 		_dragged_card.rotation = Vector3(PI / 2, 0, 0)
 		var ray_origin = camera.project_ray_origin(finger_tip.global_position)
-		var ray_end = ray_origin + camera.project_ray_normal(finger_tip.global_position) * 1000
+		var ray_end = ray_origin + camera.project_ray_normal(finger_tip.global_position) * 1
 
 		var space_state = get_world_3d().direct_space_state
 		var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end, 1 << 7)
@@ -57,7 +57,7 @@ func _hand_add_card(card: Card, index: int):
 
 
 func _hand_remove_card(card: Card):
-	card.remove_from_group("cards_in_hand")
+	card.remove_from_group("grabbable_cards")
 	cards_in_hand.remove_child(card)
 	_hand_reorder_cards()
 

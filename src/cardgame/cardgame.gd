@@ -139,10 +139,13 @@ func _instantiate_card(card_arg: PackedScene, pos_reference_node: Node3D, value:
 	#On instancie la carte
 	var card_inst = card_arg.instantiate()
 	card_inst.global_position = pos_reference_node.global_position
+	card_inst.rotation = Vector3(0, 0, PI)
 	card_inst.init(value)
 	add_child(card_inst)
 	if pos_reference_node == alien_deck_node:
 		the_alien._alien_draw_card(card_inst)
+	else:
+		card_inst.add_to_group("grabbable_cards")
 	return card_inst
 
 
