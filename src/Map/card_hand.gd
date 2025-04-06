@@ -49,8 +49,10 @@ func drop_card_in_hand():
 		camera.rail.progress_ratio < .6
 		or card_game.current_state != card_game.GameState.PLAYER_TURN
 	):
+		print("Card dropped in hand")
 		_hand_add_card(_dragged_card, 0)
 	elif camera.rail.progress_ratio >= .6:
+		print("Card dropped in battlefield")
 		place_card_in_battlefield(_dragged_card)
 
 	_dragged_card.stop_dragging()

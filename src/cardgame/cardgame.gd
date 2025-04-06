@@ -37,6 +37,7 @@ class RoundManager:
 	var alien_hand: Array = []
 	var alien_life: int = 20
 	var player_life: int = 20
+	var alien_playing: bool = false
 
 	#On setup le deck du joueur et de l'alien
 	func setup_decks(player_deck_arg: Array = [], alien_deck_arg: Array = []) -> void:
@@ -67,16 +68,8 @@ class RoundManager:
 
 	# Fonction pour jouer une carte sur le champ de bataille
 	func play_card(player: String, card: int) -> void:
+		print("Player: ", player, " played card: ", card)
 		battle_field.append({"player": player, "card": card})
-
-	# Fonction pour faire piocher l'alien à partir de la fonction draw_cards et de alien_hand
-	func alien_draw_cards(count: int) -> void:
-		alien_hand = draw_cards(alien_deck, count)
-
-	# Fonction pour faire jouer l'alien
-	func alien_play_card() -> void:
-		var card_to_play: int = alien_hand.pop_back()
-		play_card("alien", card_to_play)
 
 	#Résolution du combat
 	func battle() -> bool:
@@ -162,6 +155,10 @@ func _start_game() -> void:
 
 func _process(delta: float) -> void:
 	delta = delta
+	if current_state != precedent_state:
+		print(current_state)
+		precedent_state = current_state
+
 	if current_state == GameState.NOT_STARTED:
 		return
 
@@ -174,32 +171,34 @@ func _process(delta: float) -> void:
 		for i in range(RoundManager.HAND_SIZE - 1):
 			var card = round_manager.draw_cards(round_manager.alien_deck, 1)
 			_instantiate_card(card_scene, alien_deck_node, card[0])
+			round_manager.alien_hand.append(card[0])
 
 		#La distrubution des cartes est faite, on passe en DRAW
 		current_state = GameState.DRAW
 
-	if current_state == GameState.DRAW:
+	elif current_state == GameState.DRAW:
 		var card = TYPE_NIL
 		card = round_manager.draw_cards(round_manager.my_deck, 1)
 		_instantiate_card(card_scene, player_deck_node, card[0])
 		card = round_manager.draw_cards(round_manager.alien_deck, 1)
 		_instantiate_card(card_scene, alien_deck_node, card[0])
+		round_manager.alien_hand.append(card)
+
 		current_state = GameState.WAITING_FOR_RECUP
 
-	if current_state == GameState.WAITING_FOR_RECUP:
+	elif current_state == GameState.WAITING_FOR_RECUP:
 		#On attend que le joueur prenne les cartes, ici on met direct le bon truc
 		#if blablabla
 
 		current_state = GameState.WHOS_FIRST
 
-	if current_state == GameState.WHOS_FIRST:
+	elif current_state == GameState.WHOS_FIRST:
 		if round_manager.first_player:
 			current_state = GameState.PLAYER_TURN
 		else:
 			current_state = GameState.ALIEN_TURN
 
-	if current_state == GameState.PLAYER_TURN:
-		#Faudra configurer ici le fait de poser une carte et tout
+	elif current_state == GameState.PLAYER_TURN:
 		for card in round_manager.battle_field:
 			#On vérifie qu'on a bien posé la carte
 			if card["player"] == "player":
@@ -208,17 +207,24 @@ func _process(delta: float) -> void:
 				else:
 					current_state = GameState.BATTLE
 
-	if current_state == GameState.ALIEN_TURN:
-		#Faudra configurer ici le fait de poser une carte et tout
+	elif current_state == GameState.ALIEN_TURN:
+		#TODO RIGGER LE JEU DE L'ALIEN
+		if not round_manager.alien_playing:
+			round_manager.alien_playing = true
+			var the_alien_choosen_card = await the_alien.alien_think_about_card(
+				round_manager.alien_hand, round_manager.battle_field
+			)
+			the_alien.alien_play_card(the_alien_choosen_card)
 		for card in round_manager.battle_field:
 			#On vérifie qu'on a bien posé la carte
 			if card["player"] == "alien":
-				if round_manager.first_player:
+				round_manager.alien_playing = false
+				if not round_manager.first_player:
 					current_state = GameState.PLAYER_TURN
 				else:
 					current_state = GameState.BATTLE
 
-	if current_state == GameState.BATTLE:
+	elif current_state == GameState.BATTLE:
 		#On fait la bataille
 		round_manager.battle()
 		if round_manager.player_life <= 0:
@@ -227,3 +233,12 @@ func _process(delta: float) -> void:
 			current_state = GameState.WIN
 		else:
 			current_state = GameState.DRAW
+		print("Player life: ", round_manager.player_life)
+		print("Alien life: ", round_manager.alien_life)
+		round_manager.battle_field.clear()
+
+		#TODO AJOUTER LE CLEAR DU CHAMP DE BATAILLE (INSTANCE SUR LA MAP)
+		#TODO FAIRE LE WAIT FOR RECUP
+		#TODO ANIMATION DE L ALIEN
+		#TODO FAIRE GAFFE A LA FIN DU DECK SINON CA FAIT CRASH
+		#TODO METTRE UN SWITCH
