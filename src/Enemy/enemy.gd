@@ -34,7 +34,8 @@ func _update_sprite():
 func _ready() -> void:
 	_update_sprite()
 
-func _alien_draw_card(card_instance : Node3D) -> void:
+
+func _alien_draw_card(card_instance: Node3D) -> void:
 	await get_tree().create_timer(1.0).timeout
 	#TODO PLACEHOLDER DE L ALIEN QUI FAIT GENRE QU IL PREND UNE CARTE
 	#PEUT ETRE QU IL FAUDRA FAIRE BOUGER SON BRAS OU QU IL FASSE LA GUEULE
