@@ -1,6 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bc10qcsin3l0f"]
-
-[ext_resource type="Script" path="res://src/Hand/hand.gd" id="1_fmgxm"]
+[gd_scene load_steps=6 format=3 uid="uid://bc10qcsin3l0f"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i50rn"]
 radius = 0.15
@@ -21,7 +19,6 @@ radius = 1.02777
 height = 2.05555
 
 [node name="Hand" type="Node3D"]
-script = ExtResource("1_fmgxm")
 
 [node name="HandBody" type="CharacterBody3D" parent="."]
 collision_layer = 2

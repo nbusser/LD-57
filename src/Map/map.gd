@@ -55,13 +55,11 @@ func _input(event):
 		if event.is_pressed():
 			if _hovered_card != null:
 				_dragged_card = _hovered_card
-				_dragged_card.start_dragging()
 				_cards_manager.grab_card_in_hand(_dragged_card)
 				_hovered_card = null
 				_sprite.frame = 1
 		else:
 			if _dragged_card != null:
-				_dragged_card.stop_dragging()
 				_cards_manager.drop_card_in_hand(_dragged_card)
 				_dragged_card = null
 				_sprite.frame = 0
