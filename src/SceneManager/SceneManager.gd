@@ -43,9 +43,6 @@ func _ready() -> void:
 	for mp in music_players:
 		mp.play()
 		mp.volume_linear = 0
-	while true:
-		await get_tree().create_timer(3.0).timeout
-		self.change_music_track(music_players[randi_range(0, music_players.size() - 1)])
 
 
 func _process(_delta: float) -> void:
