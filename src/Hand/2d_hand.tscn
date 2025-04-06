@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b2cvc362p8kcb" path="res://src/Hand/2d_hand.gd" id="1_6e8t3"]
 [ext_resource type="Texture2D" uid="uid://cmhev7oj7816j" path="res://assets/sprites/hand.png" id="2_7k6lh"]
 [ext_resource type="Script" uid="uid://dr3eiw3kce6oq" path="res://src/Map/finger_tip.gd" id="3_vbcl1"]
-[ext_resource type="Script" path="res://src/Hand/anchor.gd" id="4_yki2y"]
+[ext_resource type="Script" uid="uid://du808ocmqjkbo" path="res://src/Hand/anchor.gd" id="4_yki2y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jlw6s"]
 radius = 60.0

@@ -21,6 +21,7 @@ var round_manager = null
 @onready var player_deck_node = get_node("../deckManager/deckObjectPlayer")
 @onready var alien_deck_node = get_node("../deckManager/deckObjectAlien")
 @onready var card_scene = preload("res://src/Card/Card.tscn")
+@onready var the_alien = get_node("../Enemy")
 
 
 class RoundManager:
@@ -140,11 +141,14 @@ func _instantiate_card(card_arg: PackedScene, pos_reference_node: Node3D, value:
 	card_inst.global_position = pos_reference_node.global_position
 	card_inst.init(value)
 	add_child(card_inst)
+	if pos_reference_node == alien_deck_node:
+		the_alien._alien_draw_card(card_inst)
 	return card_inst
 
 
 func _ready() -> void:
 	#Pour le débug on start le round mtn
+	print(the_alien)
 	_start_game()
 	return
 

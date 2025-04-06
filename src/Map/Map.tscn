@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=28 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -152,6 +152,7 @@ z_index = -10
 position = Vector2(-8, 416)
 
 [node name="Sleeve" type="Node2D" parent="Billboard"]
+visible = false
 position = Vector2(760, 330)
 
 [node name="Top" type="RigidBody2D" parent="Billboard/Sleeve"]
