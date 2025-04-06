@@ -4,6 +4,7 @@ const CARD_VERTICAL_OFFSET = Vector3.DOWN * 0.06
 const CARD_THICKNESS = 0.0003  # .3mm
 
 var _dragged_card: Card = null
+var _is_card_close_to_battlefield = false
 
 @onready var card_scene: PackedScene = preload("res://src/Card/Card.tscn")
 @onready var cards_in_hand: Node3D = $CardsInHand
@@ -30,9 +31,6 @@ func _physics_process(_delta: float) -> void:
 				_dragged_card.global_position.distance_to(batte_field_zone.global_position) < 0.1
 			)
 		# _dragged_card.transform = _dragged_card.transform.translated(Vector3(0.0, -0.06, 0.0))
-
-
-var _is_card_close_to_battlefield = false
 
 
 func is_card_close_to_battlefield() -> bool:
