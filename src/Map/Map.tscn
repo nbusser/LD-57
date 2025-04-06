@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
-[ext_resource type="PackedScene" uid="uid://dqom45hiv58ib" path="res://src/Hand.tscn" id="2_hlp16"]
-[ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table.tscn" id="3_13lp4"]
-[ext_resource type="PackedScene" uid="uid://b1swxld0lwpiv" path="res://src/Card.tscn" id="5_jde0p"]
+[ext_resource type="PackedScene" uid="uid://dqom45hiv58ib" path="res://src/Hand/Hand.tscn" id="2_hlp16"]
+[ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table/Table.tscn" id="3_13lp4"]
+[ext_resource type="PackedScene" uid="uid://b1swxld0lwpiv" path="res://src/Card/Card.tscn" id="5_jde0p"]
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
 [ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
-[ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/2d_hand.tscn" id="8_fgn2p"]
+[ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="8_fgn2p"]
 [ext_resource type="Texture2D" uid="uid://dkxf7u58n18ne" path="res://assets/sprites/sleeve_placeholder.png" id="8_jljl6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lrvju"]

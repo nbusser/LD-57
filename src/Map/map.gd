@@ -9,7 +9,7 @@ var selected = null
 
 @onready var hand: Hand = $Hand
 @onready var fixed_arm: Node3D = $FixedArm
-@onready var card_scene: PackedScene = preload("res://src/Card.tscn")
+@onready var card_scene: PackedScene = preload("res://src/Card/Card.tscn")
 @onready var finger_tip = $"2DHand/HandBody/Sprite2D/FingerTip"
 
 @onready var stencil_viewport: SubViewport = $StencilViewport
