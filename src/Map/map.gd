@@ -60,7 +60,7 @@ func _input(event):
 				_sprite.frame = 1
 		else:
 			if _dragged_card != null:
-				_cards_manager.drop_card_in_hand(_dragged_card)
+				_cards_manager.drop_card_in_hand()
 				_dragged_card = null
 				_sprite.frame = 0
 
