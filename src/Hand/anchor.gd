@@ -5,6 +5,7 @@ extends Node2D
 
 var forward = true
 
+
 func _process(delta: float) -> void:
 	follow_rail.progress_ratio += delta * rail_ratio_speed * (1 if forward else -1)
 	if follow_rail.progress_ratio > .99:

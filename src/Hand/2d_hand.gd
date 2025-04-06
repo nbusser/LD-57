@@ -14,7 +14,10 @@ var enabled = true
 func _ready() -> void:
 	var points = arm.points
 	for i in range(points.size()):
-		points[i] = anchor.global_position + i * (hand_body.position - anchor.global_position) / points.size()
+		points[i] = (
+			anchor.global_position
+			+ i * (hand_body.position - anchor.global_position) / points.size()
+		)
 	arm.set_points(points)
 	hand_body.position = Vector2(0, 0)
 
@@ -22,7 +25,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if !enabled:
 		return
-		
+
 	# Move
 	hand_body.velocity = (get_global_mouse_position() - finger_tip.global_position) * 500 * delta
 	if hand_body.move_and_slide():
