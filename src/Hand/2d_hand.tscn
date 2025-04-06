@@ -53,10 +53,10 @@ scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_bb4y2")
 
 [node name="MousePointer" type="Node2D" parent="HandBody/Sprite2D"]
-position = Vector2(60.7882, 9.76819)
+position = Vector2(117.038, 6.01819)
 
 [node name="FingerTip" type="Node2D" parent="HandBody/Sprite2D"]
-position = Vector2(100.794, 10.8246)
+position = Vector2(117.044, 5.8246)
 script = ExtResource("3_vbcl1")
 
 [node name="Anchor" type="Node2D" parent="."]
