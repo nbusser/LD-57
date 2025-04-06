@@ -5,7 +5,6 @@ const PLANE_COLLISION_LAYER = 6
 var _hovered_card: Card = null
 var _dragged_card: Card = null
 
-@onready var hand: Hand = $Hand
 @onready var cards_hand: CardHand = $CardHand
 @onready var card_scene: PackedScene = preload("res://src/Card/Card.tscn")
 @onready var finger_tip = $"2DHand/HandBody/Sprite2D/FingerTip"
@@ -20,22 +19,6 @@ func _is_dragging():
 
 
 func _process(_delta):
-	var mouse_pos = get_viewport().get_mouse_position()
-	var cam = get_viewport().get_camera_3d()
-	var ray_origin = cam.project_ray_origin(mouse_pos)
-	var ray_end = ray_origin + cam.project_ray_normal(mouse_pos) * 1000
-
-	var space_state = get_world_3d().direct_space_state
-	var query = PhysicsRayQueryParameters3D.create(
-		ray_origin, ray_end, 1 << PLANE_COLLISION_LAYER - 1
-	)
-	query.collide_with_areas = true
-
-	var result = space_state.intersect_ray(query)
-
-	if result:
-		hand.global_position = result.position
-
 	var viewport := get_viewport()
 	var current_camera := viewport.get_camera_3d()
 
@@ -50,10 +33,7 @@ func _process(_delta):
 		return
 
 	var new_hover_card: Card = null
-	if hand.enabled:
-		new_hover_card = hand.get_closest_card()
-	else:  # Use FrontView hand
-		new_hover_card = finger_tip.get_closest_card()
+	new_hover_card = finger_tip.get_closest_card()
 
 	if new_hover_card == null:
 		if _hovered_card != null:
