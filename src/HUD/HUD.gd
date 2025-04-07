@@ -35,7 +35,10 @@ func _ready() -> void:
 
 	Globals.state_changed.connect(self.translate_global_states)
 
-func translate_global_states(action_state: Globals.ActionState, enemy_state: Globals.BaseEnemyState) -> void:
+
+func translate_global_states(
+	action_state: Globals.ActionState, enemy_state: Globals.BaseEnemyState
+) -> void:
 	# set_overlay_state(OverlayState.RED)
 	match [action_state, enemy_state]:
 		[Globals.ActionState.IDLE, Globals.BaseEnemyState.IDLE]:
@@ -47,6 +50,7 @@ func translate_global_states(action_state: Globals.ActionState, enemy_state: Glo
 	# 	[Globals.ActionState.ILLEGAL, Globals.BaseEnemyState.IDLE]:
 	# 		set_overlay_state(OverlayState.PINK)
 
+
 enum OverlayState {
 	BLUE,
 	RED,
@@ -56,12 +60,13 @@ enum OverlayState {
 
 var current_state = OverlayState.HIDDEN
 
+
 func set_overlay_state(state: OverlayState) -> void:
 	if state == OverlayState.BLUE:
-		create_tween().tween_property(texture_rect, "modulate", Color(0,1,1,1), 0.7)
+		create_tween().tween_property(texture_rect, "modulate", Color(0, 1, 1, 1), 0.7)
 	elif state == OverlayState.RED:
-		create_tween().tween_property(texture_rect, "modulate", Color(1,0,0,1), 0.7)
+		create_tween().tween_property(texture_rect, "modulate", Color(1, 0, 0, 1), 0.7)
 	elif state == OverlayState.HIDDEN:
 		create_tween().tween_property(texture_rect, "modulate", Color.TRANSPARENT, 0.7)
 	elif state == OverlayState.PINK:
-		create_tween().tween_property(texture_rect, "modulate", Color(1,0,1,1), 0.7)
+		create_tween().tween_property(texture_rect, "modulate", Color(1, 0, 1, 1), 0.7)

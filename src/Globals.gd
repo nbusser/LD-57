@@ -62,6 +62,7 @@ signal state_changed(action_state: ActionState, enemy_state: BaseEnemyState)
 var enemy_state = BaseEnemyState.IDLE
 var action_state = ActionState.IDLE
 
+
 func set_enemy_state(state: BaseEnemyState) -> void:
 	if state == BaseEnemyState.IDLE:
 		state_changed.emit(action_state, BaseEnemyState.IDLE)
@@ -72,6 +73,7 @@ func set_enemy_state(state: BaseEnemyState) -> void:
 	elif state == BaseEnemyState.ANGRY:
 		state_changed.emit(action_state, BaseEnemyState.ANGRY)
 	enemy_state = state
+
 
 func set_action_state(state: ActionState) -> void:
 	if state == ActionState.IDLE:

@@ -134,6 +134,7 @@ func spawn_cards_in_hand(card_values: Array):
 		_hand_add_card(card, 0, Transform3D.IDENTITY)
 	_hand_reorder_cards()
 
+
 func _hand_add_card(card: Card, index: int, og_transform: Transform3D):
 	card.add_to_group("grabbable_cards")
 	cards_in_hand.add_child(card)
