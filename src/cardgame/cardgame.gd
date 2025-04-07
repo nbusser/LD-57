@@ -63,12 +63,11 @@ func setup_and_start_timer(duration: float) -> bool:
 		if timer.is_stopped():
 			timer_in_progress = false
 			return true
-		else:
-			return false
-	else:
-		timer.start(duration)
-		timer_in_progress = true
 		return false
+
+	timer.start(duration)
+	timer_in_progress = true
+	return false
 
 
 class RoundManager:

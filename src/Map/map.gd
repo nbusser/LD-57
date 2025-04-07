@@ -20,7 +20,7 @@ var _hovered_card: Card = null
 @onready var _enemy_snapper = $EnemySnapper
 @onready var _enemy: Enemy = $Enemy
 
-@onready var round_manager = _card_game.create_round_manager()
+@onready var _round_manager = _card_game.create_round_manager()
 
 
 func _process(_delta):
@@ -77,7 +77,7 @@ func _on_tutorial_mode_changed(is_tutorial: bool) -> void:
 	if is_tutorial:
 		await tutorial()
 	else:
-		round_manager.life_changed.connect(_on_life_changed)
+		_round_manager.life_changed.connect(_on_life_changed)
 		_enemy_snapper.init(false)
 		_player_snapper.init(true)
 

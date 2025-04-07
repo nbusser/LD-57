@@ -32,8 +32,8 @@ var _grabbed_card: Card:
 @onready var cards_on_top_of_deck: Node3D = $CardsOnTopOfDeck
 @onready var _cards_on_sleeve: Node3D = $SleeveHand/CardsInSleeve
 @onready var _grabbed_card_parent: Node3D = $"GrabbedCard"
-@onready var card_rail: Path3D = $SleeveHand/CardRail
-@onready var relative_point: Node3D = $SleeveHand/CardRail/RelativePoint
+@onready var _card_rail: Path3D = $SleeveHand/CardRail
+@onready var _relative_point: Node3D = $SleeveHand/CardRail/RelativePoint
 
 
 func is_grabbing_a_card():
@@ -130,10 +130,10 @@ func _sleeve_add_card(card: Card):
 	if not result:
 		return
 
-	relative_point.global_position = result
-	var closest_point = card_rail.curve.get_closest_point(relative_point.position)
-	relative_point.position = closest_point
-	card.global_position = relative_point.global_position
+	_relative_point.global_position = result
+	var closest_point = _card_rail.curve.get_closest_point(_relative_point.position)
+	_relative_point.position = closest_point
+	card.global_position = _relative_point.global_position
 
 	card.add_to_group("grabbable_cards")
 
