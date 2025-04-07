@@ -73,7 +73,9 @@ func _ready():
 
 	round_manager.life_changed.connect(_on_life_changed)
 	_enemy_snapper.set_modulate(Color(100, 0, 0))
+	_enemy_snapper.init(false)
 	_player_snapper.set_modulate(Color(0, 100, 0))
+	_player_snapper.init(true)
 
 
 func _on_life_changed(side: CardGame.Side, value: int):

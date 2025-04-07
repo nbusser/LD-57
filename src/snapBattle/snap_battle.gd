@@ -2,6 +2,7 @@ extends Node3D
 
 var glowing = false
 var base_modulate = Color(0, 0, 0)
+var is_player = false
 
 @onready var camera: Camera3D = $"../CameraRail/FollowRail/Camera"
 @onready var cards_manager: CardsManager = $"../CardsManager"
@@ -12,7 +13,7 @@ var base_modulate = Color(0, 0, 0)
 
 func set_modulate(color):
 	base_modulate = color
-	if !glowing:
+	if !glowing || !is_player:
 		sprite.modulate = color
 
 
@@ -20,9 +21,13 @@ func _ready() -> void:
 	$Sprite3D.texture = base_texture
 
 
+func init(is_player: bool):
+	self.is_player = is_player
+
+
 func _process(_delta: float) -> void:
 	var is_close = cards_manager.is_card_close_to_battlefield()
-	if is_close != glowing:
+	if is_player && is_close != glowing:
 		glowing = is_close
 		print("Disagree")
 		if is_close:
