@@ -11,11 +11,8 @@ var distance = 2.0
 
 
 func _physics_process(_delta: float) -> void:
-	print("hey")
 	if !camera:
 		return
-	else:
-		print(camera)
 
 	var ray_query = PhysicsRayQueryParameters3D.new()
 	ray_query.from = camera.project_ray_origin(global_position)
