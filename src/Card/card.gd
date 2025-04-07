@@ -10,10 +10,11 @@ const RATIO = .0221 / 430
 var _card_state: State = State.NOTHING
 
 var _is_in_sleeve_mode = false
+var _is_in_hand_mode = false
 
-@onready var _card_face_sprite: Sprite3D = $"FaceSprite"
-@onready var _card_border_sprite: Sprite3D = $"BorderSprite"
-@onready var _mesh = $CardMesh
+@onready var _card_face_sprite: Sprite3D = $"Visuals/FaceSprite"
+@onready var _card_border_sprite: Sprite3D = $"Visuals/BorderSprite"
+@onready var _visuals: Node3D = $"Visuals"
 
 
 # Hides the mesh, billboards the sprite
@@ -25,8 +26,12 @@ func sleeve_mode(enable: bool):
 		_card_border_sprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 
 	_card_face_sprite.visible = not enable
-	_mesh.visible = not enable
 	start_hovering()
+
+
+func hand_mode(enable: bool):
+	_is_in_hand_mode = enable
+	_visuals.position = Vector3.ZERO
 
 
 func _process(_delta: float) -> void:
@@ -37,20 +42,28 @@ func _process(_delta: float) -> void:
 func start_hovering():
 	_card_state = State.HOVERED
 	_card_border_sprite.set_layer_mask_value(6, true)
+	if _is_in_hand_mode:
+		var tween = create_tween()
+		tween.tween_property(_visuals, "position", Vector3.FORWARD * .05, .2)
 
 
 func stop_hovering():
 	_card_state = State.NOTHING
 	_card_border_sprite.set_layer_mask_value(6, false)
+	if _is_in_hand_mode:
+		var tween = create_tween()
+		tween.tween_property(_visuals, "position", Vector3.ZERO, .2)
 
 
 func start_dragging():
 	stop_hovering()
 	_card_state = State.DRAGGED
+	_visuals.position = Vector3.ZERO
 
 
 func stop_dragging():
 	_card_state = State.NOTHING
+	_visuals.position = Vector3.ZERO
 
 
 func _ready():
@@ -66,12 +79,12 @@ func _ready():
 	var card_texture: CompressedTexture2D = Globals.card_skins[card_value]
 	var size: Vector2 = card_texture.get_size()
 	assert(
-		abs(size.x / size.y - 288.0 / 430.0) < 0.01,
-		"Texture aspect ratio must be ~288/430 but was %s" % str(size.x / size.y)
+		abs(size.x / size.y - 1.0 / 1.0) < 0.01,
+		"Texture aspect ratio must be 1/1 but was %s" % str(size.x / size.y)
 	)
 
 	_card_face_sprite.texture = card_texture
-	_card_face_sprite.scale = Vector3.ONE * RATIO * size.y
+	# _card_face_sprite.scale = Vector3.ONE * RATIO * size.y
 
 
 func init(card_value_arg: int):
