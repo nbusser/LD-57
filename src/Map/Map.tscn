@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=28 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
 [ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
 [ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="8_fgn2p"]
-[ext_resource type="Texture2D" uid="uid://dkxf7u58n18ne" path="res://assets/sprites/sleeve_placeholder.png" id="8_jljl6"]
 [ext_resource type="Script" uid="uid://cko8icjpkjvo" path="res://src/Map/cards_manager.gd" id="9_22krd"]
+[ext_resource type="PackedScene" uid="uid://b33p0i1qpivld" path="res://src/Sleeve/sleeve.tscn" id="9_g5aly"]
 [ext_resource type="PackedScene" uid="uid://des7slrabd1qt" path="res://src/cardgame/cardgame.tscn" id="10_hxqom"]
 [ext_resource type="PackedScene" uid="uid://bswm5o0d0ybau" path="res://src/deckObject/deckObject.tscn" id="11_22krd"]
 [ext_resource type="PackedScene" uid="uid://xk15mh5tpksd" path="res://src/StaticEnvironment.tscn" id="12_fk5ph"]
@@ -54,15 +54,6 @@ shader = ExtResource("7_fyitu")
 shader_parameter/lineWeight = 3.0
 shader_parameter/outlineColor = Color(3, 0.8, 0, 0.8)
 shader_parameter/stencilMask = SubResource("ViewportTexture_fyitu")
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fgn2p"]
-friction = 0.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jljl6"]
-size = Vector2(1350, 2)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hxqom"]
-friction = 0.0
 
 [sub_resource type="Animation" id="Animation_g5aly"]
 length = 0.001
@@ -176,34 +167,8 @@ mouse_filter = 2
 z_index = -10
 position = Vector2(-8, 416)
 
-[node name="Sleeve" type="Node2D" parent="Billboard"]
+[node name="Sleeve" parent="Billboard" instance=ExtResource("9_g5aly")]
 position = Vector2(1370, 588)
-
-[node name="Top" type="RigidBody2D" parent="Billboard/Sleeve"]
-position = Vector2(0, -142)
-collision_layer = 3
-physics_material_override = SubResource("PhysicsMaterial_fgn2p")
-can_sleep = false
-freeze = true
-
-[node name="TopArea" type="CollisionShape2D" parent="Billboard/Sleeve/Top"]
-shape = SubResource("RectangleShape2D_jljl6")
-
-[node name="Bottom" type="RigidBody2D" parent="Billboard/Sleeve"]
-position = Vector2(14, 166)
-physics_material_override = SubResource("PhysicsMaterial_hxqom")
-freeze = true
-
-[node name="BottomArea" type="CollisionShape2D" parent="Billboard/Sleeve/Bottom"]
-shape = SubResource("RectangleShape2D_jljl6")
-
-[node name="Sprite2D" type="Sprite2D" parent="Billboard/Sleeve"]
-scale = Vector2(0.693726, 0.972116)
-texture = ExtResource("8_jljl6")
-
-[node name="DropZone" type="Area2D" parent="Billboard/Sleeve"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Billboard/Sleeve/DropZone"]
 
 [node name="CardsManager" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)

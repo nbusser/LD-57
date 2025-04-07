@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://b33p0i1qpivld"]
+
+[ext_resource type="Script" uid="uid://brfg3xqgchstw" path="res://src/Sleeve/sleeve.gd" id="1_0444v"]
+[ext_resource type="Texture2D" uid="uid://dkxf7u58n18ne" path="res://assets/sprites/sleeve_placeholder.png" id="1_ge5dv"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fgn2p"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jljl6"]
+size = Vector2(1350, 2)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hxqom"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g5aly"]
+size = Vector2(1328, 268)
+
+[node name="Sleeve" type="Node2D"]
+script = ExtResource("1_0444v")
+
+[node name="Top" type="RigidBody2D" parent="."]
+position = Vector2(0, -142)
+collision_layer = 3
+physics_material_override = SubResource("PhysicsMaterial_fgn2p")
+can_sleep = false
+freeze = true
+
+[node name="TopArea" type="CollisionShape2D" parent="Top"]
+shape = SubResource("RectangleShape2D_jljl6")
+
+[node name="Bottom" type="RigidBody2D" parent="."]
+position = Vector2(14, 166)
+physics_material_override = SubResource("PhysicsMaterial_hxqom")
+freeze = true
+
+[node name="BottomArea" type="CollisionShape2D" parent="Bottom"]
+shape = SubResource("RectangleShape2D_jljl6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.693726, 0.972116)
+texture = ExtResource("1_ge5dv")
+
+[node name="DropZone" type="Area2D" parent="."]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DropZone"]
+position = Vector2(7, 14)
+shape = SubResource("RectangleShape2D_g5aly")
+
+[connection signal="body_entered" from="DropZone" to="." method="_on_drop_zone_body_entered"]
+[connection signal="body_exited" from="DropZone" to="." method="_on_drop_zone_body_exited"]
