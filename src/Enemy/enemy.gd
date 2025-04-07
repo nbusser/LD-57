@@ -94,7 +94,7 @@ func alien_think_about_card(hand, battle_field: Array) -> int:
 func alien_play_card(value: int) -> void:
 	#On instancie une carte
 	var card_inst = card_scene.instantiate()
-	card_inst.global_rotation = Vector3(PI/2, 0, 0)
+	card_inst.global_rotation = Vector3(PI / 2, 0, 0)
 	card_inst.init(value)
 	#On la place à un endroit la tavu
 	drop_zone_enemy.add_child(card_inst)
