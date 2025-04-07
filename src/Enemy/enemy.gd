@@ -235,8 +235,24 @@ func alien_play_card(value: int) -> void:
 
 
 func poke_left():
-	state = Enums.EnemyState.POKED_LEFT
+	_poke(true)
 
 
 func poke_right():
-	state = Enums.EnemyState.POKED_RIGHT
+	_poke(false)
+
+
+func _poke(left: bool):
+	if not $PokedTimer.is_stopped():
+		return
+
+	if left:
+		state = Enums.EnemyState.POKED_LEFT
+	else:
+		state = Enums.EnemyState.POKED_RIGHT
+
+	$PokedTimer.start()
+	await $PokedTimer.timeout
+
+	state = Enums.EnemyState.ANGRY
+	en_instance_de_se_faire_chopper = NB_FRAMES_TO_LOSE - 60
