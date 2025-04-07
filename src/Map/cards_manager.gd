@@ -147,7 +147,9 @@ func _hand_add_card(card: Card, index: int, og_transform: Transform3D):
 		var target_trans = card.global_transform
 		card.global_transform = og_transform
 		create_tween().tween_property(
-			card, "global_transform", target_trans,
+			card,
+			"global_transform",
+			target_trans,
 			(target_trans.origin - og_transform.origin).length()
 		)
 
