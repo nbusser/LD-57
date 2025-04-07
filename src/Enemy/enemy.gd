@@ -103,8 +103,10 @@ func alien_play_card(value: int) -> void:
 	tween.parallel().tween_property(
 		card_inst, "global_position", Vector3(drop_zone_enemy.global_position), 1
 	)
-	tween.parallel().tween_property(card_inst, "rotation", Vector3(5 * PI / 2, 0, 0), 1)
-	tween.set_trans(Tween.TRANS_CIRC)
+	tween.parallel().tween_property(card_inst, "rotation", Vector3(5 * PI / 2, 0, 0), .7)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_IN)
+
 
 	card_game.round_manager.play_card("alien", value)
 	#TODO REGLER L INSTANCE DE LA CARTE
