@@ -177,33 +177,33 @@ z_index = -10
 position = Vector2(-8, 416)
 
 [node name="Sleeve" type="Node2D" parent="Billboard"]
-visible = false
-position = Vector2(760, 330)
+position = Vector2(1370, 588)
 
 [node name="Top" type="RigidBody2D" parent="Billboard/Sleeve"]
-position = Vector2(450, 72)
+position = Vector2(0, -142)
 collision_layer = 3
 physics_material_override = SubResource("PhysicsMaterial_fgn2p")
 can_sleep = false
 freeze = true
 
 [node name="TopArea" type="CollisionShape2D" parent="Billboard/Sleeve/Top"]
-position = Vector2(147.5, 0)
 shape = SubResource("RectangleShape2D_jljl6")
 
 [node name="Bottom" type="RigidBody2D" parent="Billboard/Sleeve"]
-position = Vector2(450, 200)
+position = Vector2(14, 166)
 physics_material_override = SubResource("PhysicsMaterial_hxqom")
 freeze = true
 
 [node name="BottomArea" type="CollisionShape2D" parent="Billboard/Sleeve/Bottom"]
-position = Vector2(145.5, 40)
 shape = SubResource("RectangleShape2D_jljl6")
 
 [node name="Sprite2D" type="Sprite2D" parent="Billboard/Sleeve"]
-position = Vector2(605, 145)
-scale = Vector2(0.693726, 0.609863)
+scale = Vector2(0.693726, 0.972116)
 texture = ExtResource("8_jljl6")
+
+[node name="DropZone" type="Area2D" parent="Billboard/Sleeve"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billboard/Sleeve/DropZone"]
 
 [node name="CardsManager" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)
