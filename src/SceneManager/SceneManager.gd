@@ -3,8 +3,10 @@ class_name SceneManager
 extends Control
 
 # Settings of all levels. To be configured from the editor
-@export var levels: Array[LevelData]
 
+enum AlertState { NORMAL, WARNING, CAUGHT }
+
+@export var levels: Array[LevelData]
 # State of the game
 var current_level_number := 0
 var nb_coins := 0
@@ -136,6 +138,13 @@ func change_music_track(new_audio_player: AudioStreamPlayer) -> void:
 				tween = create_tween()
 				tween.tween_property(mp, "volume_linear", 0, .2)
 		current_audio_player = new_audio_player
+
+
+func change_music_track_by_index(index: int) -> void:
+	if index >= 0 and index < music_players.size():
+		change_music_track(music_players[index])
+	else:
+		print("Invalid music track index: ", index)
 
 
 # State machine handling the state of the whole game

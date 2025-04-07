@@ -62,6 +62,16 @@ var action_state = ActionState.IDLE:
 		state_changed.emit(state, enemy_state)
 		action_state = state
 
+		match action_state:
+			ActionState.IDLE:
+				scene_manager.change_music_track_by_index(0)
+			ActionState.ILLEGAL:
+				scene_manager.change_music_track_by_index(1)
+			ActionState.CAUGHT:
+				scene_manager.change_music_track_by_index(3)
+
+@onready var scene_manager = get_node("/root/SceneManager")
+
 
 func end_scene(status: EndSceneStatus, params: Dictionary = {}) -> void:
 	scene_ended.emit(status, params)

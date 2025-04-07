@@ -87,4 +87,8 @@ func _on_life_changed(side: CardGame.Side, value: int):
 
 
 func _on_enemy_player_caught_cheating() -> void:
+	print("GAME OVER BLOCK THE CONTROLS")
+	#TODO : BLOCK THE CONTROLS
+	Globals.action_state = Globals.ActionState.CAUGHT
+	await get_tree().create_timer(3.0).timeout
 	Globals.end_scene(Globals.EndSceneStatus.LEVEL_GAME_OVER)

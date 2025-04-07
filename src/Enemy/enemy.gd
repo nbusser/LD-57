@@ -137,6 +137,8 @@ func _process(_delta: float) -> void:
 
 func alien_draw_card(card_instance: Node3D) -> void:
 	await get_tree().create_timer(1.0).timeout
+	#TODO REMETTRE CA PARCE QUE C EST CASSE, LA CARTE RESTE
+	#TODO FAUDRAI FAIRE LA MEME ANIMATION QUI TOURNE ET POOUIS DELETE LA CARTE EN VRAI CA POURRAIT ETRE COOL
 	#TODO PLACEHOLDER DE L ALIEN QUI FAIT GENRE QU IL PREND UNE CARTE
 	#PEUT ETRE QU IL FAUDRA FAIRE BOUGER SON BRAS OU QU IL FASSE LA GUEULE
 	var card_value = card_instance.get("card_value")
@@ -229,7 +231,6 @@ func alien_play_card(value: int) -> void:
 	tween.set_ease(Tween.EASE_IN)
 
 	card_game.round_manager.play_card("alien", value)
-	#TODO REGLER L INSTANCE DE LA CARTE
 
 
 func poke_left():
