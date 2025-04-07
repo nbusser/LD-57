@@ -6,6 +6,7 @@ signal clicked
 # @onready var area = get_node("Area3D")
 @onready var col_shape = get_node("collision")
 
+
 func _ready():
 	show_message(["Hello", "World"])
 

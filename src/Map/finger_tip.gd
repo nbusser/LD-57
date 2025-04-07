@@ -29,7 +29,11 @@ func _input(event):
 	if !camera:
 		return
 
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+	if (
+		event is InputEventMouseButton
+		and event.is_pressed()
+		and event.button_index == MOUSE_BUTTON_LEFT
+	):
 		var ray_query = PhysicsRayQueryParameters3D.new()
 		ray_query.from = camera.project_ray_origin(global_position)
 		ray_query.to = ray_query.from + camera.project_ray_normal(global_position) * 1000
@@ -39,6 +43,7 @@ func _input(event):
 			enemy.poke_left()
 		elif results && results.collider == %RightEye:
 			enemy.poke_right()
+
 
 func get_closest_card() -> Card:
 	var ray_query = PhysicsRayQueryParameters3D.new()
