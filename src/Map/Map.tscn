@@ -175,6 +175,9 @@ transform = Transform3D(76.9231, 0, 0, 0, -76.9231, -6.72483e-06, 0, 6.72483e-06
 [node name="Enemy" parent="." instance=ExtResource("6_lrvju")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823981, -0.612635)
 
+[node name="Mouth" type="Node3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0191145, 0.0633981, -5.96046e-08)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, -4.84548, 0)
 mesh = SubResource("SphereMesh_g5aly")
