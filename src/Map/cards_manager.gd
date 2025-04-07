@@ -24,7 +24,7 @@ var _grabbed_card: Card:
 @onready var card_scene: PackedScene = preload("res://src/Card/Card.tscn")
 @onready var finger_tip: Node2D = $"../Billboard/2DHand/HandBody/Sprite2D/FingerTip"
 @onready var camera: Camera3D = $"../CameraRail/FollowRail/Camera"
-@onready var batte_field_zone: Node3D = $"../Snapper/CardsInBattleField"
+@onready var drop_zone_player: Node3D = $"../Snapper/CardsInBattleField"
 @onready var card_game: Node = $"../cardgame"
 @onready var sleeve: Sleeve = $"../Billboard/Sleeve"
 
@@ -52,7 +52,7 @@ func _physics_process(_delta: float) -> void:
 		if result:
 			_grabbed_card.global_position = result
 			_is_card_close_to_battlefield = (
-				_grabbed_card.global_position.distance_to(batte_field_zone.global_position) < 0.1
+				_grabbed_card.global_position.distance_to(drop_zone_player.global_position) < 0.1
 			)
 		# _dragged_card.transform = _dragged_card.transform.translated(Vector3(0.0, -0.06, 0.0))
 
@@ -84,7 +84,7 @@ func grab_card(card: Card):
 
 func _place_card_in_battlefield(card: Card):
 	card_game.round_manager.play_card("player", card.card_value)
-	batte_field_zone.add_child(card)
+	drop_zone_player.add_child(card)
 	card.position = Vector3.ZERO
 	card.remove_from_group("grabbable_cards")
 
