@@ -46,13 +46,13 @@ const SAMPLE_GLOBAL_VARIABLE: int = 1
 var dialog: Dialog = null
 
 var card_skins: Dictionary = {
-	-2: load("res://assets/sprites/cards/card_front_minus2.png"),
-	0: load("res://assets/sprites/cards/card_front_0.png"),
-	1: load("res://assets/sprites/cards/card_front_1.png"),
-	2: load("res://assets/sprites/cards/card_front_2.png"),
-	3: load("res://assets/sprites/cards/card_front_3.png"),
-	4: load("res://assets/sprites/cards/card_front_4.png"),
-	5: load("res://assets/sprites/cards/card_front_5.png"),
+	-2: load("res://assets/sprites/cards/card_front_minus2.webp"),
+	0: load("res://assets/sprites/cards/card_front_0.webp"),
+	1: load("res://assets/sprites/cards/card_front_1.webp"),
+	2: load("res://assets/sprites/cards/card_front_2.webp"),
+	3: load("res://assets/sprites/cards/card_front_3.webp"),
+	4: load("res://assets/sprites/cards/card_front_4.webp"),
+	5: load("res://assets/sprites/cards/card_front_5.webp"),
 }
 
 var enemy_state = BaseEnemyState.IDLE:

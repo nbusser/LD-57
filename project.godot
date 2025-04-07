@@ -10,11 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Deep sleeve"
+config/name="Deep Sleeve"
 config/description="Ludum Dare 57 game by team Ludum Darons"
 run/main_scene="res://src/SceneManager/SceneManager.tscn"
 config/features=PackedStringArray("4.4")
-config/icon="uid://ch5ej3ucypo3w"
+config/icon="uid://cawvud1a2swx"
 
 [autoload]
 

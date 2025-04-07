@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=4 uid="uid://b1swxld0lwpiv"]
 
 [ext_resource type="Script" uid="uid://cpn6p14owhxg" path="res://src/Card/card.gd" id="1_xkmnc"]
-[ext_resource type="Texture2D" uid="uid://m28s8drcyjrv" path="res://assets/sprites/cards/card_back.png" id="3_52213"]
-[ext_resource type="Texture2D" uid="uid://cyp3acpwap3io" path="res://assets/sprites/cards/card_metal.png" id="3_crwnv"]
+[ext_resource type="Texture2D" uid="uid://gbud557wql3b" path="res://assets/sprites/cards/card_back.webp" id="3_ua61t"]
+[ext_resource type="Texture2D" uid="uid://chm8chcxckvt8" path="res://assets/sprites/cards/card_metal.webp" id="4_taig8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_crwnv"]
 size = Vector3(0.0976562, 0.0974121, 0.00488281)
@@ -12,12 +12,12 @@ size = Vector3(0.0976562, 0.0974121, 0.00488281)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tupqs"]
 resource_name = "Material.001"
 cull_mode = 2
-albedo_texture = ExtResource("3_52213")
+albedo_texture = ExtResource("3_ua61t")
 metallic = 1.0
-metallic_texture = ExtResource("3_crwnv")
+metallic_texture = ExtResource("4_taig8")
 metallic_texture_channel = 4
 roughness = 0.59
-roughness_texture = ExtResource("3_crwnv")
+roughness_texture = ExtResource("4_taig8")
 roughness_texture_channel = 4
 heightmap_scale = 16.0
 heightmap_texture = SubResource("CompressedTexture2D_xkmnc")
@@ -69,13 +69,13 @@ shape = SubResource("BoxShape3D_crwnv")
 
 [node name="BorderSprite" type="Sprite3D" parent="Visuals"]
 transform = Transform3D(0.0220996, 1.2784e-06, 0.000137935, -0.000137941, 0.0002042, 0.0220986, 3.29316e-09, -0.0220991, 0.000204204, 0, 0.0012, 0)
-pixel_size = 0.0028
-texture = ExtResource("3_52213")
+pixel_size = 0.0112
+texture = ExtResource("3_ua61t")
 
 [node name="FaceSprite" type="Sprite3D" parent="Visuals"]
 transform = Transform3D(0.0220996, 1.2784e-06, 0.000137935, -0.000137941, 0.0002042, 0.0220986, 3.29316e-09, -0.0220991, 0.000204204, 0, 0.0022485, 0)
-pixel_size = 0.0028
-texture = ExtResource("3_52213")
+pixel_size = 0.0112
+texture = ExtResource("3_ua61t")
 
 [node name="card" type="Node3D" parent="Visuals"]
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.0014063, 0)
