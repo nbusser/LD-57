@@ -170,12 +170,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CardsManager" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)
-script = ExtResource("9_22krd")
-
-[node name="CardsInHand" type="Node3D" parent="CardsManager"]
-
 [node name="Billboard" type="Node2D" parent="."]
 
 [node name="2DHand" parent="Billboard" instance=ExtResource("8_fgn2p")]
@@ -211,6 +205,18 @@ position = Vector2(605, 145)
 scale = Vector2(0.693726, 0.609863)
 texture = ExtResource("8_jljl6")
 
+[node name="CardsManager" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)
+script = ExtResource("9_22krd")
+
+[node name="CardsInHand" type="Node3D" parent="CardsManager"]
+
+[node name="CardsOnTopOfDeck" type="Node3D" parent="CardsManager"]
+
+[node name="CardsInSleeve" type="Node3D" parent="CardsManager"]
+
+[node name="GrabbedCard" type="Node3D" parent="CardsManager"]
+
 [node name="cardgame" parent="." instance=ExtResource("10_hxqom")]
 
 [node name="deckManager" type="Node3D" parent="."]
@@ -240,3 +246,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_8kakp")
 }
 autoplay = "rotate bg"
+
+[connection signal="card_spawned_on_the_deck" from="cardgame" to="CardsManager" method="_on_cardgame_card_spawned_on_the_deck"]

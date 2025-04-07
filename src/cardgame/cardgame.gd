@@ -1,6 +1,8 @@
 class_name CardGame
 extends Node
 
+signal card_spawned_on_the_deck(card: Card)
+
 enum GameState {
 	NOT_STARTED,
 	INIT,
@@ -24,6 +26,7 @@ var round_manager = null
 @onready var alien_deck_node = get_node("../deckManager/deckObjectAlien")
 @onready var card_scene = preload("res://src/Card/Card.tscn")
 @onready var the_alien = get_node("../Enemy")
+@onready var cards_manager = $"../CardsManager"
 
 
 class RoundManager:
@@ -138,17 +141,22 @@ class RoundManager:
 	#Toutes les données sont accessible depuis la classe la
 
 
-func _instantiate_card(card_arg: PackedScene, pos_reference_node: Node3D, value: int) -> Node3D:
-	#On instancie la carte
-	var card_inst = card_arg.instantiate()
+func _instantiate_card(is_player_card: bool, value: int) -> Node3D:
+	var pos_reference_node: Node3D = player_deck_node if is_player_card else alien_deck_node
+
+	var card_inst: Card = card_scene.instantiate()
 	card_inst.rotation = Vector3(0, 0, PI)
 	card_inst.init(value)
-	add_child(card_inst)
-	card_inst.global_position = pos_reference_node.global_position
-	if pos_reference_node == alien_deck_node:
-		the_alien._alien_draw_card(card_inst)
-	else:
+
+	if is_player_card:
 		card_inst.add_to_group("grabbable_cards")
+		cards_manager.cards_on_top_of_deck.add_child(card_inst)
+	else:
+		the_alien._alien_draw_card(card_inst)
+		add_child(card_inst)
+
+	card_inst.global_position = pos_reference_node.global_position
+
 	return card_inst
 
 
@@ -171,11 +179,11 @@ func _process(delta: float) -> void:
 		round_manager.setup_decks(round_manager.my_custom_deck)
 		for i in range(RoundManager.HAND_SIZE - 1):
 			var card = round_manager.draw_cards(round_manager.my_deck, 1)
-			_instantiate_card(card_scene, player_deck_node, card[0])
+			_instantiate_card(true, card[0])
 
 		for i in range(RoundManager.HAND_SIZE - 1):
 			var card = round_manager.draw_cards(round_manager.alien_deck, 1)
-			_instantiate_card(card_scene, alien_deck_node, card[0])
+			_instantiate_card(false, card[0])
 			round_manager.alien_hand.append(card[0])
 
 		#La distrubution des cartes est faite, on passe en DRAW
@@ -184,9 +192,9 @@ func _process(delta: float) -> void:
 	elif current_state == GameState.DRAW:
 		var card = TYPE_NIL
 		card = round_manager.draw_cards(round_manager.my_deck, 1)
-		_instantiate_card(card_scene, player_deck_node, card[0])
+		_instantiate_card(true, card[0])
 		card = round_manager.draw_cards(round_manager.alien_deck, 1)
-		_instantiate_card(card_scene, alien_deck_node, card[0])
+		_instantiate_card(false, card[0])
 		round_manager.alien_hand.append(card)
 
 		current_state = GameState.WAITING_FOR_RECUP

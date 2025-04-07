@@ -1,12 +1,12 @@
 extends Node3D
 
-@onready var label_3d: Label3D = $Label3D
-@onready var points: Node3D = $Points
-
 @export_range(0, 20) var value = 20:
 	set(new_value):
 		value = new_value
 		_on_value_update()
+
+@onready var label_3d: Label3D = $Label3D
+@onready var points: Node3D = $Points
 
 
 func _ready():

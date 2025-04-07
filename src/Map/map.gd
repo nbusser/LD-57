@@ -59,18 +59,18 @@ func _input(event):
 		if event.is_pressed():
 			if _hovered_card != null:
 				_dragged_card = _hovered_card
-				_cards_manager.grab_card_in_hand(_dragged_card)
+				_cards_manager.grab_card(_dragged_card)
 				_hovered_card = null
 				_hand_2d.state = Enums.HandState.PINCH
 		else:
 			if _dragged_card != null:
-				_cards_manager.drop_card_in_hand()
+				_cards_manager.drop_card()
 				_dragged_card = null
 				_hand_2d.state = Enums.HandState.POINT
 
 
 func _ready():
-	_cards_manager.spawn_cards([0, -2, 3, 4, 4])
+	_cards_manager.spawn_cards_in_hand([0, -2, 3, 4, 4])
 
 	#Pour le débug on start le round mtn
 	var round_manager = _card_game.create_round_manager()

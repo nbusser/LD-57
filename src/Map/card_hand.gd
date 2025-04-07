@@ -3,21 +3,35 @@ class_name CardsManager extends Node3D
 const CARD_VERTICAL_OFFSET = Vector3.DOWN * 0.06
 const CARD_THICKNESS = 0.0003  # .3mm
 
-var _dragged_card: Card = null
 var _is_card_close_to_battlefield = false
 
+var _grabbed_card: Card:
+	get:
+		assert(_grabbed_card_parent.get_child_count() <= 1)
+		return _grabbed_card_parent.get_child(0)
+	set(card):
+		if card == null:
+			assert(_grabbed_card_parent.get_child_count() == 1)
+			_grabbed_card_parent.remove_child(_grabbed_card_parent.get_child(0))
+		else:
+			assert(_grabbed_card_parent.get_child_count() == 0)
+			_grabbed_card_parent.add_child(card)
+
 @onready var card_scene: PackedScene = preload("res://src/Card/Card.tscn")
-@onready var cards_in_hand: Node3D = $CardsInHand
 @onready var finger_tip: Node2D = $"../Billboard/2DHand/HandBody/Sprite2D/FingerTip"
 @onready var camera: Camera3D = $"../CameraRail/FollowRail/Camera"
 @onready var batte_field_zone: Node3D = $"../CardsInBattleField"
 @onready var card_game: Node = $"../cardgame"
 
+@onready var cards_in_hand: Node3D = $CardsInHand
+@onready var cards_on_top_of_deck: Node3D = $CardsOnTopOfDeck
+@onready var _grabbed_card_parent: Node3D = $"GrabbedCard"
+
 
 func _physics_process(_delta: float) -> void:
 	# Move the dragged card along the finger tip
-	if _dragged_card != null:
-		_dragged_card.rotation = Vector3(PI / 2, 0, 0)
+	if _grabbed_card != null:
+		_grabbed_card.rotation = Vector3(PI / 2, 0, 0)
 		var ray_origin = camera.project_ray_origin(finger_tip.global_position)
 		var ray_end = ray_origin + camera.project_ray_normal(finger_tip.global_position) * 1
 
@@ -26,9 +40,9 @@ func _physics_process(_delta: float) -> void:
 		query.collide_with_areas = true
 		var result = space_state.intersect_ray(query).get("position")
 		if result:
-			_dragged_card.global_position = result
+			_grabbed_card.global_position = result
 			_is_card_close_to_battlefield = (
-				_dragged_card.global_position.distance_to(batte_field_zone.global_position) < 0.1
+				_grabbed_card.global_position.distance_to(batte_field_zone.global_position) < 0.1
 			)
 		# _dragged_card.transform = _dragged_card.transform.translated(Vector3(0.0, -0.06, 0.0))
 
@@ -37,35 +51,52 @@ func is_card_close_to_battlefield() -> bool:
 	return _is_card_close_to_battlefield
 
 
-func grab_card_in_hand(card: Card):
-	_dragged_card = card
-	_hand_remove_card(card)
-	add_child(_dragged_card)
+func grab_card(card: Card):
+	assert(_grabbed_card == null, "Cannot grab a card if you already have a card in hand")
+
+	card.remove_from_group("grabbable_cards")
+
+	# Card was in hand
+	if card.get_parent() == cards_in_hand:
+		_hand_remove_card(card)
+	# Card was in deck
+	elif card.get_parent() == cards_on_top_of_deck:
+		cards_on_top_of_deck.remove_child(card)
+	else:
+		assert(false, "Card was in an unexpected location")
+
+	_grabbed_card = card
 	card.start_dragging()
 
 
-func place_card_in_battlefield(card: Card):
+func _place_card_in_battlefield(card: Card):
 	card_game.round_manager.play_card("player", card.card_value)
 	batte_field_zone.add_child(card)
 	card.position = Vector3.ZERO
 	card.remove_from_group("grabbable_cards")
 
 
-func drop_card_in_hand():
-	remove_child(_dragged_card)
+func drop_card():
+	assert(_grabbed_card != null, "Cannot drop card if no card in hand")
+
+	var card = _grabbed_card
+	_grabbed_card = null
+
 	var close = is_card_close_to_battlefield()
 	if close and card_game.current_state == card_game.GameState.PLAYER_TURN:
 		print("Card dropped in battlefield")
-		place_card_in_battlefield(_dragged_card)
+		_place_card_in_battlefield(card)
 	else:
 		print("Card dropped in hand")
-		_hand_add_card(_dragged_card, 0)
+		_hand_add_card(card, 0)
 
-	_dragged_card.stop_dragging()
-	_dragged_card = null
+	card.stop_dragging()
 
 
-func spawn_cards(card_values: Array):
+# -------- HAND RELATED ACTIONS --------
+
+
+func spawn_cards_in_hand(card_values: Array):
 	for value in card_values:
 		var card: Card = card_scene.instantiate()
 		card.init(value)
@@ -81,7 +112,6 @@ func _hand_add_card(card: Card, index: int):
 
 
 func _hand_remove_card(card: Card):
-	card.remove_from_group("grabbable_cards")
 	cards_in_hand.remove_child(card)
 	_hand_reorder_cards()
 
