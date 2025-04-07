@@ -101,7 +101,8 @@ class RoundManager:
 		var drawn_cards: Array = []
 		for i in range(count):
 			if deck.size() > 0:
-				var card: int = deck.pop_back()
+				var card: int = deck[0]
+				deck.remove_at(0)
 				drawn_cards.append(card)
 			else:
 				break
@@ -172,6 +173,8 @@ class RoundManager:
 				pass
 
 		#On remet les cartes joués dans les decks
+		#TODO Il faudrait faire un système propre, la on remet à la fin du coup on cycle sur les 21 cartes, une fois arrivé à la fin on va repiocher dans le même ordre
+		#En vrai on s'en fout parce que généralement ça sera fini avant mais bon on peut changer dans le futur
 		my_deck.append(player_score)
 		alien_deck.append(alien_score)
 		return first_player
@@ -297,6 +300,5 @@ func _process(delta: float) -> void:
 
 			await requier_to_delete_cards()
 
-			#TODO AJOUTER LE CLEAR DU CHAMP DE BATAILLE (INSTANCE SUR LA MAP)
 		_:
 			return
