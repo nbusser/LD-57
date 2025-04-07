@@ -1,6 +1,8 @@
 extends Node
 
 signal scene_ended(status: EndSceneStatus, params: Dictionary)
+signal state_changed(action_state: ActionState, enemy_state: BaseEnemyState)
+
 # Status sent along with signal end_scene()
 enum EndSceneStatus {
 	# Main meu
@@ -25,25 +27,6 @@ enum EndSceneStatus {
 	CREDITS_BACK,
 }
 
-const SAMPLE_GLOBAL_VARIABLE: int = 1
-
-# gdlint: disable=duplicated-load
-var card_skins: Dictionary = {
-	-2: load("res://assets/sprites/cards/sprite_0.png"),
-	0: load("res://assets/sprites/cards/sprite_1.png"),
-	1: load("res://assets/sprites/cards/sprite_2.png"),
-	2: load("res://assets/sprites/cards/sprite_4.png"),
-	3: load("res://assets/sprites/cards/sprite_5.png"),
-	4: load("res://assets/sprites/cards/sprite_6.png"),
-	5: load("res://assets/sprites/cards/sprite_8.png"),
-}
-# gdlint: enable=duplicated-load
-
-
-func end_scene(status: EndSceneStatus, params: Dictionary = {}) -> void:
-	scene_ended.emit(status, params)
-
-
 enum BaseEnemyState {
 	IDLE,
 	DISTRACTED,
@@ -57,10 +40,25 @@ enum ActionState {
 	CAUGHT,
 }
 
-signal state_changed(action_state: ActionState, enemy_state: BaseEnemyState)
+const SAMPLE_GLOBAL_VARIABLE: int = 1
 
+# gdlint: disable=duplicated-load
+var card_skins: Dictionary = {
+	-2: load("res://assets/sprites/cards/sprite_0.png"),
+	0: load("res://assets/sprites/cards/sprite_1.png"),
+	1: load("res://assets/sprites/cards/sprite_2.png"),
+	2: load("res://assets/sprites/cards/sprite_4.png"),
+	3: load("res://assets/sprites/cards/sprite_5.png"),
+	4: load("res://assets/sprites/cards/sprite_6.png"),
+	5: load("res://assets/sprites/cards/sprite_8.png"),
+}
 var enemy_state = BaseEnemyState.IDLE
 var action_state = ActionState.IDLE
+# gdlint: enable=duplicated-load
+
+
+func end_scene(status: EndSceneStatus, params: Dictionary = {}) -> void:
+	scene_ended.emit(status, params)
 
 
 func set_enemy_state(state: BaseEnemyState) -> void:

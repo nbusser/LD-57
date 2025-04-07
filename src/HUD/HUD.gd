@@ -2,11 +2,20 @@ class_name HUD
 
 extends Control
 
+enum OverlayState {
+	BLUE,
+	RED,
+	PINK,
+	HIDDEN,
+}
+
 var level_name:
 	set = set_level_name
 
 var level_number:
 	set = set_level_number
+
+var current_state = OverlayState.HIDDEN
 
 @onready var level_number_label: Label = $VBoxContainer/VBoxContainer/LevelNumber/LevelNumberValue
 @onready var level_name_label: Label = $VBoxContainer/CenterContainer/LevelNameValue
@@ -49,16 +58,6 @@ func translate_global_states(
 	# 		set_overlay_state(OverlayState.RED)
 	# 	[Globals.ActionState.ILLEGAL, Globals.BaseEnemyState.IDLE]:
 	# 		set_overlay_state(OverlayState.PINK)
-
-
-enum OverlayState {
-	BLUE,
-	RED,
-	PINK,
-	HIDDEN,
-}
-
-var current_state = OverlayState.HIDDEN
 
 
 func set_overlay_state(state: OverlayState) -> void:
