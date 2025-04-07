@@ -50,7 +50,7 @@ func translate_global_states(
 ) -> void:
 	# set_overlay_state(OverlayState.RED)
 	match [action_state, enemy_state]:
-		[Globals.ActionState.IDLE, Globals.BaseEnemyState.IDLE]:
+		[Globals.ActionState.IDLE, _]:
 			set_overlay_state(OverlayState.HIDDEN)
 		[_, Globals.BaseEnemyState.DISTRACTED]:
 			set_overlay_state(OverlayState.BLUE)
