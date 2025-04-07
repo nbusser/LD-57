@@ -137,14 +137,18 @@ func _process(_delta: float) -> void:
 
 func alien_draw_card(card_instance: Node3D) -> void:
 	await get_tree().create_timer(1.0).timeout
-	#TODO REMETTRE CA PARCE QUE C EST CASSE, LA CARTE RESTE
-	#TODO FAUDRAI FAIRE LA MEME ANIMATION QUI TOURNE ET POOUIS DELETE LA CARTE EN VRAI CA POURRAIT ETRE COOL
-	#TODO PLACEHOLDER DE L ALIEN QUI FAIT GENRE QU IL PREND UNE CARTE
-	#PEUT ETRE QU IL FAUDRA FAIRE BOUGER SON BRAS OU QU IL FASSE LA GUEULE
+	var tween = get_tree().create_tween()
+	tween.parallel().tween_property(card_instance, "global_position", mouth.global_position, 1.0)
+	tween.parallel().tween_property(
+		card_instance, "rotation_degrees", card_instance.rotation_degrees + Vector3(90, 0, 0), 1.0
+	)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	await tween.finished
 	var card_value = card_instance.get("card_value")
 	var initial_state = state
 	state = Enums.EnemyState.THINKING
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(1.5).timeout
 	if initial_state != Enums.EnemyState.THINKING:
 		state = initial_state
 	card_instance.queue_free()
@@ -217,6 +221,7 @@ func alien_play_card(value: int) -> void:
 	var previous_cards = drop_zone_enemy.get_children()
 	drop_zone_enemy.add_child(card_inst)
 	card_inst.global_position = mouth.global_position
+
 	var tween = get_tree().create_tween()
 	tween.parallel().tween_property(
 		card_inst, "global_position", Vector3(drop_zone_enemy.global_position), .8

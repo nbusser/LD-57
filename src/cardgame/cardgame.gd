@@ -192,91 +192,87 @@ func _process(delta: float) -> void:
 		print(current_state)
 		precedent_state = current_state
 
-	if current_state == GameState.NOT_STARTED:
-		return
+	match current_state:
+		GameState.NOT_STARTED:
+			#On ne fait rien
+			return
 
-	if current_state == GameState.INIT:
-		round_manager.setup_decks(round_manager.my_custom_deck)
-		for i in range(RoundManager.HAND_SIZE - 1):
-			var card = round_manager.draw_cards(round_manager.my_deck, 1)
+		GameState.INIT:
+			round_manager.setup_decks(round_manager.my_custom_deck)
+			for i in range(RoundManager.HAND_SIZE - 1):
+				var card = round_manager.draw_cards(round_manager.my_deck, 1)
+				_instantiate_card(true, card[0])
+
+			for i in range(RoundManager.HAND_SIZE - 1):
+				var card = round_manager.draw_cards(round_manager.alien_deck, 1)
+				_instantiate_card(false, card[0])
+				round_manager.alien_hand.append(card[0])
+
+			#La distrubution des cartes est faite, on passe en DRAW
+			current_state = GameState.DRAW
+
+		GameState.DRAW:
+			var card = TYPE_NIL
+			card = round_manager.draw_cards(round_manager.my_deck, 1)
 			_instantiate_card(true, card[0])
-
-		for i in range(RoundManager.HAND_SIZE - 1):
-			var card = round_manager.draw_cards(round_manager.alien_deck, 1)
+			card = round_manager.draw_cards(round_manager.alien_deck, 1)
 			_instantiate_card(false, card[0])
 			round_manager.alien_hand.append(card[0])
 
-		#La distrubution des cartes est faite, on passe en DRAW
-		current_state = GameState.DRAW
+			current_state = GameState.WAITING_FOR_RECUP
 
-	elif current_state == GameState.DRAW:
-		var card = TYPE_NIL
-		card = round_manager.draw_cards(round_manager.my_deck, 1)
-		_instantiate_card(true, card[0])
-		card = round_manager.draw_cards(round_manager.alien_deck, 1)
-		_instantiate_card(false, card[0])
-		round_manager.alien_hand.append(card[0])
+		GameState.WAITING_FOR_RECUP:
+			current_state = GameState.WHOS_FIRST
 
-		current_state = GameState.WAITING_FOR_RECUP
+		GameState.WHOS_FIRST:
+			if round_manager.first_player:
+				current_state = GameState.PLAYER_TURN
+			else:
+				current_state = GameState.ALIEN_TURN
+		GameState.PLAYER_TURN:
+			player_snapper.is_playing = true
+			for card in round_manager.battle_field:
+				#On vérifie qu'on a bien posé la carte
+				if card["player"] == "player":
+					if round_manager.first_player:
+						current_state = GameState.ALIEN_TURN
+						cards_manager._is_card_close_to_battlefield = false
+						player_snapper.is_playing = false
+					else:
+						current_state = GameState.BATTLE
+						cards_manager._is_card_close_to_battlefield = false
+						player_snapper.is_playing = false
 
-	elif current_state == GameState.WAITING_FOR_RECUP:
-		#On attend que le joueur prenne les cartes, ici on met direct le bon truc
-		#if blablabla
+		GameState.ALIEN_TURN:
+			if not round_manager.alien_playing:
+				round_manager.alien_playing = true
+				var the_alien_choosen_card = await the_alien.alien_think_about_card(
+					round_manager.alien_hand, round_manager.battle_field
+				)
+				round_manager.alien_hand.erase(the_alien_choosen_card)
+				the_alien.alien_play_card(the_alien_choosen_card)
+			for card in round_manager.battle_field:
+				#On vérifie qu'on a bien posé la carte
+				if card["player"] == "alien":
+					round_manager.alien_playing = false
+					if not round_manager.first_player:
+						current_state = GameState.PLAYER_TURN
+					else:
+						current_state = GameState.BATTLE
+		GameState.BATTLE:
+			#On fait la bataille
+			round_manager.battle()
+			if round_manager.player_life <= 0:
+				current_state = GameState.GAME_OVER
+			elif round_manager.alien_life <= 0:
+				current_state = GameState.WIN
+			else:
+				current_state = GameState.DRAW
+			round_manager.battle_field.clear()
 
-		current_state = GameState.WHOS_FIRST
+			await requier_to_delete_cards()
 
-	elif current_state == GameState.WHOS_FIRST:
-		if round_manager.first_player:
-			current_state = GameState.PLAYER_TURN
-		else:
-			current_state = GameState.ALIEN_TURN
-
-	elif current_state == GameState.PLAYER_TURN:
-		player_snapper.is_playing = true
-		for card in round_manager.battle_field:
-			#On vérifie qu'on a bien posé la carte
-			if card["player"] == "player":
-				if round_manager.first_player:
-					current_state = GameState.ALIEN_TURN
-					cards_manager._is_card_close_to_battlefield = false
-					player_snapper.is_playing = false
-				else:
-					current_state = GameState.BATTLE
-					cards_manager._is_card_close_to_battlefield = false
-					player_snapper.is_playing = false
-
-	elif current_state == GameState.ALIEN_TURN:
-		if not round_manager.alien_playing:
-			round_manager.alien_playing = true
-			var the_alien_choosen_card = await the_alien.alien_think_about_card(
-				round_manager.alien_hand, round_manager.battle_field
-			)
-			round_manager.alien_hand.erase(the_alien_choosen_card)
-			the_alien.alien_play_card(the_alien_choosen_card)
-		for card in round_manager.battle_field:
-			#On vérifie qu'on a bien posé la carte
-			if card["player"] == "alien":
-				round_manager.alien_playing = false
-				if not round_manager.first_player:
-					current_state = GameState.PLAYER_TURN
-				else:
-					current_state = GameState.BATTLE
-
-	elif current_state == GameState.BATTLE:
-		#On fait la bataille
-		round_manager.battle()
-		if round_manager.player_life <= 0:
-			current_state = GameState.GAME_OVER
-		elif round_manager.alien_life <= 0:
-			current_state = GameState.WIN
-		else:
-			current_state = GameState.DRAW
-		round_manager.battle_field.clear()
-
-		await requier_to_delete_cards()
-
-		#TODO AJOUTER LE CLEAR DU CHAMP DE BATAILLE (INSTANCE SUR LA MAP)
-		#TODO FAIRE LE WAIT FOR RECUP
-		#TODO ANIMATION DE L ALIEN
-		#TODO FAIRE GAFFE A LA FIN DU DECK SINON CA FAIT CRASH
-		#TODO METTRE UN SWITCH
+			#TODO AJOUTER LE CLEAR DU CHAMP DE BATAILLE (INSTANCE SUR LA MAP)
+			#TODO ANIMATION DE L ALIEN
+		_:
+			return
