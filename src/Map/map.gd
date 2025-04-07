@@ -66,7 +66,7 @@ func _input(event):
 
 
 func _ready():
-	_cards_manager.spawn_cards_in_hand([0, -2, 3, 4, 4])
+	#_cards_manager.spawn_cards_in_hand([0, -2, 3, 4, 4])
 
 	#Pour le débug on start le round mtn
 	var round_manager = _card_game.create_round_manager()

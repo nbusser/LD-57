@@ -237,7 +237,6 @@ func _process(delta: float) -> void:
 					current_state = GameState.BATTLE
 
 	elif current_state == GameState.ALIEN_TURN:
-		#TODO RIGGER LE JEU DE L'ALIEN
 		if not round_manager.alien_playing:
 			round_manager.alien_playing = true
 			var the_alien_choosen_card = await the_alien.alien_think_about_card(
