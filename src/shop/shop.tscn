@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv1omds42jyqv"]
+
+[ext_resource type="Texture2D" uid="uid://4rp3yl6x2fur" path="res://assets/sprites/shopPlace.png" id="1_0npe2"]
+
+[node name="Shop" type="Node3D"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("1_0npe2")
+
+[node name="canva" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
