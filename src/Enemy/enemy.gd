@@ -26,13 +26,27 @@ func _update_sprite():
 			animated_sprite_3d.play("sproink_thinking")
 		[Enums.EnemyType.SPROINK, Enums.EnemyState.ANGRY]:
 			animated_sprite_3d.play("sproink_angry")
-		[Enums.EnemyType.SPROINK, ..]:
+		[Enums.EnemyType.SPROINK, Enums.EnemyState.DISTRACTED]:
+			animated_sprite_3d.play("sproink_distracted")
+		[Enums.EnemyType.SPROINK, _]:
 			animated_sprite_3d.play("sproink_idle")
 		# pig
+		[Enums.EnemyType.PIG, Enums.EnemyState.IDLE]:
+			animated_sprite_3d.play("pig_idle")
+		[Enums.EnemyType.PIG, Enums.EnemyState.WEAK]:
+			animated_sprite_3d.play("pig_weak")
+		[Enums.EnemyType.PIG, Enums.EnemyState.THINKING]:
+			animated_sprite_3d.play("pig_thinking")
+		[Enums.EnemyType.PIG, Enums.EnemyState.ANGRY]:
+			animated_sprite_3d.play("pig_angry")
 		[Enums.EnemyType.PIG, Enums.EnemyState.DISTRACTED]:
 			animated_sprite_3d.play("pig_distracted")
-		[Enums.EnemyType.PIG, ..]:
-			animated_sprite_3d.play("pig_distracted")
+		[Enums.EnemyType.PIG, Enums.EnemyState.SHOCKED]:
+			animated_sprite_3d.play("pig_shocked")
+		[Enums.EnemyType.PIG, Enums.EnemyState.ASLEEP]:
+			animated_sprite_3d.play("pig_asleep")
+		[Enums.EnemyType.PIG, _]:
+			animated_sprite_3d.play("pig_idle")
 
 
 func _ready() -> void:

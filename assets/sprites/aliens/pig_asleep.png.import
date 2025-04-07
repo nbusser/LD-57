@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c18c8gv33qoyx"
-path.s3tc="res://.godot/imported/alien2suspect.png-961ef4e83061049c526de43667022068.s3tc.ctex"
+uid="uid://dkx3q3kdyh0dc"
+path.s3tc="res://.godot/imported/pig_asleep.png-741c8fce82355442773b2c1b954da38d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/sprites/alien2suspect.png"
-dest_files=["res://.godot/imported/alien2suspect.png-961ef4e83061049c526de43667022068.s3tc.ctex"]
+source_file="res://assets/sprites/aliens/pig_asleep.png"
+dest_files=["res://.godot/imported/pig_asleep.png-741c8fce82355442773b2c1b954da38d.s3tc.ctex"]
 
 [params]
 

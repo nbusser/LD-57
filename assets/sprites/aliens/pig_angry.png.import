@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8rmf6ufuoiq0"
-path.s3tc="res://.godot/imported/sproinkblink-Sheet.png-179fa55efa17befd51a076e098483b10.s3tc.ctex"
+uid="uid://c17ubtg3i1jm2"
+path.s3tc="res://.godot/imported/pig_angry.png-5fb68434f5e5bd4506ccd959ecfe8c3d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/sprites/sproinkblink-Sheet.png"
-dest_files=["res://.godot/imported/sproinkblink-Sheet.png-179fa55efa17befd51a076e098483b10.s3tc.ctex"]
+source_file="res://assets/sprites/aliens/pig_angry.png"
+dest_files=["res://.godot/imported/pig_angry.png-5fb68434f5e5bd4506ccd959ecfe8c3d.s3tc.ctex"]
 
 [params]
 

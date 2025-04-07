@@ -1,28 +1,130 @@
-[gd_scene load_steps=58 format=3 uid="uid://cb2c6exrmfj47"]
+[gd_scene load_steps=88 format=3 uid="uid://cb2c6exrmfj47"]
 
-[ext_resource type="Texture2D" uid="uid://b8rmf6ufuoiq0" path="res://assets/sprites/sproinkblink-Sheet.png" id="1_do4pe"]
+[ext_resource type="Texture2D" uid="uid://b8rmf6ufuoiq0" path="res://assets/sprites/aliens/sproink_idle.png" id="1_do4pe"]
 [ext_resource type="Script" uid="uid://b1whyc7omqomo" path="res://src/Enemy/enemy.gd" id="1_fjy47"]
-[ext_resource type="Texture2D" uid="uid://ralww3ycdfo8" path="res://assets/sprites/sproinksweating-Sheet.png" id="2_5fq8x"]
-[ext_resource type="Texture2D" uid="uid://bvug7hrquq6so" path="res://assets/sprites/pigsleep-Sheet.png" id="2_428xd"]
-[ext_resource type="Texture2D" uid="uid://cx32dvxephhrm" path="res://assets/sprites/Alien2distract-Sheet.png" id="3_i0rgi"]
-[ext_resource type="Texture2D" uid="uid://c18c8gv33qoyx" path="res://assets/sprites/alien2suspect.png" id="3_mrjpw"]
-[ext_resource type="Texture2D" uid="uid://4c3bhqe8j1wx" path="res://assets/sprites/alien2concentre.png" id="5_kb5un"]
+[ext_resource type="Texture2D" uid="uid://ralww3ycdfo8" path="res://assets/sprites/aliens/sproink_weak.png" id="2_5fq8x"]
+[ext_resource type="Texture2D" uid="uid://c17ubtg3i1jm2" path="res://assets/sprites/aliens/pig_angry.png" id="2_6ital"]
+[ext_resource type="Texture2D" uid="uid://dkx3q3kdyh0dc" path="res://assets/sprites/aliens/pig_asleep.png" id="2_hjafo"]
+[ext_resource type="Texture2D" uid="uid://bw4fcyb0ih2tc" path="res://assets/sprites/aliens/pig_distracted.png" id="3_hjafo"]
+[ext_resource type="Texture2D" uid="uid://cx32dvxephhrm" path="res://assets/sprites/aliens/sproink_distracted.png" id="3_i0rgi"]
+[ext_resource type="Texture2D" uid="uid://c18c8gv33qoyx" path="res://assets/sprites/aliens/sproink_angry.png" id="3_mrjpw"]
+[ext_resource type="Texture2D" uid="uid://bhqtqmld1rc46" path="res://assets/sprites/aliens/pig_idle.png" id="3_nmpjs"]
+[ext_resource type="Texture2D" uid="uid://cfpp3rykrgk5x" path="res://assets/sprites/aliens/pig_shocked.png" id="4_ls3ox"]
+[ext_resource type="Texture2D" uid="uid://4c3bhqe8j1wx" path="res://assets/sprites/aliens/sproink_thinking.png" id="5_kb5un"]
+[ext_resource type="Texture2D" uid="uid://duj25blf6ybni" path="res://assets/sprites/aliens/pig_thinking.png" id="5_ls3ox"]
+[ext_resource type="Texture2D" uid="uid://d4gtgdpwkwtaj" path="res://assets/sprites/aliens/pig_weak.png" id="6_1enot"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g0ehj"]
-atlas = ExtResource("2_428xd")
+atlas = ExtResource("2_hjafo")
 region = Rect2(0, 0, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yldpm"]
-atlas = ExtResource("2_428xd")
+atlas = ExtResource("2_hjafo")
 region = Rect2(402, 0, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cioqm"]
-atlas = ExtResource("2_428xd")
+atlas = ExtResource("2_hjafo")
 region = Rect2(0, 402, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o0cnx"]
-atlas = ExtResource("2_428xd")
+atlas = ExtResource("2_hjafo")
 region = Rect2(402, 402, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvxh7"]
+atlas = ExtResource("4_ls3ox")
+region = Rect2(0, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rcd2"]
+atlas = ExtResource("4_ls3ox")
+region = Rect2(402, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ecki"]
+atlas = ExtResource("6_1enot")
+region = Rect2(0, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1y4c6"]
+atlas = ExtResource("6_1enot")
+region = Rect2(402, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0skd"]
+atlas = ExtResource("6_1enot")
+region = Rect2(804, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8b6u"]
+atlas = ExtResource("6_1enot")
+region = Rect2(1206, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8x83"]
+atlas = ExtResource("6_1enot")
+region = Rect2(1608, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qb6n7"]
+atlas = ExtResource("6_1enot")
+region = Rect2(0, 402, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0escu"]
+atlas = ExtResource("6_1enot")
+region = Rect2(402, 402, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvs3f"]
+atlas = ExtResource("6_1enot")
+region = Rect2(804, 402, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xiuxc"]
+atlas = ExtResource("6_1enot")
+region = Rect2(1206, 402, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qt3vl"]
+atlas = ExtResource("6_1enot")
+region = Rect2(1608, 402, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccb4w"]
+atlas = ExtResource("6_1enot")
+region = Rect2(0, 804, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_871kl"]
+atlas = ExtResource("6_1enot")
+region = Rect2(402, 804, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf2np"]
+atlas = ExtResource("6_1enot")
+region = Rect2(804, 804, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjwyo"]
+atlas = ExtResource("6_1enot")
+region = Rect2(1206, 804, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpvho"]
+atlas = ExtResource("6_1enot")
+region = Rect2(1608, 804, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfa8i"]
+atlas = ExtResource("6_1enot")
+region = Rect2(0, 1206, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufi2r"]
+atlas = ExtResource("6_1enot")
+region = Rect2(402, 1206, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1i4c"]
+atlas = ExtResource("6_1enot")
+region = Rect2(804, 1206, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3vb5"]
+atlas = ExtResource("6_1enot")
+region = Rect2(1206, 1206, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqaoh"]
+atlas = ExtResource("6_1enot")
+region = Rect2(1608, 1206, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w12uo"]
+atlas = ExtResource("6_1enot")
+region = Rect2(0, 1608, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgrnt"]
+atlas = ExtResource("6_1enot")
+region = Rect2(402, 1608, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lv1wm"]
 atlas = ExtResource("3_i0rgi")
@@ -208,6 +310,14 @@ region = Rect2(402, 1206, 400, 400)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_6ital")
+}],
+"loop": true,
+"name": &"pig_angry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_g0ehj")
 }, {
 "duration": 1.0,
@@ -220,8 +330,114 @@ animations = [{
 "texture": SubResource("AtlasTexture_o0cnx")
 }],
 "loop": true,
+"name": &"pig_asleep",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hjafo")
+}],
+"loop": true,
 "name": &"pig_distracted",
-"speed": 2.0
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nmpjs")
+}],
+"loop": true,
+"name": &"pig_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvxh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rcd2")
+}],
+"loop": true,
+"name": &"pig_shocked",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ls3ox")
+}],
+"loop": true,
+"name": &"pig_thinking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ecki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1y4c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0skd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8b6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8x83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qb6n7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0escu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvs3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xiuxc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qt3vl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccb4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_871kl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf2np")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjwyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpvho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfa8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufi2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1i4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3vb5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lqaoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w12uo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgrnt")
+}],
+"loop": true,
+"name": &"pig_weak",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -395,5 +611,6 @@ script = ExtResource("1_fjy47")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0720145, 0)
+texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_irkw7")
-animation = &"sproink_distracted"
+animation = &"sproink_idle"

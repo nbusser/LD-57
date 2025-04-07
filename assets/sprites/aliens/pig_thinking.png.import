@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cx32dvxephhrm"
-path.s3tc="res://.godot/imported/Alien2distract-Sheet.png-5d654fa94dbd8af32090c018b3499c9e.s3tc.ctex"
+uid="uid://duj25blf6ybni"
+path.s3tc="res://.godot/imported/pig_thinking.png-7aa98c5e62c4ce5e7b91c06e967ee978.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/sprites/Alien2distract-Sheet.png"
-dest_files=["res://.godot/imported/Alien2distract-Sheet.png-5d654fa94dbd8af32090c018b3499c9e.s3tc.ctex"]
+source_file="res://assets/sprites/aliens/pig_thinking.png"
+dest_files=["res://.godot/imported/pig_thinking.png-7aa98c5e62c4ce5e7b91c06e967ee978.s3tc.ctex"]
 
 [params]
 

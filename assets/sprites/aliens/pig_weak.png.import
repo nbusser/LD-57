@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4c3bhqe8j1wx"
-path.s3tc="res://.godot/imported/alien2concentre.png-c67d45b02e9a8ec2b2174f3b325ffb9f.s3tc.ctex"
+uid="uid://d4gtgdpwkwtaj"
+path.s3tc="res://.godot/imported/pig_weak.png-17f9fa7a166604fb41ef857aa27c5538.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/sprites/alien2concentre.png"
-dest_files=["res://.godot/imported/alien2concentre.png-c67d45b02e9a8ec2b2174f3b325ffb9f.s3tc.ctex"]
+source_file="res://assets/sprites/aliens/pig_weak.png"
+dest_files=["res://.godot/imported/pig_weak.png-17f9fa7a166604fb41ef857aa27c5538.s3tc.ctex"]
 
 [params]
 
