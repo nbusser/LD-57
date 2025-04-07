@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dve1ylvmh0i6o"]
+[gd_scene load_steps=9 format=3 uid="uid://dve1ylvmh0i6o"]
 
 [ext_resource type="Script" uid="uid://b2cvc362p8kcb" path="res://src/Hand/2d_hand.gd" id="1_6e8t3"]
 [ext_resource type="Texture2D" uid="uid://cmhev7oj7816j" path="res://assets/sprites/hand.png" id="2_7k6lh"]
@@ -8,9 +8,6 @@
 [sub_resource type="Curve" id="Curve_yki2y"]
 _data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
 point_count = 2
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_jlw6s"]
-radius = 60.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pm0q2"]
 atlas = ExtResource("2_7k6lh")
@@ -49,27 +46,23 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="HandBody" type="CharacterBody2D" parent="."]
-position = Vector2(0, 9)
 collision_layer = 513
 collision_mask = 513
 motion_mode = 1
 wall_min_slide_angle = 3.14159
 
 [node name="PointCollision" type="CollisionPolygon2D" parent="HandBody"]
-position = Vector2(0, -9)
-polygon = PackedVector2Array(0, -38, 179, -26, 253, -5, 297, 20, 293, 36, 205, 80, 141, 89, -1, 53)
+position = Vector2(-295, -26)
+polygon = PackedVector2Array(24, -47, 179, -31, 242, -11, 292, 13, 295, 26, 282, 34, 172, 11, 196, 80, 139, 92, 101, 101, 73, 82, 12, 68)
 
 [node name="PinchCollision" type="CollisionPolygon2D" parent="HandBody"]
-polygon = PackedVector2Array(0, -42, 181, -124, 249, -114, 296, -80, 239, 67, 0, 44)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HandBody"]
-shape = SubResource("CircleShape2D_jlw6s")
+position = Vector2(-295, -17)
+polygon = PackedVector2Array(19, -43, 181, -124, 249, -114, 296, -80, 239, 67, 21, 45)
+disabled = true
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="HandBody"]
-position = Vector2(297, 21)
-scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_bb4y2")
-offset = Vector2(-116.25, -5)
+offset = Vector2(-114.25, -1)
 
 [node name="FingerTip" type="Node2D" parent="HandBody/Sprite2D"]
 script = ExtResource("3_vbcl1")
@@ -110,6 +103,9 @@ closed = true
 width = 3.0
 default_color = Color(1, 1, 1, 0.584314)
 
+[node name="AttachmentPoint" type="Node2D" parent="HandBody"]
+position = Vector2(-370, -23)
+
 [node name="Anchor" type="Node2D" parent="."]
-position = Vector2(-656.975, -487.863)
+position = Vector2(-1682, -21)
 rotation = 1.56912

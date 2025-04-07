@@ -15,7 +15,9 @@ var state: Enums.HandState = Enums.HandState.POINT:
 @onready var hand_body = $"HandBody"
 @onready var arm = $"Arm"
 @onready var finger_tip = $"HandBody/Sprite2D/FingerTip"
+@onready var collision_shape = $"HandBody/CollisionShape2D"
 @onready var sprite_2d: AnimatedSprite2D = $"HandBody/Sprite2D"
+@onready var attachment_point = $HandBody/AttachmentPoint
 
 @onready var point_outline: Line2D = $HandBody/Sprite2D/PointOutline
 @onready var pinch_outline: Node2D = $HandBody/Sprite2D/PinchOutline
@@ -28,10 +30,9 @@ func _ready() -> void:
 	for i in range(points.size()):
 		points[i] = (
 			anchor.global_position
-			+ i * (hand_body.global_position - anchor.global_position) / points.size()
+			+ i * (attachment_point.global_position - anchor.global_position) / points.size()
 		)
 	arm.set_points(points)
-	hand_body.position = Vector2(0, 0)
 	for i in range(points.size()):
 		var node = CharacterBody2D.new()
 		node.name = "Joint" + str(i)
@@ -44,11 +45,17 @@ func _ready() -> void:
 		node.add_child(collision_shape)
 		arm.add_child(node)
 		joints.append(node)
+	joints[joints.size() - 1].collision_layer = 0
 
 	_on_update_state()
 
 
 func _physics_process(delta: float) -> void:
+	#Adjust display size
+	hand_body.scale.x = .1 + 1.0 - finger_tip.distance / 3.0
+	hand_body.scale.y = .1 + 1.0 - finger_tip.distance / 3.0
+	arm.width_curve.set_point_value(1, .3 + 1.0 - finger_tip.distance / 3.0)
+
 	# Move
 	hand_body.velocity = (get_global_mouse_position() - finger_tip.global_position) * 500 * delta
 	if hand_body.move_and_slide():
@@ -73,11 +80,10 @@ func _physics_process(delta: float) -> void:
 	# Run FABRIK
 	FABRIK_pass(delta)
 
-	#Adjust display size
-	hand_body.scale.x = .1 + 1.0 - finger_tip.distance / 3.0
-	hand_body.scale.y = .1 + 1.0 - finger_tip.distance / 3.0
-	arm.width_curve.set_point_value(1, .3 + 1.0 - finger_tip.distance / 3.0)
-
+#func _input(event):
+	#if event is InputEventKey and event.pressed:
+		#if event.keycode == KEY_SPACE:
+			#FABRIK_pass(.01)
 
 # gdlint:ignore = function-name
 func FABRIK_pass(delta: float):
@@ -93,7 +99,7 @@ func FABRIK_pass(delta: float):
 		joints[i].move_and_slide()
 
 	# Forward
-	joints[joints.size() - 1].global_position = hand_body.global_position  # Set the first node to the anchor position
+	joints[joints.size() - 1].global_position = attachment_point.global_position  # Set the first node to the anchor position
 	for i in range(joints.size() - 2, -1, -1):
 		var new_direction = (joints[i + 1].position - joints[i].position).normalized()
 		joints[i].velocity = (
@@ -102,28 +108,27 @@ func FABRIK_pass(delta: float):
 			* ((joints[i + 1].position - new_direction * distance_constraint) - joints[i].position)
 		)
 		joints[i].move_and_slide()
-
+	
 	var points = []
 	for i in range(joints.size()):
 		points.append(joints[i].position)
 	arm.set_points(points)
-
-	hand_body.global_rotation = points[points.size() - 2].angle_to_point(points[points.size() - 1])
+	#hand_body.global_rotation = points[points.size() - 2].angle_to_point(points[points.size() - 1])
 
 
 func _on_update_state():
 	point_outline.hide()
 	pinch_outline.hide()
 
-	point_collision.disabled = true
-	pinch_collision.disabled = true
+	#point_collision.disabled = true
+	#pinch_collision.disabled = true
 
 	match state:
 		Enums.HandState.POINT:
 			sprite_2d.frame = 0
 			point_outline.show()
-			point_collision.disabled = false
+			#point_collision.disabled = false
 		Enums.HandState.PINCH:
 			sprite_2d.frame = 1
 			pinch_outline.show()
-			pinch_collision.disabled = false
+			#pinch_collision.disabled = false
