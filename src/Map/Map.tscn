@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=46 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -18,6 +18,16 @@
 [ext_resource type="PackedScene" uid="uid://cdrmyavlvhc06" path="res://src/ScoreDisplay/ScoreDisplay.tscn" id="14_1blim"]
 [ext_resource type="PackedScene" uid="uid://3np2v35e7jwk" path="res://src/Bubble.tscn" id="16_8kakp"]
 [ext_resource type="PackedScene" uid="uid://cv1omds42jyqv" path="res://src/shop/shop.tscn" id="18_bxjut"]
+[ext_resource type="Script" uid="uid://bqub0n7gx4ukd" path="res://src/AudioBankPlayer.gd" id="19_a8qib"]
+[ext_resource type="AudioStream" uid="uid://2ff34iqm034t" path="res://assets/sounds/alien_felix.wav.ogg" id="20_crd61"]
+[ext_resource type="AudioStream" uid="uid://v6ukjsfvi6w1" path="res://assets/sounds/alien_louis.wav.ogg" id="21_jgp2q"]
+[ext_resource type="AudioStream" uid="uid://dl7h8o4rqcdky" path="res://assets/sounds/angry alien.wav.ogg" id="22_derk0"]
+[ext_resource type="AudioStream" uid="uid://c7w1yspykjim3" path="res://assets/sounds/card shuffle_fast.wav.ogg" id="23_c63hh"]
+[ext_resource type="AudioStream" uid="uid://s0dhrc5g3o20" path="res://assets/sounds/card shuffle_slow.wav.ogg" id="24_ls1a0"]
+[ext_resource type="AudioStream" uid="uid://bp3llymprk4jp" path="res://assets/sounds/card shuffle_normal.wav.ogg" id="25_mjnwk"]
+[ext_resource type="AudioStream" uid="uid://dvkw6h0roqx8x" path="res://assets/sounds/card_thumbing.wav.ogg" id="26_0kkng"]
+[ext_resource type="AudioStream" uid="uid://bbr30xd7umpfo" path="res://assets/sounds/grumpy alien.wav.ogg" id="27_crlm5"]
+[ext_resource type="AudioStream" uid="uid://c5yvw6ji4jdje" path="res://assets/sounds/notice for change of turn.wav.ogg" id="28_j1beu"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22krd"]
 panorama = ExtResource("2_xtfh0")
@@ -332,6 +342,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.215632, 0.96897, -0.606009)
 [node name="Shop" parent="." instance=ExtResource("18_bxjut")]
 transform = Transform3D(0.05, 0, 0, 0, 0.0474523, 0.0157568, 0, -0.0157568, 0.0474523, 0, 0.870451, 0.289254)
 visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioBankPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayer"]
+script = ExtResource("19_a8qib")
+sounds = Array[AudioStream]([ExtResource("20_crd61"), ExtResource("21_jgp2q"), ExtResource("22_derk0"), ExtResource("23_c63hh"), ExtResource("24_ls1a0"), ExtResource("25_mjnwk"), ExtResource("26_0kkng"), ExtResource("27_crlm5"), ExtResource("28_j1beu")])
+metadata/_custom_type_script = "uid://bqub0n7gx4ukd"
 
 [connection signal="player_caught_cheating" from="Enemy" to="." method="_on_enemy_player_caught_cheating"]
 [connection signal="card_spawned_on_the_deck" from="cardgame" to="CardsManager" method="_on_cardgame_card_spawned_on_the_deck"]

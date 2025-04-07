@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://s0dhrc5g3o20"
+path="res://.godot/imported/card shuffle_slow.wav.ogg-8fa1fc8a285f590466c0d6a817eee941.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/card shuffle_slow.wav.ogg"
+dest_files=["res://.godot/imported/card shuffle_slow.wav.ogg-8fa1fc8a285f590466c0d6a817eee941.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

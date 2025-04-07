@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://twi0uuxhc50e"
+path="res://.godot/imported/card shuffle_slow.wav-baf50310f2f8771ec4c40d1611888fcd.sample"
+
+[deps]
+
+source_file="res://assets/sounds/card shuffle_slow.wav"
+dest_files=["res://.godot/imported/card shuffle_slow.wav-baf50310f2f8771ec4c40d1611888fcd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

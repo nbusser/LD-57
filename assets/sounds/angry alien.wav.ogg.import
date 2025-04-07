@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dl7h8o4rqcdky"
+path="res://.godot/imported/angry alien.wav.ogg-80bb6922a28fd3a0264e60f6225dc8b0.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/angry alien.wav.ogg"
+dest_files=["res://.godot/imported/angry alien.wav.ogg-80bb6922a28fd3a0264e60f6225dc8b0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
