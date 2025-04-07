@@ -344,9 +344,9 @@ func _process(delta: float) -> void:
 			round_manager.battle_field.clear()
 
 			#Soit on va au shop, soit on fait un test de fin de partie
-			if round_manager.player_life <= 20:
+			if round_manager.player_life <= 0:
 				player_lost.emit()
-			elif round_manager.alien_life <= 20:
+			elif round_manager.alien_life <= 0:
 				player_won.emit()
 
 			if round_manager.hp_until_shop >= HP_TO_SHOP:

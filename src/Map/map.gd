@@ -183,5 +183,5 @@ func _on_cardgame_player_won() -> void:
 
 func _end_game_animation():
 	_hand_2d.can_control = false
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.8).timeout
 	await _hud.fadeout()
