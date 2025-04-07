@@ -84,6 +84,7 @@ func _on_tutorial_mode_changed(is_tutorial: bool) -> void:
 		_player_snapper.init(true)
 
 
+# gdlint:ignore = class-definitions-order
 var played_card = false
 
 

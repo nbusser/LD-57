@@ -224,7 +224,7 @@ class RoundManager:
 				#Egalité
 				explanation += ("Well, that's a draw. You go first.")
 				#Ouai dark sasukesouke
-				pass
+
 		await (Globals.show_messages([explanation]))
 
 		#On remet les cartes joués dans les decks

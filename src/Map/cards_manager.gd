@@ -1,10 +1,10 @@
 class_name CardsManager extends Node3D
 
-const CARD_VERTICAL_OFFSET = Vector3.DOWN * 0.06
-const CARD_THICKNESS = 0.003  # .3mm
-
 signal card_played(card: Card)
 signal card_added_in_hand(card: Card)
+
+const CARD_VERTICAL_OFFSET = Vector3.DOWN * 0.06
+const CARD_THICKNESS = 0.003  # .3mm
 
 var _is_card_close_to_battlefield = false
 

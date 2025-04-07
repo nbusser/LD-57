@@ -7,6 +7,8 @@ extends Camera3D
 @export var amplitude_hz = 90  # degrees
 @export var center = Vector2(-20, 0)
 
+var can_move = true
+
 @onready var rail = $".."
 @onready var hand = $"../../../2DHand"
 @onready var finger_tip = $"../../../2DHand/HandBody/Sprite2D/FingerTip"
@@ -14,12 +16,11 @@ extends Camera3D
 @onready var sleeve_anchor: Node3D = %SleeveAnchor
 @onready var sleeve_hand: Sprite3D = %SleeveHand
 
-var can_move = true
 
 func _physics_process(delta: float) -> void:
 	if not can_move:
 		return
-	
+
 	var x_ratio = finger_tip.global_position.x / get_viewport().get_size().x
 	var y_ratio = finger_tip.global_position.y / get_viewport().get_size().y
 
