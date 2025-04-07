@@ -2,7 +2,7 @@ extends Node2D
 
 const CARD_LAYER = 7
 
-var distance = 2.0
+var distance = .5
 
 @onready var camera = get_node_or_null("../../../../CameraRail/FollowRail/Camera")
 @onready var enemy = get_node_or_null("../../../../Enemy")
@@ -24,7 +24,7 @@ func _physics_process(_delta: float) -> void:
 	if results:
 		distance = (results.position - camera.global_position).length()
 	else:
-		distance = 2.0
+		distance = .5
 
 
 func _input(event):

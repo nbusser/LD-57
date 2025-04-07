@@ -27,6 +27,7 @@ var round_manager: RoundManager = null
 @onready var card_scene = preload("res://src/Card/Card.tscn")
 @onready var the_alien = get_node("../Enemy")
 @onready var cards_manager = $"../CardsManager"
+@onready var player_snapper = $"../Snapper"
 @onready var snapper = $"../Snapper/CardsInBattleField"
 @onready var enemy_snapper = $"../EnemySnapper/CardsInBattleField"
 
@@ -231,13 +232,18 @@ func _process(delta: float) -> void:
 			current_state = GameState.ALIEN_TURN
 
 	elif current_state == GameState.PLAYER_TURN:
+		player_snapper.is_playing = true
 		for card in round_manager.battle_field:
 			#On vérifie qu'on a bien posé la carte
 			if card["player"] == "player":
 				if round_manager.first_player:
 					current_state = GameState.ALIEN_TURN
+					cards_manager._is_card_close_to_battlefield = false
+					player_snapper.is_playing = false
 				else:
 					current_state = GameState.BATTLE
+					cards_manager._is_card_close_to_battlefield = false
+					player_snapper.is_playing = false
 
 	elif current_state == GameState.ALIEN_TURN:
 		if not round_manager.alien_playing:
