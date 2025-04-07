@@ -74,12 +74,12 @@ var action_state = ActionState.IDLE:
 			ActionState.CAUGHT:
 				scene_manager.change_music_track_by_index(3)
 
-@onready var scene_manager = get_node("/root/SceneManager")
-
 var tutorial_mode: bool = false:
 	set(value):
 		tutorial_mode_changed.emit(tutorial_mode)
 		tutorial_mode = value
+
+@onready var scene_manager = get_node("/root/SceneManager")
 
 
 func end_scene(status: EndSceneStatus, params: Dictionary = {}) -> void:

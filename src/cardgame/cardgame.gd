@@ -20,7 +20,7 @@ enum GameState {
 
 enum Side { PLAYER, ALIEN }
 
-const HP_TO_SHOP: int = 5
+const HP_TO_SHOP: int = 8
 
 var current_state: GameState = GameState.NOT_STARTED
 var precedent_state: GameState = current_state
@@ -68,12 +68,11 @@ func setup_and_start_timer(duration: float) -> bool:
 		if timer.is_stopped():
 			timer_in_progress = false
 			return true
-		else:
-			return false
-	else:
-		timer.start(duration)
-		timer_in_progress = true
 		return false
+
+	timer.start(duration)
+	timer_in_progress = true
+	return false
 
 
 class RoundManager:
@@ -234,12 +233,6 @@ func create_round_manager() -> RoundManager:
 	return round_manager
 
 
-func requier_to_delete_cards() -> void:
-	await get_tree().create_timer(1.5).timeout
-	for child in snapper.get_children():
-		child.queue_free()
-
-
 func _process(delta: float) -> void:
 	delta = delta
 	if current_state != precedent_state:
@@ -298,13 +291,19 @@ func _process(delta: float) -> void:
 						player_snapper.is_playing = false
 
 		GameState.ALIEN_TURN:
-			if not round_manager.alien_playing:
-				round_manager.alien_playing = true
-				var the_alien_choosen_card = await the_alien.alien_think_about_card(
-					round_manager.alien_hand, round_manager.battle_field
-				)
-				round_manager.alien_hand.erase(the_alien_choosen_card)
-				the_alien.alien_play_card(the_alien_choosen_card)
+			if !timer_in_progress:  # Start animation
+				if not round_manager.alien_playing:
+					round_manager.alien_playing = true
+					var the_alien_choosen_card = await the_alien.alien_think_about_card(
+						round_manager.alien_hand, round_manager.battle_field
+					)
+					round_manager.alien_hand.erase(the_alien_choosen_card)
+					the_alien.alien_play_card(the_alien_choosen_card)
+
+			var timer_over = setup_and_start_timer(2.0)
+			if !timer_over:
+				return
+
 			for card in round_manager.battle_field:
 				#On vérifie qu'on a bien posé la carte
 				if card["player"] == "alien":
@@ -341,7 +340,6 @@ func _process(delta: float) -> void:
 				return
 			round_manager.battle()
 			round_manager.battle_field.clear()
-			await requier_to_delete_cards()
 			#Soit on va au shop, soit on fait un test de fin de partie
 			if round_manager.hp_until_shop >= HP_TO_SHOP:
 				current_state = GameState.SHOP
@@ -354,7 +352,8 @@ func _process(delta: float) -> void:
 			#SI ON A LE TEMPS CA SERAIT BIEN QUE L ALIEN PUISSE COMPTER COMBIEN DE CARTES ON A ET DEVIENNE DOUTEUX MAIS BON
 			#IL FAUT RELIER CA AU NODE SHOP DEJA PRESENT ET MASQUE
 			print("C'est l'heure du shopping")
-			await get_tree().create_timer(3).timeout
+			round_manager.hp_until_shop = 0
+			#await get_tree().create_timer(3).timeout
 			current_state = GameState.IS_GAME_END
 
 		GameState.IS_GAME_END:
