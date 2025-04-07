@@ -136,6 +136,7 @@ class RoundManager:
 
 	#Résolution du combat
 	func battle() -> bool:
+		var explanation = ""
 		var was_first = first_player
 		var player_score = -99
 		var alien_score = -99
@@ -151,50 +152,67 @@ class RoundManager:
 			#2 étoiles
 			if alien_score == 0 and player_score == 0:
 				if was_first:
+					explanation += ("I countered your star. You lose 5 points.")
 					player_life -= 5
 				else:
+					explanation += ("You countered my star. I lose 5 points.")
 					alien_life -= 5
 				#Les roles s'inversent
 				first_player = not was_first
+				explanation += (" We swap playing order.")
 			elif alien_score == 0:
 				#L'alien a joué une étoile
 				first_player = true
 				if player_score == -2:
+					explanation += ("I lose 2 points and you get to go first.")
 					alien_life -= 2
 			elif player_score == 0:
 				#Le joueur a joué une étoile
 				first_player = false
 				if alien_score == -2:
 					player_life -= 2
+					explanation += ("You lose 2 points and I get to go first.")
+
 
 		#CAS SPECIAL -2 ET 5
 		elif (alien_score == -2 and player_score == 5) or (player_score == -2 and alien_score == 5):
 			if alien_score == -2:
 				player_life -= 5  # Alien perd 7 points de vie
 				first_player = false
+				explanation += ("Oh no, you countered my -2 with a 5! I lose 7 points. I will go first.")
 			else:
 				alien_life -= 5  # Joueur perd 7 points de vie
 				first_player = true
+				explanation += ("Ha! I countered your -2 with a 5! You lose 7 points. You will go first.")
 
 		elif player_score == alien_score:
 			#Les deux joueurs ont joué -2
 			#On ne fait rien, on ne change pas de joueur
 			first_player = was_first
+			explanation += ("Well, that's a draw.")
+			if first_player:
+				explanation += (" You still go first!")
+			else:
+				explanation += (" I still go first!")
 			print("Egalité")
 		#CAS NORMAL
 		else:
 			#On retire les points de vie
 			first_player = false if player_score > alien_score else true
 			if player_score > alien_score:
+				explanation += (str(alien_score) + " > " + str(player_score) + ": I'm losing " + str(player_score - alien_score) + " points on this one! Loser goes first.")
 				#Le joueur perd
 				player_life -= player_score - alien_score
 			elif alien_score > player_score:
+				explanation += (str(player_score) + " > " + str(alien_score) + ": you're losing " + str(alien_score - player_score) + " points on this one! Loser goes first.")
 				#L'alien perd
 				alien_life -= alien_score - player_score
 			else:
 				#Egalité
+				explanation += ("Well, that's a draw. You go first.")
 				#Ouai dark sasukesouke
 				pass
+		await (Globals.show_messages([explanation]))
 
 		#On remet les cartes joués dans les decks
 		#TODO Il faudrait faire un système propre, la on remet à la fin du coup on cycle sur les 21 cartes, une fois arrivé à la fin on va repiocher dans le même ordre
