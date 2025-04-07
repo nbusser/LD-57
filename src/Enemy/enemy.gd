@@ -166,7 +166,7 @@ func alien_think_about_card(hand, battle_field: Array) -> int:
 	#Y REFLECHI
 	await get_tree().create_timer(1.0).timeout
 	battle_field = battle_field
-	var choosen_card : int = 1
+	var choosen_card: int = 1
 
 	match alien_intelligence:
 		0:
@@ -177,7 +177,7 @@ func alien_think_about_card(hand, battle_field: Array) -> int:
 				var random_choice = randi() % 2
 				if random_choice == 0:
 					choosen_card = hand[0]
-				else :
+				else:
 					choosen_card = hand.min()
 		2:
 			#Jouer optimal càd
