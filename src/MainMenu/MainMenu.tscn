@@ -33,19 +33,32 @@ layout_mode = 2
 layout_mode = 2
 text = "Start"
 
+[node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
 [node name="SelectLevel" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Select level"
 
+[node name="MarginContainer3" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
 [node name="Credits" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Credits"
+
+[node name="MarginContainer4" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 
 [node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
 [node name="2DHand" parent="." instance=ExtResource("2_cttlv")]
+scale = Vector2(0.5, 0.5)
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/SelectLevel" to="." method="_on_select_level_pressed"]
