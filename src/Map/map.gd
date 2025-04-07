@@ -93,7 +93,7 @@ func set_played_card(_x) -> void:
 func tutorial():
 	_cards_manager.card_played.connect(set_played_card)
 	_card_game.current_state = CardGame.GameState.NOT_STARTED
-	round_manager.first_player = true
+	_round_manager.first_player = true
 	await (
 		Globals
 		. show_messages(
@@ -115,7 +115,7 @@ func tutorial():
 	_card_game.current_state = CardGame.GameState.NOT_STARTED
 
 	await Globals.show_messages(['I will now play a "3" card.'])
-	round_manager.first_player = false
+	_round_manager.first_player = false
 	_card_game.current_state = CardGame.GameState.ALIEN_TURN
 	await _card_game.alien_played_card
 	_card_game.current_state = CardGame.GameState.NOT_STARTED
