@@ -637,4 +637,9 @@ animation = &"sproink_distracted"
 [node name="DistractionTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="AngryTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="timeout" from="DistractionTimer" to="." method="_on_distraction_timer_timeout"]
+[connection signal="timeout" from="AngryTimer" to="." method="_on_angry_timer_timeout"]

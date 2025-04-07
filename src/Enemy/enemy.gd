@@ -112,10 +112,8 @@ func _on_distraction_timer_timeout() -> void:
 
 # gdlint:disable = class-definitions-order
 const NB_FRAMES_TO_GET_CAUGHT = 140
+const NB_FRAMES_TO_LOSE = 280
 var en_instance_de_se_faire_chopper = 0
-
-const NB_FRAMES_TO_LOSE = 140
-var en_instance_de_se_faire_virer = 0
 # gdlint:enable = class-definitions-order
 
 
@@ -124,22 +122,16 @@ func _process(_delta: float) -> void:
 		(state == Enums.EnemyState.IDLE or state == Enums.EnemyState.ANGRY)
 		&& Globals.action_state == Globals.ActionState.ILLEGAL
 	):
-		if state == Enums.EnemyState.IDLE:
-			en_instance_de_se_faire_chopper += 1
-			if en_instance_de_se_faire_chopper >= NB_FRAMES_TO_GET_CAUGHT:
-				en_instance_de_se_faire_chopper = 0
-				state = Enums.EnemyState.ANGRY
-		elif state == Enums.EnemyState.ANGRY:
-			en_instance_de_se_faire_virer += 1
-			if en_instance_de_se_faire_virer >= NB_FRAMES_TO_LOSE:
-				en_instance_de_se_faire_virer = 0
-				state = Enums.EnemyState.ANGRY
-				emit_signal("player_caught_cheating")
-		else:
-			assert(false, "Invalid state, bourricot")
+		en_instance_de_se_faire_chopper += 1
+		if en_instance_de_se_faire_chopper >= NB_FRAMES_TO_GET_CAUGHT:
+			state = Enums.EnemyState.ANGRY
+		elif en_instance_de_se_faire_chopper >= NB_FRAMES_TO_LOSE:
+			emit_signal("player_caught_cheating")
 	else:
 		en_instance_de_se_faire_chopper = max(0, en_instance_de_se_faire_chopper - 1)
-		en_instance_de_se_faire_virer = max(0, en_instance_de_se_faire_virer - 1)
+
+	if state == Enums.EnemyState.ANGRY and en_instance_de_se_faire_chopper == 0:
+		state = Enums.EnemyState.IDLE
 
 
 func alien_draw_card(card_instance: Node3D) -> void:
