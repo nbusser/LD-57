@@ -45,8 +45,8 @@ layout_mode = 2
 text = "Matthieu Baty
 Antoine Brûlé
 Nicolas Busser
-Valérian Coulon
 Louis Mouhat
+Clément Thiebault
 "
 
 [node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/VBoxContainer"]

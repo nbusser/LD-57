@@ -2,6 +2,8 @@ extends Node3D
 
 signal player_caught_cheating
 
+@export var alien_intelligence: int = 2
+
 var type: Enums.EnemyType = Enums.EnemyType.SPROINK:
 	set(value):
 		type = value
@@ -146,6 +148,17 @@ func alien_draw_card(card_instance: Node3D) -> void:
 	card_instance.queue_free()
 
 
+func get_list_avoid_card(initial_list: Array, avoid: int) -> Array:
+	var filtre: Array = []
+	for c in initial_list:
+		if c != avoid:
+			filtre.append(c)
+
+	if filtre.size() != 0:
+		return filtre
+	return initial_list
+
+
 func alien_think_about_card(hand, battle_field: Array) -> int:
 	#Fonction appelée par le cardgame pour trigger une carte de l'alien
 	#Pour l'instant on va juste prendre la première carte de la main de l'alien
@@ -153,9 +166,44 @@ func alien_think_about_card(hand, battle_field: Array) -> int:
 	#Y REFLECHI
 	await get_tree().create_timer(1.0).timeout
 	battle_field = battle_field
-	if hand.size() > 0:
-		return hand[0]
-	return -1
+	var choosen_card : int = 1
+
+	match alien_intelligence:
+		0:
+			if hand.size() > 0:
+				return hand[0]
+		1:
+			if hand.size() > 0:
+				var random_choice = randi() % 2
+				if random_choice == 0:
+					choosen_card = hand[0]
+				else :
+					choosen_card = hand.min()
+		2:
+			#Jouer optimal càd
+			if battle_field.size() == 0:
+				#ON JOUE EN PREMIER
+				if hand.size() > 0:
+					return hand.min()
+			else:  #On joue en deuxième
+				var player_card = -99
+				var new_hand: Array = []
+				choosen_card = hand.min()
+				for card in battle_field:
+					if card["player"] == "player":
+						player_card = card["card"]
+						break
+				if player_card == -2:
+					new_hand = get_list_avoid_card(hand, 5)
+					choosen_card = new_hand.min()
+				elif player_card == 0:
+					new_hand = get_list_avoid_card(hand, 0)
+					choosen_card = new_hand.min()
+
+				return choosen_card
+		_:
+			return 1
+	return choosen_card
 
 
 #Fonction appelée par le cardgame pour trigger une carte de l'alien
@@ -173,12 +221,12 @@ func alien_play_card(value: int) -> void:
 	)
 	tween.parallel().tween_property(card_inst, "rotation", Vector3(5 * PI / 2, 0, 0), .7)
 	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.set_ease(Tween.EASE_IN)
 	tween.tween_callback(
 		func():
 			for node in previous_cards:
 				node.call_deferred("queue_free")
 	)
+	tween.set_ease(Tween.EASE_IN)
 
 	card_game.round_manager.play_card("alien", value)
 	#TODO REGLER L INSTANCE DE LA CARTE

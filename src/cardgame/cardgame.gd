@@ -27,6 +27,8 @@ var round_manager: RoundManager = null
 @onready var card_scene = preload("res://src/Card/Card.tscn")
 @onready var the_alien = get_node("../Enemy")
 @onready var cards_manager = $"../CardsManager"
+@onready var snapper = $"../Snapper/CardsInBattleField"
+@onready var enemy_snapper = $"../EnemySnapper/CardsInBattleField"
 
 
 class RoundManager:
@@ -81,13 +83,11 @@ class RoundManager:
 
 	# Fonction pour jouer une carte sur le champ de bataille
 	func play_card(player: String, card: int) -> void:
-		print("Player: ", player, " played card: ", card)
 		battle_field.append({"player": player, "card": card})
 
 	#Résolution du combat
 	func battle() -> bool:
 		var was_first = first_player
-		print(battle_field)
 		var player_score = -99
 		var alien_score = -99
 		for card in battle_field:
@@ -95,8 +95,6 @@ class RoundManager:
 				player_score = card["card"]
 			elif card["player"] == "alien":
 				alien_score = card["card"]
-		print("Player score: ", player_score)
-		print("Alien score: ", alien_score)
 		#CAS SPECIAL ETOILE ET -2
 		if alien_score == 0 or player_score == 0:
 			#2 étoiles
@@ -128,8 +126,10 @@ class RoundManager:
 				first_player = true
 
 		elif player_score == alien_score:
-			print("Egalité")
+			#Les deux joueurs ont joué -2
+			#On ne fait rien, on ne change pas de joueur
 			first_player = was_first
+			print("Egalité")
 		#CAS NORMAL
 		else:
 			#On retire les points de vie
@@ -176,6 +176,12 @@ func create_round_manager() -> RoundManager:
 	return round_manager
 
 
+func requier_to_delete_cards() -> void:
+	await get_tree().create_timer(1.5).timeout
+	for child in snapper.get_children():
+		child.queue_free()
+
+
 func _process(delta: float) -> void:
 	delta = delta
 	if current_state != precedent_state:
@@ -205,7 +211,7 @@ func _process(delta: float) -> void:
 		_instantiate_card(true, card[0])
 		card = round_manager.draw_cards(round_manager.alien_deck, 1)
 		_instantiate_card(false, card[0])
-		round_manager.alien_hand.append(card)
+		round_manager.alien_hand.append(card[0])
 
 		current_state = GameState.WAITING_FOR_RECUP
 
@@ -237,6 +243,7 @@ func _process(delta: float) -> void:
 			var the_alien_choosen_card = await the_alien.alien_think_about_card(
 				round_manager.alien_hand, round_manager.battle_field
 			)
+			round_manager.alien_hand.erase(the_alien_choosen_card)
 			the_alien.alien_play_card(the_alien_choosen_card)
 		for card in round_manager.battle_field:
 			#On vérifie qu'on a bien posé la carte
@@ -256,9 +263,9 @@ func _process(delta: float) -> void:
 			current_state = GameState.WIN
 		else:
 			current_state = GameState.DRAW
-		print("Player life: ", round_manager.player_life)
-		print("Alien life: ", round_manager.alien_life)
 		round_manager.battle_field.clear()
+
+		await requier_to_delete_cards()
 
 		#TODO AJOUTER LE CLEAR DU CHAMP DE BATAILLE (INSTANCE SUR LA MAP)
 		#TODO FAIRE LE WAIT FOR RECUP
