@@ -20,6 +20,7 @@ var _hovered_card: Card = null
 @onready var _enemy_snapper = $EnemySnapper
 @onready var _enemy: Enemy = $Enemy
 @onready var _hud: HUD = $"../UI/HUD"
+@onready var _camera: Camera3D = $"CameraRail/FollowRail/Camera"
 
 @onready var _round_manager = _card_game.create_round_manager()
 
@@ -208,6 +209,7 @@ func _on_cardgame_player_won() -> void:
 
 
 func _end_game_animation():
+	_camera.can_move = false
 	_hand_2d.can_control = false
 	await get_tree().create_timer(0.8).timeout
 	await _hud.fadeout()

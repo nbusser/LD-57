@@ -14,8 +14,12 @@ extends Camera3D
 @onready var sleeve_anchor: Node3D = %SleeveAnchor
 @onready var sleeve_hand: Sprite3D = %SleeveHand
 
+var can_move = true
 
 func _physics_process(delta: float) -> void:
+	if not can_move:
+		return
+	
 	var x_ratio = finger_tip.global_position.x / get_viewport().get_size().x
 	var y_ratio = finger_tip.global_position.y / get_viewport().get_size().y
 
