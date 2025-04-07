@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1swxld0lwpiv"]
+[gd_scene load_steps=6 format=3 uid="uid://b1swxld0lwpiv"]
 
 [ext_resource type="Script" uid="uid://cpn6p14owhxg" path="res://src/Card/card.gd" id="1_xkmnc"]
 [ext_resource type="Texture2D" uid="uid://dsieo0tadije" path="res://assets/sprites/cards/sprite_0.png" id="2_xkmnc"]
+[ext_resource type="Texture2D" uid="uid://y7gq6nqth12j" path="res://assets/sprites/cards/blank.png" id="3_crwnv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_77rk5"]
 size = Vector3(0.062, 0.001, 0.096)
@@ -14,6 +15,10 @@ height = 0.12
 collision_layer = 97
 collision_mask = 65
 script = ExtResource("1_xkmnc")
+
+[node name="BorderSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.0220996, 1.2784e-06, 0.000137935, -0.000137941, 0.0002042, 0.0220986, 3.29316e-09, -0.0220991, 0.000204204, 0, 0.0012, 0)
+texture = ExtResource("3_crwnv")
 
 [node name="FaceSprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.0220996, 1.2784e-06, 0.000137935, -0.000137941, 0.0002042, 0.0220986, 3.29316e-09, -0.0220991, 0.000204204, 0, 0.0012, 0)

@@ -76,6 +76,7 @@ func grab_card(card: Card):
 	# Card was in sleeve
 	elif card.get_parent() == _cards_on_sleeve:
 		_cards_on_sleeve.remove_child(card)
+		card.sleeve_mode(false)
 
 	_grabbed_card = card
 	card.start_dragging()
@@ -113,9 +114,14 @@ func drop_card():
 
 
 func _sleeve_add_card(card: Card):
-	card.visible = false
+	card.sleeve_mode(true)
 	_cards_on_sleeve.add_child(card)
 	card.add_to_group("grabbable_cards")
+
+
+func _sleeve_remove_card(card: Card):
+	card.sleeve_mode(false)
+	_cards_on_sleeve.remove_child(card)
 
 
 # -------- HAND RELATED ACTIONS --------

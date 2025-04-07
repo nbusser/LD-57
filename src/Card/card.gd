@@ -9,18 +9,39 @@ const RATIO = .0221 / 430
 
 var _card_state: State = State.NOTHING
 
+var _is_in_sleeve_mode = false
+
 @onready var _card_face_sprite: Sprite3D = $"FaceSprite"
+@onready var _card_border_sprite: Sprite3D = $"BorderSprite"
 @onready var _mesh = $CardMesh
+
+
+# Hides the mesh, billboards the sprite
+func sleeve_mode(enable: bool):
+	_is_in_sleeve_mode = enable
+	if enable:
+		_card_border_sprite.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	else:
+		_card_border_sprite.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+
+	_card_face_sprite.visible = not enable
+	_mesh.visible = not enable
+	start_hovering()
+
+
+func _process(_delta: float) -> void:
+	if _is_in_sleeve_mode:
+		start_hovering()
 
 
 func start_hovering():
 	_card_state = State.HOVERED
-	_mesh.set_layer_mask_value(6, true)
+	_card_border_sprite.set_layer_mask_value(6, true)
 
 
 func stop_hovering():
 	_card_state = State.NOTHING
-	_mesh.set_layer_mask_value(6, false)
+	_card_border_sprite.set_layer_mask_value(6, false)
 
 
 func start_dragging():

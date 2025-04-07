@@ -139,7 +139,7 @@ collision_layer = 128
 collision_mask = 0
 
 [node name="SleeveDropArea3D" type="CollisionShape3D" parent="place_area"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.884547, 0.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.877129, 0.8)
 shape = SubResource("CylinderShape3D_g5aly")
 
 [node name="TableDropArea3D" type="CollisionShape3D" parent="place_area"]
@@ -161,15 +161,6 @@ handle_input_locally = false
 cull_mask = 1047584
 environment = SubResource("Environment_lrvju")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_fgn2p")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
 [node name="Billboard" type="Node2D" parent="."]
 
 [node name="2DHand" parent="Billboard" instance=ExtResource("8_fgn2p")]
@@ -178,6 +169,15 @@ position = Vector2(-8, 416)
 
 [node name="Sleeve" parent="Billboard" instance=ExtResource("9_g5aly")]
 position = Vector2(1370, 588)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fgn2p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="CardsManager" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)
