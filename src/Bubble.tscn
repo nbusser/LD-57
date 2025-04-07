@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://3np2v35e7jwk"]
+
+[ext_resource type="Script" uid="uid://yny7kxxbpyiv" path="res://src/bubble.gd" id="1_qo7bw"]
+
+[sub_resource type="Gradient" id="Gradient_qo7bw"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qbh7g"]
+gradient = SubResource("Gradient_qo7bw")
+width = 56
+height = 48
+fill_to = Vector2(1, 0.00854701)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mbe88"]
+margin = 0.01
+size = Vector3(1.5435, 2.3873, 0.1)
+
+[node name="Bubble" type="StaticBody3D"]
+script = ExtResource("1_qo7bw")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.128529, -0.0521301, 0)
+centered = false
+pixel_size = 0.03
+texture = SubResource("GradientTexture2D_qbh7g")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+alpha_cut = 1
+text = "Salut je suis moi et toi ?
+Tu es une merde ?"
+horizontal_alignment = 0
+vertical_alignment = 2
+autowrap_mode = 3
+width = 300.0
+
+[node name="collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.712146, 1.18539, 0)
+shape = SubResource("BoxShape3D_mbe88")

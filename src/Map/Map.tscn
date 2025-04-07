@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=32 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://xk15mh5tpksd" path="res://src/StaticEnvironment.tscn" id="12_fk5ph"]
 [ext_resource type="PackedScene" uid="uid://blp2otlyjliss" path="res://src/snapBattle/snapBattle.tscn" id="12_xtfh0"]
 [ext_resource type="PackedScene" uid="uid://cdrmyavlvhc06" path="res://src/ScoreDisplay/ScoreDisplay.tscn" id="14_1blim"]
+[ext_resource type="PackedScene" uid="uid://3np2v35e7jwk" path="res://src/Bubble.tscn" id="16_8kakp"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22krd"]
 panorama = ExtResource("2_xtfh0")
@@ -278,4 +279,8 @@ libraries = {
 autoplay = "rotate bg"
 
 [connection signal="player_caught_cheating" from="Enemy" to="." method="_on_enemy_player_caught_cheating"]
+
+[node name="Bubble" parent="." instance=ExtResource("16_8kakp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.215632, 0.658507, -0.606009)
+
 [connection signal="card_spawned_on_the_deck" from="cardgame" to="CardsManager" method="_on_cardgame_card_spawned_on_the_deck"]
