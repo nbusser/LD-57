@@ -141,9 +141,10 @@ func _hand_add_card(card: Card, index: int, og_transform: Transform3D):
 	cards_in_hand.move_child(card, index)
 	_hand_reorder_cards()
 
-	var target_trans = card.global_transform
-	card.global_transform = og_transform
-	create_tween().tween_property(card, "global_transform", target_trans, .5)
+	if og_transform != Transform3D.IDENTITY:
+		var target_trans = card.global_transform
+		card.global_transform = og_transform
+		create_tween().tween_property(card, "global_transform", target_trans, .5)
 
 
 func _hand_remove_card(card: Card):
