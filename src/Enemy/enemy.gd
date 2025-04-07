@@ -126,9 +126,10 @@ func alien_play_card(value: int) -> void:
 	tween.parallel().tween_property(card_inst, "rotation", Vector3(5 * PI / 2, 0, 0), .7)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_IN)
-	tween.tween_callback(func():
-		for node in previous_cards:
-			node.call_deferred("queue_free")
+	tween.tween_callback(
+		func():
+			for node in previous_cards:
+				node.call_deferred("queue_free")
 	)
 
 	card_game.round_manager.play_card("alien", value)
