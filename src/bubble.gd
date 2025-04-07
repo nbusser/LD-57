@@ -1,5 +1,7 @@
 class_name Dialog extends StaticBody3D
 
+signal clicked
+
 @onready var label = get_node("Label3D")
 # @onready var area = get_node("Area3D")
 @onready var col_shape = get_node("collision")
@@ -8,19 +10,15 @@ func _ready():
 	show_message(["Hello", "World"])
 
 
-signal clicked
-
 func show_message(messages: Array[String]):
 	# label.text = message
-	print('setting...')
+	print("setting...")
 	for message in messages:
 		label.text = message
 		# col_shape.shape.size = Vector3(label.text.length() * 0.1, 0.1, 0.1)
-		print('waiting...')
+		print("waiting...")
 		await clicked
-		print('done')
-
-
+		print("done")
 
 
 func _input(event):
