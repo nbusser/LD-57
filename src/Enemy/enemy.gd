@@ -75,7 +75,8 @@ func _on_distraction_timer_timeout() -> void:
 	if state == Enums.EnemyState.IDLE:
 		var states = [
 			{state = Enums.EnemyState.DISTRACTED, distraction_time = 1.0},
-			{state = Enums.EnemyState.ASLEEP, distraction_time = 3.0}
+			# Uncomment when we have a sleeping enemy
+			# {state = Enums.EnemyState.ASLEEP, distraction_time = 3.0}
 		]
 		var new_state = states[randi() % len(states)]
 
