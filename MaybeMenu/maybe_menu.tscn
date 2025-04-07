@@ -1,6 +1,5 @@
-[gd_scene load_steps=104 format=3 uid="uid://c4btlvu6ioue3"]
+[gd_scene load_steps=103 format=3 uid="uid://c4btlvu6ioue3"]
 
-[ext_resource type="Script" uid="uid://btvd0b0skhsfa" path="res://src/MainMenu/MainMenu.gd" id="1_cgxue"]
 [ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="2_5btuq"]
 [ext_resource type="Texture2D" uid="uid://xkej5orjj4jo" path="res://assets/HDR_blue_local_star.jpg" id="3_pjlhc"]
 [ext_resource type="Texture2D" uid="uid://c17ubtg3i1jm2" path="res://assets/sprites/aliens/pig_angry.png" id="4_0dtta"]
@@ -693,7 +692,6 @@ radius = 5.0
 height = 10.0
 
 [node name="MaybeMenu" type="Node3D"]
-script = ExtResource("1_cgxue")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
