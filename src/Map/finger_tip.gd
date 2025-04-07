@@ -5,7 +5,10 @@ const CARD_LAYER = 7
 var distance = 2.0
 
 @onready var camera = get_node_or_null("../../../../CameraRail/FollowRail/Camera")
-@onready var enemy = get_node_or_null("../../../../CameraRail/FollowRail/Camera")
+@onready var enemy = get_node_or_null("../../../../Enemy")
+@onready var left_eye = get_node_or_null("../../../../Enemy/LeftEye")
+@onready var right_eye = get_node_or_null("../../../../Enemy/RightEye")
+
 
 # Finger tip is now the same as HandBody's position, making this relatively
 # useless
@@ -39,9 +42,9 @@ func _input(event):
 		ray_query.to = ray_query.from + camera.project_ray_normal(global_position) * 1000
 		var results = camera.get_world_3d().direct_space_state.intersect_ray(ray_query)
 
-		if results && results.collider == %LeftEye:
+		if results && results.collider == left_eye:
 			enemy.poke_left()
-		elif results && results.collider == %RightEye:
+		elif results && results.collider == right_eye:
 			enemy.poke_right()
 
 

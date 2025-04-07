@@ -24,7 +24,8 @@ func _update_sprite():
 		or state == Enums.EnemyState.ASLEEP
 		or state == Enums.EnemyState.WEAK
 		or state == Enums.EnemyState.THINKING
-		or state == Enums.EnemyState.POKED
+		or state == Enums.EnemyState.POKED_LEFT
+		or state == Enums.EnemyState.POKED_RIGHT
 	):
 		Globals.enemy_state = Globals.BaseEnemyState.DISTRACTED
 	elif state == Enums.EnemyState.ANGRY:
@@ -32,6 +33,7 @@ func _update_sprite():
 	else:
 		Globals.enemy_state = Globals.BaseEnemyState.IDLE
 
+	animated_sprite_3d.flip_h = false
 	match [type, state]:
 		# sproink
 		[Enums.EnemyType.SPROINK, Enums.EnemyState.IDLE]:
@@ -44,7 +46,10 @@ func _update_sprite():
 			animated_sprite_3d.play("sproink_angry")
 		[Enums.EnemyType.SPROINK, Enums.EnemyState.DISTRACTED]:
 			animated_sprite_3d.play("sproink_distracted")
-		[Enums.EnemyType.SPROINK, Enums.EnemyState.POKED]:
+		[Enums.EnemyType.SPROINK, Enums.EnemyState.POKED_LEFT]:
+			animated_sprite_3d.play("sproink_poked")
+			animated_sprite_3d.flip_h = true
+		[Enums.EnemyType.SPROINK, Enums.EnemyState.POKED_RIGHT]:
 			animated_sprite_3d.play("sproink_poked")
 		[Enums.EnemyType.SPROINK, _]:
 			animated_sprite_3d.play("sproink_idle")
@@ -63,7 +68,10 @@ func _update_sprite():
 			animated_sprite_3d.play("pig_shocked")
 		[Enums.EnemyType.PIG, Enums.EnemyState.ASLEEP]:
 			animated_sprite_3d.play("pig_asleep")
-		[Enums.EnemyType.PIG, Enums.EnemyState.POKED]:
+		[Enums.EnemyType.PIG, Enums.EnemyState.POKED_LEFT]:
+			animated_sprite_3d.play("pig_poked")
+			animated_sprite_3d.flip_h = true
+		[Enums.EnemyType.PIG, Enums.EnemyState.POKED_RIGHT]:
 			animated_sprite_3d.play("pig_poked")
 		[Enums.EnemyType.PIG, _]:
 			animated_sprite_3d.play("pig_idle")
@@ -178,8 +186,8 @@ func alien_play_card(value: int) -> void:
 
 
 func poke_left():
-	print("poke left")
+	state = Enums.EnemyState.POKED_LEFT
 
 
 func poke_right():
-	print("poke right")
+	state = Enums.EnemyState.POKED_RIGHT
