@@ -185,7 +185,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.799363, -0.612635)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0191145, 0.0633981, -5.96046e-08)
 
 [node name="LeftEye" type="StaticBody3D" parent="Enemy"]
-unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0387914, 0.142425, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/LeftEye"]
@@ -194,7 +193,6 @@ shape = SubResource("SphereShape3D_dgvhi")
 debug_color = Color(0, 0.595, 0.7, 1)
 
 [node name="RightEye" type="StaticBody3D" parent="Enemy"]
-unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0674775, 0.154303, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/RightEye"]
