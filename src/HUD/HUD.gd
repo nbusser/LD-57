@@ -56,8 +56,8 @@ func translate_global_states(
 			set_overlay_state(OverlayState.BLUE)
 		[Globals.ActionState.ILLEGAL, Globals.BaseEnemyState.IDLE]:
 			set_overlay_state(OverlayState.PINK)
-	# 	[Globals.ActionState.CAUGHT, _]:
-	# 		set_overlay_state(OverlayState.RED)
+		[Globals.ActionState.ILLEGAL, Globals.BaseEnemyState.ANGRY]:
+			set_overlay_state(OverlayState.RED)
 
 
 func set_overlay_state(state: OverlayState) -> void:

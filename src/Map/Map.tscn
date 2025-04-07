@@ -277,4 +277,5 @@ libraries = {
 }
 autoplay = "rotate bg"
 
+[connection signal="player_caught_cheating" from="Enemy" to="." method="_on_enemy_player_caught_cheating"]
 [connection signal="card_spawned_on_the_deck" from="cardgame" to="CardsManager" method="_on_cardgame_card_spawned_on_the_deck"]

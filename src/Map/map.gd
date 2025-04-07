@@ -84,3 +84,7 @@ func _on_life_changed(side: CardGame.Side, value: int):
 			_score_display_enemy.value = value
 		CardGame.Side.PLAYER:
 			_score_display_player.value = value
+
+
+func _on_enemy_player_caught_cheating() -> void:
+	Globals.end_scene(Globals.EndSceneStatus.LEVEL_GAME_OVER)

@@ -1,5 +1,7 @@
 extends Node3D
 
+signal player_caught_cheating
+
 var type: Enums.EnemyType = Enums.EnemyType.SPROINK:
 	set(value):
 		type = value
@@ -64,12 +66,13 @@ func _update_sprite():
 
 func _ready() -> void:
 	_update_sprite()
-	_on_distraction_timer_timeout()
+	$DistractionTimer.wait_time = randf() * 13.0 + 3.0
+	$DistractionTimer.start()
 
 
 func _on_distraction_timer_timeout() -> void:
-	# Alien gets distracted only if it is not his turn
-	if card_game.round_manager != null and not card_game.round_manager.alien_playing:
+	# Alien gets distracted only if he is idling
+	if state == Enums.EnemyState.IDLE:
 		var states = [
 			{state = Enums.EnemyState.DISTRACTED, distraction_time = 1.0},
 			{state = Enums.EnemyState.ASLEEP, distraction_time = 3.0}
@@ -82,6 +85,38 @@ func _on_distraction_timer_timeout() -> void:
 
 	$DistractionTimer.wait_time = randf() * 13.0 + 3.0
 	$DistractionTimer.start()
+
+
+# gdlint:disable = class-definitions-order
+const NB_FRAMES_TO_GET_CAUGHT = 140
+var en_instance_de_se_faire_chopper = 0
+
+const NB_FRAMES_TO_LOSE = 140
+var en_instance_de_se_faire_virer = 0
+# gdlint:enable = class-definitions-order
+
+
+func _process(_delta: float) -> void:
+	if (
+		(state == Enums.EnemyState.IDLE or state == Enums.EnemyState.ANGRY)
+		&& Globals.action_state == Globals.ActionState.ILLEGAL
+	):
+		if state == Enums.EnemyState.IDLE:
+			en_instance_de_se_faire_chopper += 1
+			if en_instance_de_se_faire_chopper >= NB_FRAMES_TO_GET_CAUGHT:
+				en_instance_de_se_faire_chopper = 0
+				state = Enums.EnemyState.ANGRY
+		elif state == Enums.EnemyState.ANGRY:
+			en_instance_de_se_faire_virer += 1
+			if en_instance_de_se_faire_virer >= NB_FRAMES_TO_LOSE:
+				en_instance_de_se_faire_virer = 0
+				state = Enums.EnemyState.ANGRY
+				emit_signal("player_caught_cheating")
+		else:
+			assert(false, "Invalid state, bourricot")
+	else:
+		en_instance_de_se_faire_chopper = max(0, en_instance_de_se_faire_chopper - 1)
+		en_instance_de_se_faire_virer = max(0, en_instance_de_se_faire_virer - 1)
 
 
 func alien_draw_card(card_instance: Node3D) -> void:

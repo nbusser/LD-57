@@ -42,7 +42,6 @@ enum ActionState {
 
 const SAMPLE_GLOBAL_VARIABLE: int = 1
 
-# gdlint: disable=duplicated-load
 var card_skins: Dictionary = {
 	-2: load("res://assets/sprites/cards/sprite_0.png"),
 	0: load("res://assets/sprites/cards/sprite_1.png"),
@@ -52,12 +51,6 @@ var card_skins: Dictionary = {
 	4: load("res://assets/sprites/cards/sprite_6.png"),
 	5: load("res://assets/sprites/cards/sprite_8.png"),
 }
-# gdlint: enable=duplicated-load
-
-
-func end_scene(status: EndSceneStatus, params: Dictionary = {}) -> void:
-	scene_ended.emit(status, params)
-
 
 var enemy_state = BaseEnemyState.IDLE:
 	set(state):
@@ -68,3 +61,7 @@ var action_state = ActionState.IDLE:
 	set(state):
 		state_changed.emit(state, enemy_state)
 		action_state = state
+
+
+func end_scene(status: EndSceneStatus, params: Dictionary = {}) -> void:
+	scene_ended.emit(status, params)
