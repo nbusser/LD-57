@@ -16,6 +16,9 @@ var _hovered_card: Card = null
 @onready var _score_display_enemy = $ScoreDisplayEnemy
 @onready var _score_display_player = $ScoreDisplayPlayer
 
+@onready var _player_snapper = $Snapper
+@onready var _enemy_snapper = $EnemySnapper
+
 
 func _process(_delta):
 	var viewport := get_viewport()
@@ -69,6 +72,8 @@ func _ready():
 	var round_manager = _card_game.create_round_manager()
 
 	round_manager.life_changed.connect(_on_life_changed)
+	_enemy_snapper.set_modulate(Color(100, 0, 0))
+	_player_snapper.set_modulate(Color(0, 100, 0))
 
 
 func _on_life_changed(side: CardGame.Side, value: int):
