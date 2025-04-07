@@ -175,7 +175,7 @@ shape = SubResource("BoxShape3D_jde0p")
 transform = Transform3D(76.9231, 0, 0, 0, -76.9231, -6.72483e-06, 0, 6.72483e-06, -76.9231, 0, 0, 0)
 
 [node name="Enemy" parent="." instance=ExtResource("6_lrvju")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823981, -0.612635)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.799363, -0.612635)
 
 [node name="Mouth" type="Node3D" parent="Enemy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0191145, 0.0633981, -5.96046e-08)
