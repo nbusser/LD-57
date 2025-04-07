@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
-[ext_resource type="Texture2D" uid="uid://xkej5orjj4jo" path="res://assets/HDR_blue_local_star.jpg" id="2_xtfh0"]
+[ext_resource type="Texture2D" uid="uid://dq57idemhwjkw" path="res://assets/HDR_blue_local_star.webp" id="2_crd61"]
 [ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table/Table.tscn" id="3_13lp4"]
 [ext_resource type="Material" uid="uid://cxy1ssgbmb5ff" path="res://src/Map/floor.tres" id="6_1blim"]
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
@@ -30,7 +30,7 @@
 [ext_resource type="AudioStream" uid="uid://c5yvw6ji4jdje" path="res://assets/sounds/notice for change of turn.wav.ogg" id="28_j1beu"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22krd"]
-panorama = ExtResource("2_xtfh0")
+panorama = ExtResource("2_crd61")
 energy_multiplier = 2.5
 
 [sub_resource type="Sky" id="Sky_dgvhi"]

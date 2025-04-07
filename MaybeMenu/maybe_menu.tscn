@@ -1,7 +1,7 @@
 [gd_scene load_steps=103 format=3 uid="uid://c4btlvu6ioue3"]
 
 [ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="2_5btuq"]
-[ext_resource type="Texture2D" uid="uid://xkej5orjj4jo" path="res://assets/HDR_blue_local_star.jpg" id="3_pjlhc"]
+[ext_resource type="Texture2D" uid="uid://dq57idemhwjkw" path="res://assets/HDR_blue_local_star.webp" id="2_bueqb"]
 [ext_resource type="Texture2D" uid="uid://c17ubtg3i1jm2" path="res://assets/sprites/aliens/pig_angry.png" id="4_0dtta"]
 [ext_resource type="Texture2D" uid="uid://dkx3q3kdyh0dc" path="res://assets/sprites/aliens/pig_asleep.png" id="5_n6vh3"]
 [ext_resource type="Texture2D" uid="uid://bw4fcyb0ih2tc" path="res://assets/sprites/aliens/pig_distracted.png" id="6_v4rqr"]
@@ -61,7 +61,7 @@ _data = {
 }
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_70h2t"]
-panorama = ExtResource("3_pjlhc")
+panorama = ExtResource("2_bueqb")
 energy_multiplier = 2.5
 
 [sub_resource type="Sky" id="Sky_fyitu"]

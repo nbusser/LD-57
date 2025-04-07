@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xkej5orjj4jo"
-path.s3tc="res://.godot/imported/HDR_blue_local_star.jpg-8ebfa746e586bdfc1f5c6bfed4bbc989.s3tc.ctex"
+uid="uid://dq57idemhwjkw"
+path.s3tc="res://.godot/imported/HDR_blue_local_star.webp-c7049a0b0752359186ca36ff60efb2f2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/HDR_blue_local_star.jpg"
-dest_files=["res://.godot/imported/HDR_blue_local_star.jpg-8ebfa746e586bdfc1f5c6bfed4bbc989.s3tc.ctex"]
+source_file="res://assets/HDR_blue_local_star.webp"
+dest_files=["res://.godot/imported/HDR_blue_local_star.webp-c7049a0b0752359186ca36ff60efb2f2.s3tc.ctex"]
 
 [params]
 
