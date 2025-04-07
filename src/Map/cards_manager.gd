@@ -64,6 +64,7 @@ func is_card_close_to_battlefield() -> bool:
 func grab_card(card: Card):
 	assert(_grabbed_card == null, "Cannot grab a card if you already have a card in hand")
 
+	card.visible = true
 	card.remove_from_group("grabbable_cards")
 
 	# Card was in hand
@@ -72,8 +73,9 @@ func grab_card(card: Card):
 	# Card was in deck
 	elif card.get_parent() == cards_on_top_of_deck:
 		cards_on_top_of_deck.remove_child(card)
-	else:
-		assert(false, "Card was in an unexpected location")
+	# Card was in sleeve
+	elif card.get_parent() == _cards_on_sleeve:
+		_cards_on_sleeve.remove_child(card)
 
 	_grabbed_card = card
 	card.start_dragging()
@@ -95,7 +97,7 @@ func drop_card():
 	_grabbed_card = null
 
 	if sleeve.finger_is_in_sleeve:
-		_cards_on_sleeve.add_child(card)
+		_sleeve_add_card(card)
 	else:
 		var close = is_card_close_to_battlefield()
 		if close and card_game.current_state == card_game.GameState.PLAYER_TURN:
@@ -104,6 +106,15 @@ func drop_card():
 		else:
 			print("Card dropped in hand")
 			_hand_add_card(card, 0)
+
+
+# -------- SLEEVE RELATED ACTIONS --------
+
+
+func _sleeve_add_card(card: Card):
+	card.visible = false
+	_cards_on_sleeve.add_child(card)
+	card.add_to_group("grabbable_cards")
 
 
 # -------- HAND RELATED ACTIONS --------
