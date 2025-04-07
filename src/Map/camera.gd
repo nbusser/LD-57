@@ -2,15 +2,17 @@ extends Camera3D
 
 @export var margin = .2
 @export var pan_speed = 1
-@export var rail_speed = 2
-@export var amplitude_vt = 10  # degrees
+@export var rail_speed = 0
+@export var amplitude_vt = 0  # degrees
 @export var amplitude_hz = 120  # degrees
-@export var center = Vector2(-30, 0)
+@export var center = Vector2(-20, 0)
 
 @onready var rail = $".."
-@onready var hand = $"../../../Billboard/2DHand"
-@onready var finger_tip = $"../../../Billboard/2DHand/HandBody/Sprite2D/FingerTip"
+@onready var hand = $"../../../2DHand"
+@onready var finger_tip = $"../../../2DHand/HandBody/Sprite2D/FingerTip"
 @onready var billboard = $"../../../Billboard"
+@onready var sleeve_anchor: Node3D = %SleeveAnchor
+@onready var sleeve_hand: Sprite3D = %SleeveHand
 
 
 func _physics_process(delta: float) -> void:
@@ -62,6 +64,13 @@ func _physics_process(delta: float) -> void:
 			rail.progress_ratio = .6
 
 	# horizontal movement
-	billboard.position.x = global_rotation.y * 500
-	# vertical movement
-	billboard.position.y = (-0.4 - global_rotation.x) * 1000  #+ (1 - cos(global_rotation.y)) * 200
+	# billboard.position.x = 600 + global_rotation.y * 600
+	# # vertical movement
+	# billboard.position.y = (-0.4 - global_rotation.x) * 1000  #+ (1 - cos(global_rotation.y)) * 200
+	billboard.visible = not is_position_behind(sleeve_anchor.global_transform.origin)
+	billboard.position = unproject_position(sleeve_anchor.global_transform.origin)
+	# billboard.global_position = unproject_position(sleeve_anchor.global_position) / 100
+	# print(billboard.position)
+
+	# sleeve_hand.look_at(global_position)
+	sleeve_hand.global_rotation = global_rotation

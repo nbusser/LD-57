@@ -1,17 +1,19 @@
-[gd_scene load_steps=29 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=31 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
 [ext_resource type="Texture2D" uid="uid://xkej5orjj4jo" path="res://assets/HDR_blue_local_star.jpg" id="2_xtfh0"]
 [ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table/Table.tscn" id="3_13lp4"]
-[ext_resource type="Material" uid="uid://dwpeqms8cq4u6" path="res://src/Map/floor.tres" id="6_1blim"]
+[ext_resource type="Material" uid="uid://cxy1ssgbmb5ff" path="res://src/Map/floor.tres" id="6_1blim"]
 [ext_resource type="PackedScene" uid="uid://cb2c6exrmfj47" path="res://src/Enemy/Enemy.tscn" id="6_lrvju"]
 [ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
 [ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="8_fgn2p"]
 [ext_resource type="Script" uid="uid://cko8icjpkjvo" path="res://src/Map/cards_manager.gd" id="9_22krd"]
 [ext_resource type="PackedScene" uid="uid://b33p0i1qpivld" path="res://src/Sleeve/sleeve.tscn" id="9_g5aly"]
+[ext_resource type="Texture2D" uid="uid://tnbx5hfh8qr1" path="res://assets/sprites/hand/F2.png" id="10_dgvhi"]
 [ext_resource type="PackedScene" uid="uid://des7slrabd1qt" path="res://src/cardgame/cardgame.tscn" id="10_hxqom"]
 [ext_resource type="PackedScene" uid="uid://bswm5o0d0ybau" path="res://src/deckObject/deckObject.tscn" id="11_22krd"]
+[ext_resource type="Texture2D" uid="uid://dmv3ie41m1qo7" path="res://assets/sprites/hand/F3.png" id="11_bxjut"]
 [ext_resource type="PackedScene" uid="uid://xk15mh5tpksd" path="res://src/StaticEnvironment.tscn" id="12_fk5ph"]
 [ext_resource type="PackedScene" uid="uid://blp2otlyjliss" path="res://src/snapBattle/snapBattle.tscn" id="12_xtfh0"]
 [ext_resource type="PackedScene" uid="uid://cdrmyavlvhc06" path="res://src/ScoreDisplay/ScoreDisplay.tscn" id="14_1blim"]
@@ -116,7 +118,7 @@ loop = false
 tilt_enabled = false
 
 [node name="Camera" type="Camera3D" parent="CameraRail/FollowRail"]
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573578, 0, -0.573577, 0.819155, 0, 0, 0)
+transform = Transform3D(1, -3.03375e-09, -1.86454e-09, 3.55455e-09, 0.881716, 0.471781, 2.12731e-10, -0.471782, 0.881719, 2.42654e-09, -0.0299072, -0.0814211)
 rotation_order = 1
 script = ExtResource("1_wqubw")
 
@@ -192,14 +194,27 @@ environment = SubResource("Environment_lrvju")
 
 [node name="Billboard" type="Node2D" parent="."]
 
-[node name="2DHand" parent="Billboard" instance=ExtResource("8_fgn2p")]
+[node name="Sleeve" parent="Billboard" instance=ExtResource("9_g5aly")]
+position = Vector2(779, 92)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fgn2p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="2DHand" parent="." instance=ExtResource("8_fgn2p")]
 z_index = -10
 position = Vector2(-8, 416)
 
-[node name="Sleeve" parent="Billboard" instance=ExtResource("9_g5aly")]
-position = Vector2(1370, 588)
+[node name="Billboard2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect2" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_fgn2p")
 anchors_preset = 15
 anchor_right = 1.0
@@ -212,13 +227,30 @@ mouse_filter = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0478107, 0.921507, 0.481954)
 script = ExtResource("9_22krd")
 
-[node name="CardsInHand" type="Node3D" parent="CardsManager"]
+[node name="SleeveHand" type="Sprite3D" parent="CardsManager"]
+unique_name_in_owner = true
+transform = Transform3D(0.0392161, 0.00167075, -0.0309726, 0.000632016, 0.049874, 0.00349056, 0.0310113, -0.00312923, 0.0390962, 0.380453, -0.107672, 0.0431782)
+sorting_offset = -1e+06
+texture = ExtResource("10_dgvhi")
+
+[node name="SleeveHandOverlay" type="Sprite3D" parent="CardsManager/SleeveHand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.651, 0.075, 0.462)
+sorting_offset = 1e+10
+texture = ExtResource("11_bxjut")
+
+[node name="SleeveAnchor" type="Node3D" parent="CardsManager/SleeveHand"]
+unique_name_in_owner = true
+transform = Transform3D(1, -2.6077e-08, 8.9407e-08, 2.23517e-08, 1, -4.47035e-08, 0, 1.49012e-08, 1, 0.995709, 0.864445, -0.00482178)
+
+[node name="CardsInHand" type="Node3D" parent="CardsManager/SleeveHand"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -3.1469, 0.528149, -0.437333)
 
 [node name="CardsOnTopOfDeck" type="Node3D" parent="CardsManager"]
 
 [node name="CardsInSleeve" type="Node3D" parent="CardsManager"]
 
 [node name="GrabbedCard" type="Node3D" parent="CardsManager"]
+transform = Transform3D(0.753781, 0, -0.657125, 0, 1, 0, 0.657125, 0, 0.753781, 0.158395, -0.0596996, -0.0215369)
 
 [node name="cardgame" parent="." instance=ExtResource("10_hxqom")]
 

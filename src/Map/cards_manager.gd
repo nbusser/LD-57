@@ -1,7 +1,7 @@
 class_name CardsManager extends Node3D
 
 const CARD_VERTICAL_OFFSET = Vector3.DOWN * 0.06
-const CARD_THICKNESS = 0.0003  # .3mm
+const CARD_THICKNESS = 0.003  # .3mm
 
 var _is_card_close_to_battlefield = false
 
@@ -22,13 +22,13 @@ var _grabbed_card: Card:
 			_grabbed_card_parent.add_child(card)
 
 @onready var card_scene: PackedScene = preload("res://src/Card/Card.tscn")
-@onready var finger_tip: Node2D = $"../Billboard/2DHand/HandBody/Sprite2D/FingerTip"
+@onready var finger_tip: Node2D = $"../2DHand/HandBody/Sprite2D/FingerTip"
 @onready var camera: Camera3D = $"../CameraRail/FollowRail/Camera"
 @onready var drop_zone_player: Node3D = $"../Snapper/CardsInBattleField"
 @onready var card_game: Node = $"../cardgame"
 @onready var sleeve: Sleeve = $"../Billboard/Sleeve"
 
-@onready var cards_in_hand: Node3D = $CardsInHand
+@onready var cards_in_hand: Node3D = $SleeveHand/CardsInHand
 @onready var cards_on_top_of_deck: Node3D = $CardsOnTopOfDeck
 @onready var _cards_on_sleeve: Node3D = $CardsInSleeve
 @onready var _grabbed_card_parent: Node3D = $"GrabbedCard"
