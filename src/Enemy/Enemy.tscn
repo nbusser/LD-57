@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://cb2c6exrmfj47"]
+[gd_scene load_steps=90 format=3 uid="uid://cb2c6exrmfj47"]
 
 [ext_resource type="Texture2D" uid="uid://b8rmf6ufuoiq0" path="res://assets/sprites/aliens/sproink_idle.png" id="1_do4pe"]
 [ext_resource type="Script" uid="uid://b1whyc7omqomo" path="res://src/Enemy/enemy.gd" id="1_fjy47"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://4c3bhqe8j1wx" path="res://assets/sprites/aliens/sproink_thinking.png" id="5_kb5un"]
 [ext_resource type="Texture2D" uid="uid://duj25blf6ybni" path="res://assets/sprites/aliens/pig_thinking.png" id="5_ls3ox"]
 [ext_resource type="Texture2D" uid="uid://d4gtgdpwkwtaj" path="res://assets/sprites/aliens/pig_weak.png" id="6_1enot"]
+[ext_resource type="Texture2D" uid="uid://bmn4kv06xh42m" path="res://assets/sprites/aliens/pig_poked.png" id="6_32e6g"]
+[ext_resource type="Texture2D" uid="uid://dl52cwx0hkh1x" path="res://assets/sprites/aliens/sproink_poked.png" id="13_rfbxy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g0ehj"]
 atlas = ExtResource("2_hjafo")
@@ -351,6 +353,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("6_32e6g")
+}],
+"loop": true,
+"name": &"pig_poked",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vvxh7")
 }, {
 "duration": 1.0,
@@ -549,6 +559,14 @@ animations = [{
 "loop": true,
 "name": &"sproink_idle",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_rfbxy")
+}],
+"loop": true,
+"name": &"sproink_poked",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
