@@ -614,3 +614,8 @@ transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0720145, 0)
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_irkw7")
 animation = &"sproink_idle"
+
+[node name="DistractionTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="DistractionTimer" to="." method="_on_distraction_timer_timeout"]

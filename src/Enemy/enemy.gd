@@ -13,7 +13,8 @@ var state: Enums.EnemyState = Enums.EnemyState.IDLE:
 @onready var card_scene = preload("res://src/Card/Card.tscn")
 @onready var drop_zone_enemy: Node3D = $"../EnemySnapper/CardsInBattleField"
 @onready var mouth: Node3D = $"../Enemy/Mouth"
-@onready var card_game: Node = $"../cardgame"
+@onready var batte_field_zone = $"../Snapper/CardsInBattleField"
+@onready var card_game: CardGame = $"../cardgame"
 
 
 func _update_sprite():
@@ -63,9 +64,27 @@ func _update_sprite():
 
 func _ready() -> void:
 	_update_sprite()
+	_on_distraction_timer_timeout()
 
 
-func _alien_draw_card(card_instance: Node3D) -> void:
+func _on_distraction_timer_timeout() -> void:
+	# Alien gets distracted only if it is not his turn
+	if card_game.round_manager != null and not card_game.round_manager.alien_playing:
+		var states = [
+			{state = Enums.EnemyState.DISTRACTED, distraction_time = 1.0},
+			{state = Enums.EnemyState.ASLEEP, distraction_time = 3.0}
+		]
+		var new_state = states[randi() % len(states)]
+
+		state = new_state.state
+		await get_tree().create_timer(new_state.distraction_time).timeout
+		state = Enums.EnemyState.IDLE
+
+	$DistractionTimer.wait_time = randf() * 5.0
+	$DistractionTimer.start()
+
+
+func alien_draw_card(card_instance: Node3D) -> void:
 	await get_tree().create_timer(1.0).timeout
 	#TODO PLACEHOLDER DE L ALIEN QUI FAIT GENRE QU IL PREND UNE CARTE
 	#PEUT ETRE QU IL FAUDRA FAIRE BOUGER SON BRAS OU QU IL FASSE LA GUEULE

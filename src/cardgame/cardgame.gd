@@ -20,7 +20,7 @@ enum Side { PLAYER, ALIEN }
 
 var current_state: GameState = GameState.NOT_STARTED
 var precedent_state: GameState = current_state
-var round_manager = null
+var round_manager: RoundManager = null
 
 @onready var player_deck_node = get_node("../deckManager/deckObjectPlayer")
 @onready var alien_deck_node = get_node("../deckManager/deckObjectAlien")
@@ -152,7 +152,7 @@ func _instantiate_card(is_player_card: bool, value: int) -> Node3D:
 		card_inst.add_to_group("grabbable_cards")
 		cards_manager.cards_on_top_of_deck.add_child(card_inst)
 	else:
-		the_alien._alien_draw_card(card_inst)
+		the_alien.alien_draw_card(card_inst)
 		add_child(card_inst)
 
 	card_inst.global_position = pos_reference_node.global_position
