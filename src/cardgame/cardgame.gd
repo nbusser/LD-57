@@ -298,6 +298,5 @@ func _process(delta: float) -> void:
 			await requier_to_delete_cards()
 
 			#TODO AJOUTER LE CLEAR DU CHAMP DE BATAILLE (INSTANCE SUR LA MAP)
-			#TODO ANIMATION DE L ALIEN
 		_:
 			return
