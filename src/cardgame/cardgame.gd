@@ -16,18 +16,30 @@ enum GameState {
 	WIN
 }
 
+
 func game_state_to_string(gs: GameState):
 	match gs:
-		GameState.NOT_STARTED: return "NOT_STARTED"
-		GameState.INIT: return "INIT"
-		GameState.DRAW: return "DRAW"
-		GameState.WAITING_FOR_RECUP: return "WAITING_FOR_RECUP"
-		GameState.WHOS_FIRST: return "WHOS_FIRST"
-		GameState.PLAYER_TURN: return "PLAYER_TURN"
-		GameState.ALIEN_TURN: return "ALIEN_TURN"
-		GameState.BATTLE: return "BATTLE"
-		GameState.GAME_OVER: return "GAME_OVER"
-		GameState.WIN: return "WIN"
+		GameState.NOT_STARTED:
+			return "NOT_STARTED"
+		GameState.INIT:
+			return "INIT"
+		GameState.DRAW:
+			return "DRAW"
+		GameState.WAITING_FOR_RECUP:
+			return "WAITING_FOR_RECUP"
+		GameState.WHOS_FIRST:
+			return "WHOS_FIRST"
+		GameState.PLAYER_TURN:
+			return "PLAYER_TURN"
+		GameState.ALIEN_TURN:
+			return "ALIEN_TURN"
+		GameState.BATTLE:
+			return "BATTLE"
+		GameState.GAME_OVER:
+			return "GAME_OVER"
+		GameState.WIN:
+			return "WIN"
+
 
 enum Side { PLAYER, ALIEN }
 
