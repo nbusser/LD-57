@@ -157,6 +157,7 @@ func spawn_cards_in_hand(card_values: Array):
 
 
 func _hand_add_card(card: Card, index: int, og_transform: Transform3D):
+	card.hand_mode(true)
 	card.add_to_group("grabbable_cards")
 	cards_in_hand.add_child(card)
 	cards_in_hand.move_child(card, index)
@@ -174,6 +175,7 @@ func _hand_add_card(card: Card, index: int, og_transform: Transform3D):
 
 
 func _hand_remove_card(card: Card):
+	card.hand_mode(false)
 	cards_in_hand.remove_child(card)
 	_hand_reorder_cards()
 
@@ -181,7 +183,7 @@ func _hand_remove_card(card: Card):
 func _hand_reorder_cards():
 	var num_cards = len(cards_in_hand.get_children())
 
-	var angle_step = PI / 12
+	var angle_step = PI / 6
 	var total_angle = angle_step * num_cards
 	var start_angle = -total_angle / 2
 
