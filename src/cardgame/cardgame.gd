@@ -145,6 +145,9 @@ class RoundManager:
 				#Ouai dark sasukesouke
 				pass
 
+		#On remet les cartes joués dans les decks
+		my_deck.append(player_score)
+		alien_deck.append(alien_score)
 		return first_player
 
 	#Trouver un moyen de detecter la fin de partie.
