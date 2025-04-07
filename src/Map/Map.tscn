@@ -9,7 +9,7 @@
 [ext_resource type="Shader" uid="uid://oves4dppg0li" path="res://assets/shaders/stencil_outline.gdshader" id="7_fyitu"]
 [ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="8_fgn2p"]
 [ext_resource type="Texture2D" uid="uid://dkxf7u58n18ne" path="res://assets/sprites/sleeve_placeholder.png" id="8_jljl6"]
-[ext_resource type="Script" uid="uid://cko8icjpkjvo" path="res://src/Map/card_hand.gd" id="9_22krd"]
+[ext_resource type="Script" uid="uid://cko8icjpkjvo" path="res://src/Map/cards_manager.gd" id="9_22krd"]
 [ext_resource type="PackedScene" uid="uid://des7slrabd1qt" path="res://src/cardgame/cardgame.tscn" id="10_hxqom"]
 [ext_resource type="PackedScene" uid="uid://bswm5o0d0ybau" path="res://src/deckObject/deckObject.tscn" id="11_22krd"]
 [ext_resource type="PackedScene" uid="uid://xk15mh5tpksd" path="res://src/StaticEnvironment.tscn" id="12_fk5ph"]
