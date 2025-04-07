@@ -60,7 +60,6 @@ func game_state_to_string(gs: GameState):
 
 func setup_and_start_timer(duration: float) -> bool:
 	if timer_in_progress:
-		print(timer.time_left)
 		if timer.is_stopped():
 			timer_in_progress = false
 			return true
