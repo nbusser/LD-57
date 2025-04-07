@@ -3,6 +3,9 @@ class_name CardsManager extends Node3D
 const CARD_VERTICAL_OFFSET = Vector3.DOWN * 0.06
 const CARD_THICKNESS = 0.003  # .3mm
 
+signal card_played(card: Card)
+signal card_added_in_hand(card: Card)
+
 var _is_card_close_to_battlefield = false
 
 var _grabbed_card: Card:
@@ -85,6 +88,7 @@ func grab_card(card: Card):
 
 
 func _place_card_in_battlefield(card: Card):
+	card_played.emit(card)
 	card_game.round_manager.play_card("player", card.card_value)
 	drop_zone_player.add_child(card)
 	card.position = Vector3.ZERO
@@ -155,6 +159,7 @@ func spawn_cards_in_hand(card_values: Array):
 
 
 func _hand_add_card(card: Card, index: int, og_transform: Transform3D):
+	card_added_in_hand.emit(card)
 	card.hand_mode(true)
 	card.add_to_group("grabbable_cards")
 	cards_in_hand.add_child(card)

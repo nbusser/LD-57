@@ -4,6 +4,7 @@ extends Node
 signal card_spawned_on_the_deck(card: Card)
 signal player_lost
 signal player_won
+signal alien_played_card(card: int)
 
 enum GameState {
 	NOT_STARTED,
@@ -301,6 +302,7 @@ func _process(delta: float) -> void:
 					)
 					round_manager.alien_hand.erase(the_alien_choosen_card)
 					the_alien.alien_play_card(the_alien_choosen_card)
+					alien_played_card.emit(the_alien_choosen_card)
 
 			var timer_over = setup_and_start_timer(2.0)
 			if !timer_over:

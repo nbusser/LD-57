@@ -83,7 +83,17 @@ func _on_tutorial_mode_changed(is_tutorial: bool) -> void:
 		_player_snapper.init(true)
 
 
+var played_card = false
+
+
+func set_played_card(_x) -> void:
+	played_card = true
+
+
 func tutorial():
+	_cards_manager.card_played.connect(set_played_card)
+	_card_game.current_state = CardGame.GameState.NOT_STARTED
+	round_manager.first_player = true
 	await (
 		Globals
 		. show_messages(
@@ -95,14 +105,20 @@ func tutorial():
 				"We have materialized the standard test in a form you should be familiar with.",
 				"The goal is to play lower-valued cards than the ones I play.",
 				"Let's start with a simple example.",
-				"Draw a card from the deck.",
 			]
 		)
 	)
+	await Globals.show_messages(["Draw a card from the deck and place it in your hand."], false)
+	_card_game.current_state = CardGame.GameState.INIT
 	# highlight the deck and wait for the player to draw a card
+	await _cards_manager.card_added_in_hand
+	_card_game.current_state = CardGame.GameState.NOT_STARTED
 
 	await Globals.show_messages(['I will now play a "3" card.'])
+	round_manager.first_player = false
 	_card_game.current_state = CardGame.GameState.ALIEN_TURN
+	await _card_game.alien_played_card
+	_card_game.current_state = CardGame.GameState.NOT_STARTED
 	await (
 		Globals
 		. show_messages(
@@ -113,14 +129,20 @@ func tutorial():
 			]
 		)
 	)
+	_card_game.current_state = CardGame.GameState.PLAYER_TURN
+	if not played_card:
+		await _cards_manager.card_played
+	_cards_manager.card_played.disconnect(set_played_card)
+	_card_game.current_state = CardGame.GameState.NOT_STARTED
 
-	# Globals.enemy_state = Globals.BaseEnemyState.DISTRACTED
+	await (Globals.show_messages(["Good! So now-"]))
+
 	_enemy.state = Enums.EnemyState.DISTRACTED
 	await (
 		Globals
 		. show_messages(
 			[
-				"A supernova? Where?\n--The alien seems distracted--",
+				"A supernova? Where?\n--The alien is distracted--",
 			]
 		)
 	)
@@ -128,29 +150,33 @@ func tutorial():
 		["--You can use this chance to reach the inside of your sleeve.\nTry it now.--"], false
 	)
 
-	# TODO disable death
 	while true:
 		var action_state = (await Globals.state_changed)[0]
 		if action_state == Globals.ActionState.ILLEGAL:
 			break
+	await (
+		Globals
+		. show_messages(
+			[
+				"--This game seems too hard for your species, but if you don't get caught, you don't cheat--",
+				"--When you're cheating, there's a pink overlay that appears--",
+				"--When your opponent is distracted (blue), you can use this chance to reach the inside of your sleeve--",
+				"--Good luck--",
+			]
+		)
+	)
 	_enemy.state = Enums.EnemyState.IDLE
 	await (
 		Globals
 		. show_messages(
 			[
-				"--Good job!--",
-				"--Did you notice the red glow when trying to cheat?--",
+				"Hmm... Probably just the anti-matter wind.",
+				"Anyways, should we start?",
 			]
 		)
 	)
-	await (
-		Globals
-		. show_messages(
-			[
-				"Now ",
-			]
-		)
-	)
+	Globals.tutorial_mode = false
+	Globals.end_scene(Globals.EndSceneStatus.LEVEL_RESTART)
 
 
 func _on_life_changed(side: CardGame.Side, value: int):
