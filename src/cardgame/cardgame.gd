@@ -285,13 +285,19 @@ func _process(delta: float) -> void:
 						player_snapper.is_playing = false
 
 		GameState.ALIEN_TURN:
-			if not round_manager.alien_playing:
-				round_manager.alien_playing = true
-				var the_alien_choosen_card = await the_alien.alien_think_about_card(
-					round_manager.alien_hand, round_manager.battle_field
-				)
-				round_manager.alien_hand.erase(the_alien_choosen_card)
-				the_alien.alien_play_card(the_alien_choosen_card)
+			if !timer_in_progress:  # Start animation
+				if not round_manager.alien_playing:
+					round_manager.alien_playing = true
+					var the_alien_choosen_card = await the_alien.alien_think_about_card(
+						round_manager.alien_hand, round_manager.battle_field
+					)
+					round_manager.alien_hand.erase(the_alien_choosen_card)
+					the_alien.alien_play_card(the_alien_choosen_card)
+
+			var timer_over = setup_and_start_timer(2.0)
+			if !timer_over:
+				return
+
 			for card in round_manager.battle_field:
 				#On vérifie qu'on a bien posé la carte
 				if card["player"] == "alien":
