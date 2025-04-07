@@ -221,12 +221,6 @@ func create_round_manager() -> RoundManager:
 	return round_manager
 
 
-func requier_to_delete_cards() -> void:
-	await get_tree().create_timer(1.5).timeout
-	for child in snapper.get_children():
-		child.queue_free()
-
-
 func _process(delta: float) -> void:
 	delta = delta
 	if current_state != precedent_state:
@@ -340,8 +334,6 @@ func _process(delta: float) -> void:
 			else:
 				current_state = GameState.DRAW
 			round_manager.battle_field.clear()
-
-			await requier_to_delete_cards()
 
 		_:
 			return
