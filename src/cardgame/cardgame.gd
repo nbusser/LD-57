@@ -127,7 +127,7 @@ class RoundManager:
 				alien_life -= 5  # Joueur perd 7 points de vie
 				first_player = true
 
-		elif  player_score == alien_score :
+		elif player_score == alien_score:
 			print("Egalité")
 			first_player = was_first
 		#CAS NORMAL
