@@ -2,6 +2,7 @@ extends Node
 
 signal scene_ended(status: EndSceneStatus, params: Dictionary)
 signal state_changed(action_state: ActionState, enemy_state: BaseEnemyState)
+signal tutorial_mode_changed(tutorial_mode: bool)
 
 # Status sent along with signal end_scene()
 enum EndSceneStatus {
@@ -42,6 +43,8 @@ enum ActionState {
 
 const SAMPLE_GLOBAL_VARIABLE: int = 1
 
+var dialog: Dialog = null
+
 var card_skins: Dictionary = {
 	-2: load("res://assets/sprites/cards/sprite_0.png"),
 	0: load("res://assets/sprites/cards/sprite_1.png"),
@@ -54,6 +57,7 @@ var card_skins: Dictionary = {
 
 var enemy_state = BaseEnemyState.IDLE:
 	set(state):
+		print("enemy_state", state)
 		state_changed.emit(action_state, state)
 		enemy_state = state
 
@@ -72,6 +76,23 @@ var action_state = ActionState.IDLE:
 
 @onready var scene_manager = get_node("/root/SceneManager")
 
+var tutorial_mode: bool = false:
+	set(value):
+		tutorial_mode_changed.emit(tutorial_mode)
+		tutorial_mode = value
+
 
 func end_scene(status: EndSceneStatus, params: Dictionary = {}) -> void:
 	scene_ended.emit(status, params)
+
+
+func set_dialog(dialog: Dialog) -> void:
+	self.dialog = dialog
+
+
+func show_messages(messages: Array[String], can_click = true) -> void:
+	await dialog.show_messages(messages, can_click)
+
+
+func wait_for_click():
+	await dialog.wait_for_click()

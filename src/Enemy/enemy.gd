@@ -1,4 +1,4 @@
-extends Node3D
+class_name Enemy extends Node3D
 
 signal player_caught_cheating
 
@@ -81,8 +81,15 @@ func _update_sprite():
 
 func _ready() -> void:
 	_update_sprite()
-	$DistractionTimer.wait_time = randf() * 13.0 + 3.0
-	$DistractionTimer.start()
+	Globals.tutorial_mode_changed.connect(_on_tutorial_mode_changed)
+
+
+func _on_tutorial_mode_changed(is_tutorial: bool) -> void:
+	if is_tutorial:
+		($DistractionTimer as Timer).stop()
+	else:
+		$DistractionTimer.wait_time = randf() * 13.0 + 3.0
+		$DistractionTimer.start()
 
 
 func _on_distraction_timer_timeout() -> void:
@@ -166,6 +173,8 @@ func get_list_avoid_card(initial_list: Array, avoid: int) -> Array:
 
 
 func alien_think_about_card(hand, battle_field: Array) -> int:
+	if Globals.tutorial_mode:
+		return 3
 	#Fonction appelée par le cardgame pour trigger une carte de l'alien
 	#Pour l'instant on va juste prendre la première carte de la main de l'alien
 	#On récupère le premier joueur pour savoir si on joue une carte en contre ou pas
