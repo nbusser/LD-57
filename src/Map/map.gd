@@ -19,6 +19,7 @@ var _hovered_card: Card = null
 @onready var _player_snapper = $Snapper
 @onready var _enemy_snapper = $EnemySnapper
 @onready var _enemy: Enemy = $Enemy
+@onready var _hud: HUD = $"../UI/HUD"
 
 @onready var _round_manager = _card_game.create_round_manager()
 
@@ -163,26 +164,24 @@ func _on_life_changed(side: CardGame.Side, value: int):
 func _on_enemy_player_caught_cheating() -> void:
 	if Globals.tutorial_mode:
 		return
-	print("GAME OVER BLOCK THE CONTROLS")
-	_freeze_controls()
 	Globals.action_state = Globals.ActionState.CAUGHT
-	await get_tree().create_timer(3.0).timeout
+	await _end_game_animation()
 	Globals.end_scene(Globals.EndSceneStatus.LEVEL_GAME_OVER)
 
 
 func _on_cardgame_player_lost() -> void:
 	Globals.show_messages(["I won!"])
-	_freeze_controls()
-	await get_tree().create_timer(3.0).timeout
+	await _end_game_animation()
 	Globals.end_scene(Globals.EndSceneStatus.LEVEL_GAME_OVER)
 
 
 func _on_cardgame_player_won() -> void:
 	Globals.show_messages(["Daw zetla tah khedamin ta3 had jeu!"])
-	_freeze_controls()
-	await get_tree().create_timer(3.0).timeout
+	await _end_game_animation()
 	Globals.end_scene(Globals.EndSceneStatus.LEVEL_END)
 
 
-func _freeze_controls() -> void:
+func _end_game_animation():
 	_hand_2d.can_control = false
+	await get_tree().create_timer(0.5).timeout
+	await _hud.fadeout()

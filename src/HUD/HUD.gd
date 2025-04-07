@@ -69,3 +69,16 @@ func set_overlay_state(state: OverlayState) -> void:
 		create_tween().tween_property(texture_rect, "modulate", Color.TRANSPARENT, 0.7)
 	elif state == OverlayState.PINK:
 		create_tween().tween_property(texture_rect, "modulate", Color(1, 0, 1, 1), 0.7)
+
+
+func fadeout():
+	fadein_pane.visible = 1
+
+	fadein_pane.modulate = Color.TRANSPARENT
+
+	fadein_pane.modulate = Color.TRANSPARENT
+	fadein_pane.visible = 1
+
+	await create_tween().tween_property(fadein_pane, "modulate", Color.BLACK, 2.0).finished
+	await get_tree().create_timer(0.5).timeout
+	fadein_pane.visible = 0
