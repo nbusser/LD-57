@@ -4,7 +4,7 @@ const CARD_LAYER = 7
 
 var distance = 2.0
 
-@onready var camera = $"../../../../../CameraRail/FollowRail/Camera"
+@onready var camera = get_node_or_null("../../../../../CameraRail/FollowRail/Camera")
 
 # Finger tip is now the same as HandBody's position, making this relatively
 # useless
