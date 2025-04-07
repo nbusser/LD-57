@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=29 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -34,6 +34,10 @@ _data = {
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g5aly"]
+height = 0.01
+radius = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jde0p"]
 size = Vector3(4, 0.01, 4)
@@ -133,7 +137,11 @@ spot_angle = 19.5751
 collision_layer = 128
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="place_area"]
+[node name="SleeveDropArea3D" type="CollisionShape3D" parent="place_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.884547, 0.8)
+shape = SubResource("CylinderShape3D_g5aly")
+
+[node name="TableDropArea3D" type="CollisionShape3D" parent="place_area"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 shape = SubResource("BoxShape3D_jde0p")
 

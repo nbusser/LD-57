@@ -26,9 +26,11 @@ var _grabbed_card: Card:
 @onready var camera: Camera3D = $"../CameraRail/FollowRail/Camera"
 @onready var batte_field_zone: Node3D = $"../CardsInBattleField"
 @onready var card_game: Node = $"../cardgame"
+@onready var sleeve: Sleeve = $"../Billboard/Sleeve"
 
 @onready var cards_in_hand: Node3D = $CardsInHand
 @onready var cards_on_top_of_deck: Node3D = $CardsOnTopOfDeck
+@onready var _cards_on_sleeve: Node3D = $CardsInSleeve
 @onready var _grabbed_card_parent: Node3D = $"GrabbedCard"
 
 
@@ -88,17 +90,20 @@ func drop_card():
 	assert(_grabbed_card != null, "Cannot drop card if no card in hand")
 
 	var card = _grabbed_card
+	card.stop_dragging()
+
 	_grabbed_card = null
 
-	var close = is_card_close_to_battlefield()
-	if close and card_game.current_state == card_game.GameState.PLAYER_TURN:
-		print("Card dropped in battlefield")
-		_place_card_in_battlefield(card)
+	if sleeve.finger_is_in_sleeve:
+		_cards_on_sleeve.add_child(card)
 	else:
-		print("Card dropped in hand")
-		_hand_add_card(card, 0)
-
-	card.stop_dragging()
+		var close = is_card_close_to_battlefield()
+		if close and card_game.current_state == card_game.GameState.PLAYER_TURN:
+			print("Card dropped in battlefield")
+			_place_card_in_battlefield(card)
+		else:
+			print("Card dropped in hand")
+			_hand_add_card(card, 0)
 
 
 # -------- HAND RELATED ACTIONS --------
