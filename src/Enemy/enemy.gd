@@ -125,7 +125,7 @@ func _process(_delta: float) -> void:
 		en_instance_de_se_faire_chopper += 1
 		if en_instance_de_se_faire_chopper >= NB_FRAMES_TO_GET_CAUGHT:
 			state = Enums.EnemyState.ANGRY
-		elif en_instance_de_se_faire_chopper >= NB_FRAMES_TO_LOSE:
+		if en_instance_de_se_faire_chopper >= NB_FRAMES_TO_LOSE:
 			emit_signal("player_caught_cheating")
 	else:
 		en_instance_de_se_faire_chopper = max(0, en_instance_de_se_faire_chopper - 1)
