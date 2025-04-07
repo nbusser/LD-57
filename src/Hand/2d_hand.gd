@@ -74,7 +74,6 @@ func _physics_process(delta: float) -> void:
 	elif required_length / arm.points.size() < distance_constraint:  # Too long, spool back slowly
 		distance_constraint -= delta * reactivity
 
-
 	# Run FABRIK
 	FABRIK_pass(delta)
 
