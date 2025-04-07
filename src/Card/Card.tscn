@@ -1,33 +1,24 @@
-[gd_scene load_steps=11 format=4 uid="uid://b1swxld0lwpiv"]
+[gd_scene load_steps=9 format=4 uid="uid://b1swxld0lwpiv"]
 
 [ext_resource type="Script" uid="uid://cpn6p14owhxg" path="res://src/Card/card.gd" id="1_xkmnc"]
 [ext_resource type="Texture2D" uid="uid://m28s8drcyjrv" path="res://assets/sprites/cards/card_back.png" id="3_52213"]
+[ext_resource type="Texture2D" uid="uid://cyp3acpwap3io" path="res://assets/sprites/cards/card_metal.png" id="3_crwnv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_crwnv"]
 size = Vector3(0.0976562, 0.0974121, 0.00488281)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_52213"]
-load_path = "res://.godot/imported/card_back.png-0da4998b89878f66010225bccabac7f2.s3tc.ctex"
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xkmnc"]
-load_path = "res://.godot/imported/card_metal.png-d19bdd3fc7b435201b5872d91a88c2db.s3tc.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ua61t"]
-load_path = "res://.godot/imported/card_metal.png-3a05400b130f3e62631ece3d9997cc2d.s3tc.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_taig8"]
-load_path = "res://.godot/imported/card_metal.png-3a05400b130f3e62631ece3d9997cc2d.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tupqs"]
 resource_name = "Material.001"
 cull_mode = 2
-albedo_texture = SubResource("CompressedTexture2D_52213")
+albedo_texture = ExtResource("3_52213")
 metallic = 1.0
-metallic_texture = SubResource("CompressedTexture2D_ua61t")
+metallic_texture = ExtResource("3_crwnv")
 metallic_texture_channel = 4
-roughness = 0.5
-roughness_texture = SubResource("CompressedTexture2D_taig8")
-roughness_texture_channel = 1
+roughness = 0.59
+roughness_texture = ExtResource("3_crwnv")
+roughness_texture_channel = 4
 heightmap_scale = 16.0
 heightmap_texture = SubResource("CompressedTexture2D_xkmnc")
 
