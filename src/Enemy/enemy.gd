@@ -140,7 +140,6 @@ func alien_draw_card(card_instance: Node3D) -> void:
 
 func alien_think_about_card(hand, battle_field: Array) -> int:
 	#Fonction appelée par le cardgame pour trigger une carte de l'alien
-	#TODO : faire un algo de choix de carte
 	#Pour l'instant on va juste prendre la première carte de la main de l'alien
 	#On récupère le premier joueur pour savoir si on joue une carte en contre ou pas
 	#Y REFLECHI

@@ -1,32 +1,27 @@
-[gd_scene load_steps=11 format=4 uid="uid://bwajg7ky455r3"]
+[gd_scene load_steps=10 format=4 uid="uid://bwajg7ky455r3"]
 
 [ext_resource type="Material" uid="uid://bs07kotkxjpx6" path="res://assets/sprites/metal_texture.tres" id="1_aph8e"]
-[ext_resource type="Texture2D" uid="uid://do0mc07k507c3" path="res://assets/sprites/table_table_tableV1.png" id="2_3qd3a"]
+[ext_resource type="Texture2D" uid="uid://b2h0mcuph34o1" path="res://assets/sprites/table_albedo.png" id="2_7vhe7"]
+[ext_resource type="Texture2D" uid="uid://dsiyquynfnxm7" path="res://assets/sprites/table_normal.png" id="3_dkyhi"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_h5757"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_avb4b"]
-load_path = "res://.godot/imported/table_table_tableV1.png-b34ae3ffddcc1204d33dc96ce0d09fec.s3tc.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3qd3a"]
-load_path = "res://.godot/imported/table_tableV1.png-df683364fda632190746fac39c1544df.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7vhe7"]
 resource_name = "Material"
 cull_mode = 2
-albedo_texture = SubResource("CompressedTexture2D_avb4b")
+albedo_texture = ExtResource("2_7vhe7")
 metallic = 1.0
 metallic_specular = 0.82
 roughness = 0.243523
 normal_enabled = true
 normal_scale = -2.0
-normal_texture = SubResource("CompressedTexture2D_3qd3a")
+normal_texture = ExtResource("3_dkyhi")
 heightmap_enabled = true
 heightmap_scale = 3.0
 heightmap_deep_parallax = true
 heightmap_min_layers = 8
 heightmap_max_layers = 32
-heightmap_texture = ExtResource("2_3qd3a")
+heightmap_texture = ExtResource("3_dkyhi")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_dkyhi"]
 _surfaces = [{

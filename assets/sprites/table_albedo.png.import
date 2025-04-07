@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do0mc07k507c3"
-path.s3tc="res://.godot/imported/table_table_tableV1.png-c24f5bd9d7f5c7ad3cd8e6815ea9a871.s3tc.ctex"
+uid="uid://b2h0mcuph34o1"
+path.s3tc="res://.godot/imported/table_albedo.png-e6f11a4a26bd993a5e848651e926fad9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "60cacf76e7ad7c90148b72211dfc96ad"
-}
 
 [deps]
 
-source_file="res://assets/sprites/table_table_tableV1.png"
-dest_files=["res://.godot/imported/table_table_tableV1.png-c24f5bd9d7f5c7ad3cd8e6815ea9a871.s3tc.ctex"]
+source_file="res://assets/sprites/table_albedo.png"
+dest_files=["res://.godot/imported/table_albedo.png-e6f11a4a26bd993a5e848651e926fad9.s3tc.ctex"]
 
 [params]
 
@@ -25,7 +22,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
