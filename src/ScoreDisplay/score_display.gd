@@ -13,7 +13,7 @@ func _ready():
 	var children = points.get_children()
 	for i in range(children.size()):
 		var point = children[i]
-		point.position = Vector3(i * 0.04, 0, 0)
+		# point.position = Vector3(i * 0.04, 0, 0)
 		point.color = Color.BLACK
 	_on_value_update()
 

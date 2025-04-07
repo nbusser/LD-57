@@ -1,19 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3lbtfni0uvt1"]
+[gd_scene load_steps=4 format=3 uid="uid://c3lbtfni0uvt1"]
 
 [ext_resource type="Script" uid="uid://cs2u3csstuxfe" path="res://src/ScoreDisplay/score_display_point.gd" id="1_1p534"]
+[ext_resource type="Material" uid="uid://bs07kotkxjpx6" path="res://assets/sprites/metal_texture.tres" id="2_r8ycj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1p534"]
 resource_local_to_scene = true
-albedo_color = Color(0, 0, 0, 1)
+albedo_color = Color(0.219501, 0.219501, 0.219501, 1)
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 10.0
+emission_energy_multiplier = 2.0
 
 [node name="ScoreDisplayPoint" type="Node3D"]
 script = ExtResource("1_1p534")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-radius = 0.005
-height = 0.2
+[node name="Light" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00561739, 0)
+radius = 0.02
+radial_segments = 24
+rings = 12
 material = SubResource("StandardMaterial3D_1p534")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00488556, 0)
+radius = 0.03
+height = 0.01
+sides = 32
+cone = true
+material = ExtResource("2_r8ycj")

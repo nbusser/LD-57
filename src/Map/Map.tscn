@@ -26,6 +26,7 @@ sky_material = SubResource("PanoramaSkyMaterial_22krd")
 [sub_resource type="Environment" id="Environment_57a3y"]
 background_mode = 2
 sky = SubResource("Sky_fyitu")
+glow_enabled = true
 
 [sub_resource type="Curve3D" id="Curve3D_wqubw"]
 bake_interval = 0.01
@@ -198,7 +199,7 @@ script = ExtResource("9_22krd")
 transform = Transform3D(8, 0, 0, 0, -3.49691e-07, -8, 0, 8, -3.49691e-07, -0.398799, 0.61604, -0.269868)
 
 [node name="deckObjectPlayer" parent="deckManager" instance=ExtResource("11_22krd")]
-transform = Transform3D(8, 0, 0, 0, -3.49691e-07, -8, 0, 8, -3.49691e-07, -0.399, 0.616, 0.320375)
+transform = Transform3D(8, 0, 0, 0, -3.49691e-07, -8, 0, 8, -3.49691e-07, -0.399, 0.616, 0.275)
 
 [node name="Snapper" parent="." instance=ExtResource("12_xtfh0")]
 transform = Transform3D(0.013, 0, 0, 0, -5.68248e-10, -0.013, 0, 0.013, -5.68248e-10, -0.035, 0.615, 0.076)
@@ -209,10 +210,10 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.035
 [node name="StaticEnvironment" parent="." instance=ExtResource("12_fk5ph")]
 
 [node name="ScoreDisplayEnemy" parent="." instance=ExtResource("14_1blim")]
-transform = Transform3D(0.999994, -0.00298314, 0.00197657, 0.00298703, 0.999994, -0.00196519, -0.00197068, 0.0019711, 0.999996, -0.286943, 0.60842, -0.38661)
+transform = Transform3D(0.999994, -0.00298314, 0.00197657, 0.00298703, 0.999994, -0.00196519, -0.00197068, 0.0019711, 0.999996, -0.376298, 0.60842, -0.370031)
 
 [node name="ScoreDisplayPlayer" parent="." instance=ExtResource("14_1blim")]
-transform = Transform3D(0.999994, -0.00298314, 0.00197657, 0.00298703, 0.999994, -0.00196519, -0.00197068, 0.0019711, 0.999996, -0.286943, 0.60842, 0.385542)
+transform = Transform3D(0.999994, -0.00298314, 0.00197657, 0.00298703, 0.999994, -0.00196519, -0.00197068, 0.0019711, 0.999996, -0.381181, 0.60842, 0.440422)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
