@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=35 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://des7slrabd1qt" path="res://src/cardgame/cardgame.tscn" id="10_hxqom"]
 [ext_resource type="PackedScene" uid="uid://bswm5o0d0ybau" path="res://src/deckObject/deckObject.tscn" id="11_22krd"]
 [ext_resource type="Texture2D" uid="uid://dmv3ie41m1qo7" path="res://assets/sprites/hand/F3.png" id="11_bxjut"]
-[ext_resource type="PackedScene" uid="uid://xk15mh5tpksd" path="res://src/StaticEnvironment.tscn" id="12_fk5ph"]
 [ext_resource type="PackedScene" uid="uid://blp2otlyjliss" path="res://src/snapBattle/snapBattle.tscn" id="12_xtfh0"]
 [ext_resource type="PackedScene" uid="uid://cdrmyavlvhc06" path="res://src/ScoreDisplay/ScoreDisplay.tscn" id="14_1blim"]
 [ext_resource type="PackedScene" uid="uid://3np2v35e7jwk" path="res://src/Bubble.tscn" id="16_8kakp"]
@@ -313,8 +312,6 @@ transform = Transform3D(8, 0, 0, 0, -3.49691e-07, -8, 0, 8, -3.49691e-07, -0.398
 
 [node name="deckObjectPlayer" parent="deckManager" instance=ExtResource("11_22krd")]
 transform = Transform3D(8, 0, 0, 0, -3.49691e-07, -8, 0, 8, -3.49691e-07, -0.399, 0.616, 0.275)
-
-[node name="StaticEnvironment" parent="." instance=ExtResource("12_fk5ph")]
 
 [node name="ScoreDisplayEnemy" parent="." instance=ExtResource("14_1blim")]
 transform = Transform3D(0.999994, -0.00298314, 0.00197657, 0.00298703, 0.999994, -0.00196519, -0.00197068, 0.0019711, 0.999996, -0.376298, 0.60842, -0.370031)
