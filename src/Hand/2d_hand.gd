@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var distance_constraint = 60.0
-@export var reactivity = 50
+@export var reactivity = 5000
 @export var joint_speed = 2000
 
 var joints = []
@@ -71,19 +71,12 @@ func _physics_process(delta: float) -> void:
 	var required_length = (anchor.global_position - hand_body.position).length()
 	if required_length / arm.points.size() > distance_constraint:  # Too short, emergency fix
 		distance_constraint = required_length / arm.points.size()
-	elif required_length / (arm.points.size()) < distance_constraint:  # Too long, spool back slowly
+	elif required_length / arm.points.size() < distance_constraint:  # Too long, spool back slowly
 		distance_constraint -= delta * reactivity
-	if distance_constraint < required_length / (arm.points.size() - 1):  # Long enough but may be longer, grow slowly
-		distance_constraint += delta * reactivity
+
 
 	# Run FABRIK
 	FABRIK_pass(delta)
-
-
-#func _input(event):
-#if event is InputEventKey and event.pressed:
-#if event.keycode == KEY_SPACE:
-#FABRIK_pass(.01)
 
 
 # gdlint:ignore = function-name
