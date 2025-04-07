@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=36 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://blp2otlyjliss" path="res://src/snapBattle/snapBattle.tscn" id="12_xtfh0"]
 [ext_resource type="PackedScene" uid="uid://cdrmyavlvhc06" path="res://src/ScoreDisplay/ScoreDisplay.tscn" id="14_1blim"]
 [ext_resource type="PackedScene" uid="uid://3np2v35e7jwk" path="res://src/Bubble.tscn" id="16_8kakp"]
+[ext_resource type="PackedScene" uid="uid://cv1omds42jyqv" path="res://src/shop/shop.tscn" id="18_bxjut"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_22krd"]
 panorama = ExtResource("2_xtfh0")
@@ -327,6 +328,10 @@ autoplay = "rotate bg"
 
 [node name="Bubble" parent="." instance=ExtResource("16_8kakp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.215632, 0.96897, -0.606009)
+
+[node name="Shop" parent="." instance=ExtResource("18_bxjut")]
+transform = Transform3D(0.05, 0, 0, 0, 0.0474523, 0.0157568, 0, -0.0157568, 0.0474523, 0, 0.870451, 0.289254)
+visible = false
 
 [connection signal="player_caught_cheating" from="Enemy" to="." method="_on_enemy_player_caught_cheating"]
 [connection signal="card_spawned_on_the_deck" from="cardgame" to="CardsManager" method="_on_cardgame_card_spawned_on_the_deck"]

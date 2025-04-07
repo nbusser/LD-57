@@ -30,8 +30,6 @@ texture = SubResource("GradientTexture2D_qbh7g")
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
 alpha_cut = 1
-text = "Salut je suis moi et toi ?
-Tu es une merde ?"
 font = ExtResource("2_qbh7g")
 font_size = 18
 outline_size = 10

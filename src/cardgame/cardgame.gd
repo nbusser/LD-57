@@ -13,15 +13,20 @@ enum GameState {
 	ALIEN_TURN,
 	BATTLE,
 	GAME_OVER,
-	WIN
+	WIN,
+	SHOP,
+	IS_GAME_END
 }
 
 enum Side { PLAYER, ALIEN }
+
+const HP_TO_SHOP: int = 5
 
 var current_state: GameState = GameState.NOT_STARTED
 var precedent_state: GameState = current_state
 var round_manager: RoundManager = null
 var timer_in_progress: bool = false
+
 
 @onready var player_deck_node = get_node("../deckManager/deckObjectPlayer")
 @onready var alien_deck_node = get_node("../deckManager/deckObjectAlien")
@@ -60,7 +65,7 @@ func game_state_to_string(gs: GameState):
 
 func setup_and_start_timer(duration: float) -> bool:
 	if timer_in_progress:
-		print(timer.time_left)
+		#print(timer.time_left)
 		if timer.is_stopped():
 			timer_in_progress = false
 			return true
@@ -85,6 +90,7 @@ class RoundManager:
 	var battle_field: Array = []
 	var first_player: bool = true
 	var alien_hand: Array = []
+	var hp_until_shop : int = 0
 	var alien_life: int = 20:
 		set(value):
 			alien_life = value
@@ -132,6 +138,8 @@ class RoundManager:
 		var was_first = first_player
 		var player_score = -99
 		var alien_score = -99
+		var before_hp_player = player_life
+		var before_hp_alien = alien_life
 		for card in battle_field:
 			if card["player"] == "player":
 				player_score = card["card"]
@@ -192,6 +200,10 @@ class RoundManager:
 		#En vrai on s'en fout parce que généralement ça sera fini avant mais bon on peut changer dans le futur
 		my_deck.append(player_score)
 		alien_deck.append(alien_score)
+
+		hp_until_shop += before_hp_alien - alien_life
+		hp_until_shop += before_hp_player - player_life 
+		print("hp until shop: ", hp_until_shop)
 		return first_player
 
 	#Trouver un moyen de detecter la fin de partie.
@@ -232,7 +244,7 @@ func requier_to_delete_cards() -> void:
 func _process(delta: float) -> void:
 	delta = delta
 	if current_state != precedent_state:
-		print(game_state_to_string(current_state))
+		#print(game_state_to_string(current_state))
 		precedent_state = current_state
 
 	match current_state:
@@ -329,15 +341,29 @@ func _process(delta: float) -> void:
 			if !timer_over:
 				return
 			round_manager.battle()
+			round_manager.battle_field.clear()
+			await requier_to_delete_cards()
+			#Soit on va au shop, soit on fait un test de fin de partie
+			if round_manager.hp_until_shop >= HP_TO_SHOP:
+				current_state = GameState.SHOP
+			else:
+				current_state = GameState.IS_GAME_END
+
+		GameState.SHOP:
+			#TODO FAIRE UN SHOP
+			#C EST JUSTE GENRE 2 3 CARTES SUR LESQUELLES ONT PEUT CLIQUER CA EN PREND UNE ET CA LA MET DANS NOTRE MANCHE
+			#SI ON A LE TEMPS CA SERAIT BIEN QUE L ALIEN PUISSE COMPTER COMBIEN DE CARTES ON A ET DEVIENNE DOUTEUX MAIS BON
+			#IL FAUT RELIER CA AU NODE SHOP DEJA PRESENT ET MASQUE
+			print("C'est l'heure du shopping")
+			await get_tree().create_timer(3).timeout
+			current_state = GameState.IS_GAME_END
+
+		GameState.IS_GAME_END:
 			if round_manager.player_life <= 0:
 				current_state = GameState.GAME_OVER
 			elif round_manager.alien_life <= 0:
 				current_state = GameState.WIN
 			else:
 				current_state = GameState.DRAW
-			round_manager.battle_field.clear()
-
-			await requier_to_delete_cards()
-
 		_:
 			return
