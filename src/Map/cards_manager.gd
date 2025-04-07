@@ -94,7 +94,7 @@ func drop_card():
 
 	var card = _grabbed_card
 	card.stop_dragging()
-
+	var old_transform = card.global_transform
 	_grabbed_card = null
 
 	if sleeve.finger_is_in_sleeve:
@@ -107,7 +107,7 @@ func drop_card():
 			_place_card_in_battlefield(card)
 		else:
 			print("Card dropped in hand")
-			_hand_add_card(card, 0)
+			_hand_add_card(card, 0, old_transform)
 
 
 # -------- SLEEVE RELATED ACTIONS --------
@@ -131,15 +131,18 @@ func spawn_cards_in_hand(card_values: Array):
 	for value in card_values:
 		var card: Card = card_scene.instantiate()
 		card.init(value)
-		_hand_add_card(card, 0)
+		_hand_add_card(card, 0, Transform3D.IDENTITY)
 	_hand_reorder_cards()
 
-
-func _hand_add_card(card: Card, index: int):
+func _hand_add_card(card: Card, index: int, og_transform: Transform3D):
 	card.add_to_group("grabbable_cards")
 	cards_in_hand.add_child(card)
 	cards_in_hand.move_child(card, index)
 	_hand_reorder_cards()
+
+	var target_trans = card.global_transform
+	card.global_transform = og_transform
+	create_tween().tween_property(card, "global_transform", target_trans, .5)
 
 
 func _hand_remove_card(card: Card):
