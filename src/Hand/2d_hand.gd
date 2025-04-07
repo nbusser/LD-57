@@ -80,10 +80,12 @@ func _physics_process(delta: float) -> void:
 	# Run FABRIK
 	FABRIK_pass(delta)
 
+
 #func _input(event):
-	#if event is InputEventKey and event.pressed:
-		#if event.keycode == KEY_SPACE:
-			#FABRIK_pass(.01)
+#if event is InputEventKey and event.pressed:
+#if event.keycode == KEY_SPACE:
+#FABRIK_pass(.01)
+
 
 # gdlint:ignore = function-name
 func FABRIK_pass(delta: float):
@@ -108,7 +110,7 @@ func FABRIK_pass(delta: float):
 			* ((joints[i + 1].position - new_direction * distance_constraint) - joints[i].position)
 		)
 		joints[i].move_and_slide()
-	
+
 	var points = []
 	for i in range(joints.size()):
 		points.append(joints[i].position)

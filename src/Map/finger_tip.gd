@@ -6,7 +6,6 @@ var distance = 2.0
 
 @onready var camera = $"../../../../../CameraRail/FollowRail/Camera"
 
-
 # Finger tip is now the same as HandBody's position, making this relatively
 # useless
 
