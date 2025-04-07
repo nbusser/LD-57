@@ -16,6 +16,13 @@ var state: Enums.EnemyState = Enums.EnemyState.IDLE:
 
 
 func _update_sprite():
+	if state == Enums.EnemyState.DISTRACTED or state == Enums.EnemyState.WEAK or state == Enums.EnemyState.THINKING:
+		Globals.set_enemy_state(Globals.BaseEnemyState.DISTRACTED)
+	elif state == Enums.EnemyState.ANGRY:
+		Globals.set_enemy_state(Globals.BaseEnemyState.ANGRY)
+	else:
+		Globals.set_enemy_state(Globals.BaseEnemyState.IDLE)
+
 	match [type, state]:
 		# sproink
 		[Enums.EnemyType.SPROINK, Enums.EnemyState.IDLE]:
