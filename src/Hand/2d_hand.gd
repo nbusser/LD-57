@@ -11,6 +11,8 @@ var state: Enums.HandState = Enums.HandState.POINT:
 		state = value
 		_on_update_state()
 
+var can_control = true
+
 @onready var anchor = $"Anchor"
 @onready var hand_body = $"HandBody"
 @onready var arm = $"Arm"
@@ -56,16 +58,19 @@ func _physics_process(delta: float) -> void:
 	arm.width_curve.set_point_value(1, clamp(1.0 - finger_tip.distance / 2.0, .1, 1.0))
 
 	# Move
-	hand_body.velocity = (get_global_mouse_position() - finger_tip.global_position) * 500 * delta
-	if hand_body.move_and_slide():
-		var collision_info = hand_body.get_last_slide_collision()
-		var norm = collision_info.get_normal()
-		var slide_dir = norm.rotated(PI / 2)
-		var target = Geometry2D.line_intersects_line(
-			finger_tip.global_position, slide_dir, get_global_mouse_position(), norm
+	if can_control:
+		hand_body.velocity = (
+			(get_global_mouse_position() - finger_tip.global_position) * 500 * delta
 		)
-		hand_body.velocity = (target - finger_tip.global_position) * 500 * delta
-		hand_body.move_and_slide()
+		if hand_body.move_and_slide():
+			var collision_info = hand_body.get_last_slide_collision()
+			var norm = collision_info.get_normal()
+			var slide_dir = norm.rotated(PI / 2)
+			var target = Geometry2D.line_intersects_line(
+				finger_tip.global_position, slide_dir, get_global_mouse_position(), norm
+			)
+			hand_body.velocity = (target - finger_tip.global_position) * 500 * delta
+			hand_body.move_and_slide()
 
 	# Adjust arm length
 	var required_length = (anchor.global_position - hand_body.position).length()

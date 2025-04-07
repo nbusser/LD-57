@@ -164,7 +164,7 @@ func _on_enemy_player_caught_cheating() -> void:
 	if Globals.tutorial_mode:
 		return
 	print("GAME OVER BLOCK THE CONTROLS")
-	#TODO : BLOCK THE CONTROLS
+	_freeze_controls()
 	Globals.action_state = Globals.ActionState.CAUGHT
 	await get_tree().create_timer(3.0).timeout
 	Globals.end_scene(Globals.EndSceneStatus.LEVEL_GAME_OVER)
@@ -172,13 +172,17 @@ func _on_enemy_player_caught_cheating() -> void:
 
 func _on_cardgame_player_lost() -> void:
 	Globals.show_messages(["I won!"])
-	#TODO : BLOCK THE CONTROLS
+	_freeze_controls()
 	await get_tree().create_timer(3.0).timeout
 	Globals.end_scene(Globals.EndSceneStatus.LEVEL_GAME_OVER)
 
 
 func _on_cardgame_player_won() -> void:
 	Globals.show_messages(["Daw zetla tah khedamin ta3 had jeu!"])
-	#TODO : BLOCK THE CONTROLS
+	_freeze_controls()
 	await get_tree().create_timer(3.0).timeout
 	Globals.end_scene(Globals.EndSceneStatus.LEVEL_END)
+
+
+func _freeze_controls() -> void:
+	_hand_2d.can_control = false
