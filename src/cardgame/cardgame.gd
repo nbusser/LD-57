@@ -27,7 +27,6 @@ var precedent_state: GameState = current_state
 var round_manager: RoundManager = null
 var timer_in_progress: bool = false
 
-
 @onready var player_deck_node = get_node("../deckManager/deckObjectPlayer")
 @onready var alien_deck_node = get_node("../deckManager/deckObjectAlien")
 @onready var card_scene = preload("res://src/Card/Card.tscn")
@@ -90,7 +89,7 @@ class RoundManager:
 	var battle_field: Array = []
 	var first_player: bool = true
 	var alien_hand: Array = []
-	var hp_until_shop : int = 0
+	var hp_until_shop: int = 0
 	var alien_life: int = 20:
 		set(value):
 			alien_life = value
@@ -202,7 +201,7 @@ class RoundManager:
 		alien_deck.append(alien_score)
 
 		hp_until_shop += before_hp_alien - alien_life
-		hp_until_shop += before_hp_player - player_life 
+		hp_until_shop += before_hp_player - player_life
 		print("hp until shop: ", hp_until_shop)
 		return first_player
 
