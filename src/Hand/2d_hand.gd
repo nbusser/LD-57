@@ -15,7 +15,6 @@ var state: Enums.HandState = Enums.HandState.POINT:
 @onready var hand_body = $"HandBody"
 @onready var arm = $"Arm"
 @onready var finger_tip = $"HandBody/Sprite2D/FingerTip"
-@onready var collision_shape = $"HandBody/CollisionShape2D"
 @onready var sprite_2d: AnimatedSprite2D = $"HandBody/Sprite2D"
 @onready var attachment_point = $HandBody/AttachmentPoint
 
