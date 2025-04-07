@@ -4,3 +4,6 @@
 
 [node name="cardgame" type="Node"]
 script = ExtResource("1_4grid")
+
+[node name="StepTimer" type="Timer" parent="."]
+one_shot = true

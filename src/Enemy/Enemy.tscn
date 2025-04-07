@@ -626,6 +626,7 @@ animations = [{
 
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_fjy47")
+alien_intelligence = null
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0720145, 0)

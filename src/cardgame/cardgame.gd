@@ -16,6 +16,23 @@ enum GameState {
 	WIN
 }
 
+enum Side { PLAYER, ALIEN }
+
+var current_state: GameState = GameState.NOT_STARTED
+var precedent_state: GameState = current_state
+var round_manager: RoundManager = null
+var timer_in_progress: bool = false
+
+@onready var player_deck_node = get_node("../deckManager/deckObjectPlayer")
+@onready var alien_deck_node = get_node("../deckManager/deckObjectAlien")
+@onready var card_scene = preload("res://src/Card/Card.tscn")
+@onready var the_alien = get_node("../Enemy")
+@onready var cards_manager = $"../CardsManager"
+@onready var player_snapper = $"../Snapper"
+@onready var snapper = $"../Snapper/CardsInBattleField"
+@onready var enemy_snapper = $"../EnemySnapper/CardsInBattleField"
+@onready var timer = $"StepTimer"
+
 
 func game_state_to_string(gs: GameState):
 	match gs:
@@ -41,20 +58,18 @@ func game_state_to_string(gs: GameState):
 			return "WIN"
 
 
-enum Side { PLAYER, ALIEN }
-
-var current_state: GameState = GameState.NOT_STARTED
-var precedent_state: GameState = current_state
-var round_manager: RoundManager = null
-
-@onready var player_deck_node = get_node("../deckManager/deckObjectPlayer")
-@onready var alien_deck_node = get_node("../deckManager/deckObjectAlien")
-@onready var card_scene = preload("res://src/Card/Card.tscn")
-@onready var the_alien = get_node("../Enemy")
-@onready var cards_manager = $"../CardsManager"
-@onready var player_snapper = $"../Snapper"
-@onready var snapper = $"../Snapper/CardsInBattleField"
-@onready var enemy_snapper = $"../EnemySnapper/CardsInBattleField"
+func setup_and_start_timer(duration: float) -> bool:
+	if timer_in_progress:
+		print(timer.time_left)
+		if timer.is_stopped():
+			timer_in_progress = false
+			return true
+		else:
+			return false
+	else:
+		timer.start(duration)
+		timer_in_progress = true
+		return false
 
 
 class RoundManager:
@@ -287,8 +302,32 @@ func _process(delta: float) -> void:
 						current_state = GameState.PLAYER_TURN
 					else:
 						current_state = GameState.BATTLE
+
 		GameState.BATTLE:
 			#On fait la bataille
+			if !timer_in_progress:  # Start animation
+				var tween = get_tree().create_tween()
+				tween.set_trans(Tween.TRANS_CUBIC)
+				tween.set_ease(Tween.EASE_IN)
+				for card in enemy_snapper.get_children():
+					tween.parallel().tween_property(
+						card, "global_position", card.global_position + Vector3(.07, 0, 0), 1
+					)
+				for card in snapper.get_children():
+					tween.parallel().tween_property(
+						card, "global_position", card.global_position + Vector3(-.07, 0, 0), 1
+					)
+				tween.tween_callback(
+					func():
+						for node in snapper.get_children():
+							node.call_deferred("queue_free")
+						for node in enemy_snapper.get_children():
+							node.call_deferred("queue_free")
+				)
+
+			var timer_over = setup_and_start_timer(3.0)
+			if !timer_over:
+				return
 			round_manager.battle()
 			if round_manager.player_life <= 0:
 				current_state = GameState.GAME_OVER
