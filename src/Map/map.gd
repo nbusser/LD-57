@@ -18,6 +18,9 @@ var _hovered_card: Card = null
 
 @onready var _player_snapper = $Snapper
 @onready var _enemy_snapper = $EnemySnapper
+@onready var _enemy: Enemy = $Enemy
+
+@onready var round_manager = _card_game.create_round_manager()
 
 
 func _process(_delta):
@@ -66,14 +69,91 @@ func _input(event):
 
 
 func _ready():
-	#_cards_manager.spawn_cards_in_hand([0, -2, 3, 4, 4])
+	Globals.tutorial_mode_changed.connect(_on_tutorial_mode_changed)
+	_on_tutorial_mode_changed(Globals.tutorial_mode)
 
-	#Pour le débug on start le round mtn
-	var round_manager = _card_game.create_round_manager()
 
-	round_manager.life_changed.connect(_on_life_changed)
-	_enemy_snapper.init(false)
-	_player_snapper.init(true)
+func _on_tutorial_mode_changed(is_tutorial: bool) -> void:
+	if is_tutorial:
+		await tutorial()
+	else:
+		_cards_manager.spawn_cards_in_hand([0, -2, 3, 4, 4])
+
+		round_manager.life_changed.connect(_on_life_changed)
+		_enemy_snapper.set_modulate(Color(100, 0, 0))
+		_enemy_snapper.init(false)
+		_player_snapper.set_modulate(Color(0, 100, 0))
+		_player_snapper.init(true)
+
+
+func tutorial():
+	await (
+		Globals
+		. show_messages(
+			[
+				"Hi, welcome to the introductory abduction program.",
+				"You have been forcefully invited in the depths of your interstellar space to participate in the federation's intelligence test.",
+				"You have been selected to represent your species:\nWater-Based-Carbon-Unit-42198",
+				"You will be tested on your extra-sensory perception and multiverse-reasoning.",
+				"We have materialized the standard test in a form you should be familiar with.",
+				"The goal is to play lower-valued cards than the ones I play.",
+				"Let's start with a simple example.",
+				"Draw a card from the deck.",
+			]
+		)
+	)
+	# highlight the deck and wait for the player to draw a card
+
+	await Globals.show_messages(['I will now play a "3" card.'])
+	_card_game.current_state = CardGame.GameState.ALIEN_TURN
+	await (
+		Globals
+		. show_messages(
+			[
+				"If you play a higher value (x) card , you will lose x - 3 points.",
+				"Otherwise, I get to lose that difference.",
+				"Your goal is to use your species' extra-sensory perception to predict my next moves and the deck's content.",
+			]
+		)
+	)
+
+	# Globals.enemy_state = Globals.BaseEnemyState.DISTRACTED
+	_enemy.state = Enums.EnemyState.DISTRACTED
+	await (
+		Globals
+		. show_messages(
+			[
+				"A supernova? Where?\n--The alien seems distracted--",
+			]
+		)
+	)
+	await Globals.show_messages(
+		["--You can use this chance to reach the inside of your sleeve.\nTry it now.--"], false
+	)
+
+	# TODO disable death
+	while true:
+		var action_state = (await Globals.state_changed)[0]
+		if action_state == Globals.ActionState.ILLEGAL:
+			break
+	_enemy.state = Enums.EnemyState.IDLE
+	await (
+		Globals
+		. show_messages(
+			[
+				"--Good job!--",
+				"--Did you notice the red glow when trying to cheat?--",
+			]
+		)
+	)
+	await (
+		Globals
+		. show_messages(
+			[
+				"Now ",
+			]
+		)
+	)
 
 
 func _on_life_changed(side: CardGame.Side, value: int):
@@ -85,6 +165,8 @@ func _on_life_changed(side: CardGame.Side, value: int):
 
 
 func _on_enemy_player_caught_cheating() -> void:
+	if Globals.tutorial_mode:
+		return
 	print("GAME OVER BLOCK THE CONTROLS")
 	#TODO : BLOCK THE CONTROLS
 	Globals.action_state = Globals.ActionState.CAUGHT

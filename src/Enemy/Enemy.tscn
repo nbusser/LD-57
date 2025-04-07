@@ -515,7 +515,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mlx8e")
 }],
-"loop": true,
+"loop": false,
 "name": &"sproink_distracted",
 "speed": 20.0
 }, {
@@ -631,7 +631,7 @@ script = ExtResource("1_fjy47")
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0720145, 0)
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_irkw7")
-animation = &"sproink_poked"
+animation = &"sproink_distracted"
 
 [node name="DistractionTimer" type="Timer" parent="."]
 one_shot = true

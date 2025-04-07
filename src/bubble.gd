@@ -8,18 +8,22 @@ signal clicked
 
 
 func _ready():
-	show_message(["Hello", "World"])
+	# show_messages(["Hello", "World"])
+	Globals.set_dialog(self)
 
 
-func show_message(messages: Array[String]):
-	# label.text = message
-	print("setting...")
+func show_messages(messages: Array[String], can_click = true):
 	for message in messages:
 		label.text = message
-		# col_shape.shape.size = Vector3(label.text.length() * 0.1, 0.1, 0.1)
-		print("waiting...")
-		await clicked
-		print("done")
+		if can_click:
+			await clicked
+	if can_click:
+		label.text = ""
+
+
+func wait_for_click():
+	await clicked
+	label.text = ""
 
 
 func _input(event):
