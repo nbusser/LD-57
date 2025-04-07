@@ -8,23 +8,35 @@ var distance = .5
 @onready var enemy = get_node_or_null("../../../../Enemy")
 @onready var left_eye = get_node_or_null("../../../../Enemy/LeftEye")
 @onready var right_eye = get_node_or_null("../../../../Enemy/RightEye")
+@onready var camera_menu = get_node_or_null("../../../../Camera3D")
 
 # Finger tip is now the same as HandBody's position, making this relatively
 # useless
 
 
 func _physics_process(_delta: float) -> void:
-	if !camera:
+	if !camera && !camera_menu:
 		return
 
-	var ray_query = PhysicsRayQueryParameters3D.new()
-	ray_query.from = camera.project_ray_origin(global_position)
-	ray_query.to = ray_query.from + camera.project_ray_normal(global_position) * 50
-	var results = camera.get_world_3d().direct_space_state.intersect_ray(ray_query)
-	if results:
-		distance = (results.position - camera.global_position).length()
+	if camera:
+		var ray_query = PhysicsRayQueryParameters3D.new()
+		ray_query.from = camera.project_ray_origin(global_position)
+		ray_query.to = ray_query.from + camera.project_ray_normal(global_position) * 1000
+		var results = camera.get_world_3d().direct_space_state.intersect_ray(ray_query)
+		if results:
+			distance = (results.position - camera.global_position).length()
+		else:
+			distance = .5
+
 	else:
-		distance = .5
+		var ray_query = PhysicsRayQueryParameters3D.new()
+		ray_query.from = camera_menu.project_ray_origin(global_position)
+		ray_query.to = ray_query.from + camera_menu.project_ray_normal(global_position) * 1000
+		var results = camera_menu.get_world_3d().direct_space_state.intersect_ray(ray_query)
+		if results:
+			distance = (results.position - camera_menu.global_position).length()
+		else:
+			distance = .5
 
 
 func _input(event):

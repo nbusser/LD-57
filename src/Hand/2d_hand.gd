@@ -51,9 +51,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	#Adjust display size
-	hand_body.scale.x = 1.0 - finger_tip.distance / 2.0
-	hand_body.scale.y = 1.0 - finger_tip.distance / 2.0
-	arm.width_curve.set_point_value(1, .2 + 1.0 - finger_tip.distance / 2.0)
+	hand_body.scale.x = clamp(1.0 - finger_tip.distance / 2.0, .1, 1.0)
+	hand_body.scale.y = clamp(1.0 - finger_tip.distance / 2.0, .1, 1.0)
+	arm.width_curve.set_point_value(1, clamp(1.0 - finger_tip.distance / 2.0, .1, 1.0))
 
 	# Move
 	hand_body.velocity = (get_global_mouse_position() - finger_tip.global_position) * 500 * delta

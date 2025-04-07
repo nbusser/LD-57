@@ -33,12 +33,12 @@
 panorama = ExtResource("2_xtfh0")
 energy_multiplier = 2.5
 
-[sub_resource type="Sky" id="Sky_fyitu"]
+[sub_resource type="Sky" id="Sky_dgvhi"]
 sky_material = SubResource("PanoramaSkyMaterial_22krd")
 
 [sub_resource type="Environment" id="Environment_57a3y"]
 background_mode = 2
-sky = SubResource("Sky_fyitu")
+sky = SubResource("Sky_dgvhi")
 glow_enabled = true
 
 [sub_resource type="Curve3D" id="Curve3D_wqubw"]
