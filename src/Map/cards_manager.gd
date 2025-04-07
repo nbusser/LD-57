@@ -97,6 +97,7 @@ func drop_card():
 	_grabbed_card = null
 
 	if sleeve.finger_is_in_sleeve:
+		print("Card dropped in sleeve")
 		_sleeve_add_card(card)
 	else:
 		var close = is_card_close_to_battlefield()
