@@ -87,9 +87,16 @@ class RoundManager:
 	#Résolution du combat
 	func battle() -> bool:
 		var was_first = first_player
-		var player_score = battle_field[0]["card"] if battle_field[0]["player"] == "player" else 0
-		var alien_score = battle_field[0]["card"] if battle_field[0]["player"] == "alien" else 0
-
+		print(battle_field)
+		var player_score = -99
+		var alien_score = -99
+		for card in battle_field:
+			if card["player"] == "player":
+				player_score = card["card"]
+			elif card["player"] == "alien":
+				alien_score = card["card"]
+		print("Player score: ", player_score)
+		print("Alien score: ", alien_score)
 		#CAS SPECIAL ETOILE ET -2
 		if alien_score == 0 or player_score == 0:
 			#2 étoiles
@@ -120,6 +127,9 @@ class RoundManager:
 				alien_life -= 5  # Joueur perd 7 points de vie
 				first_player = true
 
+		elif  player_score == alien_score :
+			print("Egalité")
+			first_player = was_first
 		#CAS NORMAL
 		else:
 			#On retire les points de vie
