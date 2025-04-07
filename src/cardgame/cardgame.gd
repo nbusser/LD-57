@@ -173,7 +173,6 @@ class RoundManager:
 					player_life -= 2
 					explanation += ("You lose 2 points and I get to go first.")
 
-
 		#CAS SPECIAL -2 ET 5
 		elif (alien_score == -2 and player_score == 5) or (player_score == -2 and alien_score == 5):
 			if alien_score == -2:
@@ -200,11 +199,25 @@ class RoundManager:
 			#On retire les points de vie
 			first_player = false if player_score > alien_score else true
 			if player_score > alien_score:
-				explanation += (str(alien_score) + " > " + str(player_score) + ": I'm losing " + str(player_score - alien_score) + " points on this one! Loser goes first.")
+				explanation += (
+					str(alien_score)
+					+ " > "
+					+ str(player_score)
+					+ ": I'm losing "
+					+ str(player_score - alien_score)
+					+ " points on this one! Loser goes first."
+				)
 				#Le joueur perd
 				player_life -= player_score - alien_score
 			elif alien_score > player_score:
-				explanation += (str(player_score) + " > " + str(alien_score) + ": you're losing " + str(alien_score - player_score) + " points on this one! Loser goes first.")
+				explanation += (
+					str(player_score)
+					+ " > "
+					+ str(alien_score)
+					+ ": you're losing "
+					+ str(alien_score - player_score)
+					+ " points on this one! Loser goes first."
+				)
 				#L'alien perd
 				alien_life -= alien_score - player_score
 			else:
