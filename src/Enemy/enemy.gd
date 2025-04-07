@@ -100,8 +100,10 @@ func alien_play_card(value: int) -> void:
 	drop_zone_enemy.add_child(card_inst)
 	card_inst.global_position = mouth.global_position
 	var tween = get_tree().create_tween()
-	tween.parallel().tween_property(card_inst, "global_position", Vector3(drop_zone_enemy.global_position), 1)
-	tween.parallel().tween_property(card_inst, "rotation", Vector3(5*PI / 2, 0, 0), 1)
+	tween.parallel().tween_property(
+		card_inst, "global_position", Vector3(drop_zone_enemy.global_position), 1
+	)
+	tween.parallel().tween_property(card_inst, "rotation", Vector3(5 * PI / 2, 0, 0), 1)
 	tween.set_trans(Tween.TRANS_CIRC)
 
 	card_game.round_manager.play_card("alien", value)
