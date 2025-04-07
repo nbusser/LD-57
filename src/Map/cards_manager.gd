@@ -24,7 +24,7 @@ var _grabbed_card: Card:
 @onready var card_scene: PackedScene = preload("res://src/Card/Card.tscn")
 @onready var finger_tip: Node2D = $"../Billboard/2DHand/HandBody/Sprite2D/FingerTip"
 @onready var camera: Camera3D = $"../CameraRail/FollowRail/Camera"
-@onready var batte_field_zone: Node3D = $"../CardsInBattleField"
+@onready var batte_field_zone: Node3D = $"../Snapper/CardsInBattleField"
 @onready var card_game: Node = $"../cardgame"
 @onready var sleeve: Sleeve = $"../Billboard/Sleeve"
 

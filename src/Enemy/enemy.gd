@@ -11,7 +11,7 @@ var state: Enums.EnemyState = Enums.EnemyState.IDLE:
 
 @onready var animated_sprite_3d: AnimatedSprite3D = $AnimatedSprite3D
 @onready var card_scene = preload("res://src/Card/Card.tscn")
-@onready var batte_field_zone = $"../CardsInBattleField"
+@onready var batte_field_zone = $"../Snapper/CardsInBattleField"
 @onready var card_game: Node = $"../cardgame"
 
 
