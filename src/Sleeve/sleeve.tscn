@@ -13,7 +13,7 @@ size = Vector2(1350, 2)
 friction = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g5aly"]
-size = Vector2(1328, 268)
+size = Vector2(1156, 268)
 
 [node name="Sleeve" type="Node2D"]
 script = ExtResource("1_0444v")
@@ -45,7 +45,7 @@ collision_layer = 513
 collision_mask = 513
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropZone"]
-position = Vector2(7, 14)
+position = Vector2(93, 14)
 shape = SubResource("RectangleShape2D_g5aly")
 
 [connection signal="body_entered" from="DropZone" to="." method="_on_drop_zone_body_entered"]
