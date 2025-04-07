@@ -8,7 +8,11 @@ var _is_card_close_to_battlefield = false
 var _grabbed_card: Card:
 	get:
 		assert(_grabbed_card_parent.get_child_count() <= 1)
-		return _grabbed_card_parent.get_child(0)
+		return (
+			null
+			if _grabbed_card_parent.get_child_count() == 0
+			else _grabbed_card_parent.get_child(0)
+		)
 	set(card):
 		if card == null:
 			assert(_grabbed_card_parent.get_child_count() == 1)

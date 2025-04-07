@@ -57,7 +57,7 @@ func _input(event):
 				_hovered_card = null
 				_hand_2d.state = Enums.HandState.PINCH
 		else:
-			if _cards_manager.is_grabbing_a_card() != null:
+			if _cards_manager.is_grabbing_a_card():
 				_cards_manager.drop_card()
 				_hand_2d.state = Enums.HandState.POINT
 
