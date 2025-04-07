@@ -84,6 +84,8 @@ func grab_card(card: Card):
 
 func _place_card_in_battlefield(card: Card):
 	card_game.round_manager.play_card("player", card.card_value)
+	for node in drop_zone_player.get_children():
+		node.call_deferred("queue_free")
 	drop_zone_player.add_child(card)
 	card.position = Vector3.ZERO
 	card.remove_from_group("grabbable_cards")

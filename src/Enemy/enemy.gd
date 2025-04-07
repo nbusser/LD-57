@@ -13,7 +13,6 @@ var state: Enums.EnemyState = Enums.EnemyState.IDLE:
 @onready var card_scene = preload("res://src/Card/Card.tscn")
 @onready var drop_zone_enemy: Node3D = $"../EnemySnapper/CardsInBattleField"
 @onready var mouth: Node3D = $"../Enemy/Mouth"
-@onready var batte_field_zone = $"../Snapper/CardsInBattleField"
 @onready var card_game: CardGame = $"../cardgame"
 
 
@@ -117,6 +116,7 @@ func alien_play_card(value: int) -> void:
 	var card_inst = card_scene.instantiate()
 	card_inst.init(value)
 	#On la place à un endroit la tavu
+	var previous_cards = drop_zone_enemy.get_children()
 	drop_zone_enemy.add_child(card_inst)
 	card_inst.global_position = mouth.global_position
 	var tween = get_tree().create_tween()
@@ -126,6 +126,10 @@ func alien_play_card(value: int) -> void:
 	tween.parallel().tween_property(card_inst, "rotation", Vector3(5 * PI / 2, 0, 0), .7)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_IN)
+	tween.tween_callback(func():
+		for node in previous_cards:
+			node.call_deferred("queue_free")
+	)
 
 	card_game.round_manager.play_card("alien", value)
 	#TODO REGLER L INSTANCE DE LA CARTE
