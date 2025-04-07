@@ -72,9 +72,7 @@ func _ready():
 	var round_manager = _card_game.create_round_manager()
 
 	round_manager.life_changed.connect(_on_life_changed)
-	_enemy_snapper.set_modulate(Color(100, 0, 0))
 	_enemy_snapper.init(false)
-	_player_snapper.set_modulate(Color(0, 100, 0))
 	_player_snapper.init(true)
 
 
