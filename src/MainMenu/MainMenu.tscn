@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvgh060edrp7j"]
+[gd_scene load_steps=3 format=3 uid="uid://bvgh060edrp7j"]
 
 [ext_resource type="Script" uid="uid://btvd0b0skhsfa" path="res://src/MainMenu/MainMenu.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="2_cttlv"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -43,6 +44,8 @@ text = "Credits"
 [node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
+
+[node name="2DHand" parent="." instance=ExtResource("2_cttlv")]
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/SelectLevel" to="." method="_on_select_level_pressed"]
