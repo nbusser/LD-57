@@ -2,6 +2,8 @@ class_name CardGame
 extends Node
 
 signal card_spawned_on_the_deck(card: Card)
+signal player_lost
+signal player_won
 
 enum GameState {
 	NOT_STARTED,
@@ -340,7 +342,13 @@ func _process(delta: float) -> void:
 				return
 			round_manager.battle()
 			round_manager.battle_field.clear()
+
 			#Soit on va au shop, soit on fait un test de fin de partie
+			if round_manager.player_life <= 20:
+				player_lost.emit()
+			elif round_manager.alien_life <= 20:
+				player_won.emit()
+
 			if round_manager.hp_until_shop >= HP_TO_SHOP:
 				current_state = GameState.SHOP
 			else:

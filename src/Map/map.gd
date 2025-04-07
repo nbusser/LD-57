@@ -168,3 +168,17 @@ func _on_enemy_player_caught_cheating() -> void:
 	Globals.action_state = Globals.ActionState.CAUGHT
 	await get_tree().create_timer(3.0).timeout
 	Globals.end_scene(Globals.EndSceneStatus.LEVEL_GAME_OVER)
+
+
+func _on_cardgame_player_lost() -> void:
+	Globals.show_messages(["I won!"])
+	#TODO : BLOCK THE CONTROLS
+	await get_tree().create_timer(3.0).timeout
+	Globals.end_scene(Globals.EndSceneStatus.LEVEL_GAME_OVER)
+
+
+func _on_cardgame_player_won() -> void:
+	Globals.show_messages(["Daw zetla tah khedamin ta3 had jeu!"])
+	#TODO : BLOCK THE CONTROLS
+	await get_tree().create_timer(3.0).timeout
+	Globals.end_scene(Globals.EndSceneStatus.LEVEL_END)
