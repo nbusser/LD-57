@@ -3,7 +3,6 @@ extends Node3D
 const PLANE_COLLISION_LAYER = 6
 
 var _hovered_card: Card = null
-var _dragged_card: Card = null
 
 @onready var _card_game: CardGame = $cardgame
 @onready var _cards_manager: CardsManager = $CardsManager
@@ -18,10 +17,6 @@ var _dragged_card: Card = null
 @onready var _score_display_player = $ScoreDisplayPlayer
 
 
-func _is_dragging():
-	return _dragged_card != null
-
-
 func _process(_delta):
 	var viewport := get_viewport()
 	var current_camera := viewport.get_camera_3d()
@@ -33,7 +28,7 @@ func _process(_delta):
 		_stencil_camera.fov = current_camera.fov
 		_stencil_camera.global_transform = current_camera.global_transform
 
-	if _is_dragging():
+	if _cards_manager.is_grabbing_a_card():
 		pass
 	else:
 		var new_hover_card: Card = null
@@ -58,14 +53,12 @@ func _input(event):
 	if event is InputEventMouseButton and event.button_index == 1:
 		if event.is_pressed():
 			if _hovered_card != null:
-				_dragged_card = _hovered_card
-				_cards_manager.grab_card(_dragged_card)
+				_cards_manager.grab_card(_hovered_card)
 				_hovered_card = null
 				_hand_2d.state = Enums.HandState.PINCH
 		else:
-			if _dragged_card != null:
+			if _cards_manager.is_grabbing_a_card() != null:
 				_cards_manager.drop_card()
-				_dragged_card = null
 				_hand_2d.state = Enums.HandState.POINT
 
 

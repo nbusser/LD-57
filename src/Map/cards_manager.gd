@@ -28,6 +28,10 @@ var _grabbed_card: Card:
 @onready var _grabbed_card_parent: Node3D = $"GrabbedCard"
 
 
+func is_grabbing_a_card():
+	return _grabbed_card != null
+
+
 func _physics_process(_delta: float) -> void:
 	# Move the dragged card along the finger tip
 	if _grabbed_card != null:
