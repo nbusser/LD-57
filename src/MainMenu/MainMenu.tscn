@@ -22,7 +22,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Deep pockets"
+text = "Deep sleeve"
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
