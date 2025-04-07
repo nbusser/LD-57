@@ -71,7 +71,7 @@ func _physics_process(delta: float) -> void:
 	var required_length = (anchor.global_position - hand_body.position).length()
 	if required_length / arm.points.size() > distance_constraint:  # Too short, emergency fix
 		distance_constraint = required_length / arm.points.size()
-	elif required_length / (arm.points.size() - 2) < distance_constraint:  # Too long, spool back slowly
+	elif required_length / (arm.points.size()) < distance_constraint:  # Too long, spool back slowly
 		distance_constraint -= delta * reactivity
 	if distance_constraint < required_length / (arm.points.size() - 1):  # Long enough but may be longer, grow slowly
 		distance_constraint += delta * reactivity

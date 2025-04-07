@@ -170,3 +170,9 @@ func alien_play_card(value: int) -> void:
 
 	card_game.round_manager.play_card("alien", value)
 	#TODO REGLER L INSTANCE DE LA CARTE
+
+func poke_left():
+	print("poke left")
+
+func poke_right():
+	print("poke right")
