@@ -53,17 +53,6 @@ text = "Level: "
 layout_mode = 2
 text = "/"
 
-[node name="CoinNumber" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/CoinNumber"]
-layout_mode = 2
-text = "Coins: "
-
-[node name="CoinNumberValue" type="Label" parent="VBoxContainer/VBoxContainer/CoinNumber"]
-layout_mode = 2
-text = "/"
-
 [node name="FadeinPane" type="ColorRect" parent="."]
 visible = false
 layout_mode = 1

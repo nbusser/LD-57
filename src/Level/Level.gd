@@ -15,8 +15,8 @@ func _ready():
 	timer.start(level_state.level_data.timer_duration)
 
 
-func init(level_number_p: int, level_data_p: LevelData, nb_coins_p: int):
-	level_state = LevelState.new(level_number_p, level_data_p, nb_coins_p)
+func init(level_number_p: int, level_data_p: LevelData):
+	level_state = LevelState.new(level_number_p, level_data_p)
 
 
 func _on_Timer_timeout():

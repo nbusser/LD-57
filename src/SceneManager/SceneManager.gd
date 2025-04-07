@@ -49,7 +49,6 @@ func _process(_delta: float) -> void:
 
 func _reset_game_state() -> void:
 	current_level_number = 0
-	nb_coins = 0
 
 
 func _quit_game() -> void:
@@ -71,7 +70,7 @@ func _start_game() -> void:
 func _run_level() -> void:
 	var scene: Level = level.instantiate()
 	# Provies its settings to the level
-	scene.init(current_level_number, levels[current_level_number], nb_coins)
+	scene.init(current_level_number, levels[current_level_number])
 	# Play level music
 	change_music_track(music_players[current_level_number % len(music_players)])
 	self.current_scene = scene
@@ -88,9 +87,7 @@ func _run_level_selector() -> void:
 	self.current_scene = scene
 
 
-func _on_end_of_level(new_nb_coins: int) -> void:
-	# Update game state depending on level result
-	nb_coins = new_nb_coins
+func _on_end_of_level() -> void:
 	_load_score_screen()
 
 
@@ -105,7 +102,7 @@ func _restart_level() -> void:
 
 func _load_score_screen() -> void:
 	var scene: ScoreScreen = score_screen.instantiate()
-	scene.init(current_level_number, nb_coins)
+	scene.init(current_level_number)
 	self.current_scene = scene
 
 
@@ -152,8 +149,7 @@ func _on_end_scene(status: Globals.EndSceneStatus, params: Dictionary = {}) -> v
 		Globals.EndSceneStatus.MAIN_MENU_CLICK_QUIT:
 			_quit_game()
 		Globals.EndSceneStatus.LEVEL_END:
-			var new_nb_coins: int = params["new_nb_coins"]
-			_on_end_of_level(new_nb_coins)
+			_on_end_of_level()
 		Globals.EndSceneStatus.LEVEL_GAME_OVER:
 			_on_game_over()
 		Globals.EndSceneStatus.LEVEL_RESTART:
