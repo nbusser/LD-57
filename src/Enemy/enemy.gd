@@ -20,6 +20,7 @@ var state: Enums.EnemyState = Enums.EnemyState.IDLE:
 func _update_sprite():
 	if (
 		state == Enums.EnemyState.DISTRACTED
+		or state == Enums.EnemyState.ASLEEP
 		or state == Enums.EnemyState.WEAK
 		or state == Enums.EnemyState.THINKING
 	):
@@ -80,7 +81,7 @@ func _on_distraction_timer_timeout() -> void:
 		await get_tree().create_timer(new_state.distraction_time).timeout
 		state = Enums.EnemyState.IDLE
 
-	$DistractionTimer.wait_time = randf() * 5.0
+	$DistractionTimer.wait_time = randf() * 13.0 + 3.0
 	$DistractionTimer.start()
 
 
