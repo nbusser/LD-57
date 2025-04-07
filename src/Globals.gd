@@ -57,7 +57,7 @@ var card_skins: Dictionary = {
 
 var enemy_state = BaseEnemyState.IDLE:
 	set(state):
-		print("enemy_state", state)
+		print("new enemy state ", state)
 		state_changed.emit(action_state, state)
 		enemy_state = state
 
