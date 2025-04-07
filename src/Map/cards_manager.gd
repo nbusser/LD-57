@@ -30,8 +30,10 @@ var _grabbed_card: Card:
 
 @onready var cards_in_hand: Node3D = $SleeveHand/CardsInHand
 @onready var cards_on_top_of_deck: Node3D = $CardsOnTopOfDeck
-@onready var _cards_on_sleeve: Node3D = $CardsInSleeve
+@onready var _cards_on_sleeve: Node3D = $SleeveHand/CardsInSleeve
 @onready var _grabbed_card_parent: Node3D = $"GrabbedCard"
+@onready var card_rail: Path3D = $SleeveHand/CardRail
+@onready var relative_point: Node3D = $SleeveHand/CardRail/RelativePoint
 
 
 func is_grabbing_a_card():
@@ -118,6 +120,23 @@ func drop_card():
 func _sleeve_add_card(card: Card):
 	card.sleeve_mode(true)
 	_cards_on_sleeve.add_child(card)
+
+	var ray_origin = camera.project_ray_origin(get_viewport().get_mouse_position())
+	var ray_end = ray_origin + camera.project_ray_normal(get_viewport().get_mouse_position()) * 1
+
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end, 1 << 4)
+	query.collide_with_areas = true
+	var result = space_state.intersect_ray(query).get("position")
+
+	if not result:
+		return
+
+	relative_point.global_position = result
+	var closest_point = card_rail.curve.get_closest_point(relative_point.position)
+	relative_point.position = closest_point
+	card.global_position = relative_point.global_position
+
 	card.add_to_group("grabbable_cards")
 
 

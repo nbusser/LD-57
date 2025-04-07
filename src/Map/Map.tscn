@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://btohiqrak4tcf"]
+[gd_scene load_steps=36 format=3 uid="uid://btohiqrak4tcf"]
 
 [ext_resource type="Script" uid="uid://sasxstcl4dg3" path="res://src/Map/map.gd" id="1_e037b"]
 [ext_resource type="Script" uid="uid://dd56prqs5qd6c" path="res://src/Map/camera.gd" id="1_wqubw"]
@@ -39,12 +39,15 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_g5aly"]
-height = 0.01
-radius = 0.2
+[sub_resource type="BoxShape3D" id="BoxShape3D_bxjut"]
+size = Vector3(0.237244, 2.02521, 1.86621)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jde0p"]
 size = Vector3(4, 0.01, 4)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g5aly"]
+height = 0.01
+radius = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dgvhi"]
 radius = 0.05
@@ -65,6 +68,16 @@ shader = ExtResource("7_fyitu")
 shader_parameter/lineWeight = 3.0
 shader_parameter/outlineColor = Color(3, 0.8, 0, 0.8)
 shader_parameter/stencilMask = SubResource("ViewportTexture_fyitu")
+
+[sub_resource type="Curve3D" id="Curve3D_dgvhi"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a8qib"]
+size = Vector3(0.01, 66.9405, 46.835)
 
 [sub_resource type="Animation" id="Animation_g5aly"]
 length = 0.001
@@ -149,8 +162,8 @@ collision_layer = 128
 collision_mask = 0
 
 [node name="SleeveDropArea3D" type="CollisionShape3D" parent="Snapper/place_area"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.877129, 0.8)
-shape = SubResource("CylinderShape3D_g5aly")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -1.67374e-18, 1, 0.503892, 0.863747, 1.46105)
+shape = SubResource("BoxShape3D_bxjut")
 
 [node name="TableDropArea3D" type="CollisionShape3D" parent="Snapper/place_area"]
 transform = Transform3D(1, 0, 0, 0, 1, 3.55271e-15, 0, -3.55271e-15, 1, 0, 0.65, 0)
@@ -216,7 +229,6 @@ environment = SubResource("Environment_lrvju")
 
 [node name="Sleeve" parent="Billboard" instance=ExtResource("9_g5aly")]
 position = Vector2(779, 92)
-scale = Vector2(1, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_fgn2p")
@@ -261,14 +273,31 @@ texture = ExtResource("11_bxjut")
 
 [node name="SleeveAnchor" type="Node3D" parent="CardsManager/SleeveHand"]
 unique_name_in_owner = true
-transform = Transform3D(1, -2.6077e-08, 8.9407e-08, 2.23517e-08, 1, -4.47035e-08, 0, 1.49012e-08, 1, 0.995709, 0.864445, -0.00482178)
+transform = Transform3D(1, -2.6077e-08, 1.19209e-07, 2.23517e-08, 1, -3.35276e-08, -2.98023e-08, 1.86265e-08, 1, 0.139, 0.362, -0.04)
 
 [node name="CardsInHand" type="Node3D" parent="CardsManager/SleeveHand"]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -3.1469, 0.528149, -0.437333)
 
-[node name="CardsOnTopOfDeck" type="Node3D" parent="CardsManager"]
+[node name="CardsInSleeve" type="Node3D" parent="CardsManager/SleeveHand"]
+transform = Transform3D(15.6864, 0.252803, 12.4045, 0.668299, 19.9496, -1.25169, -12.3891, 1.39623, 15.6385, -0.0220337, -1.73877, -0.121692)
 
-[node name="CardsInSleeve" type="Node3D" parent="CardsManager"]
+[node name="CardRail" type="Path3D" parent="CardsManager/SleeveHand"]
+transform = Transform3D(1, -3.72529e-09, 0, 0, 1, 0, -2.98023e-08, 3.72529e-09, 1, -0.0305977, -2.41456, -0.168989)
+curve = SubResource("Curve3D_dgvhi")
+
+[node name="RelativePoint" type="Node3D" parent="CardsManager/SleeveHand/CardRail"]
+
+[node name="Area3D" type="Area3D" parent="CardsManager/SleeveHand"]
+transform = Transform3D(1, -3.72529e-09, 0, 0, 1, 0, -2.98023e-08, 3.72529e-09, 1, 1.21018, 0.0515575, -0.955798)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CardsManager/SleeveHand/Area3D"]
+transform = Transform3D(-5.96046e-08, -1.86265e-08, 1, -3.35276e-08, 1, -3.72529e-09, -1, 1.11759e-08, -5.96046e-08, 22.4388, 8.10138, 0.791903)
+shape = SubResource("BoxShape3D_a8qib")
+debug_color = Color(0.878431, 0.298039, 0.431373, 0.807843)
+
+[node name="CardsOnTopOfDeck" type="Node3D" parent="CardsManager"]
 
 [node name="GrabbedCard" type="Node3D" parent="CardsManager"]
 transform = Transform3D(0.753781, 0, -0.657125, 0, 1, 0, 0.657125, 0, 0.753781, 0.158395, -0.0596996, -0.0215369)

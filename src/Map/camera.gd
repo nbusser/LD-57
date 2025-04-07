@@ -4,7 +4,7 @@ extends Camera3D
 @export var pan_speed = 1
 @export var rail_speed = 0
 @export var amplitude_vt = 0  # degrees
-@export var amplitude_hz = 120  # degrees
+@export var amplitude_hz = 90  # degrees
 @export var center = Vector2(-20, 0)
 
 @onready var rail = $".."
