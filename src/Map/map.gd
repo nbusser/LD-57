@@ -77,8 +77,6 @@ func _on_tutorial_mode_changed(is_tutorial: bool) -> void:
 	if is_tutorial:
 		await tutorial()
 	else:
-		_cards_manager.spawn_cards_in_hand([0, -2, 3, 4, 4])
-
 		round_manager.life_changed.connect(_on_life_changed)
 		_enemy_snapper.init(false)
 		_player_snapper.init(true)
