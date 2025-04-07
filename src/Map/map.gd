@@ -22,6 +22,7 @@ var _hovered_card: Card = null
 
 @onready var _round_manager = _card_game.create_round_manager()
 
+
 func _process(_delta):
 	var viewport := get_viewport()
 	var current_camera := viewport.get_camera_3d()
@@ -150,12 +151,14 @@ func tutorial():
 		)
 	)
 
+
 func _on_life_changed(side: CardGame.Side, value: int):
 	match side:
 		CardGame.Side.ALIEN:
 			_score_display_enemy.value = value
 		CardGame.Side.PLAYER:
 			_score_display_player.value = value
+
 
 func _on_enemy_player_caught_cheating() -> void:
 	if Globals.tutorial_mode:
