@@ -40,6 +40,9 @@ func _ready() -> void:
 	randomize()
 	Globals.scene_ended.connect(self._on_end_scene)
 	_run_main_menu()
+	for mp in music_players:
+		mp.play()
+		mp.volume_linear = 0
 
 
 func _process(_delta: float) -> void:
