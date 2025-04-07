@@ -196,6 +196,7 @@ environment = SubResource("Environment_lrvju")
 
 [node name="Sleeve" parent="Billboard" instance=ExtResource("9_g5aly")]
 position = Vector2(779, 92)
+scale = Vector2(1, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_fgn2p")

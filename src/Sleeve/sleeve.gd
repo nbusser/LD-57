@@ -7,12 +7,12 @@ var finger_is_in_sleeve = false
 
 
 func _on_drop_zone_body_entered(_body: Node2D) -> void:
-	Globals.set_action_state(Globals.ActionState.ILLEGAL)
+	Globals.action_state = Globals.ActionState.ILLEGAL
 	finger_is_in_sleeve = true
 	finger_entered_sleeve.emit()
 
 
 func _on_drop_zone_body_exited(_body: Node2D) -> void:
-	Globals.set_action_state(Globals.ActionState.IDLE)
+	Globals.action_state = Globals.ActionState.IDLE
 	finger_is_in_sleeve = false
 	finger_left_sleeve.emit()
