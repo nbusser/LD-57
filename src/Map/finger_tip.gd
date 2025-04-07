@@ -9,7 +9,6 @@ var distance = 2.0
 @onready var left_eye = get_node_or_null("../../../../Enemy/LeftEye")
 @onready var right_eye = get_node_or_null("../../../../Enemy/RightEye")
 
-
 # Finger tip is now the same as HandBody's position, making this relatively
 # useless
 
