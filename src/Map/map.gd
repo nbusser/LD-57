@@ -103,12 +103,12 @@ func tutorial():
 		Globals
 		. show_messages(
 			[
-				"Hi, welcome to the introductory abduction program.",
-				"You have been forcefully invited in the depths of your interstellar space to participate in the federation's intelligence test.",
+				"Hi, welcome to our introductory abduction program.",
+				"You have been forcefully invited into the depths of your interstellar space to participate in the federation's intelligence test.",
 				"You have been selected to represent your species:\nWater-Based-Carbon-Unit-42198",
-				"You will be tested on your extra-sensory perception and multiverse-reasoning.",
+				"You will be tested you on your extra-sensory perception and multiverse-reasoning.",
 				"We have materialized the standard test in a form you should be familiar with.",
-				"The goal is to play lower-valued cards than the ones I play.",
+				"The goal is to play lower-value cards than the ones I play.",
 				"Let's start with a simple example.",
 			]
 		)
@@ -128,8 +128,8 @@ func tutorial():
 		Globals
 		. show_messages(
 			[
-				"If you play a higher value (x) card , you will lose x - 3 points.",
-				"Otherwise, I get to lose that difference.",
+				"If you play a higher value (x) card , you will lose x - 3 tokens.",
+				"Otherwise, I'll to lose that difference.",
 				"Your goal is to use your species' extra-sensory perception to predict my next moves and the deck's content.",
 			]
 		)
@@ -152,7 +152,7 @@ func tutorial():
 		)
 	)
 	await Globals.show_messages(
-		["--You can use this chance to reach the inside of your sleeve.\nTry it now.--"], false
+		["--You can use this opportunity to reach into your sleeve.\nTry it now--"], false
 	)
 
 	while true:
@@ -163,12 +163,10 @@ func tutorial():
 		Globals
 		. show_messages(
 			[
-				"--This game seems too hard for your species, but if you don't get caught, you don't cheat--",
-				"--When you're cheating, there's a pink overlay that appears--",
-				"--When your opponent is distracted (blue), you can use this chance to reach the inside of your sleeve--",
-				"--Storing card in you sleeve allow you to draw extra cards from your deck--",
-				"--You cannot have more than 6 cards in total--",
-				"--Good luck--",
+				"--No human could win this game the way you're expected to. You'll have to use any and all tricks at your disposal, whilst avoiding detection--",
+				"--While you're cheating, a pink overlay appears--",
+				"--While your opponent is distracted (blue), you can freely stuff things in and out of your sleeve--",
+				"--You'll need more than luck, but... good luck--",
 			]
 		)
 	)
@@ -177,8 +175,8 @@ func tutorial():
 		Globals
 		. show_messages(
 			[
-				"Hmm... Probably just the anti-matter wind... Or maybe a space rat...",
-				"Anyways, should we start?",
+				"Hmm... Probably just the anti-matter wind... Or maybe a space rat?",
+				"Anyways, shall we start?",
 			]
 		)
 	)
