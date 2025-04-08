@@ -274,7 +274,7 @@ script = ExtResource("9_22krd")
 
 [node name="SleeveHand" type="Sprite3D" parent="CardsManager"]
 unique_name_in_owner = true
-transform = Transform3D(0.0392161, 0.00167075, -0.0309726, 0.000632016, 0.049874, 0.00349056, 0.0310113, -0.00312923, 0.0390962, 0.380453, -0.107672, 0.0431782)
+transform = Transform3D(0.0392161, 0.00167075, -0.0309727, 0.000632016, 0.049874, 0.00349056, 0.0310113, -0.00312923, 0.0390961, 0.380453, -0.107672, 0.0431782)
 sorting_offset = -1e+06
 texture = ExtResource("10_dgvhi")
 

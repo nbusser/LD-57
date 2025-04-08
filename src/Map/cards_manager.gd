@@ -138,6 +138,8 @@ func _sleeve_add_card(card: Card):
 	var closest_point = _card_rail.curve.get_closest_point(_relative_point.position)
 	_relative_point.position = closest_point
 	card.global_position = _relative_point.global_position
+	# card.global_rotation = camera.global_rotation
+	card.rotation = Vector3(PI / 2, deg_to_rad(-35), 0)
 
 	card.add_to_group("grabbable_cards")
 
