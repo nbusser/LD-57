@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://cb2c6exrmfj47"]
+[gd_scene load_steps=93 format=3 uid="uid://cb2c6exrmfj47"]
 
 [ext_resource type="Texture2D" uid="uid://b8rmf6ufuoiq0" path="res://assets/sprites/aliens/sproink_idle.png" id="1_do4pe"]
 [ext_resource type="Script" uid="uid://b1whyc7omqomo" path="res://src/Enemy/enemy.gd" id="1_fjy47"]
@@ -15,6 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://d4gtgdpwkwtaj" path="res://assets/sprites/aliens/pig_weak.png" id="6_1enot"]
 [ext_resource type="Texture2D" uid="uid://bmn4kv06xh42m" path="res://assets/sprites/aliens/pig_poked.png" id="6_32e6g"]
 [ext_resource type="Texture2D" uid="uid://dl52cwx0hkh1x" path="res://assets/sprites/aliens/sproink_poked.png" id="13_rfbxy"]
+[ext_resource type="Script" uid="uid://bqub0n7gx4ukd" path="res://src/AudioBankPlayer.gd" id="16_rfbxy"]
+[ext_resource type="AudioStream" uid="uid://dgkn2g5ihh4k8" path="res://assets/sounds/grumpy alien.wav" id="18_vwiaf"]
+[ext_resource type="AudioStream" uid="uid://dl7h8o4rqcdky" path="res://assets/sounds/angry alien.wav.ogg" id="18_wb8ox"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g0ehj"]
 atlas = ExtResource("2_hjafo")
@@ -643,6 +646,16 @@ one_shot = true
 [node name="PokedTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Grumpy" type="AudioStreamPlayer" parent="SFX"]
+script = ExtResource("16_rfbxy")
+sounds = Array[AudioStream]([ExtResource("18_wb8ox")])
+
+[node name="Distracted" type="AudioStreamPlayer" parent="SFX"]
+script = ExtResource("16_rfbxy")
+sounds = Array[AudioStream]([ExtResource("18_vwiaf")])
 
 [connection signal="timeout" from="DistractionTimer" to="." method="_on_distraction_timer_timeout"]
 [connection signal="timeout" from="AngryTimer" to="." method="_on_angry_timer_timeout"]

@@ -83,16 +83,23 @@ func _ready() -> void:
 	_update_sprite()
 	Globals.tutorial_mode_changed.connect(_on_tutorial_mode_changed)
 
+	_restart_distraction_timer()
+
 
 func _on_tutorial_mode_changed(is_tutorial: bool) -> void:
 	if is_tutorial:
 		($DistractionTimer as Timer).stop()
 	else:
-		$DistractionTimer.wait_time = randf() * 13.0 + 3.0
-		$DistractionTimer.start()
+		_restart_distraction_timer()
+
+
+func _restart_distraction_timer():
+	$DistractionTimer.wait_time = randf() * 10.0 + 3.0
+	$DistractionTimer.start()
 
 
 func _on_distraction_timer_timeout() -> void:
+	print("ioe")
 	# Alien gets distracted only if he is idling
 	if state == Enums.EnemyState.IDLE:
 		var states = [
@@ -101,13 +108,14 @@ func _on_distraction_timer_timeout() -> void:
 			# {state = Enums.EnemyState.ASLEEP, distraction_time = 3.0}
 		]
 		var new_state = states[randi() % len(states)]
-
 		state = new_state.state
+
+		$SFX/Distracted.play_sound()
 		await get_tree().create_timer(new_state.distraction_time).timeout
+
 		state = Enums.EnemyState.IDLE
 
-	$DistractionTimer.wait_time = randf() * 13.0 + 3.0
-	$DistractionTimer.start()
+	_restart_distraction_timer()
 
 
 # gdlint:disable = class-definitions-order
@@ -123,8 +131,9 @@ func _process(_delta: float) -> void:
 		&& Globals.action_state == Globals.ActionState.ILLEGAL
 	):
 		en_instance_de_se_faire_chopper += 1
-		if en_instance_de_se_faire_chopper >= NB_FRAMES_TO_GET_CAUGHT:
+		if en_instance_de_se_faire_chopper == NB_FRAMES_TO_GET_CAUGHT:
 			state = Enums.EnemyState.ANGRY
+			$SFX/Grumpy.play_sound()
 		if en_instance_de_se_faire_chopper >= NB_FRAMES_TO_LOSE:
 			emit_signal("player_caught_cheating")
 	else:
@@ -256,3 +265,4 @@ func _poke(left: bool):
 
 	state = Enums.EnemyState.ANGRY
 	en_instance_de_se_faire_chopper = NB_FRAMES_TO_LOSE - 60
+	$SFX/Grumpy.play_sound()
