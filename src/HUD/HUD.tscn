@@ -79,6 +79,7 @@ layout_mode = 0
 anchor_right = 1.0
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="LevelNameValue" type="Label" parent="VBoxContainer/CenterContainer"]
@@ -87,6 +88,7 @@ theme = SubResource("2")
 text = "Ludum Dare - Base"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="LevelNumber" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
