@@ -137,3 +137,4 @@ expand = true
 [connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
 [connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
+[connection signal="gui_input" from="VideoStreamPlayer" to="." method="_on_video_stream_player_gui_input"]

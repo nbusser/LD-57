@@ -7,6 +7,15 @@ extends Control
 
 
 func _on_video_stream_player_finished() -> void:
+	_stop_video()
+
+
+func _on_video_stream_player_gui_input(event: InputEvent) -> void:
+	if event.is_pressed():
+		_stop_video()
+
+
+func _stop_video() -> void:
 	_2dhand.show()
 	_video_stream_player.hide()
 
