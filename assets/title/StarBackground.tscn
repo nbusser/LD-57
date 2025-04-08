@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://defio0qau2j83"]
+
+[ext_resource type="Texture2D" uid="uid://uxbyv2upw3dj" path="res://assets/title/stars.png" id="1_8a2iw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40n4b"]
+atlas = ExtResource("1_8a2iw")
+region = Rect2(2, 2, 1600, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfw6x"]
+atlas = ExtResource("1_8a2iw")
+region = Rect2(1604, 2, 1600, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mmws"]
+atlas = ExtResource("1_8a2iw")
+region = Rect2(2, 904, 1600, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfrpv"]
+atlas = ExtResource("1_8a2iw")
+region = Rect2(1604, 904, 1600, 900)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b2ulk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40n4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfw6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mmws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfrpv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="StarBackground" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(577.222, 325.5)
+scale = Vector2(0.727778, 0.727778)
+sprite_frames = SubResource("SpriteFrames_b2ulk")
+autoplay = "default"
+frame_progress = 0.330424

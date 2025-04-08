@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c486cbqx5w7xi"]
+[gd_scene load_steps=4 format=3 uid="uid://c486cbqx5w7xi"]
 
 [ext_resource type="Script" uid="uid://b2788yhaaw4kp" path="res://src/LevelSelector/LevelSelector.gd" id="1_agfw1"]
+[ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="2_o5dae"]
+[ext_resource type="PackedScene" uid="uid://defio0qau2j83" path="res://assets/title/StarBackground.tscn" id="3_0mygq"]
 
 [node name="LevelSelector" type="Control"]
 layout_mode = 3
@@ -10,6 +12,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_agfw1")
+
+[node name="StarBackground" parent="." instance=ExtResource("3_0mygq")]
+layout_mode = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -59,5 +64,7 @@ layout_mode = 2
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+
+[node name="2DHand" parent="." instance=ExtResource("2_o5dae")]
 
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

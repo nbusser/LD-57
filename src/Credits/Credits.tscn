@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://j5a7okn8a6xv"]
+[gd_scene load_steps=4 format=3 uid="uid://j5a7okn8a6xv"]
 
 [ext_resource type="Script" uid="uid://c5irxtmrghoys" path="res://src/Credits/Credits.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="2_non2c"]
+[ext_resource type="PackedScene" uid="uid://defio0qau2j83" path="res://assets/title/StarBackground.tscn" id="2_w4ps8"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -10,6 +12,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
+
+[node name="StarBackground" parent="." instance=ExtResource("2_w4ps8")]
+layout_mode = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
@@ -47,7 +52,8 @@ Antoine Brûlé
 Nicolas Busser
 Louis Mouhat
 Clément Thiebault
-"
+Félix West
+Soohee"
 
 [node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
@@ -60,5 +66,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Back"
+
+[node name="2DHand" parent="." instance=ExtResource("2_non2c")]
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/CenterContainer4/Back" to="." method="_on_Back_pressed"]

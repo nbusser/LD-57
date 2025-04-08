@@ -21,6 +21,10 @@ config/icon="uid://cawvud1a2swx"
 Globals="*res://src/Globals.gd"
 Enums="*res://src/enums.gd"
 
+[display]
+
+mouse_cursor/custom_image="uid://b10kgulnmco4k"
+
 [editor_plugins]
 
 enabled=PackedStringArray()
@@ -28,6 +32,11 @@ enabled=PackedStringArray()
 [filesystem]
 
 import/blender/enabled=false
+
+[gui]
+
+theme/custom="uid://b8b8eobk1rw72"
+theme/custom_font="uid://be3b27tbvj8f7"
 
 [input]
 
