@@ -201,9 +201,9 @@ class RoundManager:
 			first_player = false if player_score > alien_score else true
 			if player_score > alien_score:
 				explanation += (
-					str(alien_score)
+					str(player_score)
 					+ " > "
-					+ str(player_score)
+					+ str(alien_score)
 					+ ": I'm losing "
 					+ str(player_score - alien_score)
 					+ " points on this one! Loser goes first."
@@ -212,9 +212,9 @@ class RoundManager:
 				player_life -= player_score - alien_score
 			elif alien_score > player_score:
 				explanation += (
-					str(player_score)
+					str(alien_score)
 					+ " > "
-					+ str(alien_score)
+					+ str(player_score)
 					+ ": you're losing "
 					+ str(alien_score - player_score)
 					+ " points on this one! Loser goes first."
