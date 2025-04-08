@@ -12,7 +12,7 @@ func _ready():
 	assert(level_state, "init must be called before creating Level scene")
 	hud.init(level_state)
 
-	timer.start(level_state.level_data.timer_duration)
+	#timer.start(level_state.level_data.timer_duration)
 
 
 func init(level_number_p: int, level_data_p: LevelData):

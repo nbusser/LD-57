@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckntwca1o1jbq"]
+[gd_scene load_steps=11 format=3 uid="uid://ckntwca1o1jbq"]
 
 [ext_resource type="Script" uid="uid://bupdnxdyw4e13" path="res://src/SceneManager/SceneManager.gd" id="1"]
 [ext_resource type="Script" uid="uid://dtbff18d2g0t7" path="res://src/Level/LevelData.gd" id="2_shtkc"]
@@ -9,13 +9,29 @@
 
 [sub_resource type="Resource" id="Resource_r4gm4"]
 script = ExtResource("2_shtkc")
-name = "J'aime pu ma mère !"
-timer_duration = 30.0
+name = "EZ"
+alien_intelligence = 1
+alien = 0
 
 [sub_resource type="Resource" id="Resource_o3yet"]
 script = ExtResource("2_shtkc")
-name = "Babibulles"
-timer_duration = 3000.0
+name = "Normal"
+alien_intelligence = 2
+alien = 1
+
+[sub_resource type="Resource" id="Resource_d0g8p"]
+script = ExtResource("2_shtkc")
+name = "Hard"
+alien_intelligence = 3
+alien = 0
+metadata/_custom_type_script = "uid://dtbff18d2g0t7"
+
+[sub_resource type="Resource" id="Resource_du0b7"]
+script = ExtResource("2_shtkc")
+name = "Hard"
+alien_intelligence = 3
+alien = 1
+metadata/_custom_type_script = "uid://dtbff18d2g0t7"
 
 [node name="SceneManager" type="Control"]
 layout_mode = 3
@@ -25,7 +41,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
-levels = Array[ExtResource("2_shtkc")]([SubResource("Resource_r4gm4"), SubResource("Resource_o3yet")])
+levels = Array[ExtResource("2_shtkc")]([SubResource("Resource_r4gm4"), SubResource("Resource_o3yet"), SubResource("Resource_d0g8p"), SubResource("Resource_du0b7")])
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0

@@ -9,6 +9,7 @@ var _hovered_card: Card = null
 @onready var _card_scene: PackedScene = preload("res://src/Card/Card.tscn")
 @onready var _finger_tip = $"2DHand/HandBody/Sprite2D/FingerTip"
 @onready var _hand_2d = $"2DHand"
+@onready var _level: Level = $".."
 
 @onready var _stencil_viewport: SubViewport = $StencilViewport
 @onready var _stencil_camera: Camera3D = $StencilViewport/Camera3D
@@ -72,6 +73,8 @@ func _input(event):
 
 func _ready():
 	Globals.tutorial_mode_changed.connect(_on_tutorial_mode_changed)
+	_enemy.type = _level.level_state.level_data.alien
+	_enemy.alien_intelligence = _level.level_state.level_data.alien_intelligence
 	_on_tutorial_mode_changed(Globals.tutorial_mode)
 
 
