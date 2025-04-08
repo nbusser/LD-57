@@ -23,6 +23,7 @@ Enums="*res://src/enums.gd"
 
 [display]
 
+window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="uid://b10kgulnmco4k"
 
 [editor_plugins]
