@@ -257,7 +257,7 @@ func _instantiate_card(is_player_card: bool, value: int) -> Node3D:
 		the_alien.alien_draw_card(card_inst)
 		add_child(card_inst)
 
-	card_inst.global_position = pos_reference_node.global_position
+	card_inst.global_position = pos_reference_node.global_position + Vector3(0, .001, 0)
 
 	return card_inst
 
