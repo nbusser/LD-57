@@ -104,7 +104,7 @@ width = 3.0
 default_color = Color(1, 1, 1, 0.584314)
 
 [node name="AttachmentPoint" type="Node2D" parent="HandBody"]
-position = Vector2(-370, -23)
+position = Vector2(-370, -29)
 
 [node name="Anchor" type="Node2D" parent="."]
 position = Vector2(-1682, -21)
