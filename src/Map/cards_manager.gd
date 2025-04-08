@@ -37,6 +37,7 @@ var _grabbed_card: Card:
 @onready var _grabbed_card_parent: Node3D = $"GrabbedCard"
 @onready var _card_rail: Path3D = $SleeveHand/CardRail
 @onready var _relative_point: Node3D = $SleeveHand/CardRail/RelativePoint
+@onready var _cards_sfx: AudioBankPlayer = $"../SFX/Card"
 
 
 func is_grabbing_a_card():
@@ -69,6 +70,8 @@ func is_card_close_to_battlefield() -> bool:
 func grab_card(card: Card):
 	assert(_grabbed_card == null, "Cannot grab a card if you already have a card in hand")
 
+	_cards_sfx.play_sound()
+
 	card.visible = true
 	card.remove_from_group("grabbable_cards")
 
@@ -97,6 +100,8 @@ func _place_card_in_battlefield(card: Card):
 
 func drop_card():
 	assert(_grabbed_card != null, "Cannot drop card if no card in hand")
+
+	_cards_sfx.play_sound()
 
 	var card = _grabbed_card
 	card.stop_dragging()

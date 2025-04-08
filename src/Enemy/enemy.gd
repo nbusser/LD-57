@@ -18,6 +18,7 @@ var state: Enums.EnemyState = Enums.EnemyState.IDLE:
 @onready var drop_zone_enemy: Node3D = $"../EnemySnapper/CardsInBattleField"
 @onready var mouth: Node3D = $"../Enemy/Mouth"
 @onready var card_game: CardGame = $"../cardgame"
+@onready var _cards_sfx: AudioBankPlayer = $"../SFX/Card"
 
 
 func _update_sprite():
@@ -145,6 +146,9 @@ func _process(_delta: float) -> void:
 
 func alien_draw_card(card_instance: Node3D) -> void:
 	await get_tree().create_timer(1.0).timeout
+
+	_cards_sfx.play_sound()
+
 	var tween = get_tree().create_tween()
 	tween.parallel().tween_property(card_instance, "global_position", mouth.global_position, 1.0)
 	tween.parallel().tween_property(
@@ -153,6 +157,7 @@ func alien_draw_card(card_instance: Node3D) -> void:
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	await tween.finished
+
 	var card_value = card_instance.get("card_value")
 	var initial_state = state
 	state = Enums.EnemyState.THINKING
@@ -233,6 +238,8 @@ func alien_play_card(value: int) -> void:
 	drop_zone_enemy.add_child(card_inst)
 	card_inst.global_position = mouth.global_position
 
+	_cards_sfx.play_sound()
+
 	var tween = get_tree().create_tween()
 	tween.parallel().tween_property(
 		card_inst, "global_position", Vector3(drop_zone_enemy.global_position), .8
@@ -240,6 +247,8 @@ func alien_play_card(value: int) -> void:
 	tween.parallel().tween_property(card_inst, "rotation", Vector3(5 * PI / 2, 0, 0), .7)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_IN)
+	await tween.finished
+	_cards_sfx.play_sound()
 
 	card_game.round_manager.play_card("alien", value)
 

@@ -39,6 +39,7 @@ var timer_in_progress: bool = false
 @onready var snapper = $"../Snapper/CardsInBattleField"
 @onready var enemy_snapper = $"../EnemySnapper/CardsInBattleField"
 @onready var timer = $"StepTimer"
+@onready var _cards_sfx: AudioBankPlayer = $"../SFX/Card"
 
 
 func game_state_to_string(gs: GameState):
