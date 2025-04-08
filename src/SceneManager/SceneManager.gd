@@ -160,8 +160,8 @@ func _on_end_scene(status: Globals.EndSceneStatus, params: Dictionary = {}) -> v
 			_run_credits(true)
 		Globals.EndSceneStatus.MAIN_MENU_CLICK_QUIT:
 			_quit_game()
-		Globals.EndSceneStatus.LEVEL_END:
-			_on_end_of_level()
+		# Globals.EndSceneStatus.LEVEL_END:
+		# 	_on_end_of_level()
 		Globals.EndSceneStatus.LEVEL_GAME_OVER:
 			_on_game_over()
 		Globals.EndSceneStatus.LEVEL_RESTART:
@@ -170,7 +170,7 @@ func _on_end_scene(status: Globals.EndSceneStatus, params: Dictionary = {}) -> v
 			_restart_level()
 		Globals.EndSceneStatus.GAME_OVER_QUIT:
 			_quit_game()
-		Globals.EndSceneStatus.SCORE_SCREEN_NEXT:
+		Globals.EndSceneStatus.LEVEL_END, Globals.EndSceneStatus.SCORE_SCREEN_NEXT:
 			_run_next_level()
 		Globals.EndSceneStatus.SCORE_SCREEN_RETRY:
 			_restart_level()
