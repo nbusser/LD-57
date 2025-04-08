@@ -166,6 +166,8 @@ func tutorial():
 				"--This game seems too hard for your species, but if you don't get caught, you don't cheat--",
 				"--When you're cheating, there's a pink overlay that appears--",
 				"--When your opponent is distracted (blue), you can use this chance to reach the inside of your sleeve--",
+				"--Storing card in you sleeve allow you to draw extra cards from your deck--",
+				"--You cannot have more than 6 cards in total--",
 				"--Good luck--",
 			]
 		)
@@ -175,7 +177,7 @@ func tutorial():
 		Globals
 		. show_messages(
 			[
-				"Hmm... Probably just the anti-matter wind.",
+				"Hmm... Probably just the anti-matter wind... Or maybe a space rat...",
 				"Anyways, should we start?",
 			]
 		)
