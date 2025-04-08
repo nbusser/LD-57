@@ -1,10 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://bswm5o0d0ybau"]
 
-[ext_resource type="Texture2D" uid="uid://cuub4uywv52ut" path="res://assets/sprites/underDeck.png" id="1_adk0q"]
+[ext_resource type="Texture2D" uid="uid://gbud557wql3b" path="res://assets/sprites/cards/card_back.webp" id="1_adk0q"]
 
 [node name="Node3D" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+transform = Transform3D(0.003, 0, 0, 0, 0.003, 0, 0, 0, 0.003, 0, 0, 0)
+visible = false
 texture = ExtResource("1_adk0q")
