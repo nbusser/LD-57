@@ -342,7 +342,6 @@ autoplay = "rotate bg"
 
 [node name="Bubble" parent="." instance=ExtResource("16_8kakp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.215632, 0.96897, -0.606009)
-collision_layer = 0
 collision_mask = 0
 
 [node name="Shop" parent="." instance=ExtResource("18_bxjut")]

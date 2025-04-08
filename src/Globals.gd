@@ -74,7 +74,7 @@ var action_state = ActionState.IDLE:
 			ActionState.CAUGHT:
 				scene_manager.change_music_track_by_index(3)
 
-var tutorial_mode: bool = false:
+var tutorial_mode: bool = true:
 	set(value):
 		tutorial_mode_changed.emit(tutorial_mode)
 		tutorial_mode = value

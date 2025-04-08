@@ -83,8 +83,7 @@ func _update_sprite():
 func _ready() -> void:
 	_update_sprite()
 	Globals.tutorial_mode_changed.connect(_on_tutorial_mode_changed)
-
-	_restart_distraction_timer()
+	_on_tutorial_mode_changed(Globals.tutorial_mode)
 
 
 func _on_tutorial_mode_changed(is_tutorial: bool) -> void:
@@ -100,7 +99,6 @@ func _restart_distraction_timer():
 
 
 func _on_distraction_timer_timeout() -> void:
-	print("ioe")
 	# Alien gets distracted only if he is idling
 	if state == Enums.EnemyState.IDLE:
 		var states = [

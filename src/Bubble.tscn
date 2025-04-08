@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://3np2v35e7jwk"]
 
-[ext_resource type="Script" uid="uid://yny7kxxbpyiv" path="res://src/bubble.gd" id="1_qo7bw"]
+[ext_resource type="Script" path="res://src/bubble.gd" id="1_qo7bw"]
 [ext_resource type="FontFile" uid="uid://be3b27tbvj8f7" path="res://assets/fonts/KiwiSoda.ttf" id="2_qbh7g"]
 
 [sub_resource type="Gradient" id="Gradient_qo7bw"]
