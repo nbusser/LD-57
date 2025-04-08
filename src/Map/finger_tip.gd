@@ -36,7 +36,7 @@ func _physics_process(_delta: float) -> void:
 		if results:
 			distance = (results.position - camera_menu.global_position).length()
 		else:
-			distance = .5
+			distance = 2
 
 
 func _input(event):

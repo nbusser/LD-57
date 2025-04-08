@@ -1,5 +1,6 @@
-[gd_scene load_steps=103 format=3 uid="uid://c4btlvu6ioue3"]
+[gd_scene load_steps=105 format=3 uid="uid://c4btlvu6ioue3"]
 
+[ext_resource type="Script" uid="uid://bx3lsqamugmn" path="res://MaybeMenu/maybe_menu.gd" id="1_5btuq"]
 [ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="2_5btuq"]
 [ext_resource type="Texture2D" uid="uid://dq57idemhwjkw" path="res://assets/HDR_blue_local_star.webp" id="2_bueqb"]
 [ext_resource type="Texture2D" uid="uid://c17ubtg3i1jm2" path="res://assets/sprites/aliens/pig_angry.png" id="4_0dtta"]
@@ -16,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dl52cwx0hkh1x" path="res://assets/sprites/aliens/sproink_poked.png" id="15_tde11"]
 [ext_resource type="Texture2D" uid="uid://4c3bhqe8j1wx" path="res://assets/sprites/aliens/sproink_thinking.png" id="16_4xrxh"]
 [ext_resource type="Texture2D" uid="uid://ralww3ycdfo8" path="res://assets/sprites/aliens/sproink_weak.png" id="17_5xvhq"]
+[ext_resource type="PackedScene" uid="uid://3np2v35e7jwk" path="res://src/Bubble.tscn" id="18_cgxue"]
 [ext_resource type="Material" uid="uid://cxy1ssgbmb5ff" path="res://src/Map/floor.tres" id="18_y3487"]
 [ext_resource type="PackedScene" uid="uid://bwajg7ky455r3" path="res://src/Table/Table.tscn" id="19_4mpbl"]
 
@@ -692,6 +694,7 @@ radius = 5.0
 height = 10.0
 
 [node name="MaybeMenu" type="Node3D"]
+script = ExtResource("1_5btuq")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -738,7 +741,7 @@ environment = SubResource("Environment_l2fs3")
 transform = Transform3D(0.15, 0, 0, 0, 0.144913, 0.0387318, 0, -0.0387318, 0.144913, 0, 0.804454, -0.622483)
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_hw4f1")
-animation = &"sproink_distracted"
+animation = &"pig_weak"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="AnimatedSprite3D"]
 
@@ -780,5 +783,8 @@ transform = Transform3D(0.869566, 0.226875, -0.438615, 0.414099, 0.148883, 0.897
 light_energy = 2.0
 shadow_enabled = true
 spot_angle = 19.5751
+
+[node name="Bubble" parent="." instance=ExtResource("18_cgxue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.325656, 0.969715, -0.132138)
 
 [node name="Table" parent="." instance=ExtResource("19_4mpbl")]
