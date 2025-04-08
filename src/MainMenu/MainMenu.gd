@@ -2,6 +2,14 @@ class_name MainMenu
 
 extends Control
 
+@onready var _2dhand = $"2DHand"
+@onready var _video_stream_player: VideoStreamPlayer = $VideoStreamPlayer
+
+
+func _on_video_stream_player_finished() -> void:
+	_2dhand.show()
+	_video_stream_player.hide()
+
 
 func _on_Start_pressed() -> void:
 	Globals.end_scene(Globals.EndSceneStatus.MAIN_MENU_CLICK_START)

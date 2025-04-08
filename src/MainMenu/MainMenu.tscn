@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bvgh060edrp7j"]
+[gd_scene load_steps=14 format=3 uid="uid://bvgh060edrp7j"]
 
 [ext_resource type="Script" uid="uid://btvd0b0skhsfa" path="res://src/MainMenu/MainMenu.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dve1ylvmh0i6o" path="res://src/Hand/2d_hand.tscn" id="2_cttlv"]
 [ext_resource type="Texture2D" uid="uid://bqrqame7lldni" path="res://assets/title/titlev3-Sheet.webp" id="3_ipfen"]
+[ext_resource type="VideoStream" uid="uid://cnyt10if010n0" path="res://assets/title/title.ogv" id="4_70h2t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_70h2t"]
 atlas = ExtResource("3_ipfen")
@@ -118,8 +119,21 @@ offset_bottom = 442.0
 text = "Quit"
 
 [node name="2DHand" parent="." instance=ExtResource("2_cttlv")]
+visible = false
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("4_70h2t")
+autoplay = true
+expand = true
 
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="SelectLevel" to="." method="_on_select_level_pressed"]
 [connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
