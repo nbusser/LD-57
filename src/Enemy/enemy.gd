@@ -156,6 +156,7 @@ func alien_draw_card(card_instance: Node3D) -> void:
 	var card_value = card_instance.get("card_value")
 	var initial_state = state
 	state = Enums.EnemyState.THINKING
+	$SFX/Thinking.play_sound()
 	await get_tree().create_timer(1.5).timeout
 	if initial_state != Enums.EnemyState.THINKING:
 		state = initial_state
