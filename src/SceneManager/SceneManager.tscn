@@ -10,26 +10,26 @@
 
 [sub_resource type="Resource" id="Resource_r4gm4"]
 script = ExtResource("2_shtkc")
-name = "EZ"
+name = "Das experiment"
 alien_intelligence = 1
 alien = 0
 
 [sub_resource type="Resource" id="Resource_o3yet"]
 script = ExtResource("2_shtkc")
-name = "Normal"
+name = "Mommy?"
 alien_intelligence = 2
 alien = 1
 
 [sub_resource type="Resource" id="Resource_d0g8p"]
 script = ExtResource("2_shtkc")
-name = "Hard"
+name = "Close Encounters of the Third Kind"
 alien_intelligence = 3
 alien = 0
 metadata/_custom_type_script = "uid://dtbff18d2g0t7"
 
 [sub_resource type="Resource" id="Resource_du0b7"]
 script = ExtResource("2_shtkc")
-name = "Hard"
+name = "The Grey Escape"
 alien_intelligence = 3
 alien = 1
 metadata/_custom_type_script = "uid://dtbff18d2g0t7"
