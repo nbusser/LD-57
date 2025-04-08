@@ -8,6 +8,7 @@ script = ExtResource("1_kcakm")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.893687, 0.0936321, 0)
+visible = false
 text = "20"
 
 [node name="Points" type="Node3D" parent="."]

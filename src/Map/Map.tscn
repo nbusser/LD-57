@@ -60,7 +60,7 @@ size = Vector3(4, 0.01, 4)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g5aly"]
 height = 0.01
-radius = 0.2
+radius = 0.308105
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dgvhi"]
 radius = 0.05
@@ -148,8 +148,9 @@ loop = false
 tilt_enabled = false
 
 [node name="Camera" type="Camera3D" parent="CameraRail/FollowRail"]
-transform = Transform3D(1, -3.03375e-09, -1.86454e-09, 3.55455e-09, 0.881716, 0.471781, 2.12731e-10, -0.471782, 0.881719, 2.42654e-09, -0.0299072, -0.0814211)
+transform = Transform3D(1, -7.3475e-09, -3.75091e-09, 8.17016e-09, 0.945012, 0.327035, 1.14177e-09, -0.327037, 0.945015, -2.15733e-09, -0.029907, 0.072388)
 rotation_order = 1
+fov = 65.0
 script = ExtResource("1_wqubw")
 
 [node name="Table" parent="." instance=ExtResource("3_13lp4")]
@@ -194,7 +195,7 @@ collision_layer = 128
 collision_mask = 0
 
 [node name="SleeveDropArea3D" type="CollisionShape3D" parent="EnemySnapper/place_area"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.877129, 0.8)
+transform = Transform3D(1, 0, 0, 0, 1, 2.64274e-19, 0, -2.64274e-19, 1, 0.0762939, 0.725762, 0.849924)
 shape = SubResource("CylinderShape3D_g5aly")
 
 [node name="TableDropArea3D" type="CollisionShape3D" parent="EnemySnapper/place_area"]
