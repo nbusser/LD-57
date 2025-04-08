@@ -6,6 +6,8 @@ extends Control
 
 enum AlertState { NORMAL, WARNING, CAUGHT }
 
+enum MusicTrack { MENU = 0, BASE = 1, WARNING = 2, CAUGHT = 3 }
+
 @export var levels: Array[LevelData]
 # State of the game
 var current_level_number := 0
@@ -62,7 +64,7 @@ func _quit_game() -> void:
 
 func _run_main_menu() -> void:
 	var scene: MainMenu = main_menu.instantiate()
-	change_music_track(music_players[0])
+	change_music_track($Musics/menu)
 	self.current_scene = scene
 
 
@@ -77,7 +79,7 @@ func _run_level() -> void:
 	# Provies its settings to the level
 	scene.init(current_level_number, levels[current_level_number])
 	# Play level music
-	change_music_track(music_players[current_level_number % len(music_players)])
+	change_music_track($Musics/base)
 	self.current_scene = scene
 
 
@@ -140,11 +142,8 @@ func change_music_track(new_audio_player: AudioStreamPlayer) -> void:
 		current_audio_player = new_audio_player
 
 
-func change_music_track_by_index(index: int) -> void:
-	if index >= 0 and index < music_players.size():
-		change_music_track(music_players[index])
-	else:
-		print("Invalid music track index: ", index)
+func change_music_track_by_enum(track: MusicTrack) -> void:
+	change_music_track(music_players[track])
 
 
 # State machine handling the state of the whole game

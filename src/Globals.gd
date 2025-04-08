@@ -68,18 +68,18 @@ var action_state = ActionState.IDLE:
 
 		match action_state:
 			ActionState.IDLE:
-				scene_manager.change_music_track_by_index(0)
+				scene_manager.change_music_track_by_enum(scene_manager.MusicTrack.BASE)
 			ActionState.ILLEGAL:
-				scene_manager.change_music_track_by_index(1)
+				scene_manager.change_music_track_by_enum(scene_manager.MusicTrack.WARNING)
 			ActionState.CAUGHT:
-				scene_manager.change_music_track_by_index(3)
+				scene_manager.change_music_track_by_enum(scene_manager.MusicTrack.CAUGHT)
 
 var tutorial_mode: bool = true:
 	set(value):
 		tutorial_mode_changed.emit(tutorial_mode)
 		tutorial_mode = value
 
-@onready var scene_manager = get_node("/root/SceneManager")
+@onready var scene_manager: SceneManager = get_node("/root/SceneManager")
 
 
 func end_scene(status: EndSceneStatus, params: Dictionary = {}) -> void:

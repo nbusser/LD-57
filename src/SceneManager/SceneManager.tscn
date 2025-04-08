@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://ckntwca1o1jbq"]
+[gd_scene load_steps=12 format=3 uid="uid://ckntwca1o1jbq"]
 
 [ext_resource type="Script" uid="uid://bupdnxdyw4e13" path="res://src/SceneManager/SceneManager.gd" id="1"]
 [ext_resource type="Script" uid="uid://dtbff18d2g0t7" path="res://src/Level/LevelData.gd" id="2_shtkc"]
 [ext_resource type="AudioStream" uid="uid://cnstife21knk0" path="res://assets/musics/sample_normal.ogg" id="3_d0g8p"]
+[ext_resource type="AudioStream" uid="uid://dh8tdkoeqsso2" path="res://assets/musics/theme.ogg" id="3_du0b7"]
 [ext_resource type="AudioStream" uid="uid://btautpfjsko2e" path="res://assets/musics/sample_warning 1.ogg" id="4_du0b7"]
 [ext_resource type="AudioStream" uid="uid://e856be58bku6" path="res://assets/musics/sample_warning 2.ogg" id="5_df45d"]
 [ext_resource type="AudioStream" uid="uid://s56jxh44w46y" path="res://assets/musics/sample_caught.ogg" id="6_fvc2a"]
@@ -55,6 +56,10 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="Musics" type="Node" parent="."]
+
+[node name="menu" type="AudioStreamPlayer" parent="Musics"]
+stream = ExtResource("3_du0b7")
+bus = &"Music"
 
 [node name="base" type="AudioStreamPlayer" parent="Musics"]
 stream = ExtResource("3_d0g8p")
