@@ -407,3 +407,9 @@ func _process(delta: float) -> void:
 				current_state = GameState.DRAW
 		_:
 			return
+
+
+func _on_cards_manager_card_added_in_sleeve(nb_cards_in_hand: int, nb_other_cards: int) -> void:
+	if nb_cards_in_hand < round_manager.HAND_SIZE and nb_cards_in_hand + nb_other_cards < 6:
+		var card = round_manager.draw_cards(round_manager.my_deck, 1)[0]
+		_instantiate_card(true, card)

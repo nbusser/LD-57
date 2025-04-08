@@ -362,6 +362,7 @@ script = ExtResource("19_a8qib")
 sounds = Array[AudioStream]([ExtResource("29_c63hh"), ExtResource("30_ls1a0"), ExtResource("31_mjnwk")])
 
 [connection signal="player_caught_cheating" from="Enemy" to="." method="_on_enemy_player_caught_cheating"]
+[connection signal="card_added_in_sleeve" from="CardsManager" to="cardgame" method="_on_cards_manager_card_added_in_sleeve"]
 [connection signal="card_spawned_on_the_deck" from="cardgame" to="CardsManager" method="_on_cardgame_card_spawned_on_the_deck"]
 [connection signal="player_lost" from="cardgame" to="." method="_on_cardgame_player_lost"]
 [connection signal="player_won" from="cardgame" to="." method="_on_cardgame_player_won"]

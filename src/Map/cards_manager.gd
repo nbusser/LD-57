@@ -2,6 +2,7 @@ class_name CardsManager extends Node3D
 
 signal card_played(card: Card)
 signal card_added_in_hand(card: Card)
+signal card_added_in_sleeve(nb_cards_in_hand: int, nb_other_cards: int)
 
 const CARD_VERTICAL_OFFSET = Vector3.DOWN * 0.06
 const CARD_THICKNESS = 0.003  # .3mm
@@ -147,6 +148,11 @@ func _sleeve_add_card(card: Card):
 	card.rotation = Vector3(PI / 2, deg_to_rad(-35), 0)
 
 	card.add_to_group("grabbable_cards")
+
+	card_added_in_sleeve.emit(
+		cards_in_hand.get_child_count(),
+		_cards_on_sleeve.get_child_count() + cards_on_top_of_deck.get_child_count()
+	)
 
 
 func _sleeve_remove_card(card: Card):
