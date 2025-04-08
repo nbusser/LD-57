@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://vpi38cxa6eg6"
+path="res://.godot/imported/grumpy alien.ogg-53df4b131023ad50071080f0fd38d7f6.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/grumpy alien.ogg"
+dest_files=["res://.godot/imported/grumpy alien.ogg-53df4b131023ad50071080f0fd38d7f6.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
