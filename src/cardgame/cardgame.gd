@@ -204,9 +204,9 @@ class RoundManager:
 					str(player_score)
 					+ " > "
 					+ str(alien_score)
-					+ ": I'm losing "
+					+ ": You're losing "
 					+ str(player_score - alien_score)
-					+ " points on this one! Loser goes first."
+					+ " points on this one! Winner goes first."
 				)
 				#Le joueur perd
 				player_life -= player_score - alien_score
@@ -215,9 +215,9 @@ class RoundManager:
 					str(alien_score)
 					+ " > "
 					+ str(player_score)
-					+ ": you're losing "
+					+ ": I'm losing "
 					+ str(alien_score - player_score)
-					+ " points on this one! Loser goes first."
+					+ " points on this one! Winner goes first."
 				)
 				#L'alien perd
 				alien_life -= alien_score - player_score
