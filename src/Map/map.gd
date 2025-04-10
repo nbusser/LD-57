@@ -106,7 +106,7 @@ func tutorial():
 				"Hi, welcome to our introductory abduction program.",
 				"You have been forcefully invited into the depths of your interstellar space to participate in the federation's intelligence test.",
 				"You have been selected to represent your species:\nWater-Based-Carbon-Unit-42198",
-				"You will be tested you on your extra-sensory perception and multiverse-reasoning.",
+				"We will test you on your extra-sensory perception and multiverse-reasoning.",
 				"We have materialized the standard test in a form you should be familiar with.",
 				"The goal is to play lower-value cards than the ones I play.",
 				"Let's start with a simple example.",
