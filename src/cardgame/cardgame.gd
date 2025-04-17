@@ -120,9 +120,15 @@ class RoundManager:
 		alien_deck.shuffle()
 
 	#Fonciton pour piocher X cartes
-	func draw_cards(deck: Array, count: int) -> Array:
+	func draw_cards(side: CardGame.Side, count: int) -> Array:
+		var deck = [my_deck, alien_deck][side]
 		var drawn_cards: Array = []
 		for i in range(count):
+			# refaire le deck s'il est vide
+			if deck.size() == 0:
+				setup_decks(my_deck, alien_deck)
+				deck = [my_deck, alien_deck][side]
+
 			if deck.size() > 0:
 				var card: int = deck[0]
 				deck.remove_at(0)
@@ -281,11 +287,11 @@ func _process(delta: float) -> void:
 		GameState.INIT:
 			round_manager.setup_decks(round_manager.my_custom_deck)
 			for i in range(RoundManager.HAND_SIZE - 1):
-				var card = round_manager.draw_cards(round_manager.my_deck, 1)
+				var card = round_manager.draw_cards(Side.PLAYER, 1)
 				_instantiate_card(true, card[0])
 
 			for i in range(RoundManager.HAND_SIZE - 1):
-				var card = round_manager.draw_cards(round_manager.alien_deck, 1)
+				var card = round_manager.draw_cards(Side.ALIEN, 1)
 				_instantiate_card(false, card[0])
 				round_manager.alien_hand.append(card[0])
 
@@ -294,9 +300,9 @@ func _process(delta: float) -> void:
 
 		GameState.DRAW:
 			var card = TYPE_NIL
-			card = round_manager.draw_cards(round_manager.my_deck, 1)
+			card = round_manager.draw_cards(Side.PLAYER, 1)
 			_instantiate_card(true, card[0])
-			card = round_manager.draw_cards(round_manager.alien_deck, 1)
+			card = round_manager.draw_cards(Side.ALIEN, 1)
 			_instantiate_card(false, card[0])
 			round_manager.alien_hand.append(card[0])
 
@@ -410,5 +416,5 @@ func _process(delta: float) -> void:
 
 func _on_cards_manager_card_added_in_sleeve(nb_cards_in_hand: int, nb_other_cards: int) -> void:
 	if nb_cards_in_hand < round_manager.HAND_SIZE and nb_cards_in_hand + nb_other_cards < 6:
-		var card = round_manager.draw_cards(round_manager.my_deck, 1)[0]
+		var card = round_manager.draw_cards(Side.PLAYER, 1)[0]
 		_instantiate_card(true, card)
